@@ -3610,12 +3610,6 @@ let spec_stat = [[0, 'Magic Attack', '#bbb0ff','This enemy seems to have mastere
 [53, "Synchronize: Demon", "#FF6A00","A mysterious and threatening insight that can share attributes.<br>The enemy grows stronger as the player does, adding <span style='color:#87CEFA'>200%</span> of the player's attack."],
 [54, "Life Limit", "#ffacc5","Limiting the opponent's ability can be a trick or a burden.<br>Enemy damage per round * (enemy HP / player HP)."],
 ];
-
-
-
-
-
-];
 //超过25倍倍率的攻击暂时视为必中！
 function format_perc(perc){
     if(perc < 10) return format_number(100*perc) + '%';

@@ -1684,7 +1684,7 @@
                     }
                 }
 
-                const item_tooltip_margin = Number(getComputedStyle(document.querySelector('.item_tooltip'))["margin-left"].replace("px",""));
+                const item_tooltip_margin = Number(getComputedStyle(document.querySelector('.item_tooltip') ?? document.body)["margin-left"].replace("px",""));
                 //margin-left of tooltip elements
 
                 ///////////////
