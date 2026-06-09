@@ -3611,7 +3611,7 @@ let spec_stat = [[0, 'Magic Attack', '#bbb0ff','This enemy seems to have mastere
 [54, "Life Limit", "#ffacc5","Limiting the opponent's ability can be a trick or a burden.<br>Enemy damage per round * (enemy HP / player HP)."],
 ];
 //超过25倍倍率的攻击暂时视为必中！
-function format_perc(perc){
+function format_percent(perc){
     if(perc < 10) return format_number(100*perc) + '%';
     else return format_number(perc) + 'x'; 
 }
