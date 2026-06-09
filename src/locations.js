@@ -3485,7 +3485,7 @@ function get_location_type_penalty(type, stage, stat) {
         connected_locations: [{location: locations["飞云阁"], custom_text: "Return to Feiyun Pavilion"}],
         description: "A bitterly cold world of ice and snow. The temperature stays around 240K (-33°C), and the ice element permeating the air can spell doom for Earth Rank cultivators.",
         name: "Pure White Arctic Tundra",
-        dialogues: ["纳娜米(冰原)","极寒相变引擎","冰霜门户"], // TODO: translate new dialogue keys
+        dialogues: ["纳娜米(冰原)","极寒相变引擎","冰霜门户"], // Nanami (Arctic), Extreme Cold Phase Engine, Frost Gate — keys kept Chinese for dialogue system compatibility
         is_unlocked: false,
         bgm: 16,
         unlock_text : "In a silver-white world wrapped in thick snow, two girls stand on the peak of a snow mountain, overlooking the vast white expanse below."

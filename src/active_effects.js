@@ -284,8 +284,8 @@ effect_templates["Radiation"] = new ActiveEffect({
     effects: {stats: {max_health: {multiplier: 0.5},health_regeneration_percent:{flat:-8}}}
 });
 
-effect_templates["灵感"] = new ActiveEffect({ // TODO: translate name ("Inspiration"?)
-    name: "灵感",
+effect_templates["灵感"] = new ActiveEffect({
+    name: "Inspiration",
     effects: {stats: {luck:{multiplier: 1.2}}}
 });
 
@@ -344,40 +344,40 @@ effect_templates["饱食 IX"] = new ActiveEffect({
 });
 
 effect_templates["烈日祝福·乾"] = new ActiveEffect({
-    name: "烈日祝福·乾",
+    name: "Scorching Sun Blessing·Heaven",
     effects: {stats: {max_health: {multiplier: 1.8}}}
 });
 effect_templates["烈日祝福·兑"] = new ActiveEffect({
-    name: "烈日祝福·兑",
+    name: "Scorching Sun Blessing·Lake",
     effects: {stats: {health_regeneration_percent: {flat: 1.5}}}
 });
 effect_templates["烈日祝福·离"] = new ActiveEffect({
-    name: "烈日祝福·离",
+    name: "Scorching Sun Blessing·Fire",
     effects: {stats: {attack_power: {multiplier: 1.2}}}
 });
 effect_templates["烈日祝福·震"] = new ActiveEffect({
-    name: "烈日祝福·震",
+    name: "Scorching Sun Blessing·Thunder",
     effects: {stats: {attack_speed: {multiplier: 1.15}}}
 });
 effect_templates["烈日祝福·巽"] = new ActiveEffect({
-    name: "烈日祝福·巽",
+    name: "Scorching Sun Blessing·Wind",
     effects: {stats: {}}
-    //牵制(80%效力)
+    //Suppression (80% effectiveness)
 });
 effect_templates["烈日祝福·坎"] = new ActiveEffect({
-    name: "烈日祝福·坎",
+    name: "Scorching Sun Blessing·Water",
     effects: {stats: {}}
-    //魔攻(20%效力)
+    //Magic ATK (20% effectiveness)
 });
 effect_templates["烈日祝福·艮"] = new ActiveEffect({
-    name: "烈日祝福·艮",
+    name: "Scorching Sun Blessing·Mountain",
     effects: {stats: {attack_mul: {multiplier: 0.8}}}
-    //回风(普攻倍率80%)
+    //Whirlwind (normal attack multiplier 80%)
 });
 effect_templates["烈日祝福·坤"] = new ActiveEffect({
-    name: "烈日赐福·坤",
+    name: "Scorching Sun Blessing·Earth",
     effects: {stats: {}}
-    //坚固(无副作用/8%)
+    //Fortify (no side effects / 8%)
 });
 
 /*  let MM1 = ["New Moon","Crescent Moon","First Quarter","Waxing Gibbous","Full Moon","Waning Gibbous","Last Quarter","Waning Crescent"];

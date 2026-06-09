@@ -731,7 +731,7 @@ function format_skill_rewards(milestone){
                                     }
                                 });
     skills["Neko_Realm"] = new Skill({skill_id: "Neko_Realm", 
-                                    names: {0: "Micro Flame", 10: "Flame-Searing Art", 20: "Fire Spirit Illusion Sea [Domain Stage 1]", 30: "Flame-Sea Frost Sky [Domain Stage 2]", 35: "Flame-Sea Frost Sky [Domain Stage 3]", 40: "出云落月 [Domain Stage 4]"}, // TODO: translate stage 4 name
+                                    names: {0: "Micro Flame", 10: "Flame-Searing Art", 20: "Fire Spirit Illusion Sea [Domain Stage 1]", 30: "Flame-Sea Frost Sky [Domain Stage 2]", 35: "Flame-Sea Frost Sky [Domain Stage 3]", 40: "Clouds Rise, Moon Falls [Domain Stage 4]"},
                                     parent_skill: "Stance mastery",
                                     description: "Neko's Domain (embryonic form). Each level grants base stats, each stage breakthrough grants new insights!", 
                                     max_level_coefficient: 1.25,
@@ -1842,7 +1842,7 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
 
     skills["Fishing"] = new Skill({skill_id: "Fishing", 
         names: {0: "Fishing"},
-        description: "Increases fishing proficiency, improving chances of catching larger fish [Level 3: Blue Flower Fish / Level 10: Ice Pillar Fish]<br>Illusion Core: 0.75x length [Level 13: 血莲鱼, Level 21: 冰柱鱼王]", // TODO: translate fish names
+        description: "Increases fishing proficiency, improving chances of catching larger fish [Level 3: Blue Flower Fish / Level 10: Ice Pillar Fish]<br>Illusion Core: 0.75x length [Level 13: Blood Lotus Fish, Level 21: Ice Pillar Fish King]",
         category: "Activity",
         base_xp_cost: 80,
         visibility_treshold: 4,

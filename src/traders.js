@@ -224,15 +224,15 @@ class TradeItem {
         location_name: "飞云阁",
         profit_margin: 4.2,
     });
-    traders["冰宫商人"] = new Trader({ // TODO: translate name ("Ice Palace Merchant"?)
-        name: "冰宫商人",
+    traders["冰宫商人"] = new Trader({
+        name: "Ice Palace Merchant",
         inventory_template: "Sky II",
         is_unlocked: false,
         location_name: "极寒冰宫",
         profit_margin: 4.8,
     });
-    traders["窥秘商人"] = new Trader({ // TODO: translate name ("Secret-Peering Merchant"?)
-        name: "窥秘商人",
+    traders["窥秘商人"] = new Trader({
+        name: "Secrets Merchant",
         inventory_template: "Sky III",
         is_unlocked: false,
         location_name: "传承幻境",

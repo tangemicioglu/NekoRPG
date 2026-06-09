@@ -1819,7 +1819,7 @@ function do_character_attack_loop({base_cooldown, actual_cooldown, attack_power,
 
             for(let i = 0; i < targets.length; i++) {
                 let alive_targets = current_enemies.filter(enemy => enemy.is_alive);
-                if(active_effects["Whirlwind A9"]!=undefined || active_effects["烈日祝福·艮"]!=undefined) // TODO: translate effect key
+                if(active_effects["Whirlwind A9"]!=undefined || active_effects["烈日祝福·艮"]!=undefined)
                 {
                     do_character_combat_action({target: targets[i], attack_power}, alive_targets.length - 1,0.8,"[Whirlwind-Weak]");
                     alive_targets = current_enemies.filter(enemy => enemy.is_alive);
@@ -2300,7 +2300,7 @@ function do_character_combat_action({target, attack_power}, target_num,c_atk_mul
             damage_dealt = proto_d * 0.1;
             Spec_E += "[Magic ATK]";
         }
-        if(active_effects["烈日祝福·坎"]!=undefined && damage_dealt < proto_d * 0.2) // TODO: translate effect key
+        if(active_effects["烈日祝福·坎"]!=undefined && damage_dealt < proto_d * 0.2)
         {
             damage_dealt = proto_d * 0.1;
             Spec_E += "[Magic ATK·Blessing]";
@@ -2310,7 +2310,7 @@ function do_character_combat_action({target, attack_power}, target_num,c_atk_mul
             sdmg_mul *= Math.min(character.stats.full.defense / (target.stats.defense + 0.0001) * 0.6,10);
             Spec_E += "[Suppression]";
         }
-        if(active_effects["烈日祝福·巽"]!=undefined) // TODO: translate effect key
+        if(active_effects["烈日祝福·巽"]!=undefined)
         {
             sdmg_mul *= Math.min(character.stats.full.defense / (target.stats.defense + 0.0001) * 0.8,10);
             Spec_E += "[Suppression·Blessing]";
