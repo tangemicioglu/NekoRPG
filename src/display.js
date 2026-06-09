@@ -2847,10 +2847,10 @@ function update_displayed_time() {
     inf_combat.ST = inf_combat.ST || 0;
     if(time - inf_combat.ST >= 3.6e6)//1h
     {
-        save_button.innerHTML = "<span class='rarity_antique'><b>导出(奖励)</span></b>";
+        save_button.innerHTML = "<span class='rarity_antique'><b>Export (Bonus)</span></b>";
     }
     else{
-        save_button.innerHTML = "导出";
+        save_button.innerHTML = "Export";
     }
 
 }
