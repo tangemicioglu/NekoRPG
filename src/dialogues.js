@@ -4,8 +4,8 @@ const dialogues = {};
 
 class Dialogue {
     constructor({ name, 
-                  starting_text = `与 ${name} 对话`, 
-                  ending_text = `返回`, 
+                  starting_text = `Talk to ${name}`,
+                  ending_text = `Return`,
                   is_unlocked = true, 
                   is_finished = false, 
                   textlines = {}, 
@@ -470,11 +470,11 @@ class Textline {
 
     //NekoRPG dialogues below
     dialogues["猫妖"] = new Dialogue({
-        name: "猫妖",
+        name: "Cat Demon",
         textlines: {
             "你是谁": new Textline({
-                name: "你是谁？",
-                text: "这里是猫妖!现在，请让我简要为你介绍一下这里",
+                name: "Who are you?",
+                text: "This is Cat Demon! Now, let me give you a brief introduction to this place.",
                 unlocks: {
                     textlines: [{dialogue: "猫妖", lines: ["背景故事"]}],
                 },
@@ -482,42 +482,42 @@ class Textline {
             }),
             "背景故事": new Textline({
                 is_unlocked: false,
-                name: "这里是哪里？",
-                text: "太初之时，诞有一方大陆名为血洛。<br>"+"血洛大陆能量充盈，孕育出诸多种族与生命。<br>"+"在这方大陆，强者，可以肆意将无数弱者踩在脚下！<br>而这里，是血洛大陆-司雍世界-燕岗领-纳家。",
+                name: "Where is this place?",
+                text: "In the beginning, a continent called Xuelo came into being.<br>The Xuelo Continent brims with energy, giving rise to countless races and forms of life.<br>On this continent, the strong can trample the weak underfoot without restraint!<br>And here — within the Xuelo Continent, the Siyong World, the Yangang Territory — is the Nayaka Clan.",
 
-                
+
                 unlocks: {
                     textlines: [{dialogue: "猫妖", lines: ["Neko是谁"]}],
                 },
-                
+
                 locks_lines: ["背景故事"],
             }),
             "Neko是谁": new Textline({
                 is_unlocked: false,
-                name: "Neko又是谁？",
-                text: "纳可，燕岗城纳家一个平平无奇的小丫头。<br>"+
-                "这一天，当纳可刚结束了早上的修行<br>"+
-                "却发现和自己一同长大的姐姐纳娜米不见了。<br>"+
-                "当从家族中得知，纳娜米昨天外出历练，至今未回时，纳可已经顾不上思考<br>"+
-                "她决然地独自一人离开家族，寻找纳娜米的踪迹。<br>"+
-                "我们的故事，就从这里开始…",
-                
+                name: "And who is Neko?",
+                text: "Neko — an ordinary, unremarkable girl of the Nayaka Clan in Yangang City.<br>"+
+                "One day, just as Neko finished her morning cultivation,<br>"+
+                "she discovered that her elder sister Nanami, who had grown up alongside her, was nowhere to be found.<br>"+
+                "Upon learning from the clan that Nanami had gone out to train the day before and had not yet returned, Neko could not spare a moment to think.<br>"+
+                "She resolutely left the clan alone, setting out to find any trace of Nanami.<br>"+
+                "And so our story begins...",
+
                 unlocks: {
-                    
+
                     flags: ["is_gathering_unlocked", "is_crafting_unlocked"],
                     locations: ["纳家练兵场 - 1"],
                 },
-                
+
                 locks_lines: ["Neko是谁"],
             }),
             "MT10_clear": new Textline({
                 is_unlocked: false,
-                name: "打开大门",
-                text: "在[V0.13]中，该对话理论上不会解锁。<br>" +
-                "如果是旧版本更新存档，可使用此条对话以解锁后续区域。<br>" +
-                "MOD - NekoRPG作者：超自然生物吐火研究协会 - 纱雪(持续呜呜中=w=) <br>" +
-                "原作：Yet Another Idle RPG - miktaew <br>" +
-                "设定来自： 我吃西红柿《吞噬星空》,千夜《纳可物语》 <br>",
+                name: "Open the Gate",
+                text: "In [V0.13], this dialogue should theoretically never unlock.<br>" +
+                "If you are loading an old save after an update, you may use this dialogue to unlock subsequent areas.<br>" +
+                "MOD - NekoRPG author: Supernatural Creature Fire-Breathing Research Association - Sayuki (perpetually whimpering =w=)<br>" +
+                "Original: Yet Another Idle RPG - miktaew <br>" +
+                "Settings from: I Eat Tomatoes - Swallowed Star, Qianye - Neko's Story <br>",
                 unlocks: {
                     locations: ["燕岗城"],
                 },
@@ -536,12 +536,12 @@ class Textline {
         }
     });
     dialogues["秘法石碑 - 1"] = new Dialogue({
-        name: "秘法石碑 - 1",
+        name: "Arcane Stele - 1",
         textlines: {
             "Speed": new Textline({
                 is_unlocked: false,
-                name: "参悟融血·疾",
-                text: "融血·疾 已加入可选秘法！",
+                name: "Comprehend: Blood Fusion - Swift",
+                text: "Blood Fusion - Swift has been added to available Arcane Arts!",
                 locks_lines: ["Speed"],
                 unlocks: {
                     stances: ["MB_Speed"],
@@ -549,8 +549,8 @@ class Textline {
             }), 
             "Power": new Textline({
                 is_unlocked: false,
-                name: "参悟融血·锐",
-                text: "融血·锐 已加入可选秘法！",
+                name: "Comprehend: Blood Fusion - Edge",
+                text: "Blood Fusion - Edge has been added to available Arcane Arts!",
 
                 locks_lines: ["Power"],
                 unlocks: {
@@ -561,17 +561,17 @@ class Textline {
     });
     
     dialogues["路人甲"] = new Dialogue({
-        name: "路人甲",
+        name: "Passerby",
         textlines: {
             "shop": new Textline({ 
                 is_unlocked: false,
-                name: "你好？这附近有商店吗？",
-                text: "小丫头，刚从家族里出来的吧？<br>" +
-                "燕岗城中心寸土寸金，商店一般都开在16环外。<br>" +
-                "距离这里最近的一处是连锁店“燕岗杂货铺”<br>"+"往东再走一里半即可到达",
+                name: "Excuse me, is there a shop around here?",
+                text: "Little girl, just left your clan, haven't you?<br>" +
+                "Space is precious in central Yangang City — shops are mostly in the outer districts.<br>" +
+                "The nearest one is the chain store \"Yangang General Store\"<br>"+"Walk another half mile to the east and you'll find it",
 
                 unlocks: {
-                    traders: ["燕岗杂货铺"],
+                    traders: ["Yangang General Store"],
                 },
                 locks_lines: ["shop"],
             }), 
@@ -579,12 +579,12 @@ class Textline {
     });
     
     dialogues["百兰"] = new Dialogue({
-        name: "百兰",
+        name: "Bailan",
         textlines: {
             "before": new Textline({ 
                 is_unlocked: true,
-                name: "请问你是？",
-                text: "哪来的小丫头，你这点修为一个人出门历练，<br>真的没问题吗？外面的荒兽可是会吃人的。",
+                name: "Excuse me, who are you?",
+                text: "Where did you come from, little girl? With your level of cultivation, going out to train all on your own —<br>are you sure that's a good idea? The Wild Beasts out there will eat you alive.",
 
                 unlocks: {
                     textlines: [{dialogue: "百兰", lines: ["before2"]}],
@@ -593,8 +593,8 @@ class Textline {
             }),
             "before2": new Textline({ 
                 is_unlocked: false,
-                name: "这位大叔，看不起人可是不对的哦。",
-                text: "嘿，谁是大叔啊，信不信我——",
+                name: "Sir, it's not right to look down on people, you know.",
+                text: "Hey, who are you calling 'sir'?! Don't push your luck——",
 
                 unlocks: {
                     locations: ["燕岗近郊 - 0"],
@@ -603,8 +603,8 @@ class Textline {
             }), 
             "defeat": new Textline({ 
                 is_unlocked: false,
-                name: "等等，大叔你手上拿的是什么？",
-                text: "这，这是地图，<br>绘制的是最近新发现的一处藏宝地。",
+                name: "Wait, what's that you're holding in your hand?",
+                text: "This... this is a map,<br>drawn to show the location of a recently discovered Treasure Site.",
 
                 unlocks: {
                     textlines: [{dialogue: "百兰", lines: ["defeat2"]}],
@@ -613,8 +613,8 @@ class Textline {
             }), 
             "defeat2": new Textline({ 
                 is_unlocked: false,
-                name: "有更详细的信息吗？",
-                text: "有的有的，听说里面有不少好东西，<br>危险度还挺高的，鲜少有人能够活着出来。",
+                name: "Is there more detailed information?",
+                text: "Oh yes, yes — I've heard there are quite a few valuable things inside,<br>but it's rather dangerous. Very few people make it out alive.",
 
                 unlocks: {
                     textlines: [{dialogue: "百兰", lines: ["defeat3"]}],
@@ -623,8 +623,8 @@ class Textline {
             }), 
             "defeat3": new Textline({ 
                 is_unlocked: false,
-                name: "交出这个，你可以走啦。",
-                text: "……也罢。<br>（唉，这次居然栽在一个小丫头手上，<br>运气是真的差，回头要如何和家族交待……）",
+                name: "Hand it over, and you can go.",
+                text: "......Fine.<br>(Ugh, to lose to a little girl like this —<br>my luck is truly awful. How am I going to explain this to the clan...)",
 
                 unlocks: {
                     items: [{item_name:"地图-藏宝地"}],
@@ -635,8 +635,8 @@ class Textline {
             }),
             "V0.21 Recover": new Textline({ 
                 is_unlocked: false,
-                name: "V0.21更新存档请点击此提示获取下一区域访问权限",
-                text: "已开启3 - 1区域！",
+                name: "V0.21 update: click here to unlock the next area if loading an old save",
+                text: "Area 3-1 has been unlocked!",
 
                 unlocks: {
                     locations: ["燕岗近郊 - 1"],
@@ -647,14 +647,14 @@ class Textline {
     });
     
     dialogues["地宫老人"] = new Dialogue({
-        name: "地宫老人",
+        name: "Old Man of the Underground Palace",
         textlines: {
             "dig": new Textline({ 
                 is_unlocked: true,
-                name: "唔..老人家，想要说什么啊？",
-                text: "有些时候，直接打怪收效甚微。<br>" +
-                "但是当你用你的镐子取巧，<br>" +
-                "便可能产生意想不到的奇效。”<br>"+"不过，也不要贪多...<br>边际收益递减在这里展现的淋漓尽致。",
+                name: "Hmm... old man, what is it you want to say?",
+                text: "Sometimes, fighting monsters directly yields very little.<br>" +
+                "But when you put your pickaxe to clever use,<br>" +
+                "you may find surprising and unexpected results.<br>However, don't be too greedy...<br>The law of diminishing returns plays out perfectly here.",
                 
                 locks_lines: ["dig"],
             }),
@@ -663,12 +663,12 @@ class Textline {
 
     
     dialogues["纳娜米"] = new Dialogue({
-        name: "纳娜米",
+        name: "Nanami",
         textlines: {
             "1": new Textline({ 
                 is_unlocked: true,
-                name: "姐姐！",
-                text: "可可？！<br>你为什么在这里，这里很危险，<br>听姐姐的话，别胡闹，快回家族去。",
+                name: "Sister!",
+                text: "Koko?!<br>Why are you here? It's dangerous here,<br>listen to me — stop fooling around and get back to the clan.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米", lines: ["2"]}],
@@ -677,8 +677,8 @@ class Textline {
             }),
             "2": new Textline({ 
                 is_unlocked: false,
-                name: "不。如果是听话的孩子，这种时候不可能丢下姐姐不管的。",
-                text: "……怪姐姐没有说清楚。<br>其实这次探险，是纳布家主默许的。<br>或者说，是他有意安排我来的。",
+                name: "No. A well-behaved child would never abandon their sister at a time like this.",
+                text: "......It's my fault for not explaining clearly.<br>The truth is, this expedition was tacitly approved by Clan Head Nabu.<br>Or rather, it was he who deliberately arranged for me to come.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米", lines: ["3"]}],
@@ -687,11 +687,11 @@ class Textline {
             }),
             "3": new Textline({ 
                 is_unlocked: false,
-                name: "诶，诶？",
-                text: "…实不相瞒，在之前的一次荒兽狩猎行动中，<br>家族遭到不明来由的偷袭，损失惨重。<br>"+
-                "偷袭者实力非常强大，<br>他利用自己诡异的身法和速度，<br>几乎是以摧枯拉朽般的姿态杀掉了那些族人。<br>"+
-                "家主大怒，派出族中最为优秀的精英前去搜寻，<br>并最终——发现了这座藏有宝藏的地宫，<br>将消息散布出去！<br>"+
-                "现在，方圆千里的大地级修行者，<br>已经陆续接到消息赶来。<br>可地宫的主人却没有什么动静。",
+                name: "Eh, wait, what?",
+                text: "...To tell you the truth, during a Wild Beast hunt some time ago,<br>the clan was ambushed by unknown assailants and suffered heavy losses.<br>"+
+                "The attackers were extraordinarily powerful —<br>with eerie movement techniques and speed,<br>they cut down our clansmen almost effortlessly.<br>"+
+                "The Clan Head was furious and dispatched our finest elites to investigate,<br>ultimately discovering this underground palace housing a great treasure,<br>and let word spread!<br>"+
+                "Now, Earth Rank cultivators from a thousand miles around<br>have been receiving the news and making their way here.<br>Yet the master of this underground palace has shown no sign of movement.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米", lines: ["4"]}],
@@ -700,10 +700,10 @@ class Textline {
             }),
             "4": new Textline({ 
                 is_unlocked: false,
-                name: "原来是这样吗？有点吓人的感觉。那姐姐，你为什么会……",
-                text: "嗯……这一次的对手非常狡猾。<br>如果家族中贸然派出天空级强者，<br>只会引起对方的警觉。<br>"+
-                "所以，才会悄悄把我这个不起眼的小辈派来<br>，伪装成冒失的寻常冒险者。<br>并且，现在我的手上，有足以击杀对方的底牌。<br>"+
-                "但是下面的荒兽实在太多了。<br>我这边最多只能应付几头，<br>那张底牌又无法暴露，所以才被困在这里。",
+                name: "So that's how it is? A bit frightening. But then, Sister, why would you...",
+                text: "Well......this enemy is extremely cunning.<br>If the clan were to rashly send out Sky Rank cultivators,<br>it would only put them on guard.<br>"+
+                "That's why they quietly sent someone unassuming like me,<br>disguised as a reckless ordinary adventurer.<br>And I have in my hands a trump card capable of eliminating the enemy.<br>"+
+                "But there are simply too many Wild Beasts down here.<br>I can handle a few at most,<br>and I can't reveal that trump card — so I got trapped.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米", lines: ["5"]}],
@@ -712,8 +712,8 @@ class Textline {
             }),
             "5": new Textline({ 
                 is_unlocked: false,
-                name: "交给我吧，姐姐。我们就一起，把它们通通干掉！",
-                text: "不行不行，太危险了。<br>……等等，可可，你是怎么来到这里的？<br>难道上面的那头荒兽精英，被你解决了？<br>",
+                name: "Leave it to me, Sister. We'll take them all out together!",
+                text: "No no, it's too dangerous.<br>......Wait, Koko, how did you get down here?<br>Don't tell me you already dealt with that Wild Beast elite upstairs?<br>",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米", lines: ["6"]}],
@@ -722,8 +722,8 @@ class Textline {
             }),
             "6": new Textline({ 
                 is_unlocked: false,
-                name: "都说过了，不要小看我啊。而且，如果连这点小问题都帮不了姐姐，那还要我做什么呢。",
-                text: "……<br>原来如此，小丫头不知不觉已经长大了吗……<br>好，我知道了。",
+                name: "I've told you before, don't underestimate me. Besides, if I can't even help my sister with something this small, what good am I?",
+                text: "......<br>I see... without realizing it, you've grown up, haven't you......<br>Alright, I understand.",
 
                 unlocks: {
                     items: [{item_name: "纳娜米"}],
@@ -734,12 +734,12 @@ class Textline {
     });
     
     dialogues["纳布"] = new Dialogue({
-        name: "纳布",
+        name: "Nabu",
         textlines: {
             "1": new Textline({ 
                 is_unlocked: true,
-                name: "父亲大人，姐姐。",
-                text: "[纳布]都来了啊。可可，娜娜，这次辛苦你们了。<br>[纳娜米]可可，这次我们可是立了大功的呀！<br>城主府居然给了那么多的奖赏。",
+                name: "Father, Sister.",
+                text: "[Nabu] You're both here. Koko, Nana — good work this time.<br>[Nanami] Koko, we really made a great contribution this time!<br>The City Lord's Mansion gave us so many rewards.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳布", lines: ["2"]}],
@@ -748,8 +748,8 @@ class Textline {
             }),
             "2": new Textline({ 
                 is_unlocked: false,
-                name: "是呀……比想象中的奖励还要丰厚很多。",
-                text: "[纳布]可可，你是有什么心事吗？<br>[纳娜米]家主前辈，可可她想说的话，自己会说的。<br>不要再问了……<br>[纳布]也罢。毕竟小丫头，今年也十一岁了啊。<br>感觉怎么样？快要突破大地级了吧？",
+                name: "Yes... far more generous than I had imagined.",
+                text: "[Nabu] Koko, is something weighing on your mind?<br>[Nanami] Senior Clan Head, Koko will say what she wants to say when she's ready.<br>Please don't press her......<br>[Nabu] Very well. After all, our little girl is eleven years old now.<br>How does it feel? Are you close to breaking through to Earth Rank?",
 
                 unlocks: {
                     textlines: [{dialogue: "纳布", lines: ["3"]}],
@@ -758,8 +758,8 @@ class Textline {
             }),
             "3": new Textline({ 
                 is_unlocked: false,
-                name: "是的……自地宫一行之后，感触很深，已经隐约触摸到了那道门槛。",
-                text: "达到大地级有两种办法呢，<br>第一种是慢慢积累领悟，最终水到渠成。<br>第二种——在历练中快速突破。",
+                name: "Yes... ever since the underground palace trip, I've felt a great deal — and I've faintly touched that threshold.",
+                text: "There are two ways to reach Earth Rank.<br>The first is to slowly accumulate comprehension until it naturally comes together.<br>The second — to break through swiftly through real-world tempering.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳布", lines: ["4"]}],
@@ -768,12 +768,12 @@ class Textline {
             }),
             "4": new Textline({ 
                 is_unlocked: false,
-                name: "……我不想再等待了。父亲大人，姐姐，我想前往荒兽森林，找寻突破的契机。",
-                text: "[纳娜米]可可……<br>[纳布]荒兽森林十分凶险，<br>但你有这份冒险的心，那为父必定支持。<br>"+
-                "你在练兵场中捡破烂造的剑和盔甲，<br>从此以后就是你的了。<br>"+
-                "还有一张隐藏着传送术式的护身符咒。<br>如果你遇到危险，就使用它。<br>"+
-                "[纳娜米]家主前辈，荒兽森林太危险了，<br>把我之前使用的那把镭射枪交给可可吧？<br>"+
-                "不行。这虽然能让可可轻松应对困境，<br>但也会少了突破所应有的压力。<br>",
+                name: "...I don't want to wait any longer. Father, Sister — I want to go to the Wild Beast Forest and seek an opportunity to break through.",
+                text: "[Nanami] Koko......<br>[Nabu] The Wild Beast Forest is extremely perilous,<br>but you have the heart of an adventurer — your father will surely support you.<br>"+
+                "The sword and armor you cobbled together from scraps at the training grounds<br>are yours from this day forward.<br>"+
+                "And here is a protective talisman inscribed with a teleportation formation.<br>Use it if you find yourself in danger.<br>"+
+                "[Nanami] Senior Clan Head, the Wild Beast Forest is far too dangerous —<br>could you give Koko the laser rifle I used before?<br>"+
+                "No. While that would make things easier for Koko,<br>it would also remove the pressure needed for a true breakthrough.<br>",
 
                 unlocks: {
                     textlines: [{dialogue: "纳布", lines: ["5"]}],
@@ -782,9 +782,9 @@ class Textline {
             }),
             "5": new Textline({ 
                 is_unlocked: false,
-                name: "父亲大人，镭射枪是什么？",
-                text: "也是时候告诉你这些了。<br>这些东西，牵涉到一个传说。<br>" +
-                `<span style="color:lightblue">【天外族群】</span>的传说。<br>待可可你突破到大地级，我会告诉你更多的。`,
+                name: "Father, what is a laser rifle?",
+                text: "It is time to tell you these things.<br>They relate to a legend —<br>" +
+                `<span style="color:lightblue">The legend of the [Extraterrestrial Clan].</span><br>Once you break through to Earth Rank, Koko, I will tell you more.`,
 
                 unlocks: {
                     textlines: [{dialogue: "纳布", lines: ["6"]}],
@@ -793,8 +793,8 @@ class Textline {
             }),
             "6": new Textline({ 
                 is_unlocked: false,
-                name: "这样吗……我明白了。那么，等着我的好消息吧。",
-                text: "哼，不让姐姐省心。<br>要加油啊，小丫头。<br>……就像之前一样，一定要安然无恙回来。",
+                name: "I see... I understand. Then wait for good news from me.",
+                text: "Hmph, always giving your sister worry.<br>You'd better do your best, little girl.<br>......Just like before — make sure you come back safe and sound.",
 
                 unlocks: {
                     //items: [{item_name: "纳娜米"}],
@@ -806,13 +806,13 @@ class Textline {
     });
     
     dialogues["清野瀑布"] = new Dialogue({
-        name: "清野瀑布",
-        starting_text: "注视着清野瀑布",
+        name: "Qingye Waterfall",
+        starting_text: "Gazing at Qingye Waterfall",
         textlines: {
             "wf1": new Textline({
                 is_unlocked: false,
                 name: "...",
-                text: "父亲大人曾说，外面的世界危险而且残酷。<br>……可我不相信，我想去更远的地方看一看。",
+                text: "Father always said the outside world is dangerous and cruel.<br>......But I don't believe it. I want to see further places for myself.",
                 locks_lines: ["wf1"],
                 unlocks: {
                     textlines: [{dialogue: "清野瀑布", lines: ["wf2"]}],
@@ -821,7 +821,7 @@ class Textline {
             "wf2": new Textline({
                 is_unlocked: false,
                 name: "...",
-                text: "如今也算是历经了一次生死呢，<br>也知道了父亲大人的话是什么意思。",
+                text: "Now I've truly experienced a brush with death,<br>and I understand what Father meant.",
                 locks_lines: ["wf2"],
                 unlocks: {
                     spec:"DeathCount-1",
@@ -831,7 +831,7 @@ class Textline {
             "wf3": new Textline({
                 is_unlocked: false,
                 name: "...",
-                text: "也许，等真正成为强者的那一天，<br>这个愿望能够实现吧。",
+                text: "Perhaps, when the day comes that I truly become a strong cultivator,<br>this wish might be fulfilled.",
                 locks_lines: ["wf3"],
                 unlocks: {
                     textlines: [{dialogue: "清野瀑布", lines: ["wf4"]}],
@@ -839,8 +839,8 @@ class Textline {
             }), 
             "wf4": new Textline({
                 is_unlocked: false,
-                name: "瀑布外面是山，山外面是什么？",
-                text: "[奇怪的声音]你在害怕什么？<br>你要成为强者！去探索外面的世界！<br>生死的历练，杀不死你，只会让你失败了回到床上！",
+                name: "Beyond the waterfall are mountains — what lies beyond the mountains?",
+                text: "[Strange Voice] What are you afraid of?<br>You must become strong! Go explore the world beyond!<br>The trials of life and death — what doesn't kill you only sends you back to bed when you fail!",
                 locks_lines: ["wf4"],
                 unlocks: {
                     textlines: [{dialogue: "清野瀑布", lines: ["wf5"]}],
@@ -848,8 +848,8 @@ class Textline {
             }), 
             "wf5": new Textline({
                 is_unlocked: false,
-                name: "*不自觉地挥剑*",
-                text: "身体渐渐变得越发灵活，敏捷。<br>这些日子以来，所积累下来的沉淀，<br>终于在这一刻被全部激发。！",
+                name: "*Swings sword instinctively*",
+                text: "The body gradually becomes more agile and nimble.<br>All the accumulation of these days —<br>finally ignited in this very moment!",
                 locks_lines: ["wf5"],
                 unlocks: {
                     textlines: [{dialogue: "清野瀑布", lines: ["wf6"]}],
@@ -857,8 +857,8 @@ class Textline {
             }), 
             "wf6": new Textline({
                 is_unlocked: false,
-                name: "……发生了什么，我刚才都做了什么。",
-                text: "水无心·洪水，水无心·流水，水无心·雨水 已加入可选秘法！",
+                name: "......What just happened? What did I just do?",
+                text: "Heartless Water - Flood, Heartless Water - Stream, Heartless Water - Rain have been added to available Arcane Arts!",
 
                 locks_lines: ["wf6"],
                 unlocks: {
@@ -868,13 +868,13 @@ class Textline {
         }
     });
     dialogues["纳布(江畔)"] = new Dialogue({
-        name: "纳布(江畔)",
-        starting_text: "与父亲纳布对话",
+        name: "Nabu (Riverside)",
+        starting_text: "Talk to father Nabu",
         textlines: {
             "jp1": new Textline({ 
                 is_unlocked: false,
                 name: "...",
-                text: "可可！你没事吧，这身伤是怎么回事？",
+                text: "Koko! Are you alright? What happened to you, all those injuries?",
                 unlocks: {
                     textlines: [{dialogue: "纳布(江畔)", lines: ["jp2"]}],
                 },
@@ -883,8 +883,8 @@ class Textline {
             }),
             "jp2": new Textline({ 
                 is_unlocked: false,
-                name: "说来话长……和百家的人在外面打了一架。还好有那张符咒在呢。",
-                text: "纳可将之前的事情告诉了纳布，<br>也包括自己受伤后，<br>观想清野瀑布的意外收获。<br><br>[纳布]岂有此理，百家那群混蛋！他们真是该死！<br>不过是眼红我纳家此次所得，便做出此等勾当。<br>那个百兰连大地级都不是，<br>在百家根本没什么地位，说帮他出气只不过是个可耻的借口罢了！",
+                name: "It's a long story... I got into a fight with people from the Bai Clan outside. Good thing I had that talisman.",
+                text: "Neko told Nabu everything that had happened,<br>including the unexpected gain she had<br>while meditating on Qingye Waterfall after being injured.<br><br>[Nabu] How outrageous — those Bai Clan bastards! They deserve everything coming to them!<br>All they did was get jealous of what our clan obtained, and stoop to such underhanded tactics.<br>That Bailan isn't even Earth Rank,<br>has no real standing in the Bai Clan at all — saying they're helping him save face is just a shameful excuse!",
                 unlocks: {
                     textlines: [{dialogue: "纳布(江畔)", lines: ["jp3"]}],
                 },
@@ -893,8 +893,8 @@ class Textline {
             }),
             "jp3": new Textline({ 
                 is_unlocked: false,
-                name: "这件事……我也有一部分责任。我不该去招惹强大的百家，给家族添麻烦。",
-                text: "可可，这不是你的错。<br>最近一段时间不要单独出去了，我会派人保护你。[纳可]我没关系的。父亲大人，您说过的，只有危险的地方才有机遇。",
+                name: "This matter... I bear some responsibility too. I shouldn't have provoked the powerful Bai Clan and brought trouble to the family.",
+                text: "Koko, this is not your fault.<br>Don't go out alone for a while — I'll send someone to protect you. [Neko] I'm fine. Father, you always said that opportunity only comes in dangerous places.",
                 unlocks: {
                     textlines: [{dialogue: "纳布(江畔)", lines: ["jp4"]}],
                 },
@@ -903,7 +903,7 @@ class Textline {
             }),
             "jp4": new Textline({ 
                 is_unlocked: false,
-                name: "我能有现在的实力，也正是拜这次生死危机所赐。",
+                name: "It is precisely because of this life-and-death crisis that I have the strength I have now.",
                 text: "",
                 unlocks: {
                     spec:"Realm-A3",
@@ -914,8 +914,8 @@ class Textline {
             }),
             "jp5": new Textline({ 
                 is_unlocked: false,
-                name: "(省略天外族群的设定)真是令人神往的世界—",
-                text: "……也是时候，送你进入家族秘境磨炼了。要知道，进入纳家秘境的标准，就是实力达到大地级中期。",
+                name: "(Setting for the Extraterrestrial Clan abridged) What a fascinating world —",
+                text: "......It is also time to send you into the clan's Secret Realm for tempering. Know that the requirement to enter the Nayaka Secret Realm is reaching the mid-stage of Earth Rank.",
                 unlocks: {
                     textlines: [{dialogue: "纳布(江畔)", lines: ["jp6"]}],
                 },
@@ -924,7 +924,7 @@ class Textline {
             }),
             "jp6": new Textline({ 
                 is_unlocked: false,
-                name: "诶，家族秘境吗？",
+                name: "Oh, the clan's Secret Realm?",
                 text: "",
                 unlocks: {
                     spec:"Realm-A4",
@@ -936,12 +936,12 @@ class Textline {
         }
     });
     dialogues["秘境心火精灵"] = new Dialogue({
-        name: "秘境心火精灵",
+        name: "Secret Realm Heart-Fire Spirit",
         textlines: {
             "xh1": new Textline({ 
                 is_unlocked: false,
-                name: "哼~知道我的厉害了吗？",
-                text: "饶命，饶命——<br>小的只是秘境诞生的“灵”，<br>根本没有家底或者资源哇...",
+                name: "Hmph~ Now you know how fearsome I am!",
+                text: "Spare me, spare me——<br>This one is just a 'Spirit' born from the Secret Realm,<br>with absolutely no wealth or resources...",
                 unlocks: {
                     textlines: [{dialogue: "秘境心火精灵", lines: ["xh2"]}],
                 },
@@ -950,8 +950,8 @@ class Textline {
             }),
             "xh2": new Textline({ 
                 is_unlocked: false,
-                name: "诶，在这样的核心区域，你应该也有秘境的一些权限吧",
-                text: "啊对的对的！<br>我可以帮您调节秘境的灵阵功率！<br>这样您就可以得到更多的战斗领悟了！",
+                name: "Hey, in a core area like this, you must have some authority over the Secret Realm, right?",
+                text: "Ah yes, yes indeed!<br>I can help you adjust the Secret Realm's Spirit Formation Power!<br>That way you can gain more battle comprehension!",
                 unlocks: {
                     textlines: [{dialogue: "秘境心火精灵", lines: ["check"]},{dialogue: "秘境心火精灵", lines: ["powerup"]},{dialogue: "秘境心火精灵", lines: ["powerdown"]},{dialogue: "秘境心火精灵", lines: ["powermax"]}],
                     locations: ["纳家秘境 - ∞"],
@@ -961,7 +961,7 @@ class Textline {
             }),
             "check": new Textline({ 
                 is_unlocked: false,
-                name: "现在灵阵功率开了多少哇？",
+                name: "How much Spirit Formation Power is currently active?",
                 text: "",
                 unlocks: {
                     textlines:[{dialogue: "秘境心火精灵", lines: ["powermax"]}],
@@ -970,7 +970,7 @@ class Textline {
             }),
             "powerup": new Textline({ 
                 is_unlocked: false,
-                name: "提高一层灵阵功率\\o/",
+                name: "Increase Spirit Formation Power by one level \\o/",
                 text: "",
                 unlocks: {
                     spec: "A6-up"
@@ -978,7 +978,7 @@ class Textline {
             }),
             "powerdown": new Textline({ 
                 is_unlocked: false,
-                name: "降低一层灵阵功率T_T",
+                name: "Decrease Spirit Formation Power by one level T_T",
                 text: "",
                 unlocks: {
                     spec: "A6-down"
@@ -986,7 +986,7 @@ class Textline {
             }),
             "powermax": new Textline({ 
                 is_unlocked: false,
-                name: "将灵阵功率提高到当前上限(ノ▼Д▼)ノ",
+                name: "Raise Spirit Formation Power to the current maximum (ノ▼Д▼)ノ",
                 text: "",
                 unlocks: {
                     spec: "A6-max"
@@ -995,13 +995,13 @@ class Textline {
         }
     });
     dialogues["纳鹰"] = new Dialogue({
-        name: "纳鹰",
-        starting_text: "和结界湖的神秘强者对话",
+        name: "Naying",
+        starting_text: "Speak with the mysterious cultivator of the Barrier Lake",
         textlines: {
             "nb1": new Textline({ 
                 is_unlocked: true,
-                name: "……这位前辈，您是？",
-                text: "呵呵，你还不认识我吗？<br>确实，距我陨落，也已经过去数千年之久了吧。<br>想当初，我追随燕岗城主创下战功，<br>在燕岗城中建立起纳家，<br>也没有想到家族能走到如今这一步。",
+                name: "......Senior, may I ask who you are?",
+                text: "Heh heh, you don't recognize me?<br>True enough — it has been several thousand years since my fall.<br>Back in those days, I followed the Lord of Yangang City into battle,<br>and founded the Nayaka Clan within Yangang City.<br>I never imagined the clan would come this far.",
                 unlocks: {
                     textlines: [{dialogue: "纳鹰", lines: ["nb2"]}],
                 },
@@ -1010,8 +1010,8 @@ class Textline {
             }),
             "nb2": new Textline({ 
                 is_unlocked: false,
-                name: "……您是纳家的先祖！这……怎么可能，长老和父亲都说您……",
-                text: "不必惊讶，我确实是纳家的先祖，名为纳鹰。<br>如今纳家的后人，也无人知晓我这道意念，<br>隐藏在秘境之中。<br> 若是为人知晓，只怕这秘境，<br>就要被那群探险者掀个天翻地覆吧。<br>",
+                name: "......You are the ancestor of the Nayaka Clan! This... how is it possible — the Elders and Father both said you were...",
+                text: "No need to be surprised — I am indeed the ancestor of the Nayaka Clan, known as Naying.<br>None of the Nayaka descendants today know of this consciousness of mine,<br>hidden within the Secret Realm.<br>Were it to become known, I fear this Secret Realm<br>would be turned upside down by those adventurers.<br>",
                 unlocks: {
                     textlines: [{dialogue: "纳鹰", lines: ["nb3"]}],
                 },
@@ -1020,8 +1020,8 @@ class Textline {
             }),
             "nb3": new Textline({ 
                 is_unlocked: false,
-                name: "这是怎么回事，当年您遭遇了什么变故，才变成这个样子？",
-                text: "呵呵，小丫头，别急。<br>这也不过是一段无聊的往事罢了。<br>当年，我为了筹集一笔交易的材料，<br>铤而走险，深入危险的血魔海，<br>猎取强大的荒兽。<br>在血魔海，我不慎中了圈套，<br>沦为一位<span style='color:pink'>领域级</span>强者的灵魂奴仆。<br>那强者……恐怕与燕岗城主实力相差无几。<br>",
+                name: "How did this come to be? What happened back then that led to this state?",
+                text: "Heh heh, little girl, no need to rush.<br>It is nothing more than a dull old tale.<br>In those days, I took a great risk to gather materials for a transaction,<br>venturing deep into the perilous Demon Blood Sea<br>to hunt powerful Wild Beasts.<br>In the Demon Blood Sea, I unwittingly fell into a trap<br>and became the soul slave of a <span style='color:pink'>Domain Rank</span> cultivator.<br>That cultivator... was likely comparable in power to the Lord of Yangang City.<br>",
                 unlocks: {
                     textlines: [{dialogue: "纳鹰", lines: ["nb4"]}],
                 },
@@ -1031,7 +1031,7 @@ class Textline {
             "nb4": new Textline({ 
                 is_unlocked: false,
                 name: "...",
-                text: "这些强者缔结灵魂奴仆，<br>无非就是想要获得一个强大的“炮灰”罢了。<br>当时的我，根本就无法逃脱。<br>那些灵魂奴仆，终生服从于主人，没有自由，<br>死亡随时会降临到头顶。<br>大多数都在没日没夜经受各种危险之后，悲惨死去！<br>为了摆脱这种宿命，我选择自毁灵魂！<br>并且将意识转移到这一缕念头上。<br>这道念头，原本是寄存在家族秘境之中，<br>以备与家族传讯，此时却是派上了用场。",
+                text: "Such powerful cultivators forge soul slaves<br>for nothing more than to gain a powerful 'cannon fodder'.<br>At the time, I had absolutely no means of escape.<br>Those soul slaves obey their masters for life, without freedom,<br>with death ready to descend upon them at any moment.<br>Most met miserable ends after enduring endless dangers day and night!<br>To break free from this fate, I chose to destroy my own soul!<br>And transferred my consciousness into this single thread of thought.<br>This thread of thought had originally been stored within the clan's Secret Realm<br>to maintain communication with the clan — now it served a greater purpose.",
                 unlocks: {
                     textlines: [{dialogue: "纳鹰", lines: ["nb5"]}],
                 },
@@ -1040,7 +1040,7 @@ class Textline {
             }),
             "nb5": new Textline({ 
                 is_unlocked: false,
-                name: "啊...",
+                name: "Ah...",
                 text: "",
                 unlocks: {
                     textlines: [{dialogue: "纳鹰", lines: ["nb6"]}],
@@ -1051,8 +1051,8 @@ class Textline {
             }),
             "nb6": new Textline({ 
                 is_unlocked: false,
-                name: "我……可以吗？<br>有什么我能帮到前辈的，请尽管说吧。",
-                text: "你的火元素领悟已有小成，<br>但提升空间仍然很大。<br>那领域境界的强者，<br>能够张开蕴含法则感悟的【领域】对敌，<br>我也曾见识他施展过几次。<br>数千年过去，我对这领域也有了自己的几分见解。<br>现在，我便将自己对这等秘法的领悟，<br>传授于你。你仔细听好。<br>",
+                name: "I... can I?<br>Anything I can help with, Senior — please don't hesitate to ask.",
+                text: "Your Fire Element comprehension has made some progress,<br>but there is still much room to grow.<br>That Domain Rank cultivator<br>was able to expand a [Domain] infused with law comprehension against his enemies —<br>I witnessed him use it several times.<br>Over thousands of years, I have developed my own understanding of this Domain.<br>Now I will impart my comprehension of these Arcane Arts<br>to you. Listen carefully.<br>",
                 unlocks: {
                     textlines: [{dialogue: "纳鹰", lines: ["nb7"]}],
                 },
@@ -1061,8 +1061,8 @@ class Textline {
             }),
             "nb7": new Textline({ 
                 is_unlocked: false,
-                name: "是，晚辈遵命。",
-                text: "纳鹰伸出手指，点在了纳可眉心处，<br>顿时，庞杂的信息涌入了她的脑海中，<br>令她一时间沉浸在种种玄妙的领悟意境之内。<br>过了片刻后，纳可睁开眼睛，<br>眼底闪烁着兴奋的光芒。<br>她能感受到这些领悟对她的帮助有多大。<br>  [纳可]前辈，谢谢您。<br>我对之后的路，已经有了清晰的认知。<br>[纳鹰]谢就不必了。<br>我想，我的传承到这里也差不多快结束了。<br>接下来，你要做的是好好努力提升自己，<br>等我再次苏醒之后，希望看见你更上一层楼。<br>",
+                name: "Yes, this junior obeys.",
+                text: "Naying extended a finger and pressed it between Neko's brows.<br>Instantly, a flood of complex information poured into her mind,<br>immersing her in all manner of profound states of comprehension.<br>After a moment, Neko opened her eyes,<br>with excitement gleaming at the depths of her gaze.<br>She could feel how greatly these insights would benefit her.<br>  [Neko] Senior, thank you.<br>I now have a clear understanding of the path ahead.<br>[Naying] No need for thanks.<br>I believe my legacy is nearly at its end here.<br>What you must do next is work hard to improve yourself —<br>and when I awaken once more, I hope to see you reach even greater heights.<br>",
                 unlocks: {
                     textlines: [{dialogue: "纳鹰", lines: ["nb8"]}],
                     spec: "A7-exp",
@@ -1072,8 +1072,8 @@ class Textline {
             }),
             "nb8": new Textline({ 
                 is_unlocked: false,
-                name: "前辈您……要沉睡了？",
-                text: "  呵呵，一缕念头自是无法长期维持。<br>下一次，就不知道什么时候才能醒了。<br>如果你希望检验自己——<br>去这片结界湖的深处。<br>那里有一些结界里自然滋生的“灵”，<br>诞生了意识，想要反抗和挣脱结界。<br>为了秘境的稳固，这个任务便交予你。<br>去吧，我就不打扰了。",
+                name: "Senior... are you going to sleep again?",
+                text: "  Heh heh, a single thread of thought cannot sustain itself indefinitely.<br>The next time, who knows when I shall wake.<br>If you wish to test yourself —<br>go to the depths of this Barrier Lake.<br>There, some 'Spirits' have naturally grown within the barrier,<br>developed consciousness, and seek to resist and break free.<br>For the stability of the Secret Realm, I entrust this task to you.<br>Go now — I won't keep you.",
                 unlocks: {
                     locations: ["结界湖 - 1"],
                 },
@@ -1084,12 +1084,12 @@ class Textline {
     });
     
     dialogues["纳娜米(废墟)"] = new Dialogue({
-        name: "纳娜米(废墟)",
+        name: "Nanami (Ruins)",
         textlines: {
             "fx1": new Textline({ 
                 is_unlocked: true,
-                name: "姐姐，这片庞大的废墟……就是曾经的声律城所在地吗？",
-                text: "是的。据传那位天外来客，<br>操纵着一艘庞大的飞行物，<br>被称之为“D9级飞船”的宫殿类奇宝。<br>那奇宝将整座城池炸成了废墟，<br>令我血洛大陆一方死伤惨重。<br>最终——靠着几百位城主级别强者的合力围攻，<br>甚至还有一位通天彻地的存在出手，<br>才终于将那奇宝击落！",
+                name: "Sister, this vast expanse of ruins... is this where Shenlv City once stood?",
+                text: "Yes. It is said that the Sky-Outsider<br>controlled a massive flying craft —<br>a palace-class treasure known as a 'D9-class Vessel'.<br>That craft reduced the entire city to rubble,<br>inflicting devastating casualties on our side of the Xuelo Continent.<br>In the end — through the combined assault of several hundred City Lord-level cultivators,<br>and even the intervention of a Heaven-Reaching existence,<br>they finally brought that craft down!",
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(废墟)", lines: ["fx2"]}],
                 },
@@ -1098,8 +1098,8 @@ class Textline {
             }),
             "fx2": new Textline({ 
                 is_unlocked: false,
-                name: "……几百位城主级！临近十几座领的强者，已经齐聚在此了吗？",
-                text: "至少来了一多半呢。<br>可当强者们攻入“D9飞船”之内，<br>才发现那天外来客根本就不在里面。<br>我们低估了天外来客，<br>他早就已经悄悄放出上百艘小型的，<br>被称为“B9飞船”的飞行物，欲要逃跑。",
+                name: "......Several hundred City Lord-level cultivators! Have the powerful fighters from over a dozen nearby territories already gathered here?",
+                text: "More than half of them, at least.<br>But when the cultivators stormed inside the D9-class Vessel,<br>they found the Sky-Outsider wasn't in it at all.<br>We had underestimated him —<br>he had long since quietly launched over a hundred small craft,<br>known as 'B9-class Vessels', in an attempt to flee.",
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(废墟)", lines: ["fx3"]}],
                 },
@@ -1108,8 +1108,8 @@ class Textline {
             }),
             "fx3": new Textline({ 
                 is_unlocked: false,
-                name: "D9，B9。感觉上，像是某种划分一样，是什么呢……",
-                text: "谁知道呢。<br>的确，这种小型飞行物，材质仅仅是珍宝级，<br>可体型小，速度快，一时间无人能够发现它的踪迹。<br>还是那位大人物亲自出手，<br>在他的灵魂探测范围内，<br>一切都无所遁形。<br>最终，强者们在接近第十八层云层之下，<br>拦截了他搭乘的那艘珍宝飞船，<br>并将所有的飞船尽数击毁。",
+                name: "D9, B9. It feels like some kind of classification system — I wonder what it is...",
+                text: "Who knows.<br>True, these small craft were made of only precious-grade materials,<br>but they were small and fast — for a time no one could track them.<br>It took that great figure personally intervening;<br>within his soul-detection range,<br>nothing could hide.<br>In the end, the cultivators intercepted the vessel he was riding<br>beneath the eighteenth cloud layer,<br>and destroyed every last one of the vessels.",
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(废墟)", lines: ["fx4"]}],
                 },
@@ -1118,8 +1118,8 @@ class Textline {
             }),
             "fx4": new Textline({ 
                 is_unlocked: false,
-                name: "呼……跌宕起伏呢。我们的目的，就是去寻找那些掉落的“飞船”，搜寻所需的宝物吧？",
-                text: "正是。那座主战的飞船奇宝，<br>之中的宝藏，此刻正在被云霄级之上的强者抢夺。<br>而我们的目标，却是那些小型的飞船。<br>不过——还有一个目标，<br>可可，就在你的眼前。<br>声律城的废墟。",
+                name: "Whew... quite a story. Our goal is to find those crashed 'Vessels' and search for the treasures we need, right?",
+                text: "Exactly. The treasures within the main battle Vessel<br>are currently being fought over by Sky-Cloud Rank and above cultivators.<br>Our target, however, is those smaller vessels.<br>But — there is one more target,<br>Koko, right before your eyes.<br>The ruins of Shenlv City.",
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(废墟)", lines: ["fx5"]}],
                 },
@@ -1128,8 +1128,8 @@ class Textline {
             }),
             "fx5": new Textline({ 
                 is_unlocked: false,
-                name: "声律城的……废墟？",
-                text: "嗯，没错。曾经繁荣昌盛的声律城，<br>化作废墟之后，众多原住民死去，<br>遗落下不少东西。家主大人已经下令，<br>纳家全体分开搜寻，<br>找到有用的财物、宝物之后——",
+                name: "The ruins of... Shenlv City?",
+                text: "Yes, that's right. The once-flourishing Shenlv City,<br>now in ruins, with many of its original inhabitants gone,<br>has left behind many things. The Clan Head has already issued orders<br>for the entire Nayaka Clan to split up and search.<br>After finding useful valuables and treasures——",
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(废墟)", lines: ["fx6"]}],
                 },
@@ -1138,8 +1138,8 @@ class Textline {
             }),
             "fx6": new Textline({ 
                 is_unlocked: false,
-                name: "等一下，姐姐，这种做法……不好吧。这座城池的人，难道不会无法安息吗？",
-                text: "可可，姐姐只知道，<br>只要能够让纳家更快发展起来，<br>这些事情都是值得的。<br>如今，临近城池所有大小势力，都在做同样的事情。<br>我们想要争取到更多，并非容易，<br>更没有时间为那些难民感到悲痛。",
+                name: "Wait, Sister — this kind of thing... it doesn't feel right. Won't the people of this city be unable to rest in peace?",
+                text: "Koko, all your sister knows is<br>that anything that helps the Nayaka Clan grow faster<br>is worth doing.<br>Right now, every power great and small in the surrounding cities is doing the same thing.<br>It is not easy for us to claim more than others,<br>and there is no time to grieve for those refugees.",
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(废墟)", lines: ["fx7"]}],
                 },
@@ -1148,8 +1148,8 @@ class Textline {
             }),
             "fx7": new Textline({ 
                 is_unlocked: false,
-                name: "……我，我听姐姐的。",
-                text: "（如果燕岗城发生了同样的事情，大家……也会这样对待我们吗？）",
+                name: "......I, I will listen to you, Sister.",
+                text: "(If the same thing were to happen to Yangang City, would everyone... treat us the same way?)",
                 unlocks: {
                     textlines: [{dialogue: "声律城难民", lines: ["fx8"]}],
                     
@@ -1161,12 +1161,12 @@ class Textline {
         }
     });
     dialogues["声律城难民"] = new Dialogue({
-        name: "声律城难民",
+        name: "Shenlv City Refugee",
         textlines: {
             "fx8": new Textline({ 
                 is_unlocked: false,
-                name: "……你渴了吗？我去帮你找水。",
-                text: "谢谢你，小姑娘，但是没有必要。<br>多亏了这次遭难，我欠城主府的债务就不需要还了。<br>过一会，我还会去城里，<br>这城里天空乃至云霄级的身家，<br>可有不少留在了里面。<br>哪怕只是一位强者的部分家当，<br>也足以令我后半生无忧，哈哈哈——",
+                name: "......Are you thirsty? Let me go find you some water.",
+                text: "Thank you, little girl, but there's no need.<br>Thanks to this disaster, I no longer have to repay my debts to the City Lord's Mansion.<br>In a little while, I'll head back into the city —<br>the Sky Rank and Sky-Cloud Rank fortunes left behind in there<br>are quite considerable.<br>Even just a portion of one powerful cultivator's belongings<br>would be enough to keep me comfortable for the rest of my life, hahaha——",
                 unlocks: {
                     textlines: [{dialogue: "声律城难民", lines: ["fx9"]}],
                 },
@@ -1175,8 +1175,8 @@ class Textline {
             }),
             "fx9": new Textline({ 
                 is_unlocked: false,
-                name: "……那，那打扰了。",
-                text: "(说起来...回燕岗城之后要不要找城主府,<br>借个<span class='coin coin_moneyT'>10B,8B</span>的呢?)<br>如果燕岗城发生了同样的事情，<br>至少有了重新开始的资源。",
+                name: "......S-sorry to bother you.",
+                text: "(Come to think of it... when I get back to Yangang City,<br>should I ask the City Lord's Mansion for a<span class='coin coin_moneyT'>10B, 8B</span> loan?)<br>If the same thing were to happen to Yangang City,<br>at least there would be resources to start over with.",
                 unlocks: {
                 },
                 
@@ -1186,13 +1186,13 @@ class Textline {
     });
     
     dialogues["心魔(战场)"] = new Dialogue({
-        name: "心魔(战场)",
-        starting_text: "停下来，稳定心神",
+        name: "Inner Demon (Battlefield)",
+        starting_text: "Stop and steady your mind",
         textlines: {
             "zc1": new Textline({ 
                 is_unlocked: true,
-                name: "刚出城就有刺鼻的血腥味传来……好难受。",
-                text: "只这一个天外来客，<br>便造成这么多的强者陨落。<br>我必须保持清醒，不能制造无谓的杀戮。<br>不然……只会在这条路上越走越远。<br>",
+                name: "The sharp stench of blood hits you the moment you leave the city... it's suffocating.",
+                text: "Just this one Sky-Outsider<br>has caused the fall of so many powerful cultivators.<br>I must stay clear-headed — I cannot engage in needless killing.<br>Otherwise... I will only drift further and further down that path.<br>",
                 unlocks: {
                     textlines: [{dialogue: "心魔(战场)", lines: ["zc2"]}],
                     locations: ["声律城战场 - 1"],
@@ -1202,7 +1202,7 @@ class Textline {
             }),
             "zc2": new Textline({ 
                 is_unlocked: false,
-                name: "……(检查过往的经历)",
+                name: "......(Review past experiences)",
                 text: "",
                 unlocks: {
                     spec: "A8-killcount",
@@ -1212,13 +1212,13 @@ class Textline {
     });
     
     dialogues["御兰"] = new Dialogue({
-        name: "御兰",
-        starting_text: "观赏御兰与昊荒的强者之战",
+        name: "Yulan",
+        starting_text: "Watch the battle between Yulan and Haohuang",
         textlines: {
             "yl1": new Textline({ 
                 is_unlocked: false,
                 name: "...",
-                text: "[昊荒]御兰！又是你，<br>这艘飞船是我圣荒城的人先发现的，<br>难不成你兰陵城，还要继续死皮赖脸相争？",
+                text: "[Haohuang] Yulan! You again —<br>this Vessel was discovered first by our people of Shenghuan City,<br>and yet your Lanling City insists on shamelessly contesting it?",
                 unlocks: {
                     textlines: [{dialogue: "御兰", lines: ["yl2"]}],
                 },
@@ -1227,8 +1227,8 @@ class Textline {
             }), 
             "yl2": new Textline({ 
                 is_unlocked: false,
-                name: "（飞船！有飞船的消息？）",
-                text: "[御兰]我的昊将军，您说什么呢？<br>这次，可是您圣荒城的人马故意挑衅，<br>兰陵城不过是正当防卫罢了。<br>[昊荒]既然你如此不识时务，那我也没有必要跟你多废话！<br>就凭你这点人，也想破我等的荒门大阵，<br>简直是痴心妄想！",
+                name: "(A Vessel! There's news about a Vessel?)",
+                text: "[Yulan] What are you saying, General Hao?<br>This time, it was your Shenghuan City's forces who provoked us first —<br>Lanling City was merely acting in self-defense.<br>[Haohuang] Since you are so utterly unreasonable, I have no need to waste more words on you!<br>With just your handful of people, you think you can break our Huo Formation?<br>What a ridiculous fantasy!",
                 unlocks: {
                     textlines: [{dialogue: "御兰", lines: ["yl3"]}],
                 },
@@ -1237,8 +1237,8 @@ class Textline {
             }),
             "yl3": new Textline({ 
                 is_unlocked: false,
-                name: "诶，已经交上手了吗？战斗好精彩呀。",
-                text: "(激烈的巨剑特效)<br>(激烈的雷击特效)<br><br>[纳可]呼……隔着这么远的距离，<br>都能清晰感觉到那些骇人的能量余波。",
+                name: "Oh, have they already clashed? What an exciting battle!",
+                text: "(Intense greatsword effects)<br>(Intense lightning strike effects)<br><br>[Neko] Whew... even from this distance,<br>I can clearly feel the terrifying energy shockwaves.",
                 unlocks: {
                     textlines: [{dialogue: "御兰", lines: ["yl4"]}],
                 },
@@ -1248,7 +1248,7 @@ class Textline {
             "yl4": new Textline({ 
                 is_unlocked: false,
                 name: "...",
-                text: "但比起害怕，<br>能够亲眼得见这些强大精妙的秘法被施展出来，<br>真是令人兴奋。<br>感觉——脑海深处的那些领悟，<br>已经有一部分化为了自己的东西。",
+                text: "But more than fearful,<br>being able to witness such powerful and refined Arcane Arts being unleashed with my own eyes —<br>it is truly exciting.<br>I can feel it — some of those insights deep in my mind<br>have already begun to become my own.",
                 unlocks: {
                     flags: ["is_realm_enabled"],
                 },
@@ -1259,13 +1259,13 @@ class Textline {
     });
     
     dialogues["皎月神像"] = new Dialogue({
-        name: "皎月神像",
-        starting_text: "参拜战场中的皎月之神像",
+        name: "Moonlight Idol",
+        starting_text: "Pay respects to the Moonlight Idol on the battlefield",
         textlines: {
             "jy1": new Textline({ 
                 is_unlocked: false,
-                name: "(恭敬地拜三拜)",
-                text: "[皎月投影]<br>(这是一条自动回复)<br>都什么时代了，别整那老一套了，<br>整点刀币给咱上供就成。<br>作为回报，你可以得到皎月的祝福...<br><br>对了，生命力越雄厚的祝福消耗越大，<br>所以得加钱。<br><span class='realm_sky'>天空级四阶</span>以上的修者也算了，<br>这个小神像承载不了太强的力量投影。",
+                name: "(Bow respectfully three times)",
+                text: "[Moonlight Projection]<br>(This is an automated response)<br>What era do you think this is? Drop the old formalities —<br>just offer some Dao Coins as tribute.<br>In return, you shall receive the Moonlight Blessing...<br><br>By the way, the greater your vitality, the greater the blessing cost,<br>so you'll need to pay more.<br>Cultivators above <span class='realm_sky'>Sky Rank 4th Stage</span> need not apply —<br>this small idol cannot bear a projection of too powerful a force.",
                 unlocks: {
                     textlines: [{dialogue: "皎月神像", lines: ["jy2"]},{dialogue: "皎月神像", lines: ["jy3"]}],
                 },
@@ -1274,7 +1274,7 @@ class Textline {
             }), 
             "jy2": new Textline({ 
                 is_unlocked: false,
-                name: "(查询目前赐福与消耗信息)",
+                name: "(Check current blessing and cost information)",
                 text: "",
                 unlocks: {
                     spec: "JY-check",
@@ -1282,7 +1282,7 @@ class Textline {
             }), 
             "jy3": new Textline({ 
                 is_unlocked: false,
-                name: "(上供刀币获取赐福)",
+                name: "(Offer Dao Coins to receive the blessing)",
                 text: "",
                 unlocks: {
                     spec: "JY-sacrifice",
@@ -1294,12 +1294,12 @@ class Textline {
 
     
     dialogues["纳娜米(飞船)"] = new Dialogue({
-        name: "纳娜米(飞船)",
+        name: "Nanami (Vessel)",
         textlines: {
             "nnm1": new Textline({ 
                 is_unlocked: false,
-                name: "姐姐！你怎么在这里？",
-                text: "[纳可]……姐姐？戳一戳。<br>纳可歪了歪头，<br>自己的姐姐好像并没有什么反应，<br>她此刻正在专心致志地看着手里的一本书。<br>[纳可]书脊上写着……《基因原能运用 - 灵体之术》？<br>姐姐她，好像沉浸在这本书里，<br>似乎有所顿悟，还是不要打扰她了……。",
+                name: "Sister! What are you doing here?",
+                text: "[Neko] ......Sister? *poke*<br>Neko tilted her head —<br>her sister didn't seem to respond at all,<br>currently absorbed in reading a book in her hands.<br>[Neko] The spine reads... 'Gene Primal Energy Application - Spirit Body Arts'?<br>It seems like she is completely immersed in this book,<br>as if on the verge of an epiphany — best not to disturb her......",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(飞船)", lines: ["nnm2"]}],
@@ -1308,8 +1308,8 @@ class Textline {
             }),
             "nnm2": new Textline({ 
                 is_unlocked: false,
-                name: "纳可默默地守在一边，转眼间便是三个时辰过去。",
-                text: "[纳娜米]原来如此，怪不得呢。<br>这本书讲得真是详细，短短时间就有这么大收获，<br>简直太棒了！<br>她把手中的书扔到一旁，<br>然后站起身来，伸了个懒腰，<br>望向旁边，纳可正用怨念的眼神盯着她。<br>[纳娜米/纳可]哇啊啊啊啊！！",
+                name: "Neko quietly waited by her side, and in the blink of an eye three hours had passed.",
+                text: "[Nanami] Ah, I see — no wonder!<br>This book is so detailed; to gain so much in such a short time,<br>simply wonderful!<br>She tossed the book aside,<br>stood up, stretched with a lazy yawn,<br>and glanced over — Neko was staring at her with a look of profound grievance.<br>[Nanami/Neko] WAAAAAH!!",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(飞船)", lines: ["nnm3"]}],
@@ -1318,8 +1318,8 @@ class Textline {
             }),
             "nnm3": new Textline({ 
                 is_unlocked: false,
-                name: "干什么啊姐姐！为什么突然发出那种声音！",
-                text: "[纳娜米]可，可可，你，你什么时候在这里的？<br>我还以为是那些铁皮怪物来了……<br>[纳可]嗯，三个时辰吧，<br>不管怎么喊姐姐都没有回应。<br>[纳娜米]呜呜，都是姐姐不好，让你担心了。刚才那本修行书，似乎有一种吸引力，不自觉就沉浸进去了。",
+                name: "What are you doing, Sister! Why did you suddenly make that sound!",
+                text: "[Nanami] K-Koko, when, when did you get here?<br>I thought those iron-skinned monsters had come......<br>[Neko] Hmm, about three hours — no matter how much I called, Sister wouldn't respond.<br>[Nanami] Boo hoo, it's all my fault for worrying you. That cultivation book just now seemed to have a pull to it — I got absorbed in it without even noticing.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(飞船)", lines: ["nnm4"]}],
@@ -1328,8 +1328,8 @@ class Textline {
             }),
             "nnm3": new Textline({ 
                 is_unlocked: false,
-                name: "但是姐姐，2亿的灵体值只要敌人有200万敏捷就免疫了，这里敌人的敏捷都超过200万...",
-                text: "[纳娜米]诶，可可，你刚才说了什么。<br>[纳可]以我对这个游戏的了解，<br>只要不学牵制，都不会有坏处啦。<br>[纳娜米]……现在的设定是这样子的吗？！<br>两人交换着这次舰船之行的收获，<br>以及路上的所见所闻。<br>[纳娜米]我找到的情报，很多都是来自于这书架上的书籍。<br>里面似乎记载了天外族群的不少讯息，<br>可惜比较核心的内容却只字未提。",
+                name: "But Sister, a Spirit Body value of 200 million gets fully negated if the enemy has 2 million Agility — and all the enemies here have over 2 million Agility...",
+                text: "[Nanami] Huh, Koko, what did you just say?<br>[Neko] From what I know about this game,<br>as long as you don't learn the Restraint arts, it can't hurt.<br>[Nanami] ......Is that really how it works now?!<br>The two exchanged their gains from this vessel expedition,<br>along with everything they had seen and heard along the way.<br>[Nanami] Much of the intelligence I found came from the books on this bookshelf.<br>They seem to contain quite a bit of information about the Extraterrestrial Clan,<br>but unfortunately the more core content is not mentioned at all.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(飞船)", lines: ["nnm4"]}],
@@ -1338,8 +1338,8 @@ class Textline {
             }),
             "nnm4": new Textline({ 
                 is_unlocked: false,
-                name: "姐姐，你说这些傀儡被天外族群叫做“科技造物”？而且路上的那些，很多都属于“A9”和“B1”级？",
-                text: "[纳娜米]是的，如果树上的记载属实，<br>A、B、C三个等次，相当于大地、天空、云霄级，<br>而之后的数字则与小境界依次对应。<br>[纳可]那“A9”级，是大地级九阶吗？<br>但我在路上见到的，比如那个蓝皮怪物……<br>恐怕都相当于初入天空级的战力了吧。<br>[纳娜米]只能认为……天外族群的划分，更为严格。<br>比血洛世界要高出半级以上<br>可可，你现在好强。<br>如果没有镭射枪的话，如今的我，<br>是拿那些科技造物毫无办法的。",
+                name: "Sister, you said these puppets are called 'Techno-Constructs' by the Extraterrestrial Clan? And the ones we encountered along the way, many of them are 'A9' and 'B1' grade?",
+                text: "[Nanami] Yes, if the records in these books are accurate,<br>the three grades A, B, and C correspond to Earth, Sky, and Sky-Cloud Rank,<br>and the numbers that follow correspond to minor cultivation stages in order.<br>[Neko] So 'A9' grade is the ninth stage of Earth Rank?<br>But the ones I encountered along the way, like that blue-skinned creature...<br>they must be equivalent to early Sky Rank combat power.<br>[Nanami] One can only conclude... the Extraterrestrial Clan's classification is far stricter.<br>More than half a rank above the Xuelo World standard.<br>Koko, you've become so strong.<br>Without my laser rifle, the me of today<br>would be completely helpless against those Techno-Constructs.",
 
                 unlocks: {
                     textlines: [{dialogue: "纳娜米(飞船)", lines: ["nnm5"]}],
@@ -1348,8 +1348,8 @@ class Textline {
             }),
             "nnm5": new Textline({ 
                 is_unlocked: false,
-                name: "还好吧，哼哼。那姐姐，我们现在要做什么？",
-                text: "[纳娜米]都已经来到这里了，自然是继续前进。<br>天外来客的飞船啊……<br>不知道多少年才能见一回呢。<br>即使抛开可能的各种珍贵宝物不谈，我还想试试新学会的领悟呢。<br>[纳可]那个真的没有用处...<br>姐姐，要不要趁着新月接受一份皎月祝福，<br>然后喝了这瓶回风药水啊？<br>保证可以把你的伤害提高一倍还多！<br>以你的血量，只要十六个大钱就可以接受祝福！<br><br>[纳娜米]诶...算了吧，<br>我们都已经在飞船里面了，<br>总不能一路跑出去找神像..",
+                name: "I suppose so, heh heh. So Sister, what do we do now?",
+                text: "[Nanami] We've already come this far, so naturally we press on.<br>A vessel from the Sky-Outsiders...<br>who knows how many years until we see one again.<br>Even setting aside all the potentially precious treasures, I want to try out the new insights I've learned.<br>[Neko] That's really not that useful...<br>Sister, why not take a Moonlight Blessing during the new moon<br>and then drink this Returning Wind Potion?<br>I guarantee it can more than double your damage output!<br>With your HP, you can receive the blessing for just sixteen Dao Coins!<br><br>[Nanami] Hm... forget it,<br>we're already inside the vessel —<br>we can't exactly run all the way out to find the idol..",
 
                 unlocks: {
                     items: [{item_name: "纳娜米(飞船)",quality:130}],
@@ -1360,12 +1360,12 @@ class Textline {
     });
     
     dialogues["核心反应堆"] = new Dialogue({
-        name: "核心反应堆",
-        starting_text: "使用 [核心反应堆]",
+        name: "Core Reactor",
+        starting_text: "Use [Core Reactor]",
         textlines: {
             "reactor": new Textline({ 
                 is_unlocked: true,
-                name: "使用 [核心反应堆]",
+                name: "Use [Core Reactor]",
                 text: "...",
                 unlocks: {
                     spec:"A7-reactor",
@@ -1375,12 +1375,12 @@ class Textline {
     });
 
     dialogues["纳布(沼泽)"] = new Dialogue({
-        name: "纳布(沼泽)",
+        name: "Nabu (Swamp)",
         textlines: {
             "zz1": new Textline({ 
                 is_unlocked: true,
                 name: "...",
-                text: "没人能够想到，<br>天外来客飞船坠落后的辐射，<br>竟能让如此之多的荒兽产生变异。<br>这或许是外来者最后的报复……<br>这些荒兽变得比之前更强大、更凶残。<br>大量天空级乃至云霄级的荒兽诞生，兽潮产生。",
+                text: "No one could have anticipated<br>that the radiation from the Sky-Outsider vessel's crash<br>would cause so many Wild Beasts to mutate.<br>Perhaps this is the outsider's final act of revenge...<br>These Wild Beasts have become stronger and more ferocious than before.<br>A vast number of Sky Rank and even Sky-Cloud Rank Wild Beasts have emerged — a Beast Tide has formed.",
                 unlocks: {
                     textlines: [{dialogue: "纳布(沼泽)", lines: ["zz2"]}],
                 },
@@ -1388,8 +1388,8 @@ class Textline {
             }),
             "zz2": new Textline({ 
                 is_unlocked: false,
-                name: "父亲大人以前经历过兽潮吗？是什么样子的？",
-                text: "[纳布]顾名思义……<br>无数发疯的荒兽冲击人类的城镇，<br>众多弱小的平民家破人亡，流离失所。<br>[纳可]……好可怜……<br>[纳布]可可，此次城主府开出了丰厚的奖励，<br>乃是几大领在天外来客的身上所得。<br>只要猎杀荒兽并带回证明，就能领取奖励。",
+                name: "Father, have you ever experienced a Beast Tide before? What is it like?",
+                text: "[Nabu] As the name implies......<br>Countless berserk Wild Beasts assault human towns and cities,<br>countless weak common folk lose their homes and are displaced.<br>[Neko] ......So tragic......<br>[Nabu] Koko, the City Lord's Mansion has offered generous rewards this time,<br>taken from what was recovered from the Sky-Outsider by the major territories.<br>Hunt Wild Beasts and bring back proof, and you can claim your reward.",
                 unlocks: {
                     textlines: [{dialogue: "纳布(沼泽)", lines: ["zz3"]}],
                 },
@@ -1397,7 +1397,7 @@ class Textline {
             }),
             "zz3": new Textline({ 
                 is_unlocked: false,
-                name: "父亲大人，姐姐她现在，已经跟着家族的第一批队伍出发了吗？",
+                name: "Father, has Sister already departed with the clan's first group?",
                 text: "",
                 unlocks: {
                     spec:"3-1-nanami",
@@ -1407,8 +1407,8 @@ class Textline {
             }),
             "zz4": new Textline({ 
                 is_unlocked: false,
-                name: "……明白",
-                text: "好了，时间也差不多了，<br>纳家的下一批队伍已经开拨，<br>那就收拾心情出发吧。<br>有燕岗城大部队的超级强者开路，<br>就不用担心碰到游荡的领域，云霄级兽王了。",
+                name: "......Understood",
+                text: "Alright, it's about time —<br>the next Nayaka Clan contingent has already set out.<br>Get your head in the game and let's move.<br>With the elite cultivators of Yangang City's main force leading the way,<br>there's no need to worry about encountering wandering Domain or Sky-Cloud Rank Beast Kings.",
                 unlocks: {
                     
                     locations: ["赫尔沼泽"],
@@ -1419,12 +1419,12 @@ class Textline {
     });
 
     dialogues["结界湖转化器"] = new Dialogue({
-        name: "结界湖转化器",
-        starting_text: "使用<img src='image/item/B3_ear.png'>荒兽凭证兑换物品(包括转化器)",
+        name: "Barrier Lake Converter",
+        starting_text: "Exchange Wild Beast vouchers for items (including the converter)",
         textlines: {
-            "jjh": new Textline({ 
+            "jjh": new Textline({
                 is_unlocked: true,
-                name: "转化<img src='image/item/barrierlake_heart.png'>结界湖之心(需要结界湖之心位于装备栏)",
+                name: "Convert Barrier Lake Core (requires Barrier Lake Core in equipment slot)",
                 text: "",
                 unlocks: {
                     spec:"jjhzx",
@@ -1432,7 +1432,7 @@ class Textline {
             }),
             "pz-my": new Textline({ 
                 is_unlocked: true,
-                name: "兑换<img src='image/item/mythril_ingot.png'>秘银锭(30:1)",
+                name: "Exchange for Mithril Ingot (30:1)",
                 text: "",
                 unlocks: {
                     spec:"pz-my",
@@ -1440,7 +1440,7 @@ class Textline {
             }),
             "pz-bs": new Textline({ 
                 is_unlocked: true,
-                name: "兑换<img src='image/item/gem51_200k.png'>史诗黄宝石(80:1)",
+                name: "Exchange for Epic Topaz (80:1)",
                 text: "",
                 unlocks: {
                     spec:"pz-bs",
@@ -1448,7 +1448,7 @@ class Textline {
             }),
             "pz-Bq": new Textline({ 
                 is_unlocked: true,
-                name: "兑换<img src='image/item/1B.png'>紫色刀币(250:1)",
+                name: "Exchange for Purple Dao Coin (250:1)",
                 text: "",
                 unlocks: {
                     spec:"pz-Bq",
@@ -1463,13 +1463,13 @@ class Textline {
     });
 
     dialogues["峰"] = new Dialogue({
-        name: "峰",
-        starting_text: "和铁甲青年对话",
+        name: "Feng",
+        starting_text: "Talk to the armored young man",
         textlines: {
             "lf1": new Textline({ 
                 is_unlocked: false,
-                name: "你，你……",
-                text: "[???]谢谢。<br>[纳可]你是谁，为什么会出现在这种地方？<br>也太可疑了吧！<br>[???]呃……我看上去很可疑吗？",
+                name: "You, you...",
+                text: "[???] Thank you.<br>[Neko] Who are you, and why would you be in a place like this?<br>It's way too suspicious!<br>[???] Uh... do I really look suspicious?",
                 unlocks: {
                     textlines: [{dialogue: "峰", lines: ["lf2"]}],
                 },
@@ -1477,8 +1477,8 @@ class Textline {
             }),
             "lf2": new Textline({ 
                 is_unlocked: false,
-                name: "还有，你知道刚才有多危险吗，那个大家伙可是天空级四阶！",
-                text: "[???]是吗，天空级四阶……<br>(根据情报，也就是对应恒星级四阶。)<br>以你的实力，对付刚才那头荒兽，<br>也是有不小风险的吧？<br>即使这样，也不惜出手帮助别人？",
+                name: "And do you know how dangerous that was just now? That big one was Sky Rank 4th Stage!",
+                text: "[???] Is that so, Sky Rank 4th Stage...<br>(According to intelligence, that corresponds to Stellar Rank 4th Stage.)<br>With your level of strength, dealing with that Wild Beast just now<br>carried quite considerable risk for you too, didn't it?<br>Even so, you chose to help someone without hesitation?",
                 unlocks: {
                     textlines: [{dialogue: "峰", lines: ["lf3"]}],
                 },
@@ -1486,7 +1486,7 @@ class Textline {
             }),
             "lf3": new Textline({ 
                 is_unlocked: false,
-                name: "举手之劳而已，才不要你管呀，是在小瞧我吗？",
+                name: "It was nothing, and it's none of your business — are you looking down on me?",
                 text: "",
                 unlocks: {
                     textlines: [{dialogue: "峰", lines: ["lf4"]}],
@@ -1497,8 +1497,8 @@ class Textline {
             }),
             "lf4": new Textline({ 
                 is_unlocked: false,
-                name: "……等等！不许走！",
-                text: "[???]还有什么事吗？<br>[纳可]你……<br>既然你这么厉害，那就带我走出森林吧。<br>我找不到回去的路了。<br>[???]呵呵，好。小丫头，你叫什么名字。<br>[纳可]……<br><br>纳可，我的名字。你呢？<br>[峰]我叫，<span style='color:aqua'>【峰】</span>",
+                name: "......Wait! Don't go!",
+                text: "[???] Is there something else?<br>[Neko] You...<br>Since you're so capable, guide me out of the forest then.<br>I can't find my way back.<br>[???] Heh heh, alright. Little girl, what's your name?<br>[Neko] ......<br><br>Neko. That's my name. And you?<br>[Feng] My name is <span style='color:aqua'>[Feng]</span>",
                 unlocks: {
                     textlines: [{dialogue: "峰", lines: ["lf5"]}],
                 },
@@ -1506,8 +1506,8 @@ class Textline {
             }),
             "lf5": new Textline({ 
                 is_unlocked: false,
-                name: "………………路上，两人逐渐畅谈起来。",
-                text: "[纳可]（怎么说呢……<br>这个家伙，虽然刚才看见的时候，<br>感觉表现得很奇怪。）<br>（但一路走下来，<br>意外地感觉很好相处的样子。）<br>峰……你的年龄应该比我大，<br>那我就称呼你一声峰大哥好了。<br>不介意的话，叫我可可吧。<br>[峰]好啊。可可，你刚才说，<br>这里是燕岗领的势力范围中心？<br>而我们要去的，<br>是燕岗领的【领地主城】燕岗城？",
+                name: "................Along the way, the two gradually opened up to each other.",
+                text: "[Neko] (How to put it...<br>this person, when I first saw him,<br>seemed to be acting very strangely.)<br>(But after walking together for a while,<br>he's unexpectedly easy to get along with.)<br>Feng... you must be older than me,<br>so I'll call you Big Brother Feng.<br>If you don't mind, call me Koko.<br>[Feng] Sure. Koko, you said earlier<br>that this is the heart of Yangang Territory's sphere of influence?<br>And where we're heading<br>is Yangang City, the [Territorial Capital] of Yangang Territory?",
                 unlocks: {
                     textlines: [{dialogue: "峰", lines: ["lf6"]}],
                 },
@@ -1515,8 +1515,8 @@ class Textline {
             }),
             "lf6": new Textline({ 
                 is_unlocked: false,
-                name: "是的，只不过兽潮来袭，",
-                text: "[纳可]燕岗领的强者都在抵御兽潮，<br>所以城里暂时没什么人呢。<br>[峰]那么……出了森林之后，<br>就麻烦你带路了。<br><br>【峰】加入了队伍！",
+                name: "Yes, although the Beast Tide has struck,",
+                text: "[Neko] All the powerful cultivators of Yangang Territory are out defending against the Beast Tide,<br>so the city is temporarily rather empty.<br>[Feng] In that case... once we're out of the forest,<br>I'll be counting on you to lead the way.<br><br>[Feng] has joined the party!",
                 unlocks: {
                     textlines: [{dialogue: "峰", lines: ["lf7"]}],
                     items: [{item_name: "峰"}],
@@ -1525,8 +1525,8 @@ class Textline {
             }),
             "lf7": new Textline({ 
                 is_unlocked: false,
-                name: "有情况！",
-                text: "(百方带着一帮百家人出现！)<br>[百方]哈哈，我当是谁，<br>原来是纳可小姐。<br>(反转:我方雷冬出现)<br>(激烈的对峙)<br>(反转:敌方百炎塔出现)<br>(另一轮激烈的对峙)<br>(反转：敌方被峰大哥吓跑)",
+                name: "Something's happening!",
+                text: "(Baifang appears with a group of Bai Clan members!)<br>[Baifang] Haha, I wondered who it was —<br>turns out it's Miss Neko.<br>(Twist: Our ally Leidong appears)<br>(Intense standoff)<br>(Twist: The enemy's Baiyanta appears)<br>(Another intense standoff)<br>(Twist: The enemy is scared off by Big Brother Feng)",
                 unlocks: {
                     textlines: [{dialogue: "峰", lines: ["lf8"]}],
                 },
@@ -1534,8 +1534,8 @@ class Textline {
             }),
             "lf8": new Textline({ 
                 is_unlocked: false,
-                name: "异变再生！",
-                text: "(百家人被13斧抢劫了！)<br>(百家人因为缺少牵制药水打不过13斧！)<br>(百炎塔逃到纳可面前喊救命！)<br>(13斧的人以为好东西在纳可身上准备抢劫！)<br><br>该说不说，还真有个<span class='coin coin_moneySp'>1.21Δ</span>的好东西...<br>(<span class='coin coin_moneySp'>1.21Δ</span>暴起把13斧全杀了！)<br>(雷叔突然激动地要求纳可和峰交好！)",
+                name: "Another turn of events!",
+                text: "(The Bai Clan members are robbed by the Thirteen Axes!)<br>(The Bai Clan members can't beat the Thirteen Axes without Restraint potions!)<br>(Baiyanta flees and begs Neko for help!)<br>(The Thirteen Axes think Neko is carrying the valuables and try to rob her!)<br><br>Not gonna lie, she really does have a <span class='coin coin_moneySp'>1.21Δ</span> gem...<br>(<span class='coin coin_moneySp'>1.21Δ</span> goes berserk and wipes out all the Thirteen Axes!)<br>(Uncle Lei suddenly gets excited and urges Neko and Feng to become friends!)",
                 unlocks: {
                     textlines: [{dialogue: "峰", lines: ["lf9"]}],
                 },
@@ -1543,8 +1543,8 @@ class Textline {
             }),
             "lf9": new Textline({ 
                 is_unlocked: false,
-                name: "这都什么乱七八糟的...",
-                text: "[峰]呵呵，没什么。暂且安全了，<br>先赶路吧。有什么话到了主城再说。<br>[纳可]呜，这个家伙到底怎么回事，<br>这么强为什么不早点说啊！<br>之前花那么大力气救他，<br>其实那只蛮咕兽身上加亿层光环都打不动他！",
+                name: "What in the world is even going on...",
+                text: "[Feng] Heh heh, never mind. We're safe for now —<br>let's get moving. We can talk when we reach the capital.<br>[Neko] Ugh, what is up with this guy —<br>if he's this strong, why didn't he say so earlier!<br>I spent all that effort saving him,<br>but that Barbarian Beast with a hundred million buffs couldn't even scratch him!",
                 unlocks: {
                     locations: ["黑暗森林 - 3"],
                 },
@@ -1552,8 +1552,8 @@ class Textline {
             }),
             "lf10": new Textline({ 
                 is_unlocked: false,
-                name: "呼啊——终于除了那片黑漆漆的森林。",
-                text: "[雷冬]峰大人，这城里我非常熟，<br>如果您有什么想去的地方……<br>[峰]不必了……我们就在此分开吧。<br>[纳可]分开……吗？<br>(纳可严重掠过一抹失落)<br>[峰]对了，这燕岗城最好的住宿地是哪里？<br>[纳可]飞云阁<br>[峰]嗯，如果你想找我，就去飞云阁吧。<br><br>【峰】离开了队伍！",
+                name: "Phew — we're finally out of that pitch-black forest.",
+                text: "[Leidong] Lord Feng, I know this city very well —<br>if there's somewhere you'd like to go...<br>[Feng] That won't be necessary... let's part ways here.<br>[Neko] Part ways... already?<br>(A flicker of disappointment crosses Neko's expression)<br>[Feng] By the way, where is the best lodging in Yangang City?<br>[Neko] Feiyun Pavilion.<br>[Feng] Good. If you want to find me, head to Feiyun Pavilion.<br><br>[Feng] has left the party!",
                 unlocks: {
                     locations: ["飞云阁"],
                     spec:"lf-leave",
@@ -1564,13 +1564,13 @@ class Textline {
     });
     
     dialogues["峰(飞云)"] = new Dialogue({
-        name: "峰(飞云)",
-        starting_text: "和峰大哥对话",
+        name: "Feng (Feiyun)",
+        starting_text: "Talk to Big Brother Feng",
         textlines: {
             "lf11": new Textline({ 
                 is_unlocked: true,
-                name: "峰大哥你……有什么想问的吗？",
-                text: "小家伙，你现在使用的秘法，<br>是从哪里得来的？",
+                name: "Big Brother Feng... is there something you wanted to ask?",
+                text: "Little one, the Arcane Arts you're currently using —<br>where did you get them?",
                 unlocks: {
                     textlines: [{dialogue: "峰(飞云)", lines: ["lf12"]}],
                 },
@@ -1578,8 +1578,8 @@ class Textline {
             }),
             "lf12": new Textline({ 
                 is_unlocked: false,
-                name: "……两年以前，在“天外来客”的飞船上找到的。",
-                text: "[峰]这套秘法仅仅包含基础内容，<br>尚有不很多不完善之处。<br>我且给你一套更深层次的秘法来研习。<br><br>峰手指轻弹，两条光线飞射出去，钻进了纳可眉心。<br>纳可只感觉到脑袋一阵胀痛，<br>随后突然涌现出了许多知识。<br><br>映星花·繁星，映星花·巨星，映星花·花海<br> 已加入可选秘法！",
+                name: "...Two years ago, I found them on the Sky-Outsider's vessel.",
+                text: "[Feng] This set of Arcane Arts only covers the basics,<br>and there are many imperfections.<br>Let me give you a deeper set to study.<br><br>Feng flicked his fingers lightly; two beams of light shot out and drilled into Neko's brow.<br>Neko felt only a throbbing pain in her head,<br>followed suddenly by a flood of knowledge.<br><br>Starflower - Star Cluster, Starflower - Giant Star, Starflower - Flower Sea<br> have been added to available Arcane Arts!",
                 unlocks: {
                     textlines: [{dialogue: "峰(飞云)", lines: ["lf13"]}],
                     stances: ["SF_Power","SF_Lucky","SF_Multi"],
@@ -1588,8 +1588,8 @@ class Textline {
             }),
             "lf13": new Textline({ 
                 is_unlocked: false,
-                name: "……这次抵御兽潮，",
-                text: "[纳可]城主府给予前几名的奖励，<br>恐怕都比不上峰大哥给的这些呢。<br>[峰]兽潮吗？<br>说起来，这其中也有蹊跷。<br>看似是由于飞船坠落所导致，<br>但据我了解，那【D9飞船】里<br>有一台超大的反应堆，<br>而这片大陆缺少安全运行它的知识。",
+                name: "......About this Beast Tide defense,",
+                text: "[Neko] Even the rewards the City Lord's Mansion gives to the top few<br>probably can't compare to what Big Brother Feng just gave me.<br>[Feng] The Beast Tide?<br>Speaking of which, there is something suspicious about it.<br>It appears to have been caused by the vessel's crash,<br>but from what I know, the [D9-class Vessel]<br>contains an enormous reactor —<br>and this continent lacks the knowledge to operate it safely.",
                 unlocks: {
                     textlines: [{dialogue: "峰(飞云)", lines: ["lf14"]}],
                 },
@@ -1598,7 +1598,7 @@ class Textline {
             "lf14": new Textline({ 
                 is_unlocked: false,
                 name: "...?",
-                text: "这种原能反应堆每次爆炸，<br>都会泄露许多【原能辐射】。<br>根据现场的痕迹来看，<br>为了炼制一批【极品进化结晶】，<br>这台反应堆足足爆炸了58次。",
+                text: "Every time this type of Primal Energy reactor explodes,<br>it releases large amounts of [Primal Energy Radiation].<br>Based on the evidence at the scene,<br>to refine a batch of [Supreme Evolution Crystals],<br>this reactor exploded a total of 58 times.",
                 unlocks: {
                     textlines: [{dialogue: "峰(飞云)", lines: ["lf15"]}],
                 },
@@ -1606,8 +1606,8 @@ class Textline {
             }),
             "lf15": new Textline({ 
                 is_unlocked: false,
-                name: "诶——可是死了这么多人啊，为什么……",
-                text: "只要万千弱者的牺牲，<br>能换来一位强者的突破，<br>对族群的价值便远大于那万千弱者。<br>而且，变异后的荒兽材料价值更高，<br>也是合适的历练对象。<br>无法接受吗？没关系。<br>说到底，我并未炸过核心反应堆。<br>这终归只是我的推断罢了。",
+                name: "But — so many people died because of this, why would anyone...",
+                text: "So long as the sacrifice of thousands of the weak<br>can bring about a single powerful cultivator's breakthrough,<br>the value to the clan far outweighs those thousands.<br>Moreover, mutated Wild Beasts are more valuable as materials<br>and make for suitable training targets.<br>Can't accept that? That's fine.<br>After all, I have never detonated a Core Reactor myself.<br>This is ultimately nothing more than my speculation.",
                 unlocks: {
                     textlines: [{dialogue: "峰(飞云)", lines: ["lf16"]}],
                 },
@@ -1615,8 +1615,8 @@ class Textline {
             }),
             "lf16": new Textline({ 
                 is_unlocked: false,
-                name: "突然……对于抵御兽潮没有什么兴趣了。",
-                text: "这些都是【强者】所必须认识到的东西。<br>比起抵御兽潮，<br>或许有一个地方更适合你。<br>在燕岗城以东约万里的地带，<br>有一处隐秘之地，<br>似乎时间的流速在那里被加快了。",
+                name: "Suddenly... I've lost all interest in defending against the Beast Tide.",
+                text: "These are things a [strong cultivator] must come to understand.<br>Rather than defending against the Beast Tide,<br>there may be a place more suited to you.<br>About ten thousand miles east of Yangang City,<br>there is a secluded place<br>where the flow of time seems to be accelerated.",
                 unlocks: {
                     textlines: [{dialogue: "峰(飞云)", lines: ["lf17"]}],
                 },
@@ -1624,8 +1624,8 @@ class Textline {
             }),
             "lf17": new Textline({ 
                 is_unlocked: false,
-                name: "可是峰大哥，为什么你自己不去呢……",
-                text: "没有必要，那些东西是一位域主……<br>领域级强者留下的，<br>打包带走也没有<span class='coin coin_moneySp'>0.01Δ</span>，<br>对我而言没有意义。<br>记住，一定要小心，<br>我且在你的身上留下一道精神印记，<br>遇到危险时，用它来与我沟通。<br><br>",
+                name: "But Big Brother Feng, why don't you go there yourself...",
+                text: "There's no need. Those things were left behind by a domain master —<br>a Domain Rank cultivator,<br>and packing them up isn't worth <span class='coin coin_moneySp'>0.01Δ</span> to me;<br>they are meaningless in my eyes.<br>Remember — be very careful.<br>I will leave a spirit imprint on you;<br>use it to communicate with me when you are in danger.<br><br>",
                 unlocks: {
                     locations: ["纯白冰原"],
                 },
@@ -1635,12 +1635,12 @@ class Textline {
     });
 
     dialogues["纳娜米(冰原)"] = new Dialogue({
-        name: "纳娜米(冰原)",
+        name: "Nanami (Ice Plains)",
         textlines: {
             "by1": new Textline({ 
                 is_unlocked: true,
-                name: "好冷啊……姐姐。为什么燕岗领地图上没有这片雪原的标注？",
-                text: "这里，应该就是那神秘强者峰所说的地方了。<br>环境确实很恶劣，低温加上冰元素，<br>估计大地级在这里都有冻死的风险。",
+                name: "It's so cold... Sister. Why is this snowy plain not marked on the map of Yangang Territory?",
+                text: "This must be the place that mysterious cultivator Feng spoke of.<br>The environment is indeed harsh — low temperatures combined with ice elements;<br>Earth Rank cultivators probably risk freezing to death here.",
                 //冰元素设定：微型而懒惰的拉普拉斯妖怪，可以在气温并不十分离谱的情况下制造负热量，吸收人的能量
 
                 unlocks: {
@@ -1650,8 +1650,8 @@ class Textline {
             }),
             "by2": new Textline({ 
                 is_unlocked: false,
-                name: "受不了呀，太冷了，还是张开火焰领域取暖吧。",
-                text: "[纳娜米]不要把领域用来做这个...<br>不对，可可，你的火焰领域关过吗？<br>[纳可]诶...<br>总之姐姐你靠过来一点！<br><br>纳娜米加入了队伍！能力的效力增加了5%！",
+                name: "Can't take it anymore, it's too cold — I'll open the Flame Domain to warm up.",
+                text: "[Nanami] Don't use the Domain for something like this...<br>Wait, Koko, have you ever actually closed your Flame Domain?<br>[Neko] Eh...<br>In any case, Sister come closer!<br><br>Nanami has joined the party! Ability effectiveness increased by 5%!",
                 //火焰领域设定：高温会让冰元素活化，释放出负热量，但高温领域的量级高于一小片区域的冰元素，起到驱散效果
 
                 unlocks: {
@@ -2818,12 +2818,12 @@ class Textline {
 
 
     dialogues["心之石像"] = new Dialogue({
-        name: "心之石像",
-        starting_text: "凝聚战斗中积累的感悟",
+        name: "Heart Stone Idol",
+        starting_text: "Crystallize insights accumulated in battle",
         textlines: {
             "clumbs": new Textline({ 
                 is_unlocked: true,
-                name: "荒兽森林感悟/点击就送！！(在1.10将被移除)",
+                name: "Wild Beast Forest Insight / Click to receive!! (will be removed in v1.10)",
                 text: "...",
                 unlocks: {
                     spec:"A1-fusion",

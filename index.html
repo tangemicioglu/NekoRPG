@@ -27,7 +27,7 @@
 
         <!-- tooltip for active character effects-->
         <div id = "effects_tooltip"> 
-            无效果            
+            No Effects
         </div>
 
         <div id="screen_effect"></div>
@@ -63,7 +63,7 @@
                     </div>
 
                     <div id = "character_rank_div">
-                        燕岗领排名:9999,9999,9999,9999,9999
+                        Yangang Territory Ranking: 9999,9999,9999,9999,9999
                     </div>
 
                 </div>
@@ -86,15 +86,15 @@
                     <div id = "inventory_content_div"> </div>
 
                     <div id = "inventory_sorting_div" class="activable_buttons">
-                        <div id = "inventory_sort_by_price" class = "character_sorting_button active_selection_button" onclick='sortCharacterInventory("price")'> 价值排序 </div>
-                        <div id = "inventory_sort_by_name" class = "character_sorting_button " onclick='sortCharacterInventory("name")'> 名称排序 </div>
+                        <div id = "inventory_sort_by_price" class = "character_sorting_button active_selection_button" onclick='sortCharacterInventory("price")'> Sort by Value</div>
+                        <div id = "inventory_sort_by_name" class = "character_sorting_button " onclick='sortCharacterInventory("name")'> Sort by Name </div>
                     </div>
                     <div id = "inventory_control_div" class="activable_buttons">
-                        <div id = "inventory_show_all" class = "inventory_control_button active_selection_button" onclick = "showAllItems()"> 全部 </div>
-                        <div id = "inventory_show_equipment" class = "inventory_control_button" onclick = "showOnlyEquipment()"> 装备 </div>
-                        <div id = "inventory_show_consumable" class = "inventory_control_button" onclick = "showOnlyConsumables()"> 消耗品 </div>
-                        <div id = "inventory_show_loot" class = "inventory_control_button" onclick = "showOnlyLoot()"> 掉落物 </div>
-                        <div id = "inventory_show_other" class = "inventory_control_button" onclick = "showOnlyOther()"> 杂项 </div> 
+                        <div id = "inventory_show_all" class = "inventory_control_button active_selection_button" onclick = "showAllItems()"> All </div>
+                        <div id = "inventory_show_equipment" class = "inventory_control_button" onclick = "showOnlyEquipment()"> Equipment </div>
+                        <div id = "inventory_show_consumable" class = "inventory_control_button" onclick = "showOnlyConsumables()"> Consumables </div>
+                        <div id = "inventory_show_loot" class = "inventory_control_button" onclick = "showOnlyLoot()"> Drops </div>
+                        <div id = "inventory_show_other" class = "inventory_control_button" onclick = "showOnlyOther()"> Misc </div> 
                     </div>
                 </div>
 
@@ -132,9 +132,9 @@
                 </div>
 
                 <div id = "inventory_combat_switch_selection" class="activable_buttons box_div">
-                    <div id="switch_to_inventory" class="active_selection_button" onclick="switchToInventory()"> 物品栏
+                    <div id="switch_to_inventory" class="active_selection_button" onclick="switchToInventory()"> Inventory
                     </div>
-                    <div id="switch_to_combat" onclick="switchToCombat()">战斗</div>
+                    <div id="switch_to_combat" onclick="switchToCombat()">Combat</div>
                 </div>
 
                 <!-- location info (name, type[safe/combat], weather, time, etc?)-->
@@ -510,7 +510,7 @@
                     <div id = "enemy_count_div">
                         <div id = "enemy_count_content">
                             <div style = "display:inline-block;"> 
-                                剩余波数: 
+                                Waves remaining:
                             </div>
                             <div id = "enemies_left_div">
                                 
@@ -545,11 +545,11 @@
                             </div>
                         </div>
                         <div id = "fish_font_div">
-                            少<br><br>
-                            &emsp; 女<br><br>
-                            &emsp; &emsp; 钓<br><br>
-                            &emsp; &emsp; &emsp; 鱼<br><br>
-                            &emsp; &emsp; &emsp; &emsp; 中<br><br>
+                            F<br><br>
+                            &emsp; I<br><br>
+                            &emsp; &emsp; S<br><br>
+                            &emsp; &emsp; &emsp; H<br><br>
+                            &emsp; &emsp; &emsp; &emsp; ↓<br><br>
                             &emsp; &emsp; &emsp; &emsp; &emsp; ...
                         </div>
                     </div>
@@ -582,8 +582,8 @@
                     
                     <div id = "reactor_div">
                         <div id = "reactor_info_div">
-                            <b>= 核心反应堆 = </b> 超高品质凝胶剑柄的最佳选择！<br>
-                            <span style="color:red">警告：反应堆温度达到9999°C时会熔毁,摧毁其中的一切.</span><br>
+                            <b>= Core Reactor = </b> The best way to craft ultra-high-quality Gel Grips!<br>
+                            <span style="color:red">WARNING: The reactor will melt down at 9999°C, destroying everything inside.</span><br>
                         </div>
                         <div id = "B1_core_div">
                             <div id = "reactor_B1_bar_max"> 
@@ -591,7 +591,7 @@
                                 </div>
                             </div>
                             <span style="color:#CFFEE3">
-                                <b>B1·能量核心</b>:<span id="B1_core_num">0</span>
+                                <b>B1 Energy Core</b>:<span id="B1_core_num">0</span>
                             <span id="B1_core_diff">0</span>
                             <br>
                                 <span class="money_button" onclick = "reactor(1,1)">[+1]</span>
@@ -607,7 +607,7 @@
                                 </div>
                             </div>
                             <span style="color:#FBD6FB">
-                                <b>A7·能量核心</b>:<span id="A7_core_num">0</span>
+                                <b>A7 Energy Core</b>:<span id="A7_core_num">0</span>
                             <span id="A7_core_diff">0</span>
                             <br>
                                 <span class="money_button" onclick = "reactor(2,1)">[+1]</span>
@@ -622,7 +622,7 @@
                                 </div>
                             </div>
                             <span style="color:#0066FF">
-                                <b>雷电加护</b>:<span id="LD_core_num">0</span>
+                                <b>Thunder Shield</b>:<span id="LD_core_num">0</span>
                                 <span class="money_button" onclick = "reactor(3,1)">[+1]</span>
                                 <span class="money_button" onclick = "reactor(3,10)">[+10]</span>
                                 <span class="money_button" onclick = "reactor(3,100)">[+100]</span>
@@ -636,7 +636,7 @@
                                 </div>
                             </div>
                             <span style="color:#808080">
-                                <b>高能凝胶 </b>:<span id="ER_core_num">0</span>
+                                <b>High-Energy Gel </b>:<span id="ER_core_num">0</span>
                                 <span class="money_button" onclick = "reactor(4,1)">[+1]</span>
                                 <span class="money_button" onclick = "reactor(4,10)">[+10]</span>
                                 <span class="money_button" onclick = "reactor(4,100)">[+100]</span>
@@ -651,7 +651,7 @@
                                 </div>
                             </div>
                             <span style="color:#ffb0b0">
-                                <b>反应堆温度 </b>:<span id="temp_num">5600</span>°C
+                                <b>Reactor Temperature </b>:<span id="temp_num">5600</span>°C
                                 
                                 <span id="temp_diff">0</span>
                             </span> 
@@ -663,17 +663,17 @@
                                 </div>
                             </div>
                             <span style="color:#d0ffc0">
-                                <b>总吸收原能 </b>:<span id="rad_num">0</span>
+                                <b>Total Absorbed Energy </b>:<span id="rad_num">0</span>
                                 <span id="rad_diff">0</span>
-                                 (品质:<span id="rad_quality">160</span>%)
+                                 (Quality:<span id="rad_quality">160</span>%)
                             </span> 
                             <br>
                         </div>
 
                         <div id="reactor_exit">
-                            <span class="money_button_wide" onclick = "extract_reactor()" style="color:#808080"><b>[提取凝胶剑柄]</b></span>
-                            <span class="money_button_wider" onclick = "extract_evolve()" style="color:#80FF80" id="reactor_evolve"><b>[凝聚进化结晶(100万原能)]</b></span>
-                            <span class="money_button" onclick = "leave_reactor()"><b>[离开]</b></span>
+                            <span class="money_button_wide" onclick = "extract_reactor()" style="color:#808080"><b>[Extract Gel Grip]</b></span>
+                            <span class="money_button_wider" onclick = "extract_evolve()" style="color:#80FF80" id="reactor_evolve"><b>[Condense Evolution Crystal (1M Energy)]</b></span>
+                            <span class="money_button" onclick = "leave_reactor()"><b>[Leave]</b></span>
                         </div>
 
 
@@ -706,24 +706,24 @@
                     <div id = "trade_div">
                         <div id = "trader_sorting_buttons" class="activable_buttons"> 
                             <div id = "trader_sort_by_price" class = "trader_sorting_button active_selection_button" onclick='sortTraderInventory("price")'>
-                                按价值排序
+                                Sort by Value
                             </div>
                             <div id = "trader_sort_by_name" class = "trader_sorting_button " onclick='sortTraderInventory("name")'>
-                                按名称排序
+                                Sort by Name
                             </div>
                         </div>
                         <div id = "trader_category_buttons" class="activable_buttons">
                             <div id = "trader_category_all" class = "trader_category_button active_selection_button" onclick='showAllTraderItems()'>
-                                全部
+                                All
                             </div>
                             <div id = "trader_category_equipment" class = "trader_category_button" onclick="showOnlyTraderEquipment()">
-                                装备
+                                Equipment
                             </div>
                             <div id = "trader_category_usable" class = "trader_category_button" onclick="showOnlyTraderConsumables()">
-                                消耗品
+                                Consumables
                             </div>
                             <div id = "trader_category_other" class = "trader_category_button" onclick="showOnlyTraderOther()">
-                                杂项
+                                Misc
                             </div>
                         </div>
 
@@ -734,42 +734,42 @@
                         <div id = "trade_control_div">
 
                             <div id = "trader_cost_mult">
-                                <div id = "trader_cost_mult_text"> 价格: </div>
+                                <div id = "trader_cost_mult_text"> Price: </div>
                                 <div id = "trader_cost_mult_value"> </div>
                             </div>
                             
                             <div id = "trade_price_div">
-                                <div id = "trade_price_text"> 总计: </div>
+                                <div id = "trade_price_text"> Total: </div>
                                 <div id = "trade_price_value"> 0C </div>
                             </div>
 
                             <div id = "accept_trade_button" onclick = "acceptTrade()">
-                                交易
-                            </div> 
+                                Trade
+                            </div>
                             <div id = "cancel_trade_button" onclick = "cancelTrade()">
-                                取消
-                            </div> 
+                                Cancel
+                            </div>
                             <div id = "exit_trade_button" onclick = "exitTrade()">
-                                离开
+                                Leave
                             </div>
                         </div>
                     </div>
 
                     <div id = "crafting_window" class="crafting_window">
                         <div id="crafting_mainpage_buttons" class="activable_buttons crafting_mainpage_buttons">
-                            <div class="crafting_mainpage_button active_selection_button" onclick="switchCraftingRecipesPage('crafting')">合成</div>
-                            <div class="crafting_mainpage_button" onclick="switchCraftingRecipesPage('cooking')">烹饪</div>
-                            <div class="crafting_mainpage_button" onclick="switchCraftingRecipesPage('smelting')">熔炼 </div>
-                            <div class="crafting_mainpage_button" onclick="switchCraftingRecipesPage('forging')">锻造</div>
-                            <div class="crafting_mainpage_button" onclick="switchCraftingRecipesPage('alchemy')"> 炼金 </div>
+                            <div class="crafting_mainpage_button active_selection_button" onclick="switchCraftingRecipesPage('crafting')">Crafting</div>
+                            <div class="crafting_mainpage_button" onclick="switchCraftingRecipesPage('cooking')">Cooking</div>
+                            <div class="crafting_mainpage_button" onclick="switchCraftingRecipesPage('smelting')">Smelting </div>
+                            <div class="crafting_mainpage_button" onclick="switchCraftingRecipesPage('forging')">Forging</div>
+                            <div class="crafting_mainpage_button" onclick="switchCraftingRecipesPage('alchemy')"> Alchemy </div>
                         </div>
                         <div class="crafting_category" data-crafting_category="crafting">
                             <div class="crafting_subpage_buttons activable_buttons">
-                                <div class="crafting_subpage_button crafting_subpage_button_5 active_selection_button" onclick="switchCraftingRecipesSubpage('crafting', 'items')">第一幕</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_5 active_selection_button" onclick="switchCraftingRecipesSubpage('crafting', 'items2')">第二幕</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_5 active_selection_button" onclick="switchCraftingRecipesSubpage('crafting', 'items3')">第三幕</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_5" onclick="switchCraftingRecipesSubpage('crafting', 'components')">部件</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_5" onclick="switchCraftingRecipesSubpage('crafting', 'equipment')">装备</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_5 active_selection_button" onclick="switchCraftingRecipesSubpage('crafting', 'items')">Act I</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_5 active_selection_button" onclick="switchCraftingRecipesSubpage('crafting', 'items2')">Act II</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_5 active_selection_button" onclick="switchCraftingRecipesSubpage('crafting', 'items3')">Act III</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_5" onclick="switchCraftingRecipesSubpage('crafting', 'components')">Components</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_5" onclick="switchCraftingRecipesSubpage('crafting', 'equipment')">Equipment</div>
                             </div>
                             <div class="crafting_category crafting_recipe_list" data-crafting_category="crafting" data-crafting_subcategory="items">
                                 
@@ -787,7 +787,7 @@
                         </div>
                         <div class="crafting_category" data-crafting_category="cooking"  style="display:none">
                             <div class="crafting_subpage_buttons activable_buttons">
-                                <div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('cooking', 'items')">第一幕</div><div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('cooking', 'items2')">第二幕</div><div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('cooking', 'items3')">第三幕</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('cooking', 'items')">Act I</div><div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('cooking', 'items2')">Act II</div><div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('cooking', 'items3')">Act III</div>
                             </div>
                             <div class="crafting_category crafting_recipe_list" data-crafting_category="cooking" data-crafting_subcategory="items">
                                 
@@ -799,9 +799,9 @@
                         </div>
                         <div class="crafting_category" data-crafting_category="smelting"  style="display:none">
                             <div class="crafting_subpage_buttons activable_buttons">
-                                <div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('smelting', 'items')">第一幕</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_3" onclick="switchCraftingRecipesSubpage('smelting', 'items2')">第二幕</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_3" onclick="switchCraftingRecipesSubpage('smelting', 'items3')">第三幕</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('smelting', 'items')">Act I</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_3" onclick="switchCraftingRecipesSubpage('smelting', 'items2')">Act II</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_3" onclick="switchCraftingRecipesSubpage('smelting', 'items3')">Act III</div>
                             </div>
                             <div class="crafting_category crafting_recipe_list" data-crafting_category="smelting" data-crafting_subcategory="items">
                             </div>
@@ -812,8 +812,8 @@
                         </div>
                         <div class="crafting_category" data-crafting_category="forging"  style="display:none">
                             <div class="crafting_subpage_buttons activable_buttons">
-                                <div class="crafting_subpage_button crafting_subpage_button_2 active_selection_button"  onclick="switchCraftingRecipesSubpage('forging', 'items')">物品/饰品</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_2"  onclick="switchCraftingRecipesSubpage('forging', 'components')">部件</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_2 active_selection_button"  onclick="switchCraftingRecipesSubpage('forging', 'items')">Items/Accessories</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_2"  onclick="switchCraftingRecipesSubpage('forging', 'components')">Components</div>
                             </div>
 
                             <div class="crafting_category crafting_recipe_list" data-crafting_category="forging" data-crafting_subcategory="items">
@@ -829,9 +829,9 @@
                         </div>
                         <div class="crafting_category" data-crafting_category="alchemy"  style="display:none">
                             <div class="crafting_subpage_buttons activable_buttons">
-                                <div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('alchemy', 'items')">第一幕</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_3" onclick="switchCraftingRecipesSubpage('alchemy', 'items2')">第二幕</div>
-                                <div class="crafting_subpage_button crafting_subpage_button_3" onclick="switchCraftingRecipesSubpage('alchemy', 'items3')">第三幕</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_3 active_selection_button" onclick="switchCraftingRecipesSubpage('alchemy', 'items')">Act I</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_3" onclick="switchCraftingRecipesSubpage('alchemy', 'items2')">Act II</div>
+                                <div class="crafting_subpage_button crafting_subpage_button_3" onclick="switchCraftingRecipesSubpage('alchemy', 'items3')">Act III</div>
                             </div>
                             <div class="crafting_category crafting_recipe_list" data-crafting_category="alchemy" data-crafting_subcategory="items">
 
@@ -853,10 +853,10 @@
                             </div>
                             <div id = "skill_sorting_buttons" class="activable_buttons"> 
                                 <div id = "skill_sort_by_name" class = "skill_sorting_button active_selection_button" onclick='sortSkills({sort_by:"name"})'>
-                                    名称排序
+                                    Sort by Name
                                 </div>
                                 <div id = "skill_sort_by_level" class = "skill_sorting_button" onclick='sortSkills({sort_by:"level"})'>
-                                    等级排序
+                                    Sort by Level
                                 </div>
                             </div>
                     </div>
@@ -866,10 +866,10 @@
                     </div>
                     <div id = "skill_and_stance_control_div" class="activable_buttons">
                         <div id="show_skills" class="skill_stance_control_button active_selection_button" onclick="showSkills()">
-                            技能
+                            Skills
                         </div>
                         <div id="show_stances" class="skill_stance_control_button" onclick="showStances()">
-                            姿态
+                            Stances
                         </div>
                     </div>
                 </div>
@@ -968,14 +968,14 @@
 
                 <div id = "journal_div" class = "box_div">
                     <div id = "journal_control_div" class="activable_buttons">
-                        <div id = "journal_show_quests" class = "journal_control_button" onclick = "showQuests()"> 心之境界 </div>
-                        <div id = "journal_show_bestiary" class = "journal_control_button active_selection_button" onclick = "showBestiary()"> 怪物手册 </div>
-                        <div id = "journal_show_levelary" class = "journal_control_button" onclick = "showLevelary()"> 楼层手册 </div>
-                        <div id = "journal_show_data" class = "journal_control_button" onclick = "showData()"> 统计/银行 </div>
+                        <div id = "journal_show_quests" class = "journal_control_button" onclick = "showQuests()"> Realm </div>
+                        <div id = "journal_show_bestiary" class = "journal_control_button active_selection_button" onclick = "showBestiary()"> Bestiary </div>
+                        <div id = "journal_show_levelary" class = "journal_control_button" onclick = "showLevelary()"> Zone Guide </div>
+                        <div id = "journal_show_data" class = "journal_control_button" onclick = "showData()"> Stats/Bank </div>
                     </div>
                     <div id = "quests_box_div">
                         <div id = "quests_header">
-                            <b>= 心之境界 =</b>
+                            <b>= Realm =</b>
                         </div>
                         <div id = "quest_list">
 
@@ -1001,7 +1001,7 @@
                             
                             <div id = "data_bank">
                                 
-                                <br><b>燕岗银行 - 提现</b><br>
+                                <br><b>Yangang Bank - Withdrawal</b><br>
                                 <div id = "data_bankX" class="data_entry">
                                         <span class="coin coin_moneyK money_button" onclick = "get_money(1,1)">[1  X]</span>
                                         <span class="coin coin_moneyK money_button" onclick = "get_money(1,10)">[10 X]</span>
@@ -1042,14 +1042,14 @@
                 <div id = "character_div" class = "box_div"> 
                     <div id = "character_stats_div"> 
                         <div id = "character_level_div">
-                            境界 : 微尘级初级
+                            Realm: Dust Rank: Novice
                         </div>
                         <div class = "grid_container">
                             <div class = "stat_slot_div"> 
                                 <div class = "stat_name"> ATK: </div>
                                 <div class = "stat_value" id = "attack_power_slot"></div> 
                                 <div class = "stat_tooltip"> 
-                                    <div>攻击，受等级/装备/技能影响 </div>
+                                    <div>ATK, affected by level/equipment/skills</div>
                                     <div class="stat_breakdown"></div>
                                 </div>
                             </div>
@@ -1057,7 +1057,7 @@
                                 <div class = "stat_name"> DEF: </div>
                                 <div class = "stat_value" id = "defense_slot"></div> 
                                 <div class = "stat_tooltip"> 
-                                    <div>防御，用于抵消攻击伤害 </div>
+                                    <div>DEF, used to reduce incoming damage</div>
                                     <div class="stat_breakdown"></div>
                                 </div>
                             </div>
@@ -1068,7 +1068,7 @@
                                 <div class = "stat_name"> AGI: </div>
                                 <div class = "stat_value" id = "agility_slot"></div> 
                                 <div class = "stat_tooltip"> 
-                                    <div>敏捷，影响命中率/闪避率</div>
+                                    <div>AGI, affects hit rate/evasion rate</div>
                                     <div class="stat_breakdown"></div>
                                 </div>
                             </div>
@@ -1076,7 +1076,7 @@
                                 <div class = "stat_name"> SPD: </div>
                                 <div class = "stat_value" id = "attack_speed_slot"></div> 
                                 <div class = "stat_tooltip"> 
-                                    <div>攻击速度，影响每次攻击花费时间</div>
+                                    <div>Attack Speed, affects time between attacks</div>
                                     <div class="stat_breakdown"></div>
                                 </div>
                             </div>
@@ -1089,7 +1089,7 @@
                                 <div class = "stat_name"> C.rate: </div>
                                 <div class = "stat_value" id = "crit_rate_slot"></div> 
                                 <div class = "stat_tooltip">
-                                    <div> 打出暴击的概率</div>
+                                    <div> Chance to deal a critical hit</div>
                                     <div class="stat_breakdown"></div>
                                 </div>
                             </div>
@@ -1097,7 +1097,7 @@
                                 <div class = "stat_name"> C.mult: </div>
                                 <div class = "stat_value" id = "crit_multiplier_slot"></div> 
                                 <div class = "stat_tooltip"> 
-                                    <div> 打出暴击的伤害倍率 </div>
+                                    <div> Critical hit damage multiplier </div>
                                     <div class="stat_breakdown"></div>
                                 </div>
                             </div>
@@ -1108,7 +1108,7 @@
                                 <div class = "stat_name"> MaxHP: </div>
                                 <div class = "stat_value" id = "strength_slot"></div> 
                                 <div class = "stat_tooltip"> 
-                                    <div>生命上限</div>
+                                    <div>Max HP</div>
                                     <div class="stat_breakdown"></div>
                              </div>
                             </div>
@@ -1116,7 +1116,7 @@
                                 <div class = "stat_name"> HP/s: </div>
                                 <div class = "stat_value" id = "intuition_slot"></div> 
                                 <div class = "stat_tooltip"> 
-                                    <div>生命恢复</div>
+                                    <div>HP Regen</div>
                                     <div class="stat_breakdown"></div>
                                 </div>
                             </div>
@@ -1164,7 +1164,7 @@
 
                         <div id = "character_effects">
                             <div id = "effects_div">
-                                <div> 生效效果: </div>
+                                <div> Active Effects: </div>
                                 <div id = "active_effect_count"> 0 </div>
                             </div>
                         </div>
@@ -1173,24 +1173,24 @@
                     
                     <div id = "character_equipment_div"> 
                         <div class = "grid_container">
-                            <div class = "equipment_slot_div" id = "head_slot"> 头部 </div>
-                            <div class = "equipment_slot_div" id = "torso_slot"> 躯干 </div>
+                            <div class = "equipment_slot_div" id = "head_slot"> Head </div>
+                            <div class = "equipment_slot_div" id = "torso_slot"> Torso </div>
                         </div>
                         <div class = "grid_container">
-                            <div class = "equipment_slot_div" id = "legs_slot"> 腿部 </div>
-                            <div class = "equipment_slot_div" id = "feet_slot"> 脚部 </div>
+                            <div class = "equipment_slot_div" id = "legs_slot"> Legs </div>
+                            <div class = "equipment_slot_div" id = "feet_slot"> Feet </div>
                         </div>
                         <div class = "grid_container">
-                            <div class = "equipment_slot_div" id = "weapon_slot"> 武器 </div>
-                            <div class = "equipment_slot_div" id = "method_slot"> 秘法</div>
+                            <div class = "equipment_slot_div" id = "weapon_slot"> Weapon </div>
+                            <div class = "equipment_slot_div" id = "method_slot"> Arcane Art</div>
                         </div>
                         <div class = "grid_container">
-                            <div class = "equipment_slot_div" id = "realm_slot"> 领域 </div>
-                            <div class = "equipment_slot_div" id = "law_slot"> 法则 </div>
+                            <div class = "equipment_slot_div" id = "realm_slot"> Domain </div>
+                            <div class = "equipment_slot_div" id = "law_slot"> Law </div>
                         </div>
                         <div class = "grid_container">
-                            <div class = "equipment_slot_div" id = "props_slot"> 道具 </div>
-                            <div class = "equipment_slot_div" id = "special_slot"> 特殊 </div>
+                            <div class = "equipment_slot_div" id = "props_slot"> Props </div>
+                            <div class = "equipment_slot_div" id = "special_slot"> Special </div>
                         </div>
                     </div>
 
@@ -1201,9 +1201,9 @@
                     </div>
 
                     <div id = "character_control_div" class="activable_buttons">
-                        <div id = "character_show_stats" class = "character_control_button active_selection_button" onclick = "showCharacterStats()"> 属性 </div>
-                        <div id = "character_show_equipment" class = "character_control_button" onclick = "showCharacterEquipment()"> 装备 </div>
-                        <div id = "character_show_tools" class = "character_control_button" onclick = "showCharacterTools()"> 工具 </div>
+                        <div id = "character_show_stats" class = "character_control_button active_selection_button" onclick = "showCharacterStats()"> Stats </div>
+                        <div id = "character_show_equipment" class = "character_control_button" onclick = "showCharacterEquipment()"> Equipment </div>
+                        <div id = "character_show_tools" class = "character_control_button" onclick = "showCharacterTools()"> Tools </div>
                     </div>
                 </div>
 
@@ -1216,22 +1216,22 @@
                 <div id = "message_controls">
 
                     <div id = "message_show_unlocks" class = "message_control_button active_selection_button" onclick = "showUnlocksMessages()">
-                        升级 & 解锁
+                        Level Up & Unlocks
                     </div>
                     <div id = "message_show_events" class = "message_control_button active_selection_button" onclick = "showEventsMessages()">
-                        _事件_
+                        _Events_
                     </div>
                     <div id = "message_show_crafting" class = "message_control_button active_selection_button" onclick = "showCraftingMessages()">
-                        _合成_
+                        _Crafting_
                     </div>
                     <div id = "message_show_combat" class = "message_control_button active_selection_button" onclick = "showCombatMessages()">
-                        _战斗_
+                        _Combat_
                     </div>
                     <div id = "message_show_loot" class = "message_control_button active_selection_button" onclick = "showLootMessages()">
-                        _掉落_
+                        _Loot_
                     </div>
                     <div id = "message_show_background" class = "message_control_button active_selection_button" onclick = "showBackgroundMessages()">
-                        背景信息
+                        Background
                     </div>
                     
                 </div>
@@ -1239,9 +1239,9 @@
         </div>
 
         <div id = "bottom_panel_div">
-            <div id = "save_button" class = "sl_button" onclick = "saveProgress()"> 保存 </div>
-            <div id = "save_to_file_button" class = "sl_button" onclick = "saveToFile()"> 导出 </div>
-            <label id = "load_from_file_button" class = "sl_button" for = "saved_file_input"> 导入 </label> 
+            <div id = "save_button" class = "sl_button" onclick = "saveProgress()"> Save </div>
+            <div id = "save_to_file_button" class = "sl_button" onclick = "saveToFile()"> Export </div>
+            <label id = "load_from_file_button" class = "sl_button" for = "saved_file_input"> Import </label> 
             <input id = "saved_file_input" type='file' accept = 'text/plain' onchange = 'loadProgress(event)'>	
 
             <div id = "options_button" class = "game_info" onclick="openOptions()"><span><i class="material-icons">settings</i></span></div>
@@ -1249,36 +1249,36 @@
             <div id = "play_count" class = "pc_right">
             <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fbtly0711.github.io%2FNekoRPG%2F&label=&icon=hash&color=%23feb272&message=&style=flat&tz=PRC"></div>
             <div id = "help_button" class = "game_info"><a href="help.html" target="_blank"><i class="material-icons">help_outline</i></a></div>
-            ←帮助菜单！常见问题可以找到解答！
-            
+            <div id="translation_credit">Original mod by <a href="https://btly0711.github.io/NekoRPG/" target="_blank">btly0711</a>, based on a game by <a href="https://miktaew.github.io/yet-another-idle-rpg/" target="_blank">Miktaew</a></div>
+
         </div>
 
         <div id="options_panel">
             <div id="options_choices">
                 <div class="options_choice">
                     <input type="checkbox" id="options_textsize" name="options_textsize" value="options_textsize" onclick = "option_uniform_textsize()" />
-                    <label for="options_textsize">静音</label>
+                    <label for="options_textsize">Mute</label>
                 </div>
                 <div class="options_choice">
                     <input type="checkbox" id="options_bed_return" name="options_bed_return" value="options_bed_return" onclick = "option_bed_return()"/>
-                    <label for="options_bed_return">在战败时回到床上</label>
+                    <label for="options_bed_return">Return to bed on defeat</label>
                 </div>
                 <div class="options_choice">
                     <input type="checkbox" id="options_save_messagelog_settings" name="options_save_messagelog_settings" value="options_save_messagelog_settings" onclick = "option_remember_filters()"/>
-                    <label for="options_save_messagelog_settings">保持日志过滤器</label>
+                    <label for="options_save_messagelog_settings">Remember log filters</label>
                 </div>
                 <div class="options_choice">
                     <input type="checkbox" id="options_dont_autoswitch_to_combat" name="options_dont_autoswitch_to_combat" value="options_dont_autoswitch_to_combat" onclick = "option_combat_autoswitch()"/>
-                    <label for="options_dont_autoswitch_to_combat">开始战斗时不自动切出物品栏</label>
+                    <label for="options_dont_autoswitch_to_combat">Don't auto-switch from inventory when combat starts</label>
                 </div>
             </div>
             <div id="close_options" onclick="closeOptions()"> X </div>
-            <div id = "backup_load_button" class="options_button" onclick = "loadTheBackup()">加载备份自动存档</div>
+            <div id = "backup_load_button" class="options_button" onclick = "loadTheBackup()">Load backup autosave</div>
             <!--这一段是我也不知道干啥的！-->
             <!--
             <div id = "import_other_save_button" class="options_button" onclick = "importOtherSave()"> Import save from </div> 
             -->
-            <div id = "hard_reset_button" class="options_button" onclick = "hardReset()"> 硬重置游戏 <i class="material-icons"> warning_amber </i> </div>
+            <div id = "hard_reset_button" class="options_button" onclick = "hardReset()"> Hard Reset Game <i class="material-icons"> warning_amber </i> </div>
         </div>
 
         <script>
@@ -1564,7 +1564,7 @@
             };
 
             function hardReset() {
-                let confirmation = prompt(`这会删除你全部的进度，而你不得不从最开始玩起。如果这就是你想要的，在下面打出"reset"。`);
+                let confirmation = prompt(`This will delete all your progress and you will have to start over. If that is what you want, type "reset" below.`);
 
                 if(confirmation === "reset" || confirmation === `"reset"`) {
                     localStorage.removeItem("save data");
@@ -1589,7 +1589,7 @@
             }
 
             function loadTheBackup() {
-                let confirmation = prompt(`这会加载你的备份存档，失去从那时以来的一切进度。一般不建议这么做，除非什么东西出bug了。这时请导出bug存档并联系作者。如果这就是你想要的，在下面打出"load"。`);
+                let confirmation = prompt(`This will load your backup save, losing all progress since then. This is generally not recommended unless something is bugged. If so, please export the bugged save and contact the author. If that is what you want, type "load" below.`);
 
                 if(confirmation === "load" || confirmation === `"load"`) {
                     loadBackup();
@@ -2070,8 +2070,8 @@
                             //add to to sell
 
                             if(selected_item == "{\"id\":\"峰\"}"){
-                                log_message("[纱雪]哈?卖掉峰大哥?","sayuki");
-                                log_message("[纱雪]为了防止他把你揍死，帮你取消交易了哦~","sayuki");
+                                log_message("[Sayuki] Huh? Selling off Big Bro Feng?","sayuki");
+                                log_message("[Sayuki] To prevent him from beating you to death, I've cancelled the trade for you~","sayuki");
                                 return;
 
                             }

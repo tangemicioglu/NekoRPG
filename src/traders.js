@@ -12,7 +12,7 @@ var inventory_templates = {};
 
 class Trader extends InventoryHaver {
     constructor({name,
-                 trade_text = `<span style="color:#ffffd0"> <i class="material-icons">storefront</i> 与 ${name} 交易</span>`,
+                 trade_text = `<span style="color:#ffffd0"> <i class="material-icons">storefront</i> Trade with ${name}</span>`,
                  location_name,
                  refresh_time = 1,
                  refresh_shift = 0,
@@ -162,85 +162,85 @@ class TradeItem {
         location_name: "Slums",
         profit_margin: 3,
     });
-    traders["自动售货机"] = new Trader({
-        name: "自动售货机",
+    traders["Vending Machine"] = new Trader({
+        name: "Vending Machine",
         inventory_template: "Basic I",
         is_unlocked: true,
         location_name: "纳家大厅",
     });
-    traders["燕岗杂货铺"] = new Trader({
-        name: "燕岗杂货铺",
+    traders["Yangang General Store"] = new Trader({
+        name: "Yangang General Store",
         inventory_template: "Basic II",
         is_unlocked: false,
         location_name: "燕岗城",
         profit_margin: 3,
     });
-    traders["矿井集市"] = new Trader({
-        name: "矿井集市",
+    traders["Mine Market"] = new Trader({
+        name: "Mine Market",
         inventory_template: "Basic III",
         is_unlocked: true,
         location_name: "燕岗矿井",
         profit_margin: 3.2,
     });
-    traders["金属批发商"] = new Trader({
-        name: "金属批发商",
+    traders["Metal Wholesaler"] = new Trader({
+        name: "Metal Wholesaler",
         inventory_template: "Terra Palace",
         is_unlocked: false,
         location_name: "地宫浅层",
         profit_margin: 1.5,
     });
-    traders["营地商铺"] = new Trader({
-        name: "营地商铺",
+    traders["Camp Shop"] = new Trader({
+        name: "Camp Shop",
         inventory_template: "Terra II",
         is_unlocked: true,
         location_name: "荒兽森林营地",
         profit_margin: 3.6,
     });
-    traders["行脚商人"] = new Trader({
-        name: "行脚商人",
+    traders["Traveling Merchant"] = new Trader({
+        name: "Traveling Merchant",
         inventory_template: "Terra III",
         is_unlocked: false,
         location_name: "清野江畔",
         profit_margin: 4.2,
     });
-    traders["废墟商人"] = new Trader({
-        name: "废墟商人",
+    traders["Ruins Merchant"] = new Trader({
+        name: "Ruins Merchant",
         inventory_template: "Terra IV",
         is_unlocked: false,
         location_name: "声律城废墟",
         profit_margin: 4.8,
     });
-    traders["飞船集市"] = new Trader({
-        name: "飞船集市",
+    traders["Airship Market"] = new Trader({
+        name: "Airship Market",
         inventory_template: "Terra V",
         is_unlocked: false,
         location_name: "天外飞船",
         profit_margin: 5.4,
     });
-    traders["百宝楼"] = new Trader({
-        name: "百宝楼",
+    traders["Treasure Pavilion"] = new Trader({
+        name: "Treasure Pavilion",
         inventory_template: "Sky I",
         is_unlocked: true,
         location_name: "飞云阁",
         profit_margin: 4.2,
     });
-    traders["冰宫商人"] = new Trader({
+    traders["冰宫商人"] = new Trader({ // TODO: translate name ("Ice Palace Merchant"?)
         name: "冰宫商人",
         inventory_template: "Sky II",
         is_unlocked: false,
         location_name: "极寒冰宫",
         profit_margin: 4.8,
     });
-    traders["窥秘商人"] = new Trader({
+    traders["窥秘商人"] = new Trader({ // TODO: translate name ("Secret-Peering Merchant"?)
         name: "窥秘商人",
         inventory_template: "Sky III",
         is_unlocked: false,
         location_name: "传承幻境",
         profit_margin: 6.4,
     });
-    traders["物品存储箱"] = new Trader({
-        name: "物品存储箱",
-        trade_text: `<span style="color:#c0ffe0"> <i class="material-icons">work_outline</i> 向箱子里存取物品</span>`,
+    traders["Storage Chest"] = new Trader({
+        name: "Storage Chest",
+        trade_text: `<span style="color:#c0ffe0"> <i class="material-icons">work_outline</i> Deposit/withdraw items from chest</span>`,
         inventory_template: "Box",
         is_unlocked: true,
         location_name: "纳家秘境",

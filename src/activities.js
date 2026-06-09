@@ -107,15 +107,15 @@ class Gathering extends Training {
     //下面是被NekoRPG利用的activities
     activities["Running"] = new Training({
         name: "Running",
-        action_text: "练习奔跑",
-        description: "基础的运动之一",
+        action_text: "Practicing running",
+        description: "One of the most basic exercises",
         base_skills_names: ["Running"],
         is_unlocked: true,
     });
     activities["Swimming"] = new Training({
         name: "Swimming",
-        action_text: "练习游泳",
-        description: "基础的运动之一",
+        action_text: "Practicing swimming",
+        description: "One of the most basic exercises",
         base_skills_names: ["Swimming"],
         is_unlocked: true,
     });
@@ -132,7 +132,7 @@ class Gathering extends Training {
 (function(){
     activities["mining"] = new Gathering({
         name: "mining",
-        action_text: "抡着镐子",
+        action_text: "Swinging the pickaxe",
         description: "Swing you pickaxe against the hard rock",
         base_skills_names: ["Mining"],
         is_unlocked: true,
@@ -140,7 +140,7 @@ class Gathering extends Training {
     });//每个矿区需要加一个
     activities["woodcutting"] = new Gathering({
         name: "woodcutting",
-        action_text: "收集木头",
+        action_text: "Collecting wood",
         description: "Chop chop",
         base_skills_names: ["Woodcutting"],
         is_unlocked: true,
@@ -148,7 +148,7 @@ class Gathering extends Training {
     });
     activities["fishing"] = new Gathering({
         name: "fishing",
-        action_text: "钓鱼",
+        action_text: "Fishing",
         description: "hey ya",
         base_skills_names: ["Fishing"],
         is_unlocked: true,

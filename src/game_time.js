@@ -62,9 +62,9 @@ function Game_time(new_time) {
 }
 
 Game_time.prototype.toString = function() {
-    var date_string = this.era + "纪元 ";
-    date_string += (this.year + "年 ");
-    date_string += ((this.day>9?this.day:`0${this.day}`) + "日 ");
+    var date_string = "Era " + this.era + " ";
+    date_string += ("Year " + this.year + " ");
+    date_string += ("Day " + (this.day>9?this.day:`0${this.day}`) + " ");
     date_string += ((this.hour>99?this.hour:(this.hour>9?`0${this.hour}`:`00${this.hour}`)) + ":");
     date_string += this.minute>9?this.minute:`0${this.minute}`;
     return date_string;

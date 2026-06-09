@@ -26,7 +26,7 @@ const weapon_type_to_skill = {
     "wand": "Wands"
 };
 
-const units=['','万','亿','兆','京','垓','秭','穣','沟','涧','正','载','极'];
+const units=['','W','E','T','Q','Qi','Sx','Sp','O','N','D','Ud','Dd'];
 
 function format_number(some_number)
 {
@@ -199,10 +199,10 @@ class Skill {
                     this.xp_to_next_lvl = "Max";
                 }
 
-                let message = `${this.name()} 达到了 level ${this.current_level}`;
+                let message = `${this.name()} reached level ${this.current_level}`;
 
                 if (Object.keys(gains.stats).length > 0 || Object.keys(gains.xp_multipliers).length > 0) { 
-                    message += `<br><br> 因为 ${this.name()} 达到新的里程碑, ${character.name} 获取了: `;
+                    message += `<br><br> Because ${this.name()} reached a new milestone, ${character.name} gained: `;
                     if (gains.stats) {
                         Object.keys(gains.stats).forEach(stat => {
                             if(gains.stats[stat].flat) {
@@ -406,7 +406,7 @@ function format_skill_rewards(milestone){
 
     if(milestone.xp_multipliers) {
         const xp_multipliers = Object.keys(milestone.xp_multipliers);
-        const MulNameMap = {"all":"全部","hero":"等级","all skill":"技能"};
+        const MulNameMap = {"all":"All","hero":"Level","all skill":"Skills"};
         let name;
         if(xp_multipliers[0] !== "all" && xp_multipliers[0] !== "hero" && xp_multipliers[0] !== "all_skill") {
             name = skills[xp_multipliers[0]].name();
@@ -414,9 +414,9 @@ function format_skill_rewards(milestone){
             name = MulNameMap[xp_multipliers[0].replace("_"," ")];
         }
         if(formatted) {
-            formatted += `, x${milestone.xp_multipliers[xp_multipliers[0]]} ${name} 经验获取`;
+            formatted += `, x${milestone.xp_multipliers[xp_multipliers[0]]} ${name} XP gain`;
         } else {
-            formatted = `x${milestone.xp_multipliers[xp_multipliers[0]]} ${name} 经验获取`;
+            formatted = `x${milestone.xp_multipliers[xp_multipliers[0]]} ${name} XP gain`;
         }
         for(let i = 1; i < xp_multipliers.length; i++) {
             let name;
@@ -425,7 +425,7 @@ function format_skill_rewards(milestone){
             } else {
                 name = MulNameMap[xp_multipliers[i].replace("_"," ")];
             }
-            formatted += `, x${milestone.xp_multipliers[xp_multipliers[i]]} ${name} 经验获取`;
+            formatted += `, x${milestone.xp_multipliers[xp_multipliers[i]]} ${name} XP gain`;
         }
     }
     if(milestone.unlocks) {
@@ -445,14 +445,14 @@ function format_skill_rewards(milestone){
 //basic combat skills
 (function(){
     skills["Combat"] = new Skill({skill_id: "Combat", 
-                                names: {0: "战斗"}, 
+                                names: {0: "Combat"}, 
                                 category: "Combat",
-                                description: "总体战斗技能", 
+                                description: "Overall combat skill", 
                                 max_level_coefficient: 16,
                                 max_level: 300,
                                 base_xp_cost: 60,
                                 get_effect_description: ()=> {
-                                    return `增加 ${Math.round(skills["Combat"].get_coefficient("multiplicative")*1000-1000)/10}% 敏捷`;
+                                    return `Increases agility by ${Math.round(skills["Combat"].get_coefficient("multiplicative")*1000-1000)/10}%`;
                                 }});
     
     skills["Pest killer"] = new Skill({skill_id: "Pest killer", 
@@ -513,11 +513,11 @@ function format_skill_rewards(milestone){
                                     }});
     
      skills["Unarmed"] = new Skill({skill_id: "Unarmed", 
-                                    names: {0: "赤手空拳", 10: "拳法", 20: "武术"}, 
-                                    description: "显然的，不容置疑的，绝对的，这还不如用一把武器。不过，为什么不呢？",
+                                    names: {0: "Bare Fists", 10: "Boxing", 20: "Martial Arts"}, 
+                                    description: "Obviously, undeniably, absolutely - a weapon would be better. But why not?",
                                     category: "Combat",
                                     get_effect_description: ()=> {
-                                        return `将空手暴击率 增加${Math.round(skills["Unarmed"].get_coefficient("multiplicative")*1000-1000)/10}%`;
+                                        return `Increases unarmed crit rate by ${Math.round(skills["Unarmed"].get_coefficient("multiplicative")*1000-1000)/10}%`;
                                     },
                                     max_level_coefficient: 64, //even with 8x more it's still gonna be worse than just using a weapon lol
                                     });          
@@ -527,14 +527,14 @@ function format_skill_rewards(milestone){
 //combat stances
 (function(){
     skills["Stance mastery"] = new Skill({skill_id: "Stance mastery", 
-                                    names: {0: "秘法入门", 30: "秘法精通"}, 
-                                    description: "如何在战斗中灵活使用各种秘法的知识",
+                                    names: {0: "Arcane Initiation", 30: "Arcane Mastery"}, 
+                                    description: "Knowledge of flexibly using arcane arts in combat",
                                     base_xp_cost: 60,
                                     xp_scaling:1.8,
                                     category: "Stance",
                                     max_level: 300,
                                     get_effect_description: ()=> {
-                                        return `增加所有低于此技能等级的秘法技能经验获取，每相差一级*1.1`;
+                                        return `Increases XP gain for all arcane art skills with lower level, by *1.1 per level difference`;
                                     },
                                 });
     skills["Quick steps"] = new Skill({skill_id: "Quick steps", 
@@ -604,27 +604,27 @@ function format_skill_rewards(milestone){
                                     return `Improves efficiency of the 'Flowing Water' stance`;
                                 }});
     skills["MergeBlood"] = new Skill({skill_id: "MergeBlood", 
-                                    names: {0: "融血术"}, 
+                                    names: {0: "Blood-Fusion Art"}, 
                                     parent_skill: "Stance mastery",
-                                    description: "最普遍的血洛术式。", 
+                                    description: "The most common Xuelo technique.", 
                                     max_level_coefficient: 1.25,
                                     base_xp_cost: 60,
                                     category: "Stance",
                                     max_level: 30,
                                     related_stances: ["MB_Power","MB_Speed"],
                                     get_effect_description: ()=> {
-                                        return `增加[融血术]秘法的使用效果`;
+                                        return `Improves [Blood-Fusion Art] stance effectiveness`;
                                     }});            
     skills["3Moon/Night"] = new Skill({skill_id: "3Moon/Night", 
-                                    names: {0: "三月断宵",1:"三月断宵·小成",2:"三月断宵·大成",3:"三月断宵·圆满"}, 
+                                    names: {0: "Three-Month Severed Night", 1: "Three-Month Severed Night: Minor", 2: "Three-Month Severed Night: Major", 3: "Three-Month Severed Night: Perfect"}, 
                                     parent_skill: "Stance mastery",
-                                    description: "天空级强者的修炼功法，对所有技能大有裨益", 
+                                    description: "A cultivation technique of Sky Rank cultivators, greatly beneficial to all skills", 
                                     max_level_coefficient: 1.25,
                                     base_xp_cost: 600000,
                                     max_level: 3,
                                     xp_scaling:20,
                                     get_effect_description: ()=> {
-                                        return `增加基础经验获取量`;
+                                        return `Increases base XP gain`;
                                     },
                                     category: "Stance",
                                     rewards: {
@@ -648,15 +648,15 @@ function format_skill_rewards(milestone){
                                     }
                                 });
      skills["StarDestruction"] = new Skill({skill_id: "StarDestruction", 
-                                    names: {0: "星解之术",1:"星解之术·小成",2:"星解之术·精通",3:"星解之术·大成",4:"星解之术·圆满"}, 
+                                    names: {0: "Star-Dissolution Technique", 1: "Star-Dissolution: Minor", 2: "Star-Dissolution: Proficient", 3: "Star-Dissolution: Major", 4: "Star-Dissolution: Perfect"}, 
                                     parent_skill: "Stance mastery",
-                                    description: "天外的观想法，对领悟与能量积累都有巨大作用", 
+                                    description: "An extraterrestrial visualization method with tremendous benefits to comprehension and energy accumulation", 
                                     max_level_coefficient: 1.25,
                                     base_xp_cost: 4e12,
                                     max_level: 4,
                                     xp_scaling:20,
                                     get_effect_description: ()=> {
-                                        return `增加基础经验获取量,额外增加领域经验获取量`;
+                                        return `Increases base XP gain, additionally increases Domain XP gain`;
                                     },
                                     category: "Stance",
                                     rewards: {
@@ -731,9 +731,9 @@ function format_skill_rewards(milestone){
                                     }
                                 });
     skills["Neko_Realm"] = new Skill({skill_id: "Neko_Realm", 
-                                    names: {0: "微火",10:"燃灼术",20:"火灵幻海[领域一重]",30:"焰海霜天[领域二重]",35:"焰海霜天[领域三重]",40:"出云落月[领域四重]"}, 
+                                    names: {0: "Micro Flame", 10: "Flame-Searing Art", 20: "Fire Spirit Illusion Sea [Domain Stage 1]", 30: "Flame-Sea Frost Sky [Domain Stage 2]", 35: "Flame-Sea Frost Sky [Domain Stage 3]", 40: "出云落月 [Domain Stage 4]"}, // TODO: translate stage 4 name
                                     parent_skill: "Stance mastery",
-                                    description: "纳可的领域(雏形).每升一级都能获取基础属性，每提高一个阶段都能获取全新的领悟！", 
+                                    description: "Neko's Domain (embryonic form). Each level grants base stats, each stage breakthrough grants new insights!", 
                                     max_level_coefficient: 1.25,
                                     base_xp_cost: 5000000,
                                     visibility_treshold: 1,
@@ -748,7 +748,7 @@ function format_skill_rewards(milestone){
                                         else if(R_level<35) R_value = 121.5e4 * (R_level - 24);
                                         else if(R_level<40) R_value = 486e4 * (R_level - 29);
                                         else if(R_level<50) R_value = 2.048e8 * (R_level - 38);
-                                        return `基础攻击,防御,敏捷 + ${format_number(R_value)}`;
+                                        return `Base Attack, Defense, Agility + ${format_number(R_value)}`;
                                         //30w 729w 2916w
                                         //出云落月：4.096e
                                         
@@ -761,28 +761,28 @@ function format_skill_rewards(milestone){
                                 });
     
     skills["WaterHeartless"] = new Skill({skill_id: "WaterHeartless", 
-                                    names: {0: "水无心",5:"水无心·小成",15:"水无心·精通",25:"水无心·大成",30:"水无心·圆满"}, 
+                                    names: {0: "Waterless Mind", 5: "Waterless Mind: Minor", 15: "Waterless Mind: Proficient", 25: "Waterless Mind: Major", 30: "Waterless Mind: Perfect"}, 
                                     parent_skill: "Stance mastery",
-                                    description: "纳可在清野瀑布前领悟的剑法。拥有3种使用方式。", 
+                                    description: "Sword technique Neko comprehended by the Qingye Waterfall. Has 3 modes of use.", 
                                     max_level_coefficient: 1.25,
                                     base_xp_cost: 120000000,
                                     category: "Stance",
                                     max_level: 30,
                                     related_stances: ["WH_Power","WH_Speed","WH_Multi"],
                                     get_effect_description: ()=> {
-                                        return `增加[水无心]秘法的使用效果`;
+                                        return `Improves [Waterless Mind] stance effectiveness`;
                                     }});   
     skills["ReflectStarFlower"] = new Skill({skill_id: "ReflectStarFlower", 
-                                    names: {0: "映星花",10:"映星花·小成",20:"映星花·精通",30:"映星花·大成",40:"映星花·圆满"}, 
+                                    names: {0: "Starlight Bloom", 10: "Starlight Bloom: Minor", 20: "Starlight Bloom: Proficient", 30: "Starlight Bloom: Major", 40: "Starlight Bloom: Perfect"}, 
                                     parent_skill: "Stance mastery",
-                                    description: "峰大哥教授的高级秘法。似乎可以用很久的样子。", 
+                                    description: "Advanced arcane art taught by Brother Feng. Seems usable for a very long time.", 
                                     max_level_coefficient: 1.25,
                                     base_xp_cost: 1000e12,
                                     category: "Stance",
                                     max_level: 50,
                                     related_stances: ["SF_Power","SF_Lucky","SF_Multi"],
                                     get_effect_description: ()=> {
-                                        return `增加[映星花]秘法的使用效果`;
+                                        return `Improves [Starlight Bloom] stance effectiveness`;
                                     }});          
                                     
                                     
@@ -837,14 +837,14 @@ function format_skill_rewards(milestone){
                                     });
     skills["Night vision"] = new Skill({
                                     skill_id: "Night vision",
-                                    names: {0: "夜视"},
-                                    description: "在黑暗中视物的能力",
+                                    names: {0: "Night Vision"},
+                                    description: "Ability to see in the dark",
                                     base_xp_cost: 60,
                                     xp_scaling: 1.33,
                                     max_level: 20,
                                     category: "Environmental",
                                     get_effect_description: () => {
-                                        return `将黑暗惩罚削弱到原来的 ^${Math.round(100-100*skills["Night vision"].current_level/skills["Night vision"].max_level)/100} (‘纯粹黑暗’除外)`;
+                                        return `Reduces dark penalty to ^${Math.round(100-100*skills["Night vision"].current_level/skills["Night vision"].max_level)/100} of original (excluding ‘Pure Darkness’)`;
                                     },
                                     
                                     rewards: {
@@ -874,14 +874,14 @@ function format_skill_rewards(milestone){
                             });
     skills["Resistance"] = new Skill({
                                     skill_id: "Resistance",
-                                    names: {0: "威压抗性"},
-                                    description: "抵抗天外飞船中无处不在的威压的能力",
+                                    names: {0: "Oppression Resistance"},
+                                    description: "Ability to resist the pervasive oppressive aura in the extraterrestrial spaceship",
                                     base_xp_cost: 3000,
                                     xp_scaling: 1.6,
                                     max_level: 20,
                                     category: "Environmental",
                                     get_effect_description: () => {
-                                        return `将威压惩罚削弱到原来的 ^${Math.round(100-100*skills["Resistance"].current_level/skills["Resistance"].max_level)/100} `;
+                                        return `Reduces oppressive aura penalty to ^${Math.round(100-100*skills["Resistance"].current_level/skills["Resistance"].max_level)/100} of original `;
                                     },
                                     
                                     rewards: {
@@ -919,14 +919,14 @@ function format_skill_rewards(milestone){
                             });
     skills["Presence sensing"] = new Skill({
                 skill_id: "Presence sensing",
-                names: {0: "存在感应"},
-                description: "不用眼睛感知到“存在”的能力",
+                names: {0: "Presence Sensing"},
+                description: "Ability to sense \"existence\" without using eyes",
                 base_xp_cost: 60,
                 xp_scaling: 1.33,
                 max_level: 20,
                 category: "Environmental",
                 get_effect_description: () => {
-                    return `将‘纯粹黑暗’惩罚削弱到原来的 ^${Math.round(100-100*skills["Presence sensing"].current_level/skills["Presence sensing"].max_level)/100}`;
+                    return `Reduces ‘Pure Darkness’ penalty to ^${Math.round(100-100*skills["Presence sensing"].current_level/skills["Presence sensing"].max_level)/100} of original`;
                 },
                 rewards: {
                     milestones: {
@@ -994,20 +994,20 @@ function format_skill_rewards(milestone){
 //weapon skills
 (function(){
     skills["Weapon mastery"] = new Skill({skill_id: "Weapon mastery", 
-                                    names: {0: "武器熟练", 15: "武器精通"}, 
-                                    description: "关于所有武器的知识",
+                                    names: {0: "Weapon Proficiency", 15: "Weapon Mastery"}, 
+                                    description: "Knowledge of all weapons",
                                     category: "Weapon",
                                     max_level: 300,
                                     get_effect_description: ()=> {
-                                        return `增加所有武器技能经验获取，每1级增加10%`;
+                                        return `Increases XP gain for all weapon skills, by 10% per level`;
                                     },
                                 });
     skills["Swords"] = new Skill({skill_id: "Swords", 
                                   parent_skill: "Weapon mastery",
-                                  names: {0: "剑术"}, 
+                                  names: {0: "Swordsmanship"}, 
                                   category: "Weapon",
                                     max_level: 60,
-                                  description: "传统且高贵的剑术技能", rewards: {
+                                  description: "Traditional and noble swordsmanship skill", rewards: {
                                     milestones: {
                                         
                                         1: {
@@ -1049,17 +1049,17 @@ function format_skill_rewards(milestone){
                                     }
                                  },
                                   get_effect_description: ()=> {
-                                      return `增加持剑时暴击率 ${Math.round(skills["Swords"].get_coefficient()*1000- 1000)/10 }%`;
+                                      return `Increases crit rate while wielding swords by ${Math.round(skills["Swords"].get_coefficient()*1000- 1000)/10 }%`;
                                   },
                                   
                                   max_level_coefficient: 2
                             });
     skills["Tridents"] = new Skill({skill_id: "Tridents", 
                                   parent_skill: "Weapon mastery",
-                                  names: {0: "戟术"}, 
+                                  names: {0: "Trident Arts"}, 
                                   category: "Weapon",
                                     max_level: 60,
-                                  description: "不传统，也不怎么高贵，但好用的三叉戟技能", rewards: {
+                                  description: "Unconventional and not very noble, but effective trident skill", rewards: {
                                     milestones: {
                                         
                                         20: {
@@ -1083,16 +1083,16 @@ function format_skill_rewards(milestone){
                                     }
                                  },
                                   get_effect_description: ()=> {
-                                      return `增加持三叉戟时暴击率 ${Math.round(skills["Tridents"].get_coefficient()*1000- 1000)/10 }%`;
+                                      return `Increases crit rate while wielding tridents by ${Math.round(skills["Tridents"].get_coefficient()*1000- 1000)/10 }%`;
                                   },
                                   
                                   max_level_coefficient: 2
                             });
     skills["Moonwheels"] = new Skill({skill_id: "Moonwheels", 
                                   parent_skill: "Weapon mastery",
-                                  names: {0:"银霜月轮·未入门",20: "银霜月轮·一重",40:"银霜月轮·二重",60:"银霜月轮·三重",80:"银霜月轮·四重",100:"银霜月轮·五重",120:"银霜月轮·圆满"}, 
+                                  names: {0: "Silver Frost Moonwheel: Untrained", 20: "Silver Frost Moonwheel: Stage 1", 40: "Silver Frost Moonwheel: Stage 2", 60: "Silver Frost Moonwheel: Stage 3", 80: "Silver Frost Moonwheel: Stage 4", 100: "Silver Frost Moonwheel: Stage 5", 120: "Silver Frost Moonwheel: Perfect"}, 
                                   category: "Weapon",
-                                  description: "操纵【银霜月轮】念力兵器的能力。每20级会蜕变，大幅提升普攻倍率。", rewards: {
+                                  description: "Ability to wield the [Silver Frost Moonwheel] psychic weapon. Evolves every 20 levels, greatly boosting Normal Attack Multiplier.", rewards: {
                                     milestones: {
                                     }
                                  },
@@ -1101,7 +1101,7 @@ function format_skill_rewards(milestone){
                                   get_effect_description: ()=> {
                                     let phase = Math.floor(skills["Moonwheels"].current_level / 20);
                                     let phase_mul = {0:1,1:3,2:6,3:10,4:16,5:24,6:32};
-                                      return `增加持月轮时暴击率 ${Math.round(skills["Moonwheels"].get_coefficient()*1000- 1000)/10 }%，<br>持月轮时普攻倍率变为${phase_mul[phase]}倍。`;
+                                      return `Increases crit rate while wielding moonwheels by ${Math.round(skills["Moonwheels"].get_coefficient()*1000- 1000)/10 }%,<br>Normal Attack Multiplier with moonwheel becomes ${phase_mul[phase]}x.`;
 
                                   },
                                   
@@ -1380,8 +1380,8 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
 //non-work activity related
 (function(){
     skills["Sleeping"] = new Skill({skill_id: "Sleeping",
-                                    names: {0: "睡眠"}, 
-                                    description: "良好且规律的作息是好身体的基础",
+                                    names: {0: "Sleep"}, 
+                                    description: "Good and regular sleep patterns are the foundation of good health",
                                     base_xp_cost: 1000,
                                     visibility_treshold: 300,
                                     xp_scaling: 2,
@@ -1444,8 +1444,8 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
                                     }
                                 });
     skills["Running"] = new Skill({skill_id: "Running",
-    description: "训练敏捷和速度的最佳方案！",
-    names: {0: "跑步",20: "神行术",40: "瞬间移动"},
+    description: "The best way to train agility and speed!",
+    names: {0: "Running", 20: "Swift Stride", 40: "Teleportation"},
     max_level: 50,
     xp_scaling: 1.8,
     category: "Activity",
@@ -1506,13 +1506,13 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
     },
     get_effect_description: ()=> {
       let value = skills["Running"].get_coefficient("multiplicative");
-      return `将攻击速度乘以 ${format_number(value)}`;
+      return `Multiplies attack speed by ${format_number(value)}`;
     },
     
     });
     skills["Swimming"] = new Skill({skill_id: "Swimming",
-    description: "增加循环系统功能的运动！",
-    names: {0: "游泳",20: "水中窜",40: "水遁"},
+    description: "Exercise that improves cardiovascular function!",
+    names: {0: "Swimming", 20: "Water Sprint", 40: "Water Evasion"},
     max_level: 50,
     xp_scaling: 1.8,
     category: "Activity",
@@ -1575,7 +1575,7 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
     
     get_effect_description: ()=> {
       let value = skills["Swimming"].get_coefficient("multiplicative");
-      return `将生命上限乘以 ${format_number(value)}`;
+      return `Multiplies max HP by ${format_number(value)}`;
     },
     
     });
@@ -1832,8 +1832,8 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
 //resource gathering related
 (function(){
     skills["Woodcutting"] = new Skill({skill_id: "Woodcutting", 
-        names: {0: "砍伐"}, 
-        description: "提升砍伐树木的技能",
+        names: {0: "Woodcutting"}, 
+        description: "Skill for chopping down trees",
         category: "Activity",
         base_xp_cost: 10,
         visibility_treshold: 4,
@@ -1841,8 +1841,8 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
     });
 
     skills["Fishing"] = new Skill({skill_id: "Fishing", 
-        names: {0: "钓鱼"}, 
-        description: "增加钓鱼的熟练度,提高大鱼上钩的概率[3级出现青花鱼/10级出现冰柱鱼]<br>幻境核心:0.75x长度[13级出现血莲鱼，21级出现冰柱鱼王]",
+        names: {0: "Fishing"},
+        description: "Increases fishing proficiency, improving chances of catching larger fish [Level 3: Blue Flower Fish / Level 10: Ice Pillar Fish]<br>Illusion Core: 0.75x length [Level 13: 血莲鱼, Level 21: 冰柱鱼王]", // TODO: translate fish names
         category: "Activity",
         base_xp_cost: 80,
         visibility_treshold: 4,
@@ -1851,13 +1851,13 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
         max_level_coefficient: 200,
         get_effect_description: ()=> {
         let value = skills["Fishing"].current_level * 4;
-        return `“钓鱼条” 长度： 40px ->  ${format_number(40+value)}px.`;
+        return `"Fishing bar" length: 40px -> ${format_number(40+value)}px.`;
         },
     });
 
     skills["Mining"] = new Skill({skill_id: "Mining",
-        names: {0: "挖掘"}, 
-        description: "提升挖掘矿石的技能",
+        names: {0: "Excavation"}, 
+        description: "Skill for mining ores",
         category: "Activity",
         base_xp_cost: 10,
         visibility_treshold: 4,
@@ -1888,20 +1888,20 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
 (function(){
     skills["Crafting"] = new Skill({
         skill_id: "Crafting", 
-        names: {0: "合成"}, 
-        description: "准备，装配，构建成品的艺术",
+        names: {0: "Crafting"}, 
+        description: "The art of preparing, assembling, and constructing finished goods",
         category: "Crafting",
         base_xp_cost: 40,
         xp_scaling: 1.5,
         max_level: 999,
         get_effect_description: ()=> {
-            return `基准品质 ${Math.round(2*skills["Crafting"].current_level+90)} %`;
+            return `Base quality ${Math.round(2*skills["Crafting"].current_level+90)} %`;
         },
     });
     skills["Smelting"] = new Skill({
         skill_id: "Smelting", 
-        names: {0: "熔炼"}, 
-        description: "冶炼矿石为金属",
+        names: {0: "Smelting"}, 
+        description: "Smelt ores into metals",
         category: "Crafting",
         base_xp_cost: 40,
         xp_scaling: 1.5,
@@ -1909,20 +1909,20 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
     });
     skills["Forging"] = new Skill({
         skill_id: "Forging", 
-        names: {0: "锻造"}, 
-        description: "将金属变为有用之物",
+        names: {0: "Forging"}, 
+        description: "Transform metals into useful items",
         category: "Crafting",
         base_xp_cost: 40,
         xp_scaling: 1.5,
         max_level: 999,
         get_effect_description: ()=> {
-            return `基准品质 ${Math.round(2*skills["Forging"].current_level+90)} %`;
+            return `Base quality ${Math.round(2*skills["Forging"].current_level+90)} %`;
         },
     });
     skills["Cooking"] = new Skill({
         skill_id: "Cooking", 
-        names: {0: "烹饪"}, 
-        description: "变不可吃为可吃",
+        names: {0: "Cooking"}, 
+        description: "Transform the inedible into the edible",
         category: "Crafting",
         base_xp_cost: 40,
         xp_scaling: 1.5,
@@ -1930,8 +1930,8 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
     });
     skills["Alchemy"] = new Skill({
         skill_id: "Alchemy", 
-        names: {0: "炼金"}, 
-        description: "提炼和升华原料中的有效成分",
+        names: {0: "Alchemy"}, 
+        description: "Refine and sublimate active ingredients from raw materials",
         category: "Crafting",
         base_xp_cost: 40,
         xp_scaling: 1.5,
@@ -1944,14 +1944,14 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
     skills["Iron skin"] = new Skill({
         skill_id: "Iron skin",
         category: "Combat",
-        names: {0: "坚韧皮肤", 5: "铁制皮肤", 10: "精钢皮肤",15:"紫铜皮肤",20:"地宫皮肤",25:"充能皮肤",30:"脉冲皮肤",35:"海绿皮肤",40:"红钢皮肤",45:"秘银皮肤",50:"旋律皮肤",55:"冰髓皮肤"},
-        description: "杀不死我的，都将使我更强大",
+        names: {0: "Tough Skin", 5: "Iron Skin", 10: "Steel Skin", 15: "Copper Skin", 20: "Dungeon Skin", 25: "Charged Skin", 30: "Pulse Skin", 35: "Sea Green Skin", 40: "Red Steel Skin", 45: "Mithril Skin", 50: "Melody Skin", 55: "Ice Marrow Skin"},
+        description: "What doesn't kill me makes me stronger",
         base_xp_cost: 100,
         xp_scaling: 2.0,
         max_level: 100,
         max_level_bonus: 1.00,
         get_effect_description: ()=> {
-            return `增加基础防御 ${Math.round(100*skills["Iron skin"].get_level_bonus())} %`;
+            return `Increases base defense by ${Math.round(100*skills["Iron skin"].get_level_bonus())} %`;
         },
     }); 
 })();
@@ -2006,14 +2006,14 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
 (function(){
     skills["Haggling"] = new Skill({
         skill_id: "Haggling",
-        names: {0: "讨价还价",15:"精通·讨价还价",35:"大师·讨价还价",50:"传奇·讨价还价",75:"超凡·讨价还价"},
-        description: "交易的艺术",
+        names: {0: "Haggling", 15: "Proficient Haggling", 35: "Master Haggling", 50: "Legendary Haggling", 75: "Transcendent Haggling"},
+        description: "The art of trading",
         category: "Character",
         base_xp_cost: 100,
         max_level: 999,
         xp_scaling: 2,
         get_effect_description: ()=> {
-            return `将购买价格降低到原价的 ${Math.round((Math.pow(0.98,skills["Haggling"].current_level))*10000)/100}%(不低于110%)`;
+            return `Reduces purchase price to ${Math.round((Math.pow(0.98,skills["Haggling"].current_level))*10000)/100}% of original (no lower than 110%)`;
         },
         max_level_bonus: 0.8
     });

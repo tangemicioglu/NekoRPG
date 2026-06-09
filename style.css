@@ -1050,6 +1050,18 @@ i {
 	margin-top: -3px;
 }
 
+#translation_credit {
+	align-self: center;
+	padding-left: 10px;
+	font-size: 14px;
+	opacity: 0.85;
+	white-space: nowrap;
+}
+
+#translation_credit a {
+	color: inherit;
+}
+
 .trader_category_button {
 	float:left;
 	padding: 3px 0px 3px 0px;

@@ -9,6 +9,7 @@ let enemy_killcount = {};
 
 class Enemy {
     constructor({name, 
+                 id = null,
                  description, 
                  xp_value = 1, 
                  stats, 
@@ -25,6 +26,7 @@ class Enemy {
                 }) {
                     
         this.name = name;
+            this.id = id ?? name;
         this.rank = rank; //only for the bestiary order; higher rank => higher in display
         this.description = description; //try to keep it short
         this.xp_value = xp_value;
@@ -242,12 +244,12 @@ class Enemy {
 
 
     enemy_templates["毛茸茸"] = new Enemy({
-        name: "毛茸茸", 
-        description: "普通的浅色史莱姆", 
+        name: "Fluffy",
+        description: "An ordinary light-colored Slime",
         xp_value: 1, 
         rank: 1101,
         image: "image/enemy/E1101.png",
-        realm: "<span class=realm_basic><b>微尘级初级</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Novice</b></span>",
         size: "small",
         tags: [],
         stats: {health: 3, attack: 3, agility: 1, attack_speed: 1, defense: 0}, 
@@ -259,12 +261,12 @@ class Enemy {
     });
 
     enemy_templates["武装毛茸茸"] = new Enemy({
-        name: "武装毛茸茸", 
-        description: "获得了剑盾的浅色史莱姆，但是它也被拖累了速度", 
+        name: "Armed Fluffy",
+        description: "A light-colored Slime that got its hands on a sword and shield, but it slows it down",
         xp_value: 1, 
         rank: 1102,
         image: "image/enemy/E1102.png",
-        realm: "<span class=realm_basic><b>微尘级初级</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Novice</b></span>",
         size: "small",
         tags: [],
         stats: {health: 4, attack: 4, agility: 1, attack_speed: 0.8, defense: 0}, 
@@ -277,12 +279,12 @@ class Enemy {
     });
 
     enemy_templates["红毛茸茸"] = new Enemy({
-        name: "红毛茸茸", 
-        description: "变种史莱姆，综合实力比普通史莱姆更强", 
+        name: "Red Fluffy",
+        description: "A mutant Slime, stronger overall than an ordinary Slime",
         xp_value: 1, 
         rank: 1103,
         image: "image/enemy/E1103.png",
-        realm: "<span class=realm_basic><b>微尘级初级 +</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Novice +</b></span>",
         size: "small",
         tags: [],
         
@@ -295,12 +297,12 @@ class Enemy {
     });
 
     enemy_templates["小飞蛾"] = new Enemy({
-        name: "小飞蛾", 
-        description: "体型较小的飞蛾，飞行能力使它变得十分灵活", 
+        name: "Small Moth",
+        description: "A small-sized moth. Its ability to fly makes it extremely agile",
         xp_value: 1, 
         rank: 1104,
         image: "image/enemy/E1104.png",
-        realm: "<span class=realm_basic><b>微尘级初级 +</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Novice +</b></span>",
         size: "small",
         tags: [],
         
@@ -316,12 +318,12 @@ class Enemy {
     });
 
     enemy_templates["骸骨"] = new Enemy({
-        name: "骸骨", 
-        description: "最弱小的亡灵生物", 
+        name: "Skeleton",
+        description: "The weakest of undead creatures",
         xp_value: 2, 
         rank: 1105,
         image: "image/enemy/E1105.png",
-        realm: "<span class=realm_basic><b>微尘级中级</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Adept</b></span>",
         size: "small",
         tags: [],
         
@@ -337,12 +339,12 @@ class Enemy {
     });
 
     enemy_templates["武装红毛茸茸"] = new Enemy({
-        name: "武装红毛茸茸", 
-        description: "获得了剑盾的变种史莱姆，它已经不会被拖累了！", 
+        name: "Armed Red Fluffy",
+        description: "A mutant Slime equipped with sword and shield - it is no longer slowed down!",
         xp_value: 2, 
         rank: 1106,
         image: "image/enemy/E1106.png",
-        realm: "<span class=realm_basic><b>微尘级中级</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Adept</b></span>",
         size: "small",
         tags: [],
         stats: {health: 10, attack: 8, agility: 2.2, attack_speed: 1.0, defense: 2}, 
@@ -355,12 +357,12 @@ class Enemy {
     });
 
     enemy_templates["少年法师"] = new Enemy({
-        name: "少年法师", 
-        description: "幼小的法师。魔法攻击可以无视他人的防御，但他本身相当脆弱", 
+        name: "Young Mage",
+        description: "A young mage. Magic attacks ignore the opponent's defense, but the mage itself is quite fragile",
         xp_value: 2, 
         rank: 1107,
         image: "image/enemy/E1107.png",
-        realm: "<span class=realm_basic><b>微尘级中级 +</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Adept +</b></span>",
         size: "small",
         spec: [0],
         tags: [],
@@ -374,12 +376,12 @@ class Enemy {
     });
 
     enemy_templates["微尘级野兽"] = new Enemy({
-        name: "微尘级野兽", 
-        description: "血洛大陆的幼年野兽，肉质鲜美多汁", 
+        name: "Dust Rank Wild Beast",
+        description: "A juvenile Wild Beast from the Xuelo Continent, with tender and juicy meat",
         xp_value: 2, 
         rank: 1108,
         image: "image/enemy/E1108.png",
-        realm: "<span class=realm_basic><b>微尘级中级 +</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Adept +</b></span>",
         size: "small",
         spec: [3],
         tags: [],
@@ -394,12 +396,12 @@ class Enemy {
     });
 
     enemy_templates["废弃傀儡"] = new Enemy({
-        name: "废弃傀儡", 
-        description: "能量几乎耗竭的岩石傀儡，仅剩下微尘高级实力", 
+        name: "Abandoned Golem",
+        description: "A rock Golem with nearly depleted energy, only retaining Dust Rank Advanced strength",
         xp_value: 3, 
         rank: 1109,
         image: "image/enemy/E1109.png",
-        realm: "<span class=realm_basic><b>微尘级高级</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Expert</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -414,12 +416,12 @@ class Enemy {
     });
 
     enemy_templates["黑毛茸茸"] = new Enemy({
-        name: "黑毛茸茸", 
-        description: "体型大了一圈的变异史莱姆，实力超过它的同类", 
+        name: "Black Fluffy",
+        description: "A mutant Slime slightly larger in size, surpassing its kin in strength",
         xp_value: 3, 
         rank: 1110,
         image: "image/enemy/E1110.png",
-        realm: "<span class=realm_basic><b>微尘级高级</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Expert</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -433,12 +435,12 @@ class Enemy {
     });
 
     enemy_templates["荧光飞蛾"] = new Enemy({
-        name: "荧光飞蛾", 
-        description: "发出闪亮荧光的变种飞蛾，继承了小飞蛾的灵活性", 
+        name: "Glowing Moth",
+        description: "A mutant moth that emits a bright glow, inheriting the Small Moth's agility",
         xp_value: 3, 
         rank: 1111,
         image: "image/enemy/E1111.png",
-        realm: "<span class=realm_basic><b>微尘级高级 +</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Expert +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -452,12 +454,12 @@ class Enemy {
     });
 
     enemy_templates["橙毛茸茸"] = new Enemy({
-        name: "橙毛茸茸", 
-        description: "另一种高级变异史莱姆。全方位比黑色版本强大一些", 
+        name: "Orange Fluffy",
+        description: "Another Advanced mutant Slime. Stronger than the black version in every way",
         xp_value: 3, 
         rank: 1112,
         image: "image/enemy/E1112.png",
-        realm: "<span class=realm_basic><b>微尘级高级 +</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Expert +</b></span>",
         size: "small",
         spec: [2],
         tags: [],
@@ -471,12 +473,12 @@ class Enemy {
     });
 
     enemy_templates["聚灵骸骨"] = new Enemy({
-        name: "聚灵骸骨", 
-        description: "它的剑盾是它靠自己的实力抢来的！切莫大意！", 
+        name: "Spirit-Gathering Skeleton",
+        description: "It seized its sword and shield through its own strength! Do not underestimate it!",
         xp_value: 3, 
         rank: 1113,
         image: "image/enemy/E1113.png",
-        realm: "<span class=realm_basic><b>微尘级高级 +</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Expert +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -492,12 +494,12 @@ class Enemy {
     });
 
     enemy_templates["大飞蛾"] = new Enemy({
-        name: "大飞蛾", 
-        description: "更大只的飞蛾，灵活性不佳，但它会2连击！", 
+        name: "Large Moth",
+        description: "A bigger moth, not very agile, but it can strike twice!",
         xp_value: 3, 
         rank: 1114,
         image: "image/enemy/E1114.png",
-        realm: "<span class=realm_basic><b>微尘级高级 +</b></span>",
+        realm: "<span class=realm_basic><b>Dust Rank: Expert +</b></span>",
         size: "small",
         spec: [3],
         tags: [],
@@ -513,12 +515,12 @@ class Enemy {
     //以下是万物级怪物-NekoRPG-
 
     enemy_templates["血洛游卒"] = new Enemy({
-        name: "血洛游卒", 
-        description: "相传每一个经过心境1的人都对它有些阴影..", 
+        name: "Xuelo Wandering Soldier",
+        description: "Legend has it that everyone who passes through Stage 1 has some trauma from this one..",
         xp_value: 5, 
         rank: 1115,
         image: "image/enemy/E1115.png",
-        realm: "<span class=realm_basic><b>万物级初等</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Novice</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -532,12 +534,12 @@ class Enemy {
     });
 
     enemy_templates["石精"] = new Enemy({
-        name: "石精", 
-        description: "每次打它，它最多只会掉1滴血~", 
+        name: "Stone Spirit",
+        description: "Each time you hit it, it loses at most 1 HP~",
         xp_value: 5, 
         rank: 1116,
         image: "image/enemy/E1116.png",
-        realm: "<span class=realm_basic><b>万物级初等</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Novice</b></span>",
         size: "small",
         spec: [1],
         tags: [],
@@ -551,12 +553,12 @@ class Enemy {
     });
 
     enemy_templates["弱小意念"] = new Enemy({
-        name: "弱小意念", 
-        description: "噩梦的具象化，却拥有和梦境一般多彩的掉落。！", 
+        name: "Feeble Psyche",
+        description: "The embodiment of a nightmare, yet with drops as colorful as a dream!",
         xp_value: 5, 
         rank: 1117,
         image: "image/enemy/E1117.png",
-        realm: "<span class=realm_basic><b>万物级初等</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Novice</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -569,12 +571,12 @@ class Enemy {
     });
 
     enemy_templates["聚魂骸骨"] = new Enemy({
-        name: "聚魂骸骨", 
-        description: "它已经将自身的骨头淬炼至青铜色，可见实力之不俗", 
+        name: "Soul-Gathering Skeleton",
+        description: "It has tempered its bones to a bronze hue, demonstrating its considerable strength",
         xp_value: 5, 
         rank: 1118,
         image: "image/enemy/E1118.png",
-        realm: "<span class=realm_basic><b>万物级初等</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Novice</b></span>",
         size: "small",
         spec: [4],
         tags: [],
@@ -586,12 +588,12 @@ class Enemy {
         ],
     });
     enemy_templates["青年法师"] = new Enemy({
-        name: "青年法师", 
-        description: "稍微年长的法师。依然可以无视防御，而且实力强大了许多", 
+        name: "Adolescent Mage",
+        description: "A slightly older mage. Still ignores defense, and considerably more powerful",
         xp_value: 5, 
         rank: 1119,
         image: "image/enemy/E1119.png",
-        realm: "<span class=realm_basic><b>万物级初等</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Novice</b></span>",
         size: "small",
         spec: [0],
         tags: [],
@@ -603,12 +605,12 @@ class Enemy {
         ],
     });
     enemy_templates["武装橙毛茸茸"] = new Enemy({
-        name: "武装橙毛茸茸", 
-        description: "相传普通/武装史莱姆的颜色将会随实力呈彩虹递变...", 
+        name: "Armed Orange Fluffy",
+        description: "Legend says the color of ordinary/armed Slimes shifts like a rainbow as they grow stronger...",
         xp_value: 5, 
         rank: 1120,
         image: "image/enemy/E1120.png",
-        realm: "<span class=realm_basic><b>万物级初等 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Novice +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -624,12 +626,12 @@ class Enemy {
         ],
     });
     enemy_templates["万物级凶兽"] = new Enemy({
-        name: "万物级凶兽", 
-        description: "进化阶段与微尘级凶兽类似，但更大的体型赋予了它更强的力量..和更多的肉。", 
+        name: "Myriad Rank Wild Beast",
+        description: "At a similar evolution stage as the Dust Rank Wild Beast, but its larger body grants it greater strength... and more meat.",
         xp_value: 5, 
         rank: 1121,
         image: "image/enemy/E1121.png",
-        realm: "<span class=realm_basic><b>万物级初等 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Novice +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -644,12 +646,12 @@ class Enemy {
         ],
     });
     enemy_templates["习武孩童"] = new Enemy({
-        name: "习武孩童", 
-        description: "偷偷跑到纳家学功法的别人家小孩——该罚！", 
+        name: "Martial Arts Child",
+        description: "Some other family's kid who snuck over to the Na Family to learn techniques - they deserve a punishment!",
         xp_value: 5, 
         rank: 1122,
         image: "image/enemy/E1122.png",
-        realm: "<span class=realm_basic><b>万物级初等 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Novice +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -666,12 +668,12 @@ class Enemy {
         ],
     });
     enemy_templates["出芽茸茸"] = new Enemy({
-        name: "出芽茸茸", 
-        description: "那颗芽是它修为的结晶！但万物级的一个铜板都卖不出去就是啦..", 
+        name: "Budding Fluffy",
+        description: "That bud is the crystallization of its cultivation! But not even a single copper coin can be sold at Myriad Rank..",
         xp_value: 8, 
         rank: 1123,
         image: "image/enemy/E1123.png",
-        realm: "<span class=realm_basic><b>万物级高等</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Expert</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -686,12 +688,12 @@ class Enemy {
         ],
     });
     enemy_templates["试炼木偶"] = new Enemy({
-        name: "试炼木偶", 
-        description: "Ave Musica 奇跡を日常に(Fortuna)...不是这种人偶！", 
+        name: "Trial Puppet",
+        description: "Ave Musica 奇跡を日常に(Fortuna)... Not that kind of puppet!",
         xp_value: 8, 
         rank: 1124,
         image: "image/enemy/E1124.png",
-        realm: "<span class=realm_basic><b>万物级高等</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Expert</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -705,12 +707,12 @@ class Enemy {
     });
     //1-2 below  
     enemy_templates["纳家待从"] = new Enemy({
-        name: "纳家待从", 
-        description: "普通的纳家随从。因为在城内大街上，出手点到为止。", 
+        name: "Na Family Attendant",
+        description: "An ordinary Na Family follower. Since they are on the city streets, they hold back their strength.",
         xp_value: 13, 
         rank: 1201,
         image: "image/enemy/E1201.png",
-        realm: "<span class=realm_basic><b>万物级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle</b></span>",
         size: "small",
         spec: [5],
         tags: [],
@@ -724,12 +726,12 @@ class Enemy {
         ],
     });
     enemy_templates["轻型傀儡"] = new Enemy({
-        name: "轻型傀儡", 
-        description: "上漆铁皮做成的傀儡，比它那石头兄弟强大一些。", 
+        name: "Light Golem",
+        description: "A Golem made of painted iron sheeting, a bit stronger than its stone counterpart.",
         xp_value: 8, 
         rank: 1202,
         image: "image/enemy/E1202.png",
-        realm: "<span class=realm_basic><b>万物级高等 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Expert +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -743,12 +745,12 @@ class Enemy {
         ],
     });
     enemy_templates["出芽红茸茸"] = new Enemy({
-        name: "出芽红茸茸", 
-        description: "茸茸家族的另一个成员——尽管它只比出牙茸茸强大了一丝。", 
+        name: "Budding Red Fluffy",
+        description: "Another member of the Fluffy family - though only marginally stronger than the Budding Fluffy.",
         xp_value: 8, 
         rank: 1203,
         image: "image/enemy/E1203.png",
-        realm: "<span class=realm_basic><b>万物级高等 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Expert +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -763,12 +765,12 @@ class Enemy {
         ],
     });
     enemy_templates["万物级异兽"] = new Enemy({
-        name: "万物级异兽", 
-        description: "掌握着牵制力量的异兽。在能量加持下，它的肉营养十分丰富。", 
+        name: "Myriad Rank Strange Beast",
+        description: "A strange beast that wields restraining power. Its meat is extremely nutritious when enhanced by energy.",
         xp_value: 8, 
         rank: 1204,
         image: "image/enemy/E1204.png",
-        realm: "<span class=realm_basic><b>万物级高等 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Expert +</b></span>",
         size: "small",
         spec: [5],
         tags: [],
@@ -781,12 +783,12 @@ class Enemy {
         ],
     });
     enemy_templates["高速傀儡"] = new Enemy({
-        name: "高速傀儡", 
-        description: "轻便合金做成的傀儡，为了速度舍弃了防御", 
+        name: "High-Speed Golem",
+        description: "A Golem made of lightweight alloy, sacrificing defense for speed",
         xp_value: 13, 
         rank: 1205,
         image: "image/enemy/E1205.png",
-        realm: "<span class=realm_basic><b>万物级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle</b></span>",
         size: "small",
         spec: [6],
         tags: [],
@@ -800,12 +802,12 @@ class Enemy {
         ],
     });//需要3连击
     enemy_templates["黄毛茸茸"] = new Enemy({
-        name: "黄毛茸茸", 
-        description: "学会了魔攻的血牛茸茸！", 
+        name: "Yellow Fluffy",
+        description: "A tanky Fluffy that learned magic attacks!",
         xp_value: 13, 
         rank: 1206,
         image: "image/enemy/E1206.png",
-        realm: "<span class=realm_basic><b>万物级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle</b></span>",
         size: "small",
         spec: [0],
         tags: [],
@@ -821,12 +823,12 @@ class Enemy {
         ],
     });
     enemy_templates["纳家塑像"] = new Enemy({
-        name: "纳家塑像", 
-        description: "纳家量产的傀儡塑像。战力不强，但胜在便宜。", 
+        name: "Na Family Statue",
+        description: "A mass-produced Golem statue by the Na Family. Not very powerful, but cheap.",
         xp_value: 13, 
         rank: 1207,
         image: "image/enemy/E1207.png",
-        realm: "<span class=realm_basic><b>万物级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle</b></span>",
         size: "small",
         spec: [1],
         tags: [],
@@ -840,12 +842,12 @@ class Enemy {
         ],
     });
     enemy_templates["出芽橙茸茸"] = new Enemy({
-        name: "出芽橙茸茸", 
-        description: "它的芽蕴含充足的魔力，足以转化出一份五彩凝胶。", 
+        name: "Budding Orange Fluffy",
+        description: "Its bud contains enough magical power to produce a batch of Rainbow Gel.",
         xp_value: 13, 
         rank: 1208,
         image: "image/enemy/E1208.png",
-        realm: "<span class=realm_basic><b>万物级巅峰 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -860,12 +862,12 @@ class Enemy {
         ],
     });
     enemy_templates["森林野蝠"] = new Enemy({
-        name: "森林野蝠", 
-        description: "24层魔塔的红蝙蝠转生来了，携带伤害加深！", 
+        name: "Forest Wild Bat",
+        description: "The red bat from floor 24 of the Magic Tower has reincarnated here, bringing a wound-deepening effect!",
         xp_value: 13, 
         rank: 1209,
         image: "image/enemy/E1209.png",
-        realm: "<span class=realm_basic><b>万物级巅峰 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [7],
         tags: [],
@@ -879,12 +881,12 @@ class Enemy {
         ],
     });
     enemy_templates["血洛喽啰"] = new Enemy({
-        name: "血洛喽啰", 
-        description: "和它的弟弟相比，因出场太晚惨遭忘却的存在", 
+        name: "Xuelo Lackey",
+        description: "Compared to its younger sibling, it appeared too late and was tragically forgotten",
         xp_value: 21, 
         rank: 1210,
         image: "image/enemy/E1210.png",
-        realm: "<span class=realm_basic><b>潮汐级初等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice</b></span>",
         size: "small",
         spec: [8],
         spec_value:{8:10},
@@ -900,12 +902,12 @@ class Enemy {
         ],
     });
     enemy_templates["百家小卒"] = new Enemy({
-        name: "百家小卒", 
-        description: "没那么拼命的百家小卒，受轻伤就会离去。", 
+        name: "Hundred Clans Pawn",
+        description: "A Hundred Clans Pawn that is not so determined - it will flee at the first minor injury.",
         xp_value: 13, 
         rank: 1211,
         image: "image/enemy/E1211.png",
-        realm: "<span class=realm_basic><b>万物级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle</b></span>",
         size: "small",
         spec: [2],
         tags: [],
@@ -919,12 +921,12 @@ class Enemy {
         ],
     });
     enemy_templates["下位佣兵"] = new Enemy({
-        name: "下位佣兵", 
-        description: "底层的血洛佣兵，看守着平庸的宝物", 
+        name: "Lower-Rank Mercenary",
+        description: "A low-level Xuelo mercenary, guarding mediocre treasures",
         xp_value: 21, 
         rank: 1212,
         image: "image/enemy/E1212.png",
-        realm: "<span class=realm_basic><b>潮汐级初等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -939,12 +941,12 @@ class Enemy {
         ],
     });
     enemy_templates["地龙荒兽"] = new Enemy({
-        name: "地龙荒兽", 
-        description: "因为种族优势，采取了先发制人战略的异兽", 
+        name: "Earth Dragon Wild Beast",
+        description: "A strange beast that capitalizes on its racial advantage with a preemptive strike strategy",
         xp_value: 21, 
         rank: 1213,
         image: "image/enemy/E1213.png",
-        realm: "<span class=realm_basic><b>潮汐级初等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice</b></span>",
         size: "small",
         spec: [4],
         tags: [],
@@ -958,12 +960,12 @@ class Enemy {
         ],
     });
     enemy_templates["毒虫"] = new Enemy({
-        name: "毒虫", 
-        description: "构造诡异的软泥，与其战斗时候属性会反转！", 
+        name: "Poison Bug",
+        description: "A strangely structured slime. When fighting it, stats are reversed!",
         xp_value: 21, 
         rank: 1214,
         image: "image/enemy/E1214.png",
-        realm: "<span class=realm_basic><b>潮汐级初等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice</b></span>",
         size: "small",
         spec: [9],
         tags: [],
@@ -978,12 +980,12 @@ class Enemy {
         ],
     });
     enemy_templates["精壮青年"] = new Enemy({
-        name: "精壮青年", 
-        description: "燕岗城的精壮青年，实力在同龄人中算得上靠前", 
+        name: "Strapping Youth",
+        description: "A strapping young man from Yangang City, his strength is above average among his peers",
         xp_value: 21, 
         rank: 1215,
         image: "image/enemy/E1215.png",
-        realm: "<span class=realm_basic><b>潮汐级初等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -997,12 +999,12 @@ class Enemy {
             //{item_name: "铁剑·改", count: [1], quality: [81, 100], chance: 0.2},
         ],
     });enemy_templates["法师学徒"] = new Enemy({
-        name: "法师学徒", 
-        description: "比青年法师强大的法师，学会了全新的魔法", 
+        name: "Mage Apprentice",
+        description: "A stronger mage than the Adolescent Mage, who has learned new spells",
         xp_value: 21, 
         rank: 1216,
         image: "image/enemy/E1216.png",
-        realm: "<span class=realm_basic><b>潮汐级初等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice +</b></span>",
         size: "small",
         spec: [10],
         tags: [],
@@ -1017,12 +1019,12 @@ class Enemy {
         ],
     });
     enemy_templates["生灵骸骨"] = new Enemy({
-        name: "生灵骸骨", 
-        description: "聚魂的基础上又凝聚了部分血肉的不死族，攻防兼备。", 
+        name: "Living Skeleton",
+        description: "An undead that has condensed flesh onto a Soul-Gathering Skeleton, balancing offense and defense.",
         xp_value: 21, 
         rank: 1217,
         image: "image/enemy/E1217.png",
-        realm: "<span class=realm_basic><b>潮汐级初等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1037,12 +1039,12 @@ class Enemy {
         ],
     });
     enemy_templates["腐蚀质石精"] = new Enemy({
-        name: "腐蚀质石精", 
-        description: "城外的大石头。敌意不重，轻伤就会离去。", 
+        name: "Corrosive Stone Spirit",
+        description: "A large rock outside the city. Not very hostile - it will retreat at minor injuries.",
         xp_value: 34, 
         rank: 1301,
         image: "image/enemy/E1301.png",
-        realm: "<span class=realm_basic><b>潮汐级高等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1055,12 +1057,12 @@ class Enemy {
         ],
     });
     enemy_templates["绿毛茸茸"] = new Enemy({
-        name: "绿毛茸茸", 
-        description: "毛茸茸家族-野生限定版", 
+        name: "Green Fluffy",
+        description: "Fluffy family - wild exclusive edition",
         xp_value: 21, 
         rank: 1302,
         image: "image/enemy/E1302.png",
-        realm: "<span class=realm_basic><b>潮汐级初等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1073,12 +1075,12 @@ class Enemy {
         ],
     });
     enemy_templates["荒野蜂"] = new Enemy({
-        name: "荒野蜂", 
-        description: "变异的巨型黄蜂。它的毒液可以使人衰弱。", 
+        name: "Wasteland Wasp",
+        description: "A mutated giant wasp. Its venom can weaken its enemies.",
         xp_value: 21, 
         rank: 1303,
         image: "image/enemy/E1303.png",
-        realm: "<span class=realm_basic><b>潮汐级初等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice +</b></span>",
         size: "small",
         spec: [8],
         spec_value:{8:10},
@@ -1091,12 +1093,12 @@ class Enemy {
         ],
     });
     enemy_templates["切叶虫茧"] = new Enemy({
-        name: "切叶虫茧", 
-        description: "破茧而出的蝴蝶。它的锋利前肢可以撕裂敌人。", 
+        name: "Leafcutter Cocoon",
+        description: "A butterfly that has emerged from its cocoon. Its sharp forelegs can tear enemies apart.",
         xp_value: 21, 
         rank: 1304,
         image: "image/enemy/E1304.png",
-        realm: "<span class=realm_basic><b>潮汐级初等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Novice +</b></span>",
         size: "small",
         spec: [7],
         tags: [],
@@ -1108,12 +1110,12 @@ class Enemy {
         ],
     });
     enemy_templates["花灵液"] = new Enemy({
-        name: "花灵液", 
-        description: "绿毛茸茸的变异种。不规则的外形使它兼具灵活和承伤。", 
+        name: "Floral Spirit Slime",
+        description: "A mutant variant of the Green Fluffy. Its irregular form gives it both agility and damage absorption.",
         xp_value: 34, 
         rank: 1305,
         image: "image/enemy/E1305.png",
-        realm: "<span class=realm_basic><b>潮汐级高等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1126,12 +1128,12 @@ class Enemy {
         ],
     });
     enemy_templates["燕岗领从者"] = new Enemy({
-        name: "燕岗领从者", 
-        description: "随处可见的普通修者。修为不高，财产不多。", 
+        name: "Yangang Domain Follower",
+        description: "A common cultivator found everywhere. Modest in cultivation, modest in wealth.",
         xp_value: 34, 
         rank: 1306,
         image: "image/enemy/E1306.png",
-        realm: "<span class=realm_basic><b>潮汐级高等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert</b></span>",
         size: "small",
         spec: [3],
         tags: [],
@@ -1145,12 +1147,12 @@ class Enemy {
         ],
     });
     enemy_templates["野生幽灵"] = new Enemy({
-        name: "野生幽灵", 
-        description: "在荒野中生存下来的幽灵。非常脆弱，但飘忽不定。", 
+        name: "Wild Ghost",
+        description: "A ghost that has survived in the wilderness. Very fragile, but elusive.",
         xp_value: 34, 
         rank: 1307,
         image: "image/enemy/E1307.png",
-        realm: "<span class=realm_basic><b>潮汐级高等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert</b></span>",
         size: "small",
         spec: [2],
         tags: [],
@@ -1163,12 +1165,12 @@ class Enemy {
         ],
     });
     enemy_templates["荒兽尼尔"] = new Enemy({
-        name: "荒兽尼尔", 
-        description: "一种鸟类荒兽.肌肉发达，皮糙肉厚。", 
+        name: "Wild Beast Niel",
+        description: "An avian Wild Beast. Well-muscled with thick hide.",
         xp_value: 34, 
         rank: 1308,
         image: "image/enemy/E1308.png",
-        realm: "<span class=realm_basic><b>潮汐级高等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert +</b></span>",
         size: "small",
         spec: [5],
         tags: [],
@@ -1182,12 +1184,12 @@ class Enemy {
         ],
     });
     enemy_templates["司雍世界修士"] = new Enemy({
-        name: "司雍世界修士", 
-        description: "稍微罕见一些的普通修者，在潮汐级高等中算是强者。", 
+        name: "Siyong World Cultivator",
+        description: "A slightly rarer ordinary cultivator, considered strong among Tidal Rank Advanced.",
         xp_value: 34, 
         rank: 1309,
         image: "image/enemy/E1309.png",
-        realm: "<span class=realm_basic><b>潮汐级高等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1201,12 +1203,12 @@ class Enemy {
         ],
     });
     enemy_templates["潮汐级荒兽"] = new Enemy({
-        name: "潮汐级荒兽", 
-        description: "一种地行性荒兽，肉比荒兽尼尔略多一些", 
+        name: "Tidal Rank Wild Beast",
+        description: "A ground-dwelling Wild Beast, with slightly more meat than Wild Beast Niel",
         xp_value: 34, 
         rank: 1310,
         image: "image/enemy/E1310.png",
-        realm: "<span class=realm_basic><b>潮汐级高等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1219,12 +1221,12 @@ class Enemy {
         ],
     });
     enemy_templates["掠原蝠"] = new Enemy({
-        name: "掠原蝠", 
-        description: "一种以速度闻名的小型荒兽，什么都会叼一点", 
+        name: "Plains Raider Bat",
+        description: "A small Wild Beast known for its speed - it will snatch a bit of everything",
         xp_value: 34, 
         rank: 1311,
         image: "image/enemy/E1311.png",
-        realm: "<span class=realm_basic><b>潮汐级高等 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1239,12 +1241,12 @@ class Enemy {
         ],
     });
     enemy_templates["黑夜傀儡"] = new Enemy({
-        name: "黑夜傀儡", 
-        description: "岩石中自发产生的傀儡，体内时常镶嵌着宝石", 
+        name: "Night Golem",
+        description: "A Golem spontaneously formed within rocks, often with gemstones embedded in its body",
         xp_value: 55, 
         rank: 1312,
         image: "image/enemy/E1312.png",
-        realm: "<span class=realm_basic><b>潮汐级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Pinnacle</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1256,12 +1258,12 @@ class Enemy {
         ],
     });
     enemy_templates["来一口"] = new Enemy({
-        name: "来一口", 
-        description: "一种潜伏在地下的魔物，专门攻击冒险者防御不足的区域，极为难缠", 
+        name: "Take a Bite",
+        description: "A Magical Creature that lurks underground, specifically targeting an adventurer's weak defensive areas, extremely troublesome",
         xp_value: 55, 
         rank: 1313,
         image: "image/enemy/E1313.png",
-        realm: "<span class=realm_basic><b>潮汐级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Pinnacle</b></span>",
         size: "small",
         spec: [0,7],
         tags: [],
@@ -1275,12 +1277,12 @@ class Enemy {
         ],
     });
     enemy_templates["绿原行者"] = new Enemy({
-        name: "绿原行者", 
-        description: "潜力耗尽却堪堪达到潮汐级巅峰的老人，为了大地级的契机可以付出一切", 
+        name: "Green Plains Wanderer",
+        description: "An old man who exhausted his potential but barely reached Peak Tidal Rank, willing to pay any price for a chance at Earth Rank",
         xp_value: 55, 
         rank: 1314,
         image: "image/enemy/E1314.png",
-        realm: "<span class=realm_basic><b>潮汐级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Pinnacle</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1294,12 +1296,12 @@ class Enemy {
         ],
     });
     enemy_templates["初生鬼"] = new Enemy({
-        name: "初生鬼", 
-        description: "死去冒险者的怨念凝聚成的魔物。因贫困而死的它至死渴望着金钱。", 
+        name: "Newborn Wraith",
+        description: "A Magical Creature formed from the resentment of dead adventurers. Having died in poverty, it craved money to its last breath.",
         xp_value: 55, 
         rank: 1315,
         image: "image/enemy/E1315.png",
-        realm: "<span class=realm_basic><b>潮汐级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Pinnacle</b></span>",
         size: "small",
         spec: [18],
         spec_value:{18:2000},
@@ -1313,12 +1315,12 @@ class Enemy {
         ],
     });
     enemy_templates["燕岗领佣兵"] = new Enemy({
-        name: "燕岗领佣兵", 
-        description: "第一只大地级敌人。温馨提醒：大地级以上经验增长速率会翻倍！", 
+        name: "Yangang Domain Mercenary",
+        description: "The first Earth Rank enemy. Friendly reminder: EXP gain rate doubles for Earth Rank and above!",
         xp_value: 144, 
         rank: 1316,
         image: "image/enemy/E1316.png",
-        realm: "<span class=realm_terra><b>大地级一阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1</b></span>",
         size: "small",
         spec: [3],
         tags: [],
@@ -1333,12 +1335,12 @@ class Enemy {
     });
 
     enemy_templates["冷冻火"] = new Enemy({
-        name: "冷冻火", 
-        description: "不要想着和它打消耗战...当然，除非你可以防杀它。", 
+        name: "Frozen Flame",
+        description: "Don't think about fighting a war of attrition against it... unless you can kill it through defense.",
         xp_value: 55, 
         rank: 1317,
         image: "image/enemy/E1317.png",
-        realm: "<span class=realm_basic><b>潮汐级巅峰 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [12],//时封
         tags: [],
@@ -1352,12 +1354,12 @@ class Enemy {
     });
 
     enemy_templates["缠绕骸骨"] = new Enemy({
-        name: "缠绕骸骨", 
-        description: "生灵骸骨的加强版。它身上的骨头是上好的材料！", 
+        name: "Entwined Skeleton",
+        description: "An enhanced version of the Living Skeleton. The bones on it are top-quality materials!",
         xp_value: 55, 
         rank: 1318,
         image: "image/enemy/E1318.png",
-        realm: "<span class=realm_basic><b>潮汐级巅峰 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1373,12 +1375,12 @@ class Enemy {
 
     
     enemy_templates["灵蔓茸茸"] = new Enemy({
-        name: "灵蔓茸茸", 
-        description: "蕴含着狂暴力量的茸茸，周围的荒兽都会被其影响，变得暴戾", 
+        name: "Spirit Vine Fluffy",
+        description: "A Fluffy containing ferocious power. Wild Beasts nearby are influenced by it and become aggressive",
         xp_value: 55, 
         rank: 1319,
         image: "image/enemy/E1319.png",
-        realm: "<span class=realm_basic><b>潮汐级巅峰 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [11],
         tags: [],
@@ -1393,12 +1395,12 @@ class Enemy {
         ],
     });
     enemy_templates["夜行幽灵"] = new Enemy({
-        name: "夜行幽灵", 
-        description: "地宫里唯一的潮汐级魔物。靠着灯光的方便存活了下来。", 
+        name: "Night-Stalking Ghost",
+        description: "The only Tidal Rank Magical Creature in the Dungeon. It survived thanks to the convenience of lamplight.",
         xp_value: 55, 
         rank: 1401,
         image: "image/enemy/E1401.png",
-        realm: "<span class=realm_basic><b>潮汐级巅峰 +</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [13],
         tags: [],
@@ -1411,12 +1413,12 @@ class Enemy {
         ],
     });
     enemy_templates["石风家族剑士"] = new Enemy({
-        name: "石风家族剑士", 
-        description: "因为是家族旁系中的旁系，倒是不用担心打了他城主找上门", 
+        name: "Shifeng Family Swordsman",
+        description: "Being a branch of a branch of the family, there is no need to worry about the city lord coming after you for fighting him",
         xp_value: 144, 
         rank: 1402,
         image: "image/enemy/E1402.png",
-        realm: "<span class=realm_terra><b>大地级一阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1430,12 +1432,12 @@ class Enemy {
         ],
     });
     enemy_templates["能量络合球"] = new Enemy({
-        name: "能量络合球", 
-        description: "由纯粹的有组织能量产生的生物体。天生魔攻，但十分脆弱。", 
+        name: "Energy Binding Sphere",
+        description: "A lifeform generated from pure organized energy. Naturally uses magic attacks, but extremely fragile.",
         xp_value: 144, 
         rank: 1403,
         image: "image/enemy/E1403.png",
-        realm: "<span class=realm_terra><b>大地级一阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1</b></span>",
         size: "small",
         spec: [0],
         tags: [],
@@ -1448,12 +1450,12 @@ class Enemy {
         ],
     });
     enemy_templates["短视蝠"] = new Enemy({
-        name: "短视蝠", 
-        description: "它巨大的眼球并没有使它的视力变好...它似乎忘了凸透镜成像的原理。", 
+        name: "Shortsighted Bat",
+        description: "Its enormous eyeballs don't actually improve its vision... it seems to have forgotten how convex lenses work.",
         xp_value: 144, 
         rank: 1404,
         image: "image/enemy/E1404.png",
-        realm: "<span class=realm_terra><b>大地级一阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1466,12 +1468,12 @@ class Enemy {
         ],
     });
     enemy_templates["金衣除草者"] = new Enemy({
-        name: "金衣除草者", 
-        description: "它的阵法虽然布置慢了点，但是效果还是很强的。", 
+        name: "Golden-Robed Weeder",
+        description: "Its formation technique is a bit slow to set up, but the effect is still very powerful.",
         xp_value: 144, 
         rank: 1405,
         image: "image/enemy/E1405.png",
-        realm: "<span class=realm_terra><b>大地级一阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1</b></span>",
         size: "small",
         spec: [14],
         tags: [],
@@ -1485,12 +1487,12 @@ class Enemy {
         ],
     });
     enemy_templates["阴暗茸茸"] = new Enemy({
-        name: "阴暗茸茸", 
-        description: "它的绝对黑暗逆转了攻防的规则。不过，谁说这一定是件坏事呢？", 
+        name: "Shadow Fluffy",
+        description: "Its absolute darkness reverses the rules of offense and defense. But who says that has to be a bad thing?",
         xp_value: 144, 
         rank: 1406,
         image: "image/enemy/E1406.png",
-        realm: "<span class=realm_terra><b>大地级一阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1</b></span>",
         size: "small",
         spec: [9],
         tags: [],
@@ -1504,12 +1506,12 @@ class Enemy {
         ],
     });
     enemy_templates["地宫妖偶"] = new Enemy({
-        name: "地宫妖偶", 
-        description: "在地宫里读书学到牵制技巧的妖偶。顺带一提，牵制已经登上了“坑魔特效榜”第二名！", 
+        name: "Dungeon Puppet",
+        description: "A puppet that learned restraint techniques from reading books in the Dungeon. By the way, restraint has topped the \"trap effects\" chart at number two!",
         xp_value: 144, 
         rank: 1407,
         image: "image/enemy/E1407.png",
-        realm: "<span class=realm_terra><b>大地级一阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1</b></span>",
         size: "small",
         spec: [5],
         tags: [],
@@ -1522,12 +1524,12 @@ class Enemy {
         ],
     });
      enemy_templates["地宫虫卒"] = new Enemy({
-        name: "地宫虫卒", 
-        description: "他看了更多的书，发现了牵制是大坑。可惜，它自己的属性不怎么样..", 
+        name: "Dungeon Bug Soldier",
+        description: "It read more books and discovered restraint is a huge trap. Unfortunately, its own stats aren't great..",
         xp_value: 233, 
         rank: 1408,
         image: "image/enemy/E1408.png",
-        realm: "<span class=realm_terra><b>大地级一阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1543,12 +1545,12 @@ class Enemy {
         ],
     });
     enemy_templates["地刺"] = new Enemy({
-        name: "地刺", 
-        description: "埋伏在暗处的刺球茸茸。失去了捕捉技能——倒不如说这里所有魔物都有捕捉技能。", 
+        name: "Earth Spike",
+        description: "A spiky Fluffy lurking in the shadows. It lost its capture skill - but then again, all Magical Creatures here have capture skills.",
         xp_value: 233, 
         rank: 1409,
         image: "image/enemy/E1409.png",
-        realm: "<span class=realm_terra><b>大地级一阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1563,12 +1565,12 @@ class Enemy {
         ],
     });
     enemy_templates["探险者亡魂"] = new Enemy({
-        name: "探险者亡魂", 
-        description: "黑化强十倍，洗白弱三分。这不就看到前者的表现了吗~", 
+        name: "Explorer's Vengeful Spirit",
+        description: "Going dark makes you ten times stronger, going clean makes you thirty percent weaker. And here you can see the former in action~",
         xp_value: 233, 
         rank: 1410,
         image: "image/enemy/E1410.png",
-        realm: "<span class=realm_terra><b>大地级一阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [15],
         tags: [],
@@ -1584,12 +1586,12 @@ class Enemy {
         ],
     });
     enemy_templates["布菇妖"] = new Enemy({
-        name: "布菇妖", 
-        description: "它的孢子中含有使人衰弱的毒素。在外界它的踪迹早已消失，但黑暗的地宫中它却四处蔓延。", 
+        name: "Cloth Mushroom Fiend",
+        description: "Its spores contain a weakening toxin. While its traces have long vanished from the outside world, it spreads freely in the dark Dungeon.",
         xp_value: 233, 
         rank: 1411,
         image: "image/enemy/E1411.png",
-        realm: "<span class=realm_terra><b>大地级一阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [8],
         spec_value:{8:10},
@@ -1605,12 +1607,12 @@ class Enemy {
         ],
     });
     enemy_templates["腾风塑像"] = new Enemy({
-        name: "腾风塑像", 
-        description: "如同一阵真正的风暴！疾风？不过对它拙劣的模仿罢了！", 
+        name: "Storm Statue",
+        description: "Like a true tempest! Swift Wind? A mere crude imitation of this one!",
         xp_value: 233, 
         rank: 1412,
         image: "image/enemy/E1412.png",
-        realm: "<span class=realm_terra><b>大地级一阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [16],
         tags: [],
@@ -1625,12 +1627,12 @@ class Enemy {
         ],
     });
     enemy_templates["出芽黄茸茸"] = new Enemy({
-        name: "出芽黄茸茸", 
-        description: "血脉高贵的黄色茸茸，一旦出芽就意味着进入大地级。当然，99.8%暴毙的黄茸茸不会对此有意见的。", 
+        name: "Budding Yellow Fluffy",
+        description: "A noble-blooded Yellow Fluffy - sprouting a bud means entering Earth Rank. Of course, the 99.8% of Yellow Fluffies who died won't have any complaints about that.",
         xp_value: 233, 
         rank: 1413,
         image: "image/enemy/E1413.png",
-        realm: "<span class=realm_terra><b>大地级一阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [0],
         tags: [],
@@ -1644,12 +1646,12 @@ class Enemy {
         ],
     });
     enemy_templates["大地级卫戍"] = new Enemy({
-        name: "大地级卫戍", 
-        description: "我本是此地的叹息之墙，直到纱雪发现def里面多加了个0..", 
+        name: "Earth Rank Garrison",
+        description: "I was once the Wall of Sighs here, until Sayuki discovered that an extra 0 had been added to the def value..",
         xp_value: 377, 
         rank: 1414,
         image: "image/enemy/E1414.png",
-        realm: "<span class=realm_terra><b>大地级二阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1663,12 +1665,12 @@ class Enemy {
     });
     //1-5
     enemy_templates["地宫看门人"] = new Enemy({
-        name: "地宫看门人", 
-        description: "现在你逃不掉了..不过它也没那么强了！", 
+        name: "Dungeon Gatekeeper",
+        description: "You can't escape now.. but it isn't that strong anymore!",
         xp_value: 987, 
         rank: 1501,
         image: "image/enemy/E1501.png",
-        realm: "<span class=realm_terra><b>大地级三阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1682,12 +1684,12 @@ class Enemy {
         ],
     });
     enemy_templates["行走树妖"] = new Enemy({
-        name: "行走树妖", 
-        description: "飓风的机制，使它并不比BOSS级的那只好对付多少...", 
+        name: "Walking Tree Fiend",
+        description: "The hurricane mechanic makes it not much easier to deal with than the Boss version...",
         xp_value: 377, 
         rank: 1502,
         image: "image/enemy/E1502.png",
-        realm: "<span class=realm_terra><b>大地级二阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2</b></span>",
         size: "small",
         spec: [16],
         tags: [],
@@ -1700,12 +1702,12 @@ class Enemy {
         ],
     });
     enemy_templates["深邃之影"] = new Enemy({
-        name: "深邃之影", 
-        description: "浅层的精英荒兽，在核心处已经多到泛滥", 
+        name: "Abyssal Shadow",
+        description: "An Elite Wild Beast from the upper layers, overflowing in abundance at the core",
         xp_value: 377, 
         rank: 1503,
         image: "image/enemy/E1503.png",
-        realm: "<span class=realm_terra><b>大地级二阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2</b></span>",
         size: "small",
         spec: [17],
         tags: [],
@@ -1718,12 +1720,12 @@ class Enemy {
         ],
     });
     enemy_templates["抽丝鬼"] = new Enemy({
-        name: "抽丝鬼", 
-        description: "地宫的进化鬼魂。和所有鬼系魔物一样，它的身体脆弱，攻击强悍。", 
+        name: "Silk-Drawing Ghost",
+        description: "An evolved ghost from the Dungeon. Like all ghost-type Magical Creatures, its body is fragile but its attacks are devastating.",
         xp_value: 377, 
         rank: 1504,
         image: "image/enemy/E1504.png",
-        realm: "<span class=realm_terra><b>大地级二阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2</b></span>",
         size: "small",
         spec: [6,7],
         tags: [],
@@ -1736,12 +1738,12 @@ class Enemy {
         ],
     });
     enemy_templates["燕岗堕落狩士"] = new Enemy({
-        name: "燕岗堕落狩士", 
-        description: "陷入癫狂的大地级狩士。他变强了，但代价呢？", 
+        name: "Yangang Fallen Hunter",
+        description: "An Earth Rank hunter who has fallen into madness. He became stronger, but at what cost?",
         xp_value: 377, 
         rank: 1505,
         image: "image/enemy/E1505.png",
-        realm: "<span class=realm_terra><b>大地级二阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1754,12 +1756,12 @@ class Enemy {
         ],
     });
     enemy_templates["二极蝠"] = new Enemy({
-        name: "二极蝠", 
-        description: "将冰与炎融于一身，拥有了同调的力量。至少它不会偷敏捷...", 
+        name: "Bipolar Bat",
+        description: "Fusing ice and flame within itself, it has gained synchronized power. At least it doesn't steal agility...",
         xp_value: 610, 
         rank: 1506,
         image: "image/enemy/E1506.png",
-        realm: "<span class=realm_terra><b>大地级二阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2 +</b></span>",
         size: "small",
         spec: [19],
         tags: [],
@@ -1773,12 +1775,12 @@ class Enemy {
         ],
     });
     enemy_templates["凶戾骨将"] = new Enemy({
-        name: "凶戾骨将", 
-        description: "当当，攻击检测点！探险者亡魂的BUG绝不会再次上演~", 
+        name: "Ferocious Bone General",
+        description: "Hey hey, attack check point! The Explorer's Vengeful Spirit bug will never happen again~",
         xp_value: 987, 
         rank: 1507,
         image: "image/enemy/E1507.png",
-        realm: "<span class=realm_terra><b>大地级三阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3</b></span>",
         size: "small",
         spec: [12],
         tags: [],
@@ -1792,12 +1794,12 @@ class Enemy {
         ],
     });
     enemy_templates["武装绿毛茸茸"] = new Enemy({
-        name: "武装绿毛茸茸", 
-        description: "作为更高等的茸茸，它们需要到三阶才能凝聚芽。不过，它偷来的地宫金属不错！", 
+        name: "Armed Green Fluffy",
+        description: "As a higher-tier Fluffy, it needs to reach the third stage before it can form a bud. However, the Dungeon metal it stole is quite good!",
         xp_value: 610, 
         rank: 1508,
         image: "image/enemy/E1508.png",
-        realm: "<span class=realm_terra><b>大地级二阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1811,12 +1813,12 @@ class Enemy {
         ],
     });
     enemy_templates["二阶荒兽"] = new Enemy({
-        name: "二阶荒兽", 
-        description: "终于——地宫里出现可以吃的荒兽啦！天剑在它3400的孱弱攻击下不值一提。", 
+        name: "Stage Two Wild Beast",
+        description: "At last - an edible Wild Beast appears in the Dungeon! The Heaven Sword is nothing against its paltry 3400 attack.",
         xp_value: 610, 
         rank: 1509,
         image: "image/enemy/E1509.png",
-        realm: "<span class=realm_terra><b>大地级二阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2 +</b></span>",
         size: "small",
         spec: [20],
         tags: [],
@@ -1830,12 +1832,12 @@ class Enemy {
         ],
     });
     enemy_templates["地下岩火"] = new Enemy({
-        name: "地下岩火", 
-        description: "它怎么没有时封？被前面的三阶骷髅抢走了吗？", 
+        name: "Underground Magma Flame",
+        description: "How come it doesn't have Time Seal? Did the Stage Three Skeleton snatch it away?",
         xp_value: 610, 
         rank: 1510,
         image: "image/enemy/E1510.png",
-        realm: "<span class=realm_terra><b>大地级二阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1848,12 +1850,12 @@ class Enemy {
         ],
     });
     enemy_templates["初级魔法师"] = new Enemy({
-        name: "初级魔法师", 
-        description: "学什么不好，学牵制..你猜为什么它被卡在初级了呢？", 
+        name: "Novice Mage",
+        description: "Of all things to learn, it learned restraint.. Can you guess why it got stuck at Novice level?",
         xp_value: 610, 
         rank: 1511,
         image: "image/enemy/E1511.png",
-        realm: "<span class=realm_terra><b>大地级二阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2 +</b></span>",
         size: "small",
         spec: [0,5],
         tags: [],
@@ -1866,12 +1868,12 @@ class Enemy {
         ],
     });
     enemy_templates["喵咕哩"] = new Enemy({
-        name: "喵咕哩", 
-        description: "~真·神·降·临~ 数值与机制并存，灵体追你到RPG来喽！", 
+        name: "Miaoguli",
+        description: "~True God Descends~ Stats and mechanics combined - the spirit body has chased you all the way to this RPG!",
         xp_value: 1587, 
         rank: 1512,
         image: "image/enemy/E1512.png",
-        realm: "<span class=realm_terra><b>大地级三阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3 +</b></span>",
         size: "small",
         spec: [21],
         spec_value:{21:8000},
@@ -1885,12 +1887,12 @@ class Enemy {
         ],
     });
     enemy_templates["颂歌符文"] = new Enemy({
-        name: "颂歌符文", 
-        description: "它看起来明明那么像一只光环怪的说...居然没有嘛。", 
+        name: "Anthem Rune",
+        description: "It really looks just like an aura monster... yet turns out it isn't.",
         xp_value: 610, 
         rank: 1513,
         image: "image/enemy/E1513.png",
-        realm: "<span class=realm_terra><b>大地级二阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2 +</b></span>",
         size: "small",
         spec: [22],
         tags: [],
@@ -1903,12 +1905,12 @@ class Enemy {
         ],
     });
     enemy_templates["地宫执法者"] = new Enemy({
-        name: "地宫执法者", 
-        description: "似乎是地宫主人留下的造物，但狂暴的气息使它已经只懂得杀戮", 
+        name: "Dungeon Enforcer",
+        description: "Seemingly a construct left behind by the Dungeon's master, but its frenzied aura has left it knowing only slaughter",
         xp_value: 987, 
         rank: 1514,
         image: "image/enemy/E1514.png",
-        realm: "<span class=realm_terra><b>大地级三阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3</b></span>",
         size: "small",
         spec: [0,23],
         tags: [],
@@ -1921,12 +1923,12 @@ class Enemy {
         ],
     });
     enemy_templates["出芽绿茸茸"] = new Enemy({
-        name: "出芽绿茸茸", 
-        description: "天赋秘法·三连击！不过，催动秘法似乎消耗了它的生命力..", 
+        name: "Budding Green Fluffy",
+        description: "Natural secret art: Triple Strike! However, activating the secret art seems to drain its life force..",
         xp_value: 987, 
         rank: 1515,
         image: "image/enemy/E1515.png",
-        realm: "<span class=realm_terra><b>大地级三阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3</b></span>",
         size: "small",
         spec: [6],
         tags: [],
@@ -1940,12 +1942,12 @@ class Enemy {
         ],
     });
     enemy_templates["巨型蜘蛛"] = new Enemy({
-        name: "巨型蜘蛛", 
-        description: "只有两条腿的力量较大，因此只能进行二连击。掉落的凝胶是蜘蛛丝制成的。", 
+        name: "Giant Spider",
+        description: "Only two of its legs are strong enough, so it can only do a double strike. The gel it drops is made from spider silk.",
         xp_value: 987, 
         rank: 1516,
         image: "image/enemy/E1516.png",
-        realm: "<span class=realm_terra><b>大地级三阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3</b></span>",
         size: "small",
         spec: [3],
         tags: [],
@@ -1958,12 +1960,12 @@ class Enemy {
         ],
     });
     enemy_templates["地穴飞鸟"] = new Enemy({
-        name: "地穴飞鸟", 
-        description: "因为寻路系统坏掉了，在地宫不断飞来飞去的巨鸟。", 
+        name: "Cave Flying Bird",
+        description: "A giant bird that endlessly flies around the Dungeon because its pathfinding system broke down.",
         xp_value: 987, 
         rank: 1517,
         image: "image/enemy/E1517.png",
-        realm: "<span class=realm_terra><b>大地级三阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -1978,12 +1980,12 @@ class Enemy {
         ],
     });
     enemy_templates["小势力探险者"] = new Enemy({
-        name: "小势力探险者", 
-        description: "他穷得买不起恢复品。幸好有祖传秘法，可以吸取敌人的力量作为生命力。", 
+        name: "Minor Faction Adventurer",
+        description: "He's too poor to buy recovery items. Fortunately, he has an ancestral secret technique that lets him drain an enemy's power as life force.",
         xp_value: 1597, 
         rank: 1518,
         image: "image/enemy/E1518.png",
-        realm: "<span class=realm_terra><b>大地级三阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3 +</b></span>",
         size: "small",
         spec: [24,25],
         tags: [],
@@ -1996,12 +1998,12 @@ class Enemy {
         ],
     });
     enemy_templates["踏地荒兽"] = new Enemy({
-        name: "踏地荒兽", 
-        description: "超大只！超好吃！喵可都馋哭了！", 
+        name: "Earth-Treading Wild Beast",
+        description: "Enormous! Delicious! Even Neko is drooling!",
         xp_value: 1597, 
         rank: 1519,
         image: "image/enemy/E1519.png",
-        realm: "<span class=realm_terra><b>大地级三阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2015,12 +2017,12 @@ class Enemy {
         ],
     });
     enemy_templates["扭曲菇菇"] = new Enemy({
-        name: "扭曲菇菇", 
-        description: "红伞伞~白杆杆~吃完一起躺板板~不对啊，它也不是红的..", 
+        name: "Twisted Mushroom",
+        description: "Red cap~ white stalk~ eat it and lie down together~ Wait, it's not even red..",
         xp_value: 1597, 
         rank: 1520,
         image: "image/enemy/E1520.png",
-        realm: "<span class=realm_terra><b>大地级三阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3 +</b></span>",
         size: "small",
         spec: [26],
         tags: [],
@@ -2034,12 +2036,12 @@ class Enemy {
         ],
     });
     enemy_templates["温热飞蛾"] = new Enemy({
-        name: "温热飞蛾", 
-        description: "似乎是荧光飞蛾的超进化形态。它已经热得冒出红光了！", 
+        name: "Warm Moth",
+        description: "Appears to be a super-evolved form of the Glowing Moth. It's so hot it's glowing red!",
         xp_value: 1597, 
         rank: 1521,
         image: "image/enemy/E1521.png",
-        realm: "<span class=realm_terra><b>大地级三阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3 +</b></span>",
         size: "small",
         spec: [22,27],
         tags: [],
@@ -2052,12 +2054,12 @@ class Enemy {
         ],
     });
     enemy_templates["苍白之触"] = new Enemy({
-        name: "苍白之触", 
-        description: "它吸收了许多荒兽和冒险者的精华..结果所有的属性都冲突了，技能全没了。", 
+        name: "Pallid Touch",
+        description: "It absorbed the essence of many wild beasts and adventurers... but all those attributes clashed, and it lost every skill.",
         xp_value: 1597, 
         rank: 1522,
         image: "image/enemy/E1522.png",
-        realm: "<span class=realm_terra><b>大地级三阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2071,12 +2073,12 @@ class Enemy {
         ],
     });
     enemy_templates["燕岗城守卫"] = new Enemy({
-        name: "燕岗城守卫", 
-        description: "坚固，还血厚。看起来好像很强..但是坚固怕姐姐！", 
+        name: "Yangang City Guard",
+        description: "Tough, and packs a lot of health. Looks pretty powerful... but toughness fears the elder sister!",
         xp_value: 2584, 
         rank: 1523,
         image: "image/enemy/E1523.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [1],
         tags: [],
@@ -2090,12 +2092,12 @@ class Enemy {
 
     // 第二幕！！！
     enemy_templates["灵能菇菇"] = new Enemy({
-        name: "灵能菇菇", 
-        description: "惯用衰弱伎俩的蘑菇系荒兽。效果还不错！", 
+        name: "Psionic Mushroom",
+        description: "A mushroom-type wild beast that habitually uses weakening tricks. Works pretty well!",
         xp_value: 2584, 
         rank: 2101,
         image: "image/enemy/E2101.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [8],
         spec_value:{8:10},
@@ -2109,12 +2111,12 @@ class Enemy {
         ],
     });
     enemy_templates["妖灵飞蛾"] = new Enemy({
-        name: "妖灵飞蛾", 
-        description: "荒兽森林的浅绿色飞蛾。与普遍的看法相反，绿色不代表有毒。", 
+        name: "Specter Moth",
+        description: "A light green moth from the Wild Beast Forest. Contrary to popular belief, green does not mean poisonous.",
         xp_value: 2584, 
         rank: 2102,
         image: "image/enemy/E2102.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2128,12 +2130,12 @@ class Enemy {
         ],
     });
     enemy_templates["飞叶级魔法师"] = new Enemy({
-        name: "飞叶级魔法师", 
-        description: "挣脱了牵制的束缚，强大了一倍有余的初级魔法师。", 
+        name: "Soaring Leaf Rank Mage",
+        description: "A Novice Mage that broke free of all restraints and became more than twice as powerful.",
         xp_value: 2584, 
         rank: 2103,
         image: "image/enemy/E2103.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [0],
         tags: [],
@@ -2146,12 +2148,12 @@ class Enemy {
         ],
     });
     enemy_templates["血洛箭手"] = new Enemy({
-        name: "血洛箭手", 
-        description: "虽然箭的伤害有点不够看，但它的近战也太强了啦...", 
+        name: "Xuelo Archer",
+        description: "The damage from its arrows is a bit underwhelming, but its melee is way too strong...",
         xp_value: 2584, 
         rank: 2104,
         image: "image/enemy/E2104.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [29],
         spec_value:{29:1000},
@@ -2165,12 +2167,12 @@ class Enemy {
         ],
     });
     enemy_templates["有角一族"] = new Enemy({
-        name: "有角一族", 
-        description: "似乎比附近其他荒兽强大许多的荒兽。撞角让它可以打出两段伤害！", 
+        name: "Horned Tribe",
+        description: "A wild beast that seems far stronger than the others nearby. Its charging horns let it deal damage in two hits!",
         xp_value: 4181, 
         rank: 2105,
         image: "image/enemy/E2105.png",
-        realm: "<span class=realm_terra><b>大地级四阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4 +</b></span>",
         size: "small",
         spec: [10],
         tags: [],
@@ -2184,12 +2186,12 @@ class Enemy {
         ],
     });
     enemy_templates["噬血术傀儡"] = new Enemy({
-        name: "噬血术傀儡", 
-        description: "还在蒸！地宫养殖者他还在蒸！(注:普攻倍率会对坚固敌人造成额外伤害)", 
+        name: "Blood-Devouring Golem",
+        description: "Still steaming! The Dungeon Rancher is still steaming! (Note: basic attack multipliers deal extra damage to armored enemies)",
         xp_value: 2584, 
         rank: 2106,
         image: "image/enemy/E2106.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [1],
         tags: [],
@@ -2201,12 +2203,12 @@ class Enemy {
         ],
     });
     enemy_templates["司雍世界行者"] = new Enemy({
-        name: "司雍世界行者", 
-        description: "出乎意料地，其他领的人都跑来荒兽森林历练了。真是受欢迎的地方呢。", 
+        name: "Siyong World Wanderer",
+        description: "Surprisingly, people from other domains have also come to the Wild Beast Forest for training. What a popular place.",
         xp_value: 2584, 
         rank: 2107,
         image: "image/enemy/E2107.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2220,12 +2222,12 @@ class Enemy {
         ],
     });
     enemy_templates["密林大鸟"] = new Enemy({
-        name: "密林大鸟", 
-        description: "从地宫钻出来之后，又有进化的地穴飞鸟。寻路系统已经被修好了！", 
+        name: "Deep Forest Giant Bird",
+        description: "A Cave Flying Bird that evolved after crawling out of the Dungeon. The pathfinding system has been repaired!",
         xp_value: 2584, 
         rank: 2108,
         image: "image/enemy/E2108.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [6],
         tags: [],
@@ -2239,12 +2241,12 @@ class Enemy {
         ],
     });
     enemy_templates["地龙幼崽"] = new Enemy({
-        name: "地龙幼崽", 
-        description: "血脉纯度较高的地龙幼崽。燕岗城里面那一只和它比最多算一条大蛇！", 
+        name: "Earth Dragon Hatchling",
+        description: "An Earth Dragon hatchling with fairly pure bloodline. Compared to this one, the one inside Yangang City is at best a big snake!",
         xp_value: 2584, 
         rank: 2109,
         image: "image/enemy/E2109.png",
-        realm: "<span class=realm_terra><b>大地级四阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2257,12 +2259,12 @@ class Enemy {
         ],
     });
     enemy_templates["人立茸茸"] = new Enemy({
-        name: "人立茸茸", 
-        description: "出芽绿茸茸的进化路线止步于大地级三阶。于是，它毅然决定长出手脚...", 
+        name: "Upright Fluffy",
+        description: "The Budding Green Fluffy's evolution path stalled at the third tier of the Earth Rank. So it resolutely decided to grow arms and legs...",
         xp_value: 4181, 
         rank: 2110,
         image: "image/enemy/E2110.png",
-        realm: "<span class=realm_terra><b>大地级四阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4 +</b></span>",
         size: "small",
         spec: [26],
         tags: [],
@@ -2277,12 +2279,12 @@ class Enemy {
         ],
     });
     enemy_templates["草木蜘蛛"] = new Enemy({
-        name: "草木蜘蛛", 
-        description: "可以在战斗中恢复体力的蜘蛛。去除了回合数翻倍的限制之后，更加难缠。", 
+        name: "Woodland Spider",
+        description: "A spider that can recover health during battle. Without the turn-doubling restriction, it's even more troublesome.",
         xp_value: 4181, 
         rank: 2111,
         image: "image/enemy/E2111.png",
-        realm: "<span class=realm_terra><b>大地级四阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4 +</b></span>",
         size: "small",
         spec: [30,31],
         spec_value: {30:0.5},
@@ -2298,12 +2300,12 @@ class Enemy {
         ],
     });
     enemy_templates["持盾荒兽"] = new Enemy({
-        name: "持盾荒兽", 
-        description: "血洛大陆的荒兽不比地球的怪兽，往往要到天空级才有完整的智慧。这只..或许是变异了？", 
+        name: "Shield-Bearing Wild Beast",
+        description: "Wild beasts on the Xuelo Continent aren't like monsters on Earth — they usually don't gain full intelligence until the Sky Rank. This one... maybe it mutated?",
         xp_value: 4181, 
         rank: 2112,
         image: "image/enemy/E2112.png",
-        realm: "<span class=realm_terra><b>大地级四阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2316,12 +2318,12 @@ class Enemy {
         ],
     });
     enemy_templates["芊叶蝠"] = new Enemy({
-        name: "芊叶蝠", 
-        description: "芊叶-夜芊-千夜...谐音梗已经退环境了！", 
+        name: "Qianye Bat",
+        description: "Qianye - Yqian - Qianye... wordplay jokes are so last season!",
         xp_value: 4181, 
         rank: 2113,
         image: "image/enemy/E2113.png",
-        realm: "<span class=realm_terra><b>大地级四阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2336,12 +2338,12 @@ class Enemy {
         ],
     });
     enemy_templates["深林妖偶"] = new Enemy({
-        name: "深林妖偶", 
-        description: "和地穴飞鸟，初级魔法师同批逃出地宫的妖偶。可悲的是，它仍然抱着牵制不放。", 
+        name: "Deep Forest Puppet",
+        description: "A puppet that escaped the Dungeon in the same batch as the Cave Flying Bird and the Novice Mage. Sadly, it still clings to its restraint ability.",
         xp_value: 4181, 
         rank: 2114,
         image: "image/enemy/E2114.png",
-        realm: "<span class=realm_terra><b>大地级四阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4 +</b></span>",
         size: "small",
         spec: [5],
         tags: [],
@@ -2355,12 +2357,12 @@ class Enemy {
         ],
     });
     enemy_templates["银杖茸茸"] = new Enemy({
-        name: "银杖茸茸", 
-        description: "面对四阶瓶颈，选择修习魔法的茸茸。不过魔法也太弱了！", 
+        name: "Silver Staff Fluffy",
+        description: "A Fluffy that chose to study magic when faced with the fourth-tier bottleneck. But the magic is just way too weak!",
         xp_value: 4181, 
         rank: 2115,
         image: "image/enemy/E2115.png",
-        realm: "<span class=realm_terra><b>大地级四阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 4 +</b></span>",
         size: "small",
         spec: [0],
         tags: [],
@@ -2374,12 +2376,12 @@ class Enemy {
         ],
     });
     enemy_templates["小门派执事"] = new Enemy({
-        name: "小门派执事", 
-        description: "血杀殿的余孽真的清光了吗...这个执事怎么看起来像一只荒兽啊。", 
+        name: "Minor Sect Steward",
+        description: "Were the remnants of the Blood Kill Hall really wiped out...? Why does this steward look like a wild beast?",
         xp_value: 7575, 
         rank: 2116,
         image: "image/enemy/E2116.png",
-        realm: "<span class=realm_terra><b>大地级五阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5</b></span>",
         size: "small",
         spec: [5,7],
         tags: [],
@@ -2394,12 +2396,12 @@ class Enemy {
         ],
     });
     enemy_templates["哥布林战士"] = new Enemy({
-        name: "哥布林战士", 
-        description: "堪称皮糙肉厚的哥布林。如果它不那么容易被打中就更好了。", 
+        name: "Goblin Warrior",
+        description: "A goblin with remarkably thick hide and tough flesh. Would be even better if it weren't so easy to hit.",
         xp_value: 7575, 
         rank: 2117,
         image: "image/enemy/E2117.png",
-        realm: "<span class=realm_terra><b>大地级五阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2413,12 +2415,12 @@ class Enemy {
         ],
     });
     enemy_templates["刺猬精"] = new Enemy({
-        name: "刺猬精", 
-        description: "至少它没有反伤。光是看着都感觉扎手哇。", 
+        name: "Hedgehog Fiend",
+        description: "At least it doesn't have thorns damage. Just looking at it makes your hands feel prickly.",
         xp_value: 7575, 
         rank: 2118,
         image: "image/enemy/E2118.png",
-        realm: "<span class=realm_terra><b>大地级五阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5</b></span>",
         size: "small",
         spec: [20],
         tags: [],
@@ -2431,12 +2433,12 @@ class Enemy {
         ],
     });
     enemy_templates["毒枭蝎"] = new Enemy({
-        name: "毒枭蝎", 
-        description: "一般的玩法应该是用一个镐子绕过它啦...可惜，RPG里镐子不能破坏森林的地形。", 
+        name: "Venom Lord Scorpion",
+        description: "The normal approach would be to use a pickaxe to go around it... unfortunately, a pickaxe can't break forest terrain in an RPG.",
         xp_value: 7575, 
         rank: 2119,
         image: "image/enemy/E2119.png",
-        realm: "<span class=realm_terra><b>大地级五阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5</b></span>",
         size: "small",
         spec: [16,22],
         tags: [],
@@ -2451,12 +2453,12 @@ class Enemy {
     });
 //2-2
     enemy_templates["百家近卫"] = new Enemy({
-        name: "百家近卫", 
-        description: "不死心的百方在江畔留下了大量百家的探子。不过他们无心战斗，月入3000X拼什么命啊。", 
+        name: "Hundred Clans Guard",
+        description: "The relentless Bai Fang left many Hundred Clans spies along the riverside. But they have no will to fight — who risks their life for 3000X a month?",
         xp_value: 7575, 
         rank: 2201,
         image: "image/enemy/E2201.png",
-        realm: "<span class=realm_terra><b>大地级五阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5</b></span>",
         size: "small",
         spec: [3],
         tags: [],
@@ -2469,12 +2471,12 @@ class Enemy {
         ],
     });
     enemy_templates["怨灵船夫"] = new Enemy({
-        name: "怨灵船夫", 
-        description: "别的先不提，你长这样，谁敢来坐你的船啊！", 
+        name: "Wraith Ferryman",
+        description: "Setting everything else aside — looking like that, who would dare get on your boat?!",
         xp_value: 7575, 
         rank: 2202,
         image: "image/enemy/E2202.png",
-        realm: "<span class=realm_terra><b>大地级五阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5</b></span>",
         size: "small",
         spec: [19],
         tags: [],
@@ -2487,12 +2489,12 @@ class Enemy {
         ],
     });
     enemy_templates["旱魃龟"] = new Enemy({
-        name: "旱魃龟", 
-        description: "某一条世界线中，它钻进了地宫浅层，和微花灵阵狼狈为奸，让喵可苦不堪言。幸好，在这里它只是老老实实地待在江边。", 
+        name: "Drought Demon Turtle",
+        description: "In one timeline, it burrowed into the upper Dungeon and conspired with the Floral Spirit Array, making Neko's life miserable. Fortunately, here it simply stays put beside the river.",
         xp_value: 7575, 
         rank: 2203,
         image: "image/enemy/E2203.png",
-        realm: "<span class=realm_terra><b>大地级五阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5</b></span>",
         size: "small",
         spec: [1],
         tags: [],
@@ -2506,12 +2508,12 @@ class Enemy {
         ],
     });
     enemy_templates["复苏骸骨"] = new Enemy({
-        name: "复苏骸骨", 
-        description: "聚灵~聚魂~缠绕~复苏。血洛大陆的能量过于充沛，连骨头都能成为强者了！", 
+        name: "Revived Skeleton",
+        description: "Spirit-Gathering~ Soul-Gathering~ Entwined~ Revived. The Xuelo Continent has so much ambient energy, even bones can become powerful!",
         xp_value: 10496, 
         rank: 2204,
         image: "image/enemy/E2204.png",
-        realm: "<span class=realm_terra><b>大地级五阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5 +</b></span>",
         size: "small",
         spec: [24,25],
         tags: [],
@@ -2525,12 +2527,12 @@ class Enemy {
         ],
     });
     enemy_templates["旅行魔术师"] = new Enemy({
-        name: "旅行魔术师", 
-        description: "四处卖艺可比在地宫除草赚钱多了！有天剑用，谁还要斩阵这种屑技能啊。", 
+        name: "Traveling Magician",
+        description: "Performing shows everywhere pays far better than weeding in the Dungeon! With a heavenly sword, who needs a lousy skill like Formation Slash?",
         xp_value: 10496, 
         rank: 2205,
         image: "image/enemy/E2205.png",
-        realm: "<span class=realm_terra><b>大地级五阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5 +</b></span>",
         size: "small",
         spec: [20],
         tags: [],
@@ -2544,12 +2546,12 @@ class Enemy {
         ],
     });
     enemy_templates["水溶茸茸"] = new Enemy({
-        name: "水溶茸茸", 
-        description: "似乎走错了路的光环系茸茸。增幅效果只有灵蔓茸茸的一半，唯一的特点在于可以潜伏在水中，难以抓到。", 
+        name: "Water-Dissolving Fluffy",
+        description: "An aura-type Fluffy that seems to have taken a wrong turn. Its buff effect is only half that of the Spirit Vine Fluffy. Its only distinguishing feature is that it can lurk in water, making it hard to catch.",
         xp_value: 10496, 
         rank: 2206,
         image: "image/enemy/E2206.png",
-        realm: "<span class=realm_terra><b>大地级五阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5 +</b></span>",
         size: "small",
         spec: [11],
         tags: [],
@@ -2562,12 +2564,12 @@ class Enemy {
         ],
     });
     enemy_templates["飞龙幼崽"] = new Enemy({
-        name: "飞龙幼崽", 
-        description: "和地龙幼崽相比多出了在空中吐火的能力。天空级之前，飞行就是绝对实力的象征！", 
+        name: "Wyvern Hatchling",
+        description: "Compared to the Earth Dragon Hatchling, it additionally has the ability to breathe fire in the air. Before the Sky Rank, flight is the ultimate symbol of power!",
         xp_value: 10496, 
         rank: 2207,
         image: "image/enemy/E2207.png",
-        realm: "<span class=realm_terra><b>大地级五阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5 +</b></span>",
         size: "small",
         spec: [22],
         tags: [],
@@ -2581,12 +2583,12 @@ class Enemy {
         ],
     });
     enemy_templates["鲜红八爪鱼"] = new Enemy({
-        name: "鲜红八爪鱼", 
-        description: "为什么陆地上会有八爪鱼...爬上来之后行动笨拙，无法连击，速度也不快。还是老老实实回江里叭。", 
+        name: "Crimson Octopus",
+        description: "Why is there an octopus on land... After crawling up, its movements are clumsy, it can't combo, and it's not fast either. Best to go back to the river.",
         xp_value: 10496, 
         rank: 2208,
         image: "image/enemy/E2208.png",
-        realm: "<span class=realm_terra><b>大地级五阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2600,12 +2602,12 @@ class Enemy {
         ],
     });
     enemy_templates["商船水手"] = new Enemy({
-        name: "商船水手", 
-        description: "江边的老水手都拥有一些底牌。诸葛连弩，出来...虽然只有三发就是了啦。", 
+        name: "Merchant Ship Sailor",
+        description: "Every seasoned sailor by the river has a few tricks up their sleeve. Zhuge Repeating Crossbow, engage... though it only fires three bolts.",
         xp_value: 10496, 
         rank: 2209,
         image: "image/enemy/E2209.png",
-        realm: "<span class=realm_terra><b>大地级五阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5 +</b></span>",
         size: "small",
         spec: [4],
         tags: [],
@@ -2619,12 +2621,12 @@ class Enemy {
         ],
     });
     enemy_templates["深水恐怖"] = new Enemy({
-        name: "深水恐怖", 
-        description: "不好！是大惑幻！快吃水心盾！...哦，不是那一只啊。区区10000领域~", 
+        name: "Deep Water Terror",
+        description: "Oh no! It's the Grand Illusion! Quick, use the Aqua Heart Shield!... Oh, it's not that one. Just a measly 10000 Domain~",
         xp_value: 10496, 
         rank: 2210,
         image: "image/enemy/E2210.png",
-        realm: "<span class=realm_terra><b>大地级五阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5 +</b></span>",
         size: "small",
         spec: [35],
         spec_value:{35:10000},
@@ -2639,12 +2641,12 @@ class Enemy {
         ],
     });
     enemy_templates["礁石灵"] = new Enemy({
-        name: "礁石灵", 
-        description: "太邪恶了，坚固敌人居然有基础防御...为此，0.1%魔攻被移除了！", 
+        name: "Reef Spirit",
+        description: "So evil — an armored enemy with base defense... For that reason, the 0.1% magic attack was removed!",
         xp_value: 17711, 
         rank: 2211,
         image: "image/enemy/E2211.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [1],
         tags: [],
@@ -2658,12 +2660,12 @@ class Enemy {
         ],
     });
     enemy_templates["火烧云"] = new Enemy({
-        name: "火烧云", 
-        description: "不怀好意笑着的云朵魔物。它的攻击能力令人震惊。", 
+        name: "Burning Cloud",
+        description: "A cloud-type monster that grins with malicious intent. Its attack capability is astonishing.",
         xp_value: 17711, 
         rank: 2212,
         image: "image/enemy/E2212.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [33],
         spec_value:{33:6},
@@ -2678,13 +2680,13 @@ class Enemy {
             //应为1.6Z
         ],
     });
-    enemy_templates["行脚商人"] = new Enemy({
-        name: "行脚商人", 
-        description: "似乎是之前那些水手的头头。他在这附近还开了一家店...可以去看看~", 
+    enemy_templates["Traveling Merchant"] = new Enemy({
+        name: "Traveling Merchant",
+        description: "Seems to be the leader of those sailors from before. He's also opened a shop nearby... worth a visit~",
         xp_value: 17711, 
         rank: 2213,
         image: "image/enemy/E2213.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2698,12 +2700,12 @@ class Enemy {
         ],
     });
     enemy_templates["马里奥菇菇"] = new Enemy({
-        name: "马里奥菇菇", 
-        description: "看起来没有前面几只强嘛...等会？夺少衰弱？", 
+        name: "Mario Mushroom",
+        description: "Doesn't look as strong as the ones before... wait a moment? How much debuff does it stack?",
         xp_value: 17711, 
         rank: 2214,
         image: "image/enemy/E2214.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [8],
         spec_value:{8:50},
@@ -2717,12 +2719,12 @@ class Enemy {
         ],
     });
     enemy_templates["清野江盗匪"] = new Enemy({
-        name: "清野江盗匪", 
-        description: "在长期的欺凌弱小之下，它的实力变得远不如同级的荒兽,魔物或人类。但是，欺负欺负五阶水手还是可以的。", 
+        name: "Qingye River Bandit",
+        description: "Years of picking on the weak have left it far less powerful than wild beasts, monsters, or humans of the same rank. Still, it can push around fifth-tier sailors.",
         xp_value: 17711, 
         rank: 2215,
         image: "image/enemy/E2215.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [26],
         tags: [],
@@ -2736,12 +2738,12 @@ class Enemy {
         ],
     });
     enemy_templates["极冰火"] = new Enemy({
-        name: "极冰火", 
-        description: "似乎逆用了自爆魔法的魔物。如果血量交换比甚至超过4:1，自爆后留下的一滴血不失为搜刮战利品的方法。", 
+        name: "Extreme Ice Flame",
+        description: "A monster that appears to have inverted a self-destruct spell. If the HP exchange ratio exceeds 4:1, the single HP left after self-destruction is not a bad way to scavenge loot.",
         xp_value: 17711, 
         rank: 2216,
         image: "image/enemy/E2216.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [36],
         tags: [],
@@ -2755,12 +2757,12 @@ class Enemy {
         ],
     });
     enemy_templates["清野江窃贼"] = new Enemy({
-        name: "清野江窃贼", 
-        description: "他偷的船可比盗匪抢的船贵多了。在长期的努力下，他练就了一身敏捷的身法！", 
+        name: "Qingye River Thief",
+        description: "The ships he steals are worth far more than the ones bandits rob. Through years of practice, he has honed an incredibly agile fighting style!",
         xp_value: 17711, 
         rank: 2217,
         image: "image/enemy/E2217.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -2777,12 +2779,12 @@ class Enemy {
     //2-3
     
     enemy_templates["大门派杂役"] = new Enemy({
-        name: "大门派杂役", 
-        description: "纳家秘境怎么会对其他的门派开放啊...或许纳家子弟不够探索这么大的秘境？", 
+        name: "Major Sect Handyman",
+        description: "Why would the Na Family's secret realm be open to other sects... Perhaps the Na Family disciples aren't enough to explore such a vast realm?",
         xp_value: 17711, 
         rank: 2301,
         image: "image/enemy/E2301.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [32,6],
         spec_value:{},
@@ -2797,12 +2799,12 @@ class Enemy {
         ],
     });
     enemy_templates["燕岗高等散修"] = new Enemy({
-        name: "燕岗高等散修", 
-        description: "连散修都来了！看来秘境开放是某种半年一遇的盛事...", 
+        name: "Yangang High-Rank Rogue Cultivator",
+        description: "Even rogue cultivators showed up! Seems the realm's opening is some kind of once-every-half-year grand event...",
         xp_value: 17711, 
         rank: 2302,
         image: "image/enemy/E2302.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -2816,12 +2818,12 @@ class Enemy {
         ],
     });
     enemy_templates["高歌骸骨"] = new Enemy({
-        name: "高歌骸骨", 
-        description: "复苏之后的下一个骸骨进化阶段。比起双持的莽夫行为，它选择了装备盾牌与盔甲。", 
+        name: "Singing Skeleton",
+        description: "The next evolutionary stage of the skeleton after Revived. Rather than the brute approach of dual-wielding, it chose to equip shield and armor.",
         xp_value: 28657, 
         rank: 2303,
         image: "image/enemy/E2303.png",
-        realm: "<span class=realm_terra><b>大地级六阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -2836,12 +2838,12 @@ class Enemy {
         ],
     });
     enemy_templates["微花灵阵"] = new Enemy({
-        name: "微花灵阵", 
-        description: "秘境内增强荒兽与魔物力量的机关。没有攻击能力，但只有力量达到一定的阈值才能击碎。(或者魔攻)", 
+        name: "Floral Spirit Array",
+        description: "A mechanism inside the secret realm that enhances the power of wild beasts and monsters. It has no attack capability, but can only be shattered once your power reaches a certain threshold. (Or magic attack)",
         xp_value: 28657, 
         rank: 2304,
         image: "image/enemy/E2304.png",
-        realm: "<span class=realm_terra><b>大地级六阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -2855,12 +2857,12 @@ class Enemy {
         ],
     });
      enemy_templates["灵慧石人"] = new Enemy({
-        name: "灵慧石人", 
-        description: "红眼的魔物，拥有反转的能力。血量有点脆，但高防御又弥补了这一点。", 
+        name: "Spirit-Wise Stone Golem",
+        description: "A red-eyed monster with reversal ability. Its HP is a bit fragile, but high defense compensates for that.",
         xp_value: 28657, 
         rank: 2305,
         image: "image/enemy/E2305.png",
-        realm: "<span class=realm_terra><b>大地级六阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6 +</b></span>",
         size: "small",
         spec: [9],
         spec_value:{},
@@ -2875,12 +2877,12 @@ class Enemy {
         ],
     });
     enemy_templates["纳家探宝者"] = new Enemy({
-        name: "纳家探宝者", 
-        description: "可恶，是竞争对手！凭什么别人都是卡着等级的上沿进来的耶...", 
+        name: "Na Family Treasure Hunter",
+        description: "Dang, it's a rival! Why does everyone else get to enter right at the level cap...",
         xp_value: 28657, 
         rank: 2306,
         image: "image/enemy/E2306.png",
-        realm: "<span class=realm_terra><b>大地级六阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6 +</b></span>",
         size: "small",
         spec: [3],
         spec_value:{},
@@ -2895,12 +2897,12 @@ class Enemy {
         ],
     });
     enemy_templates["秘境蝎龙"] = new Enemy({
-        name: "秘境蝎龙", 
-        description: "似乎是毒枭蝎和地龙的杂交产物。那一晚，它们没有喝醉，但等秘境半年开一次再出去实在太难熬了。", 
+        name: "Secret Realm Scorpion Dragon",
+        description: "Appears to be a hybrid of the Venom Lord Scorpion and the Earth Dragon. That night, they weren't drunk — it's just unbearably long to wait half a year for the realm to open again.",
         xp_value: 28657, 
         rank: 2307,
         image: "image/enemy/E2307.png",
-        realm: "<span class=realm_terra><b>大地级六阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -2916,12 +2918,12 @@ class Enemy {
         ],
     });
     enemy_templates["荒兽法兵"] = new Enemy({
-        name: "荒兽法兵", 
-        description: "强大的魔法荒兽。源源不断的生命力搭配散华领悟，使它显得分外难缠。", 
+        name: "Wild Beast Mage Soldier",
+        description: "A powerful magic-wielding wild beast. Its endless vitality combined with Scattered Blossom mastery makes it exceptionally troublesome.",
         xp_value: 28657, 
         rank: 2308,
         image: "image/enemy/E2308.png",
-        realm: "<span class=realm_terra><b>大地级六阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6 +</b></span>",
         size: "small",
         spec: [19,37],
         spec_value:{},
@@ -2935,12 +2937,12 @@ class Enemy {
         ],
     });
     enemy_templates["巨人先锋"] = new Enemy({
-        name: "巨人先锋", 
-        description: "18.5w攻击，20段连击，40%光环...秘境深处注定将会困难重重。", 
+        name: "Giant Vanguard",
+        description: "185,000 attack, 20-hit combo, 40% aura... The depths of the secret realm are destined to be full of hardship.",
         xp_value: 28657, 
         rank: 2309,
         image: "image/enemy/E2309.png",
-        realm: "<span class=realm_terra><b>大地级六阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6 +</b></span>",
         size: "small",
         spec: [16],
         spec_value:{},
@@ -2955,12 +2957,12 @@ class Enemy {
     //2-4
     
     enemy_templates["威武武士"] = new Enemy({
-        name: "威武武士", 
-        description: "吃了防御低的亏而被流放到2-2的悲惨敌人。记得回去拿飞...极品绿宝石！", 
+        name: "Majestic Warrior",
+        description: "A luckless enemy exiled to 2-2 because of its poor defense. Remember to go back for the fly... the Flawless Green Gem!",
         xp_value: 46368,  
         rank: 2401,
         image: "image/enemy/E2401.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -2975,12 +2977,12 @@ class Enemy {
         ],
     });
     enemy_templates["七阶卫戍"] = new Enemy({
-        name: "七阶卫戍", 
-        description: "结界湖的守护者。然而，正如老祖所担心的，探险者们已经一拥而入了。", 
+        name: "Seventh-Tier Garrison",
+        description: "Guardian of the Boundary Lake. However, just as the patriarch feared, adventurers have swarmed in.",
         xp_value: 46368, 
         rank: 2402,
         image: "image/enemy/E2402.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -2994,12 +2996,12 @@ class Enemy {
         ],
     });
     enemy_templates["秘境帕芙之灵"] = new Enemy({
-        name: "秘境帕芙之灵", 
-        description: "结界湖中自然滋生的“灵”。常年积累能量下已经抵达大地级七阶。", 
+        name: "Secret Realm Paf Spirit",
+        description: "A \"Spirit\" that naturally grew within the Boundary Lake. After accumulating energy for years, it has reached the seventh tier of the Earth Rank.",
         xp_value: 46368, 
         rank: 2403,
         image: "image/enemy/E2403.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [0],
         spec_value:{},
@@ -3013,12 +3015,12 @@ class Enemy {
         ],
     });
     enemy_templates["秘境猬精"] = new Enemy({
-        name: "秘境猬精", 
-        description: "捕食“灵”变得晶莹剔透的刺猬精。一路从荒兽森林跑过来真是辛苦它了。", 
+        name: "Secret Realm Hedgehog Fiend",
+        description: "A Hedgehog Fiend that became translucent from preying on Spirits. It ran all the way from the Wild Beast Forest — quite the journey.",
         xp_value: 46368, 
         rank: 2404,
         image: "image/enemy/E2404.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [20],
         spec_value:{},
@@ -3033,12 +3035,12 @@ class Enemy {
         ],
     }); 
     enemy_templates["秘境心火精灵"] = new Enemy({
-        name: "秘境心火精灵", 
-        description: "其实之前那一只是这个族群的最强者。其他都被它丢到结界湖里面流放了...", 
+        name: "Secret Realm Heart Flame Sprite",
+        description: "Actually, the one from before was the strongest of this tribe. All the others were cast into the Boundary Lake as exiles...",
         xp_value: 46368, 
         rank: 2405,
         image: "image/enemy/E2405.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [27,13],
         spec_value:{},
@@ -3053,12 +3055,12 @@ class Enemy {
         ],
     });
     enemy_templates["纳家冰雪亲卫"] = new Enemy({
-        name: "纳家冰雪亲卫", 
-        description: "获取[9]之力量的妖精亲卫。不快点解决的话会有大麻烦。", 
+        name: "Na Family Ice and Snow Royal Guard",
+        description: "A fairy guard that has obtained the power of [9]. If you don't deal with it quickly, there will be big trouble.",
         xp_value: 46368, 
         rank: 2406,
         image: "image/enemy/E2406.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [38],
         spec_value:{},
@@ -3073,12 +3075,12 @@ class Enemy {
         ],
     });
     enemy_templates["有甲有角族"] = new Enemy({
-        name: "有甲有角族", 
-        description: "为什么有角一族和百家护卫也喝醉了...人不能，至少不应该！", 
+        name: "Armored Horned Tribe",
+        description: "Why did the Horned Tribe and the Hundred Clans guards get drunk too... People can't — or at least shouldn't!",
         xp_value: 46368, 
         rank: 2407,
         image: "image/enemy/E2407.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [38],
         spec_value:{},
@@ -3092,12 +3094,12 @@ class Enemy {
         ],
     });
     enemy_templates["水晶傀儡"] = new Enemy({
-        name: "水晶傀儡", 
-        description: "秘境的“灵”附身在岩石上的形态。比礁石更坚硬些许。", 
+        name: "Crystal Golem",
+        description: "A form where the secret realm's \"Spirit\" possesses a rock. Slightly harder than the Reef Spirit.",
         xp_value: 46368, 
         rank: 2408,
         image: "image/enemy/E2408.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [1],
         spec_value:{},
@@ -3111,12 +3113,12 @@ class Enemy {
         ],
     });
     enemy_templates["原力刀客"] = new Enemy({
-        name: "原力刀客", 
-        description: "把普通武器当念力兵器耍绝活的刀客，江湖人称13斧的第14名预备成员。", 
+        name: "Force Swordsman",
+        description: "A swordsman who wields ordinary weapons as if they were psychic weapons. Known in the martial world as the 14th reserve member of the Thirteen Axes.",
         xp_value: 46368, 
         rank: 2409,
         image: "image/enemy/E2409.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [10],
         spec_value:{},
@@ -3130,12 +3132,12 @@ class Enemy {
         ],
     });
      enemy_templates["秘境胖胖鸟"] = new Enemy({
-        name: "秘境胖胖鸟", 
-        description: "学会了牵制真的不能怪它。在附近都是爆攻人的时候，这简直太赚了...", 
+        name: "Secret Realm Chubby Bird",
+        description: "You really can't blame it for learning Restraint. When everyone nearby is a burst-attack player, it's simply too profitable...",
         xp_value: 46368, 
         rank: 2410,
         image: "image/enemy/E2410.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [5],
         spec_value:{},
@@ -3149,12 +3151,12 @@ class Enemy {
         ],
     });
     enemy_templates["人立金茸茸"] = new Enemy({
-        name: "人立金茸茸", 
-        description: "半途转换进化方向的茸茸。这条路的终点是天空级二阶，但秘境的能量已经捉襟见肘了。", 
+        name: "Upright Gold Fluffy",
+        description: "A Fluffy that switched evolution paths halfway through. The end of this road is the second tier of the Sky Rank, but the secret realm's energy is already running thin.",
         xp_value: 46368, 
         rank: 2411,
         image: "image/enemy/E2411.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [26],
         spec_value:{},
@@ -3168,12 +3170,12 @@ class Enemy {
         ],
     });
     enemy_templates["喵咕咕哩"] = new Enemy({
-        name: "喵咕咕哩", 
-        description: "缺乏基础属性，但可以依靠灵体造成成吨伤害的史莱姆变种(也没有那么多吨)", 
+        name: "Miaoguguli",
+        description: "A Slime variant that lacks base stats but can deal tons of damage through its spiritual body. (Not quite that many tons though)",
         xp_value: 75025, 
         rank: 2412,
         image: "image/enemy/E2412.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [21],
         spec_value:{21:360000},
@@ -3188,12 +3190,12 @@ class Enemy {
         ],
     });
     enemy_templates["秘境滋生魔"] = new Enemy({
-        name: "秘境滋生魔", 
-        description: "时封它来了...皮好脆！普攻倍率真是个好东西。", 
+        name: "Secret Realm Proliferation Fiend",
+        description: "The Temporal Seal one has arrived... its hide is so fragile! Basic attack multipliers really are a great thing.",
         xp_value: 75025, 
         rank: 2413,
         image: "image/enemy/E2413.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [12],
         spec_value:{},
@@ -3208,12 +3210,12 @@ class Enemy {
         ],
     });
     enemy_templates["蓝帽行者"] = new Enemy({
-        name: "蓝帽行者", 
-        description: "超级大血牛。即使有牵制也无法限制它逆天的战损。", 
+        name: "Blue Hat Wanderer",
+        description: "A massive HP tank. Even Restraint can't curb its outrageous damage trades.",
         xp_value: 75025, 
         rank: 2414,
         image: "image/enemy/E2414.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [3,5],
         spec_value:{},
@@ -3227,12 +3229,12 @@ class Enemy {
         ],
     });
     enemy_templates["流云级魔法师"] = new Enemy({
-        name: "流云级魔法师", 
-        description: "秘境中的法师。不仅没有学牵制还学了连击，真是到点子上了...", 
+        name: "Drifting Cloud Rank Mage",
+        description: "A mage in the secret realm. Not only did it skip learning Restraint, it learned combo attacks — right on the mark...",
         xp_value: 75025, 
         rank: 2415,
         image: "image/enemy/E2415.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [0,6],
         spec_value:{},
@@ -3246,12 +3248,12 @@ class Enemy {
         ],
     });
     enemy_templates["威武异衣士"] = new Enemy({
-        name: "威武异衣士", 
-        description: "换了一件衣服就这么强了！之前的绿色衣服和黑红盾牌原来这么没用吗...", 
+        name: "Majestic Strange-Robed Warrior",
+        description: "All it took was changing its outfit and it got this strong! So the green clothes and black-red shield from before were really that useless...",
         xp_value: 75025, 
         rank: 2416,
         image: "image/enemy/E2416.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3266,12 +3268,12 @@ class Enemy {
         ],
     });
     enemy_templates["雪魅蝠"] = new Enemy({
-        name: "雪魅蝠", 
-        description: "虽然看起来像是毒属性荒兽，却反直觉地有治愈自己的功能。", 
+        name: "Snow Specter Bat",
+        description: "Despite looking like a poison-type wild beast, it counter-intuitively has the ability to heal itself.",
         xp_value: 75025, 
         rank: 2417,
         image: "image/enemy/E2417.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [31],
         spec_value:{},
@@ -3286,12 +3288,12 @@ class Enemy {
         ],
     });
     enemy_templates["大眼八爪鱼"] = new Enemy({
-        name: "大眼八爪鱼", 
-        description: "防御极高的荒兽。至今为止似乎还没有一只八爪鱼是8连击...或许同时强化八条肢体需要的能量太多了。", 
+        name: "Big-Eyed Octopus",
+        description: "An exceptionally high-defense wild beast. No octopus so far seems to have an 8-hit combo... perhaps simultaneously empowering eight limbs requires too much energy.",
         xp_value: 75025, 
         rank: 2418,
         image: "image/enemy/E2418.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [10],
         spec_value:{},
@@ -3306,12 +3308,12 @@ class Enemy {
         ],
     });
     enemy_templates["废墟猎兵"] = new Enemy({
-        name: "废墟猎兵", 
-        description: "平平无奇的废墟探险者。这里已经卷到非大地级后期不可入内的程度了。", 
+        name: "Ruin Hunter",
+        description: "An ordinary ruins adventurer. The competition here has gotten so fierce that only late-stage Earth Rank cultivators can enter.",
         xp_value: 75025, 
         rank: 2501,
         image: "image/enemy/E2501.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [3],
         spec_value:{},
@@ -3324,12 +3326,12 @@ class Enemy {
         ],
     });
     enemy_templates["废墟菇灵"] = new Enemy({
-        name: "废墟菇灵", 
-        description: "似乎是从圣荒城来的蘑菇。继承了蘑菇一贯的毒魔法的同时居然十分贪财？", 
+        name: "Ruin Mushroom Spirit",
+        description: "Appears to be a mushroom from Shenghuang City. It inherited the mushroom's trademark poison magic, yet it's surprisingly greedy?",
         xp_value: 75025, 
         rank: 2502,
         image: "image/enemy/E2502.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [8,18],
         spec_value:{8:10,18:2e9},
@@ -3343,12 +3345,12 @@ class Enemy {
         ],
     });
     enemy_templates["燕岗城探险者"] = new Enemy({
-        name: "燕岗城探险者", 
-        description: "呦，老乡啊~燕岗城人没有什么特别的弱点。不像圣荒城居民看到钱就走不动路，兰陵城居民痴迷于宝石。", 
+        name: "Yangang City Adventurer",
+        description: "Hey, a fellow local~ Yangang City folk have no particular weakness. Unlike Shenghuang City residents who freeze when they see money, or Lanling City residents obsessed with gems.",
         xp_value: 75025, 
         rank: 2503,
         image: "image/enemy/E2503.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3362,12 +3364,12 @@ class Enemy {
         ],
     });
     enemy_templates["声律城骸骨"] = new Enemy({
-        name: "声律城骸骨", 
-        description: "它的骨头已经炼到[蓝玉]等级了。拿起来就能直接当缠绕水晶用！", 
+        name: "Shenglv City Skeleton",
+        description: "Its bones have been tempered to the [Blue Jade] tier. You could pick them up and use them directly as entwining crystals!",
         xp_value: 121393, 
         rank: 2504,
         image: "image/enemy/E2504.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3382,12 +3384,12 @@ class Enemy {
         ],
     });
     enemy_templates["声律城难民"] = new Enemy({
-        name: "声律城难民", 
-        description: "虽然有不错的机制，但是饿了好几天了，血量已经几乎见底。异界之门也无力发挥。", 
+        name: "Shenglv City Refugee",
+        description: "Has a decent set of mechanics, but has been starving for days and its HP is nearly depleted. The Otherworld Gate can't do much in this state.",
         xp_value: 121393, 
         rank: 2505,
         image: "image/enemy/E2505.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [19,15],
         spec_value:{},
@@ -3400,12 +3402,12 @@ class Enemy {
         ],
     });
     enemy_templates["锈胎人"] = new Enemy({
-        name: "锈胎人", 
-        description: "泪点解析：召唤物不会掉宝石和物品，只有经验。", 
+        name: "Rust Golem",
+        description: "Sad fact: summons don't drop gems or items, only experience.",
         xp_value: 121393, 
         rank: 2506,
         image: "image/enemy/E2506.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [41,33],
         spec_value:{33:4},
@@ -3420,12 +3422,12 @@ class Enemy {
         ],
     });
     enemy_templates["紫锈胎人"] = new Enemy({
-        name: "紫锈胎人", 
-        description: "哎，召唤。怎么会有这种技能的啊...", 
+        name: "Purple Rust Golem",
+        description: "Ugh, a summon. How does something like this even have that skill...",
         xp_value: 121393, 
         rank: 2506.5,
         image: "image/enemy/E2506a.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [33],
         spec_value:{33:4},
@@ -3436,12 +3438,12 @@ class Enemy {
         ],
     });
     enemy_templates["双棱晶体"] = new Enemy({
-        name: "双棱晶体", 
-        description: "怎么看都是二极蝠的翻版。红+绿比红+蓝要更加鲜明呢。", 
+        name: "Dual-Edge Crystal",
+        description: "No matter how you look at it, it's a reskin of the Bipolar Bat. Red + Green is more striking than Red + Blue.",
         xp_value: 121393, 
         rank: 2507,
         image: "image/enemy/E2507.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3455,12 +3457,12 @@ class Enemy {
         ],
     });
     enemy_templates["废墟恐怖"] = new Enemy({
-        name: "废墟恐怖", 
-        description: "总算有个说得过去的领域了。如果攻击仅仅略微超过它的防御，会被反伤巨额伤害...", 
+        name: "Ruin Terror",
+        description: "Finally, a Domain worth mentioning. If your attack only barely exceeds its defense, you'll take massive reflected damage...",
         xp_value: 121393, 
         rank: 2508,
         image: "image/enemy/E2508.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [35],
         spec_value:{35:1000000},
@@ -3475,12 +3477,12 @@ class Enemy {
         ],
     });
     enemy_templates["兰陵城探险者"] = new Enemy({
-        name: "兰陵城探险者", 
-        description: "兰陵城，即蓝零城。鉴于喵可RPG没有蓝钥匙，这个属性被改为根据VP波动了！", 
+        name: "Lanling City Adventurer",
+        description: "Lanling City, also known as Blue Zero City. Since Neko RPG has no blue keys, this attribute was changed to fluctuate based on VP!",
         xp_value: 121393, 
         rank: 2509,
         image: "image/enemy/E2509.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [39],
         spec_value:{39:1500},
@@ -3494,12 +3496,12 @@ class Enemy {
         ],
     });
     enemy_templates["猫茸茸"] = new Enemy({
-        name: "猫茸茸", 
-        description: "与普遍的看法不同，它并没有光环。肯定是灵蔓茸茸和水溶茸茸让人产生了“蓝色茸茸都是光环茸茸”的印象！", 
+        name: "Cat Fluffy",
+        description: "Contrary to popular belief, it has no aura. It must be the Spirit Vine Fluffy and Water-Dissolving Fluffy that gave people the impression that \"all blue Fluffies are aura Fluffies\"!",
         xp_value: 121393, 
         rank: 2510,
         image: "image/enemy/E2510.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [37],
         spec_value:{},
@@ -3513,12 +3515,12 @@ class Enemy {
         ],
     });
     enemy_templates["圣荒城探险者"] = new Enemy({
-        name: "圣荒城探险者", 
-        description: "圣荒城，即省黄城。传说中在那里，即使如昊荒那样的云霄级强者，面对足够的财富仍然毫无反抗之力。", 
+        name: "Shenghuang City Adventurer",
+        description: "Shenghuang City, also known as the Frugal Wealth City. Legends say that even someone as powerful as Hao Huang, a Sky-Soaring Rank powerhouse, is utterly helpless when faced with enough money.",
         xp_value: 121393, 
         rank: 2511,
         image: "image/enemy/E2511.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [18],
         spec_value:{18:4e9},
@@ -3531,12 +3533,12 @@ class Enemy {
         ],
     });
     enemy_templates["远古傀儡"] = new Enemy({
-        name: "远古傀儡", 
-        description: "D9飞船一砸，上个纪元的东西都跑出来了。它的巅峰远不止于此，但现在已经快没电了...只有防御力还较为强悍。", 
+        name: "Ancient Golem",
+        description: "When the D9 ship crashed, relics from the previous era came crawling out. Its peak was far beyond this, but it's nearly out of power now... only its defense remains formidable.",
         xp_value: 121393, 
         rank: 2512,
         image: "image/enemy/E2512.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3549,12 +3551,12 @@ class Enemy {
         ],
     });
     enemy_templates["血洛幽灵"] = new Enemy({
-        name: "血洛幽灵", 
-        description: "似乎是废墟追光者的初形态。在学会【追光】之前，它还只是一只平平无奇的影子荒兽。", 
+        name: "Xuelo Ghost",
+        description: "Appears to be the early form of the Ruin Light Chaser. Before learning [Light Chasing], it was just an ordinary shadow-type wild beast.",
         xp_value: 121393, 
         rank: 2513,
         image: "image/enemy/E2513.png",
-        realm: "<span class=realm_terra><b>大地级八阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3567,12 +3569,12 @@ class Enemy {
         ],
     });
     enemy_templates["废墟飞鸟"] = new Enemy({
-        name: "废墟飞鸟", 
-        description: "认真的嘛...连飞鸟都学会飓风了！特殊属性的数值膨胀可见一斑。", 
+        name: "Ruin Flying Bird",
+        description: "Seriously... even the bird learned Hurricane! The stat inflation of special attributes speaks for itself.",
         xp_value: 196418, 
         rank: 2514,
         image: "image/enemy/E2514.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [16],
         spec_value:{},
@@ -3585,12 +3587,12 @@ class Enemy {
         ],
     });
     enemy_templates["兰陵城小队长"] = new Enemy({
-        name: "兰陵城小队长", 
-        description: "它可能因VP过多无法对你造成伤害，但如果你也打不动它，这份减伤就显得有点没用了。", 
+        name: "Lanling City Squad Leader",
+        description: "It might be unable to damage you due to too much VP, but if you can't damage it either, that damage reduction seems a bit pointless.",
         xp_value: 196418, 
         rank: 2515,
         image: "image/enemy/E2515.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [39],
         spec_value:{39:5000},
@@ -3605,12 +3607,12 @@ class Enemy {
         ],
     });
     enemy_templates["伏地精"] = new Enemy({
-        name: "伏地精", 
-        description: "玻璃大炮型的荒兽。幸好血门不在它的后面...", 
+        name: "Ground Crawler Sprite",
+        description: "A glass cannon-type wild beast. Fortunately, the life gate isn't on its back...",
         xp_value: 196418, 
         rank: 2516,
         image: "image/enemy/E2516.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [7],
         spec_value:{},
@@ -3629,12 +3631,12 @@ class Enemy {
 
 
     enemy_templates["废墟虫卒"] = new Enemy({
-        name: "废墟虫卒", 
-        description: "属(na)性(li)均(dou)衡(cai)的智慧荒兽，城郊战场的杂兵。", 
+        name: "Ruin Bug Soldier",
+        description: "A well-balanced (not really) intelligent wild beast — a grunt on the suburban battlefield.",
         xp_value: 196418, 
         rank: 2601,
         image: "image/enemy/E2601.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3648,12 +3650,12 @@ class Enemy {
         ],
     });
     enemy_templates["战场亡魂"] = new Enemy({
-        name: "战场亡魂", 
-        description: "似乎是13斧成员死后留下的亡魂。绝世已经退环境了...飓风和追光才是主流。", 
+        name: "Battlefield Vengeful Spirit",
+        description: "Appears to be the spirit left behind by a fallen member of the Thirteen Axes. Unrivaled is out of the meta... Hurricane and Light Chasing are the mainstream now.",
         xp_value: 196418, 
         rank: 2602,
         image: "image/enemy/E2602.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [22],
         spec_value:{},
@@ -3667,12 +3669,12 @@ class Enemy {
         ],
     });
     enemy_templates["废墟追风者"] = new Enemy({
-        name: "废墟追风者", 
-        description: "光元素在城外的黑暗战场相当稀少。虽然风元素领悟的效力稍逊一筹，但也只能将就了。", 
+        name: "Ruin Wind Chaser",
+        description: "Light element is quite scarce on the dark battlefield outside the city. The wind element mastery is slightly inferior, but it'll have to do.",
         xp_value: 196418, 
         rank: 2603,
         image: "image/enemy/E2603.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [16],
         spec_value:{},
@@ -3688,12 +3690,12 @@ class Enemy {
     });
     
     enemy_templates["古寒铁石精"] = new Enemy({
-        name: "古寒铁石精", 
-        description: "理论上带精的金属要高一个大等级...但考虑到铁本身不入流，铁精也不会超过A9级就是了。", 
+        name: "Ancient Cold Iron Stone Spirit",
+        description: "In theory, an essence-grade metal is one full rank higher... but considering iron itself is low-tier, Iron Spirit won't surpass the A9 level.",
         xp_value: 196418, 
         rank: 2604,
         image: "image/enemy/E2604.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [1],
         spec_value:{},
@@ -3709,12 +3711,12 @@ class Enemy {
     });
     
     enemy_templates["暗茸茸战士"] = new Enemy({
-        name: "暗茸茸战士", 
-        description: "从血与火中杀出的阴暗茸茸。强大却后继乏力。", 
+        name: "Dark Fluffy Warrior",
+        description: "A Shadow Fluffy that fought its way through blood and fire. Powerful but lacking in staying power.",
         xp_value: 196418, 
         rank: 2605,
         image: "image/enemy/E2605.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3731,12 +3733,12 @@ class Enemy {
 
     
     enemy_templates["魔族潜行者"] = new Enemy({
-        name: "魔族潜行者", 
-        description: "抓到你喽~它出现的概率是其他敌人的两倍。", 
+        name: "Demon Clan Stalker",
+        description: "Gotcha~ It appears twice as often as other enemies.",
         xp_value: 196418, 
         rank: 2606,
         image: "image/enemy/E2606.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3752,12 +3754,12 @@ class Enemy {
     });
 
     enemy_templates["圣荒城骑士"] = new Enemy({
-        name: "圣荒城骑士", 
-        description: "圣荒城人永不臣服！除非包吃包住！", 
+        name: "Shenghuang City Knight",
+        description: "Shenghuang City people never submit! Unless room and board are included!",
         xp_value: 196418, 
         rank: 2607,
         image: "image/enemy/E2607.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [18],
         spec_value:{18:8e9},
@@ -3771,12 +3773,12 @@ class Enemy {
         ],
     });
     enemy_templates["战场凶残暴徒"] = new Enemy({
-        name: "战场凶残暴徒", 
-        description: "与其说它凶残，不如说它靠着绝对防御的战术，抢到宝物之后就一直抓着不放了。", 
+        name: "Battlefield Vicious Brute",
+        description: "Rather than calling it vicious, it relies on an absolute defense tactic — once it grabs a treasure, it refuses to let go.",
         xp_value: 196418, 
         rank: 2608,
         image: "image/enemy/E2608.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3790,12 +3792,12 @@ class Enemy {
         ],
     });
     enemy_templates["战场复苏骸骨"] = new Enemy({
-        name: "战场复苏骸骨", 
-        description: "和之前的骸骨不同，它仅剩下一颗头颅。虽然靠着与蠕虫的共生恢复了行动能力，但外泄的大量气息会引起周围荒兽的狂暴。", 
+        name: "Battlefield Revived Skeleton",
+        description: "Unlike previous skeletons, it has only a skull left. Although it regained mobility through symbiosis with worms, the large amount of aura it leaks enrages the wild beasts around it.",
         xp_value: 196418, 
         rank: 2609,
         image: "image/enemy/E2609.png",
-        realm: "<span class=realm_terra><b>大地级八阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 8 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3810,12 +3812,12 @@ class Enemy {
         ],
     });
     enemy_templates["探险者队长"] = new Enemy({
-        name: "探险者队长", 
-        description: "燕岗城的小队长。没有特殊弱点的同时，拥有强大的阵法领悟。", 
+        name: "Adventurer Captain",
+        description: "A squad leader from Yangang City. Has no special weakness, while possessing powerful formation mastery.",
         xp_value: 317811, 
         rank: 2610,
         image: "image/enemy/E2610.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [42],
         spec_value:{},
@@ -3829,12 +3831,12 @@ class Enemy {
         ],
     });
     enemy_templates["废墟荒兽"] = new Enemy({
-        name: "废墟荒兽", 
-        description: "大地级巅峰的强大荒兽。饿了几天的喵可终于有能吃的东西了——。", 
+        name: "Ruin Wild Beast",
+        description: "A powerful wild beast at the peak of the Earth Rank. Neko, who has been starving for days, finally has something to eat —.",
         xp_value: 317811, 
         rank: 2611,
         image: "image/enemy/E2611.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [3],
         spec_value:{},
@@ -3848,12 +3850,12 @@ class Enemy {
         ],
     });
     enemy_templates["哥布林盾兵"] = new Enemy({
-        name: "哥布林盾兵", 
-        description: "你怎么长得和2-1那只那么像啊。是亲兄弟嘛...盾兵死亡率低一些，所以境界也可以累积的高一些。", 
+        name: "Goblin Shield Soldier",
+        description: "Why do you look just like the one in 2-1? Are you brothers...? Shield soldiers have a lower death rate, so their cultivation can accumulate higher.",
         xp_value: 317811, 
         rank: 2612,
         image: "image/enemy/E2612.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3868,12 +3870,12 @@ class Enemy {
         ],
     });
     enemy_templates["鎏银幽灵"] = new Enemy({
-        name: "鎏银幽灵", 
-        description: "流银护卫...是同种类型的存在呢。战至最后一刻——自刎归天！", 
+        name: "Gilded Silver Ghost",
+        description: "Flowing Silver Guard... a kindred existence. Fight to the last moment — then slit your own throat and ascend!",
         xp_value: 317811, 
         rank: 2613,
         image: "image/enemy/E2613.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [16,36],
         spec_value:{},
@@ -3888,12 +3890,12 @@ class Enemy {
         ],
     });
     enemy_templates["血洛老年修士"] = new Enemy({
-        name: "血洛老年修士", 
-        description: "词头是血洛耶。不会那么老的原因是花了几百年跑过了几个世界...", 
+        name: "Xuelo Elder Cultivator",
+        description: "The prefix is Xuelo, you know. The reason he's not that old is because he spent hundreds of years running across multiple worlds...",
         xp_value: 317811, 
         rank: 2614,
         image: "image/enemy/E2614.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -3908,12 +3910,12 @@ class Enemy {
         ],
     });
     enemy_templates["初级卫兵A9"] = new Enemy({
-        name: "初级卫兵A9", 
-        description: "或许境界更应该叫做行星级九阶?散华不满血，满血不可敌。", 
+        name: "Junior Guard A9",
+        description: "Perhaps the rank should be called Planetary Tier Nine? Scattered Blossom below full HP, unbeatable at full HP.",
         xp_value: 317811, 
         rank: 2701,
         image: "image/enemy/E2701.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [37],
         spec_value:{},
@@ -3928,12 +3930,12 @@ class Enemy {
     });
     
     enemy_templates["领域之械A9"] = new Enemy({
-        name: "领域之械A9", 
-        description: "相当令人讨厌的领域。数值和废墟恐怖一个量级，唯一的好事在于殿堂级宝石升高了血限。", 
+        name: "Domain Mechanism A9",
+        description: "A quite irritating Domain ability. Its stats are in the same tier as the Ruin Terror — the only silver lining is that Hall-tier gems raised the HP cap.",
         xp_value: 317811, 
         rank: 2702,
         image: "image/enemy/E2702.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [35],
         spec_value:{35:5000000},
@@ -3949,12 +3951,12 @@ class Enemy {
 
     
     enemy_templates["荒兽电法兵"] = new Enemy({
-        name: "荒兽电法兵", 
-        description: "至少它失去了散华。秘境的残血·收割机已经一去不复返了.....", 
+        name: "Wild Beast Lightning Mage Soldier",
+        description: "At least it lost Scattered Blossom. The secret realm's low-HP harvester is gone for good.....",
         xp_value: 317811, 
         rank: 2703,
         image: "image/enemy/E2703.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [0],
         spec_value:{},
@@ -3969,12 +3971,12 @@ class Enemy {
     });
     
     enemy_templates["黑桃重工A9"] = new Enemy({
-        name: "黑桃重工A9", 
-        description: "重工系列(1/4).拥有不错的输出和免伤，但生命力有限脆弱。", 
+        name: "Spades Heavy Industry A9",
+        description: "Heavy Industry series (1/4). Has decent damage output and damage reduction, but its vitality is limited and fragile.",
         xp_value: 317811, 
         rank: 2704,
         image: "image/enemy/E2704.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [0,23],
         spec_value:{},
@@ -3990,12 +3992,12 @@ class Enemy {
 
     
     enemy_templates["夹击之械A9"] = new Enemy({
-        name: "夹击之械A9", 
-        description: "鉴于Neko RPG中的攻击是以线列步兵形式进行的...夹击一点用处都没有了！", 
+        name: "Pincer Mechanism A9",
+        description: "Given that attacks in Neko RPG are conducted in linear infantry formation... flanking is utterly useless!",
         xp_value: 514229, 
         rank: 2705,
         image: "image/enemy/E2705.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4011,12 +4013,12 @@ class Enemy {
 
     
     enemy_templates["神权十字A9"] = new Enemy({
-        name: "神权十字A9", 
-        description: "普普通通的重甲步兵。是怎么分裂出两份盔甲的呢？", 
+        name: "Divine Cross A9",
+        description: "A perfectly ordinary heavy armored infantry. How did it split into two sets of armor?",
         xp_value: 514229, 
         rank: 2706,
         image: "image/enemy/E2706.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [26],
         spec_value:{},
@@ -4032,12 +4034,12 @@ class Enemy {
 
     
     enemy_templates["梅花重工A9"] = new Enemy({
-        name: "梅花重工A9", 
-        description: "特长是反转和...牵制。这么点防御力，肯定会是累赘的吧...", 
+        name: "Clubs Heavy Industry A9",
+        description: "Its specialties are Reversal and... Restraint. With that little defense, it must be a liability...",
         xp_value: 514229, 
         rank: 2707,
         image: "image/enemy/E2707.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [9,5],
         spec_value:{},
@@ -4052,12 +4054,12 @@ class Enemy {
     });
 
     enemy_templates["古老符文"] = new Enemy({
-        name: "古老符文", 
-        description: "诶？地宫那个是你的亲戚吗？长得一模一样哇。", 
+        name: "Ancient Rune",
+        description: "Huh? Is the one in the Dungeon your relative? You look exactly the same.",
         xp_value: 514229, 
         rank: 2708,
         image: "image/enemy/E2708.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [9],
         spec_value:{},
@@ -4072,12 +4074,12 @@ class Enemy {
     });
 
     enemy_templates["生命熔炉A9"] = new Enemy({
-        name: "生命熔炉A9", 
-        description: "内鬼来了。-20%区域光环改为-10%全局光环...毕竟区域太难搞了x", 
+        name: "Life Furnace A9",
+        description: "The traitor is here. -20% area aura changed to -10% global aura... since area-based effects were too painful to deal with x",
         xp_value: 514229, 
         rank: 2709,
         image: "image/enemy/E2709.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [29],
         spec_value:{29:4000000},
@@ -4093,12 +4095,12 @@ class Enemy {
 
     
     enemy_templates["高级卫兵B1"] = new Enemy({
-        name: "高级卫兵B1", 
-        description: "飞船内A9和B1级生物整体呈现交错杂居...不好意思走错片场了", 
+        name: "Senior Guard B1",
+        description: "A9 and B1 grade lifeforms inside the ship are generally intermingled... sorry, walked onto the wrong set.",
         xp_value: 1346269, 
         rank: 2710,
         image: "image/enemy/E2710.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [37],
         spec_value:{},
@@ -4113,12 +4115,12 @@ class Enemy {
         ],
     });
     enemy_templates["白银之锋A9"] = new Enemy({
-        name: "白银之锋A9", 
-        description: "“普通”和“全点攻击”是什么呢？", 
+        name: "Silver Edge A9",
+        description: "What are \"ordinary\" and \"all-in attack\" anyway?",
         xp_value: 514229, 
         rank: 2711,
         image: "image/enemy/E2711.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4132,12 +4134,12 @@ class Enemy {
         ],
     });
     enemy_templates["黑铁战士B1"] = new Enemy({
-        name: "黑铁战士B1", 
-        description: "416！416！416！我是超级防杀人！", 
+        name: "Black Iron Warrior B1",
+        description: "416! 416! 416! I am the ultimate defense killer!",
         xp_value: 1346269, 
         rank: 2712,
         image: "image/enemy/E2712.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4153,12 +4155,12 @@ class Enemy {
         ],
     });
     enemy_templates["持盾战士A9"] = new Enemy({
-        name: "持盾战士A9", 
-        description: "再怎么拿盾你也没有那个天空级的家伙强的。说起来，地宫养殖者的60w在这里算什么...", 
+        name: "Shield Warrior A9",
+        description: "No matter how many shields you carry, you'll never be as strong as that Sky Rank guy. Speaking of which, the Dungeon Rancher's 600,000 means nothing here...",
         xp_value: 514229, 
         rank: 2713,
         image: "image/enemy/E2713.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [1],
         spec_value:{},
@@ -4172,12 +4174,12 @@ class Enemy {
         ],
     });
     enemy_templates["血洛游侠"] = new Enemy({
-        name: "血洛游侠", 
-        description: "法师/蝙蝠的双面生物。似乎蝙蝠更强一点耶。", 
+        name: "Xuelo Wandering Hero",
+        description: "A dual-natured creature that is part mage, part bat. The bat side seems a bit stronger.",
         xp_value: 1346269, 
         rank: 2714,
         image: "image/enemy/E2714.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [10],
         spec_value:{},
@@ -4192,12 +4194,12 @@ class Enemy {
     });
     
     enemy_templates["方片重工A9"] = new Enemy({
-        name: "方片重工A9", 
-        description: "重工系列(3/4).两个特殊属性配合的最好的一次，感觉连B1级生物都随便打！", 
+        name: "Diamonds Heavy Industry A9",
+        description: "Heavy Industry series (3/4). The best synergy between two special attributes in the series — feels like it could take on even B1-grade creatures easily!",
         xp_value: 514229, 
         rank: 2715,
         image: "image/enemy/E2715.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [8,40],
         spec_value:{8:10},
@@ -4212,12 +4214,12 @@ class Enemy {
         ],
     });
     enemy_templates["燕岗狂战傀儡"] = new Enemy({
-        name: "燕岗狂战傀儡", 
-        description: "傀儡怎么可以把伤害转化为生命力呢？简直是未解之谜。", 
+        name: "Yangang Berserker Golem",
+        description: "How can a golem convert damage into life force? Truly an unsolved mystery.",
         xp_value: 1346269, 
         rank: 2716,
         image: "image/enemy/E2716.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [7,24],
         spec_value:{},
@@ -4232,12 +4234,12 @@ class Enemy {
     });
     
     enemy_templates["激光炮塔A9"] = new Enemy({
-        name: "激光炮塔A9", 
-        description: "激光不是受击特效，而是攻击特效了！无论普攻中不中，激光都是必中的~", 
+        name: "Laser Turret A9",
+        description: "The laser is not a hit-received effect, but an attack effect! Regardless of whether the normal attack hits or not, the laser always hits~",
         xp_value: 514229, 
         rank: 2717,
         image: "image/enemy/E2717.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [43],
         spec_value:{43:2500000},
@@ -4250,12 +4252,12 @@ class Enemy {
         ],
     });
     enemy_templates["舰船护卫A9"] = new Enemy({
-        name: "舰船护卫A9", 
-        description: "看来百方就是不知道从哪搞来了两只快没电的这种护卫。不过，他那两只还怪有用的，可以打6连击。", 
+        name: "Ship Guard A9",
+        description: "Looks like Bai Fang somehow got his hands on two of these nearly out-of-power guards. His two are actually quite useful though — they can land a 6-hit combo.",
         xp_value: 514229, 
         rank: 2718,
         image: "image/enemy/E2718.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4270,12 +4272,12 @@ class Enemy {
     });
     
     enemy_templates["红桃重工B1"] = new Enemy({
-        name: "红桃重工B1", 
-        description: "重工系列的巅峰之作...哈？时封配饮盾？来搞笑的吗？还不如方片耶。", 
+        name: "Hearts Heavy Industry B1",
+        description: "The pinnacle of the Heavy Industry series... what? Temporal Seal paired with Drink Shield? Are you kidding? Diamonds is still better.",
         xp_value: 1346269, 
         rank: 2719,
         image: "image/enemy/E2719.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [12,25],
         spec_value:{},
@@ -4290,12 +4292,12 @@ class Enemy {
     });
     
     enemy_templates["塔门战甲B1"] = new Enemy({
-        name: "塔门战甲B1", 
-        description: "可以召唤许多舰船除草机。虽然看起来很像送经验的...", 
+        name: "Tower Gate Battle Armor B1",
+        description: "Can summon many Ship Weeders. Though it looks a lot like an XP piñata...",
         xp_value: 1346269, 
         rank: 2801,
         image: "image/enemy/E2801.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [44],
         spec_value:{},
@@ -4310,12 +4312,12 @@ class Enemy {
         ],
     });
     enemy_templates["万象天引B1"] = new Enemy({
-        name: "万象天引B1", 
-        description: "看起来像是某种阿拉丁神灯。不过它可不会满足你的愿望。", 
+        name: "Ten Thousand Phenomena Celestial Lure B1",
+        description: "Looks like some kind of Aladdin's lamp. But it won't be granting your wishes.",
         xp_value: 1346269, 
         rank: 2802,
         image: "image/enemy/E2802.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4330,12 +4332,12 @@ class Enemy {
         ],
     });
      enemy_templates["镭射步兵B1"] = new Enemy({
-        name: "镭射步兵B1", 
-        description: "只要打得中它，就不会被万恶的阻击伤害到。不过，镭射不是激光的意思吗...", 
+        name: "Laser Infantry B1",
+        description: "As long as you can hit it, you won't take damage from the wicked sniper shot. But doesn't \"laser\" mean laser too...",
         xp_value: 1346269, 
         rank: 2803,
         image: "image/enemy/E2803.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [29],
         spec_value:{29:10000000},
@@ -4350,12 +4352,12 @@ class Enemy {
         ],
     });
     enemy_templates["空间三角B1"] = new Enemy({
-        name: "空间三角B1", 
-        description: "其实只是核心的敌人。之所以外面那一只有那么多宝石...占山为王desu。", 
+        name: "Space Triangle B1",
+        description: "Actually just the core enemy. The reason the outer one has so many gems... king of the hill, desu.",
         xp_value: 2178309, 
         rank: 2804,
         image: "image/enemy/E2804.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4370,12 +4372,12 @@ class Enemy {
         ],
     });
     enemy_templates["舰船除草机B1"] = new Enemy({
-        name: "舰船除草机B1", 
-        description: "其实挺难搞的，但只要你有够多的破墙镐...我是说绿色刀币。", 
+        name: "Ship Weeder B1",
+        description: "Actually quite tricky, but as long as you have enough wall-breaking pickaxes... I mean Green Blade Coins.",
         xp_value: 2178309, 
         rank: 2805,
         image: "image/enemy/E2805.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [8,18],
         spec_value:{8:10,18:10e9},
@@ -4389,12 +4391,12 @@ class Enemy {
         ],
     });
     enemy_templates["异化者B1"] = new Enemy({
-        name: "异化者B1", 
-        description: "最后一看，追光得了MVP。老盯着这个伤害数字干嘛？它会把反转的努力异化掉的！", 
+        name: "Aberrant B1",
+        description: "In the end, Light Chasing got the MVP. Why keep staring at that damage number? It'll corrupt all the effort put into Reversal!",
         xp_value: 2178309, 
         rank: 2806,
         image: "image/enemy/E2806.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [9],
         spec_value:{},
@@ -4409,12 +4411,12 @@ class Enemy {
         ],
     });
     enemy_templates["核爆能源"] = new Enemy({
-        name: "核爆能源", 
-        description: "真正的核爆也不过如此了。说起来，13斧考不考虑招核弹？", 
+        name: "Nuclear Blast Energy",
+        description: "A real nuclear explosion couldn't be much worse than this. Speaking of which, should the Thirteen Axes consider recruiting a nuclear bomb?",
         xp_value: 3524578, 
         rank: 2807,
         image: "image/enemy/E2807.png",
-        realm: "<span class=realm_sky><b>天空级二阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4429,12 +4431,12 @@ class Enemy {
         ],
     });
     enemy_templates["鲜血之锋B1"] = new Enemy({
-        name: "鲜血之锋B1", 
-        description: "哈？夺少血？散华？你说你是天空一阶有人信吗？快去请魔攻牵制老祖！", 
+        name: "Blood Edge B1",
+        description: "What? That much HP? Scattered Blossom? Would anyone believe it's only Sky Tier One? Go fetch the magic-attack Restraint grandmaster, quick!",
         xp_value: 5702887, 
         rank: 2808,
         image: "image/enemy/E2808.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +++</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +++</b></span>",
         size: "small",
         spec: [37],
         spec_value:{},
@@ -4448,12 +4450,12 @@ class Enemy {
         ],
     });
     enemy_templates["剧毒恐怖B1"] = new Enemy({
-        name: "剧毒恐怖B1", 
-        description: "总比你下面的那一只好打。迄今为止还没有任何毒素可以和【马里奥菇菇】媲美...", 
+        name: "Deadly Poison Terror B1",
+        description: "Still easier to fight than the one below you. So far no poison has ever rivaled the [Mario Mushroom]...",
         xp_value: 2178309, 
         rank: 2809,
         image: "image/enemy/E2809.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [8],
         spec_value:{8:10},
@@ -4467,12 +4469,12 @@ class Enemy {
         ],
     });
     enemy_templates["黄金茸茸"] = new Enemy({
-        name: "黄金茸茸", 
-        description: "贵金属茸茸似乎是一条不错的进化路线。不过个人意见：返璞归真的【亲民茸茸】才是究极体。", 
+        name: "Golden Fluffy",
+        description: "The precious metal Fluffy seems like a solid evolution path. But personally, the back-to-basics [Friendly Fluffy] is the true ultimate form.",
         xp_value: 3524578, 
         rank: 2810,
         image: "image/enemy/E2810.png",
-        realm: "<span class=realm_sky><b>天空级二阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4486,12 +4488,12 @@ class Enemy {
         ],
     });
     enemy_templates["银色血眼B1"] = new Enemy({
-        name: "银色血眼B1", 
-        description: "久违(?)的坚固属性。三叉戟打的就是你这种硬石头！", 
+        name: "Silver Blood Eye B1",
+        description: "The long-awaited (?) armored attribute. The trident is made to crack hard rocks like you!",
         xp_value: 2178309, 
         rank: 2811,
         image: "image/enemy/E2811.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [1],
         spec_value:{},
@@ -4506,12 +4508,12 @@ class Enemy {
         ],
     });
     enemy_templates["光子石像B1"] = new Enemy({
-        name: "光子石像B1", 
-        description: "警惕一切和【光】有关的东西。天空级一阶和arc的定数10.6变成一样的定位了...", 
+        name: "Photon Stone Statue B1",
+        description: "Be wary of anything related to [light]. Sky Tier One and arc's constant 10.6 have become the same tier...",
         xp_value: 5702887, 
         rank: 2812,
         image: "image/enemy/E2812.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +++</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +++</b></span>",
         size: "small",
         spec: [40],
         spec_value:{},
@@ -4527,12 +4529,12 @@ class Enemy {
         ],
     });
     enemy_templates["游走三头蛇"] = new Enemy({
-        name: "游走三头蛇", 
-        description: "它怎么没有导致飞船的机械短路呢？防护工作做的真好哇。", 
+        name: "Roaming Three-Headed Serpent",
+        description: "How come it hasn't caused a mechanical short circuit on the ship? The protection work was done very well.",
         xp_value: 3524578, 
         rank: 2813,
         image: "image/enemy/E2813.png",
-        realm: "<span class=realm_sky><b>天空级二阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4547,12 +4549,12 @@ class Enemy {
         ],
     });
     enemy_templates["质子粉碎机B1"] = new Enemy({
-        name: "质子粉碎机B1", 
-        description: "夭寿啦——夸克禁闭坏掉啦——", 
+        name: "Proton Crusher B1",
+        description: "Oh no—— quark confinement has broken down——",
         xp_value: 2178309, 
         rank: 2814,
         image: "image/enemy/E2814.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [7],
         spec_value:{},
@@ -4567,12 +4569,12 @@ class Enemy {
         ],
     });
     enemy_templates["城主府基层"] = new Enemy({
-        name: "城主府基层", 
-        description: "没有明说，但不吃贪婪应该是燕岗城的城主府。疾走已经退环境了...现在就连飓风都不好意思拿出来了。", 
+        name: "City Lord Mansion Grunt",
+        description: "Not stated explicitly, but the one immune to greed should be Yangang City's City Lord Mansion. Swift Dash is out of the meta... now even Hurricane would be embarrassing to show.",
         xp_value: 3524578, 
         rank: 2815,
         image: "image/enemy/E2815.png",
-        realm: "<span class=realm_sky><b>天空级二阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2</b></span>",
         size: "small",
         spec: [4],
         spec_value:{},
@@ -4589,12 +4591,12 @@ class Enemy {
         ],
     });
     enemy_templates["合金弹头B1"] = new Enemy({
-        name: "合金弹头B1", 
-        description: "弹头怎么还有圣阵这种分段打击啊！皮也太厚实了。", 
+        name: "Alloy Warhead B1",
+        description: "How does a warhead have segmented strikes like Sacred Formation?! And it's so incredibly tanky.",
         xp_value: 5702887, 
         rank: 2816,
         image: "image/enemy/E2816.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +++</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +++</b></span>",
         size: "small",
         spec: [42],
         spec_value:{},
@@ -4609,12 +4611,12 @@ class Enemy {
         ],
     });
     enemy_templates["深邃之暗B2"] = new Enemy({
-        name: "深邃之暗B2", 
-        description: "虽然基础属性十分强大，但好在不像那些一阶特化机器人一样有奇妙的感悟。", 
+        name: "Abyssal Darkness B2",
+        description: "Its base stats are tremendously powerful, but thankfully it doesn't have the bizarre masteries that those Tier One specialized robots have.",
         xp_value: 3524578, 
         rank: 2817,
         image: "image/enemy/E2817.png",
-        realm: "<span class=realm_sky><b>天空级二阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -4628,12 +4630,12 @@ class Enemy {
         ],
     });
     enemy_templates["无面修者"] = new Enemy({
-        name: "无面修者", 
-        description: "在好奇为什么天空级二阶的敌人那么少？答案是天外族群的划分太严，好多B2级的被划成B1了...", 
+        name: "Faceless Cultivator",
+        description: "Curious why there are so few Sky Tier Two enemies? The answer is that the classification among the Beyond-Sky tribes is very strict — many B2-grade ones were classified as B1...",
         xp_value: 5702887, 
         rank: 3101,
         image: "image/enemy/E3101.png",
-        realm: "<span class=realm_sky><b>天空级二阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2 +</b></span>",
         spec: [],
         stats: {health: 600e4, attack: 1490e4, agility: 1080e4, attack_speed: 1.2, defense: 900e4}, 
         loot_list: [
@@ -4644,12 +4646,12 @@ class Enemy {
         ],
     });
     enemy_templates["大教掌灯人"] = new Enemy({
-        name: "大教掌灯人", 
-        description: "在兽潮中发现家里的魂灯灭了一大片的他，正在气势汹汹地准备向荒兽发起复仇！", 
+        name: "Grand Temple Lamplighter",
+        description: "Upon discovering during the beast tide that a large section of the soul lamps at home had gone out, he is now furiously preparing to take revenge on the wild beasts!",
         xp_value: 9227465, 
         rank: 3102,
         image: "image/enemy/E3102.png",
-        realm: "<span class=realm_sky><b>天空级三阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3</b></span>",
         spec: [],
         stats: {health: 880e4, attack: 1580e4, agility: 1200e4, attack_speed: 1.3, defense: 1080e4}, 
         loot_list: [
@@ -4660,12 +4662,12 @@ class Enemy {
         ],
     });
     enemy_templates["单眼蝠幼体"] = new Enemy({
-        name: "单眼蝠幼体", 
-        description: "某种血脉似乎相当坚韧的蝙蝠，皮糙肉厚。但是...你的天赋是不是混进了什么不干净的东西?", 
+        name: "Cyclops Bat Juvenile",
+        description: "A bat with a seemingly very robust bloodline — thick-hided and tough-fleshed. But... did something unclean sneak into your innate talent?",
         xp_value: 5702887, 
         rank: 3103,
         image: "image/enemy/E3103.png",
-        realm: "<span class=realm_sky><b>天空级二阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2 +</b></span>",
         spec: [5],
         stats: {health: 9025e4, attack: 1680e4, agility: 1200e4, attack_speed: 1.3, defense: 400e4}, 
         loot_list: [
@@ -4677,12 +4679,12 @@ class Enemy {
         ],
     });
     enemy_templates["淳羽家族近卫"] = new Enemy({
-        name: "淳羽家族近卫", 
-        description: "明明是燕岗领第一家族，为什么要用毒药呢？*我是不会告诉你任何东西的！*", 
+        name: "Chunyu Family Guard",
+        description: "As the number one family in the Yangang Domain, why use poison? *I won't tell you anything!*",
         xp_value: 5702887, 
         rank: 3104,
         image: "image/enemy/E3104.png",
-        realm: "<span class=realm_sky><b>天空级二阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2 +</b></span>",
         spec: [8],
         spec_value: {8:10},
         stats: {health: 350e4, attack: 1850e4, agility: 1320e4, attack_speed: 1.3, defense: 800e4}, 
@@ -4695,12 +4697,12 @@ class Enemy {
         ],
     });
     enemy_templates["赫尔沼泽野火"] = new Enemy({
-        name: "赫尔沼泽野火", 
-        description: "以火为载体的野生“灵”。温度远不如核爆，却掌握着多种能力。", 
+        name: "Hel Swamp Wildfire",
+        description: "A wild \"Spirit\" that uses fire as its vessel. Its temperature is far less than a nuclear explosion, yet it commands multiple abilities.",
         xp_value: 5702887, 
         rank: 3105,
         image: "image/enemy/E3105.png",
-        realm: "<span class=realm_sky><b>天空级二阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 2 +</b></span>",
         spec: [23,0],
         spec_value: {8:10},
         stats: {health: 480e4, attack: 1200e4, agility: 1320e4, attack_speed: 1.3, defense: 720e4}, 
@@ -4712,12 +4714,12 @@ class Enemy {
         ],
     });
     enemy_templates["地龙成长期"] = new Enemy({
-        name: "地龙成长期", 
-        description: "理论上来说天空级已经可以飞了。但它的战斗风格和体重决定了它不会长期飞行。", 
+        name: "Earth Dragon Growth Stage",
+        description: "In theory, the Sky Rank is already capable of flight. But its combat style and weight means it won't stay airborne for long.",
         xp_value: 9227465, 
         rank: 3106,
         image: "image/enemy/E3106.png",
-        realm: "<span class=realm_sky><b>天空级三阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3</b></span>",
         spec: [],
         stats: {health: 2000e4, attack: 1900e4, agility: 1440e4, attack_speed: 1.3, defense: 1225e4}, 
         loot_list: [
@@ -4729,12 +4731,12 @@ class Enemy {
         ],
     });
     enemy_templates["圣荒杀手傀儡"] = new Enemy({
-        name: "圣荒杀手傀儡", 
-        description: "从圣荒城进口的傀儡。因为太笨，它不会和其他圣荒城单位一样见钱眼开，但代价是敌友不分。", 
+        name: "Shenghuang Killer Golem",
+        description: "A golem imported from Shenghuang City. Because it's too dumb, it won't go money-crazy like other Shenghuang City units — but the cost is that it can't tell friend from foe.",
         xp_value: 9227465, 
         rank: 3107,
         image: "image/enemy/E3107.png",
-        realm: "<span class=realm_sky><b>天空级三阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3</b></span>",
         spec: [10],
         stats: {health: 1900e4, attack: 2100e4, agility: 1440e4, attack_speed: 1.3, defense: 550e4}, 
         loot_list: [
@@ -4745,12 +4747,12 @@ class Enemy {
         ],
     });
     enemy_templates["小门派供奉"] = new Enemy({
-        name: "小门派供奉", 
-        description: "加入了剿灭行动以应对兽潮威胁的修者。你问3连击?抬头看看攻速吧(笑", 
+        name: "Minor Sect Retainer",
+        description: "A cultivator who joined the suppression operation to face the beast tide threat. You ask about the 3-hit combo? Take a look at that attack speed (laughs)",
         xp_value: 9227465, 
         rank: 3108,
         image: "image/enemy/E3108.png",
-        realm: "<span class=realm_sky><b>天空级三阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3</b></span>",
         spec: [],
         stats: {health: 3250e4, attack: 1750e4, agility: 1560e4, attack_speed: 3.9, defense: 500e4}, 
         loot_list: [
@@ -4761,12 +4763,12 @@ class Enemy {
         ],
     });
     enemy_templates["化灵蝶"] = new Enemy({
-        name: "化灵蝶", 
-        description: "花灵液？感觉完全是谐音的存在呢。", 
+        name: "Spirit-Transformed Butterfly",
+        description: "Floral Spirit Slime? It feels like a complete homophone of that creature.",
         xp_value: 9227465, 
         rank: 3109,
         image: "image/enemy/E3109.png",
-        realm: "<span class=realm_sky><b>天空级三阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3</b></span>",
         spec: [31],
         stats: {health: 800e4, attack: 2116e4, agility: 1620e4, attack_speed: 1.3, defense: 1100e4}, 
         loot_list: [
@@ -4778,12 +4780,12 @@ class Enemy {
         ],
     });
     enemy_templates["沼泽石灵"] = new Enemy({
-        name: "沼泽石灵", 
-        description: "这个纪元是不是有个石头之神之类的纪元神明？怎么走到哪里都有这帮坚固石头怪啊。对了，好多荒兽在它上面撞死了，所以它身上有油..", 
+        name: "Swamp Stone Spirit",
+        description: "Is there some kind of stone deity for this era? Why are there armored stone monsters everywhere? Also, many wild beasts have crashed into it and died, so it's covered in oil..",
         xp_value: 9227465, 
         rank: 3110,
         image: "image/enemy/E3110.png",
-        realm: "<span class=realm_sky><b>天空级三阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3</b></span>",
         spec: [1],
         stats: {health: 20, attack: 2600e4, agility: 1680e4, attack_speed: 1.3, defense: 1300e4}, 
         loot_list: [
@@ -4795,12 +4797,12 @@ class Enemy {
         ],
     });
     enemy_templates["冈崎猫妖"] = new Enemy({
-        name: "冈崎猫妖", 
-        description: "听起来像是11区的猫妖。完全不讲武德的偷袭玩家！", 
+        name: "Okazaki Cat Fiend",
+        description: "Sounds like a cat fiend from District 11. Absolutely plays dirty with surprise attacks!",
         xp_value: 9227465, 
         rank: 3111,
         image: "image/enemy/E3111.png",
-        realm: "<span class=realm_sky><b>天空级三阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3</b></span>",
         spec: [2],
         stats: {health: 240e4, attack: 9000e4, agility: 1680e4, attack_speed: 1.3, defense: 1500e4}, 
         loot_list: [
@@ -4812,12 +4814,12 @@ class Enemy {
         ],
     });
     enemy_templates["沉陷死者"] = new Enemy({
-        name: "沉陷死者", 
-        description: "1-4探险者亡魂也有异界之门。它似乎是某种和死亡相关的领悟...", 
+        name: "Sunken Corpse",
+        description: "The 1-4 Explorer's Vengeful Spirit also had the Otherworld Gate. It seems to be some kind of death-related mastery...",
         xp_value: 9227465, 
         rank: 3112,
         image: "image/enemy/E3112.png",
-        realm: "<span class=realm_sky><b>天空级三阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3</b></span>",
         spec: [15],
         stats: {health: 2000e4, attack: 4000e4, agility: 1800e4, attack_speed: 1.3, defense: 1400e4}, 
         loot_list: [
@@ -4828,12 +4830,12 @@ class Enemy {
         ],
     });
     enemy_templates["赫尔沼泽飞鼠"] = new Enemy({
-        name: "赫尔沼泽飞鼠", 
-        description: "老鼠飞上天的时候，它还是老鼠吗？还是说，已经可以归类到一种肉翅鸟了呢？", 
+        name: "Hel Swamp Flying Rat",
+        description: "When a rat takes to the sky, is it still a rat? Or can it already be classified as a flesh-winged bird?",
         xp_value: 14930352, 
         rank: 3113,
         image: "image/enemy/E3113.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [],
         stats: {health: 1296e4, attack: 2400e4, agility: 1860e4, attack_speed: 1.3, defense: 1250e4}, 
         loot_list: [
@@ -4846,12 +4848,12 @@ class Enemy {
         ],
     });
     enemy_templates["赫尔沼泽蝠"] = new Enemy({
-        name: "赫尔沼泽蝠", 
-        description: "一想到蝙蝠从天上叼着剑劈下来的画面..就好想笑啊w", 
+        name: "Hel Swamp Bat",
+        description: "Just imagining the scene of a bat swooping down from the sky clutching a sword... it makes me want to laugh w",
         xp_value: 14930352, 
         rank: 3114,
         image: "image/enemy/E3114.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [20],
         stats: {health: 400e4, attack: 2000e4, agility: 1920e4, attack_speed: 1.3, defense: 1350e4}, 
         loot_list: [
@@ -4863,12 +4865,12 @@ class Enemy {
         ],
     });
     enemy_templates["不瞑之目"] = new Enemy({
-        name: "不瞑之目", 
-        description: "盯~ (若叶睦表情包.jpg)", 
+        name: "Unsleeping Eye",
+        description: "Staaare~ (Wakaba Mutsumi emote.jpg)",
         xp_value: 14930352, 
         rank: 3115,
         image: "image/enemy/E3115.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [19],
         stats: {health: 1849e4, attack: 2600e4, agility: 1780e4, attack_speed: 1.3, defense: 1200e4}, 
         loot_list: [
@@ -4879,12 +4881,12 @@ class Enemy {
         ],
     });
     enemy_templates["兰陵天空骑士"] = new Enemy({
-        name: "兰陵天空骑士", 
-        description: "天空级的骑士听起来和斗气化马差不多耶。不过，似乎这里的骑士只是一个职称~", 
+        name: "Lanling Sky Knight",
+        description: "A Sky Rank knight sounds about as plausible as condensing fighting spirit into a horse. But it seems knight is just a title here~",
         xp_value: 14930352, 
         rank: 3116,
         image: "image/enemy/E3116.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [39],
         spec_value: {39:1000e4},
         stats: {health: 1280e4, attack: 2200e4, agility: 2040e4, attack_speed: 1.3, defense: 1681e4}, 
@@ -4896,12 +4898,12 @@ class Enemy {
         ],
     });
     enemy_templates["大教外门弟子"] = new Enemy({
-        name: "大教外门弟子", 
-        description: "教和门派有什么关系呢？不过这样的爆攻教似乎活不久的样子。", 
+        name: "Grand Temple Outer Disciple",
+        description: "What's the relationship between a Temple and a Sect? But a burst-attack-focused temple like this doesn't seem like it'll last long.",
         xp_value: 14930352, 
         rank: 3117,
         image: "image/enemy/E3117.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [],
         stats: {health: 300e4, attack: 6600e4, agility: 2100e4, attack_speed: 1.3, defense: 1444e4}, 
         loot_list: [
@@ -4912,12 +4914,12 @@ class Enemy {
         ],
     });
     enemy_templates["燕岗精英佣兵"] = new Enemy({
-        name: "燕岗精英佣兵", 
-        description: "天下武功，唯快不破。这些刀口舔血的佣兵的行事法则就是如此。只是，他们似乎也没那么快。", 
+        name: "Yangang Elite Mercenary",
+        description: "In all martial arts under heaven, only speed is unbreakable. That is the guiding principle of these blade-licking mercenaries. Though they don't seem all that fast.",
         xp_value: 14930352, 
         rank: 3118,
         image: "image/enemy/E3118.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [],
         stats: {health: 900e4, attack: 2401e4, agility: 2160e4, attack_speed: 2.7, defense: 1400e4}, 
         loot_list: [
@@ -4929,12 +4931,12 @@ class Enemy {
         ],
     });
     enemy_templates["凌空级魔法师"] = new Enemy({
-        name: "凌空级魔法师", 
-        description: "均衡加点确实是某种意义上的版本答案。全防+魔攻虽然理论胜率更高，但无法适应变化多端的战场。", 
+        name: "Sky-Soaring Rank Mage",
+        description: "Balanced stat allocation is indeed the meta answer in some sense. Full defense + magic attack has theoretically higher win rates, but can't adapt to the ever-changing battlefield.",
         xp_value: 14930352, 
         rank: 3119,
         image: "image/enemy/E3119.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [],
         stats: {health: 6400e4, attack: 1800e4, agility: 2220e4, attack_speed: 1.2, defense: 1800e4}, 
         loot_list: [
@@ -4945,12 +4947,12 @@ class Enemy {
         ],
     });
     enemy_templates["飞龙成长期"] = new Enemy({
-        name: "飞龙成长期", 
-        description: "同样被原能辐射影响加速成长期的龙。似乎天生就懂得如何把一份力发挥出两份的效果。", 
+        name: "Wyvern Growth Stage",
+        description: "A dragon whose growth stage was also accelerated by primordial energy radiation. Seems to innately know how to squeeze twice the effect out of a single unit of power.",
         xp_value: 14930352, 
         rank: 3120,
         image: "image/enemy/E3120.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [],
         stats: {health: 3844e4, attack: 3000e4, agility: 2222e4, attack_speed: 1.2, defense: 1500e4}, 
         loot_list: [
@@ -4968,12 +4970,12 @@ class Enemy {
     // 20%↓
 
     enemy_templates["有角族壮年"] = new Enemy({
-        name: "有角族壮年", 
-        description: "荒兽森林敌人的进化版本。狂战士的画风和领悟真的搭配吗..", 
+        name: "Horned Tribe Adult",
+        description: "An evolved version of the Wild Beast Forest enemy. Does a berserker aesthetic really go with that mastery...",
         xp_value: 14930352, 
         rank: 3201,
         image: "image/enemy/E3201.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [9],
         stats: {health: 11200e4, attack: 3100e4, agility: 2400e4, attack_speed: 1.3, defense: 1200e4}, 
         loot_list: [
@@ -4985,12 +4987,12 @@ class Enemy {
     });
     
     enemy_templates["黑森异惑之花"] = new Enemy({
-        name: "黑森异惑之花", 
-        description: "听起来像是XOR之花。有没有OR之花和AND之花呢？", 
+        name: "Black Forest Bewildering Flower",
+        description: "Sounds like the XOR Flower. Is there an OR Flower or an AND Flower?",
         xp_value: 14930352, 
         rank: 3202,
         image: "image/enemy/E3202.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [8],
         spec_value: {8:10},
         stats: {health: 10000e4, attack: 3300e4, agility: 2520e4, attack_speed: 1.3, defense: 1750e4}, 
@@ -5003,12 +5005,12 @@ class Enemy {
         ],
     });
     enemy_templates["黑森镔铁战士"] = new Enemy({
-        name: "黑森镔铁战士", 
-        description: "可惜这里缺少塔门战甲B3来一次召唤一窝。不然也是个令人头疼的对象。", 
+        name: "Black Forest Iron Warrior",
+        description: "Unfortunately there's no Tower Gate Battle Armor B3 here to summon a whole nest at once. Otherwise it'd be quite a headache.",
         xp_value: 14930352, 
         rank: 3203,
         image: "image/enemy/E3203.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [],
         stats: {health: 3864e4, attack: 3750e4, agility: 2640e4, attack_speed: 1.3, defense: 2300e4}, 
         loot_list: [
@@ -5020,12 +5022,12 @@ class Enemy {
         ],
     });
     enemy_templates["黑森骸骨"] = new Enemy({
-        name: "黑森骸骨", 
-        description: "和之前的骸骨完全不是一个画风。99^2,2^12,7^4...学数学学疯了?。", 
+        name: "Black Forest Skeleton",
+        description: "Nothing like any of the previous skeletons in aesthetic. 99^2, 2^12, 7^4... gone mad studying math?",
         xp_value: 14930352, 
         rank: 3204,
         image: "image/enemy/E3204.png",
-        realm: "<span class=realm_sky><b>天空级三阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 3 +</b></span>",
         spec: [32],
         stats: {health: 1960.2e4, attack: 4096e4, agility: 2662e4, attack_speed: 1.331, defense: 2401e4}, 
         loot_list: [
@@ -5036,12 +5038,12 @@ class Enemy {
         ],
     });
     enemy_templates["司雍世界骨干"] = new Enemy({
-        name: "司雍世界骨干", 
-        description: "其实我觉得下面那家伙更适合称为骨干。B4级对于权力来说太低了，但对于魔物来说刚刚好。", 
+        name: "Siyong World Core Member",
+        description: "Honestly I think the one below is more deserving of the title \"backbone\". B4 rank is too low for a position of power, but just right for a monster.",
         xp_value: 24157817, 
         rank: 3205,
         image: "image/enemy/E3205.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         spec: [],
         stats: {health: 15000e4, attack: 5000e4, agility: 3276.8e4, attack_speed: 1.3, defense: 2500e4}, 
         loot_list: [
@@ -5053,12 +5055,12 @@ class Enemy {
         ],
     });
     enemy_templates["黑森僵尸茸茸"] = new Enemy({
-        name: "黑森僵尸茸茸", 
-        description: "原来茸茸这种生物也可以尸变的吗！本来以为是暴毙了就化掉的类型...", 
+        name: "Black Forest Zombie Fluffy",
+        description: "So Fluffies can undergo corpse transformation too! I thought they were the type that would just dissolve when they died...",
         xp_value: 24157817, 
         rank: 3206,
         image: "image/enemy/E3206.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         spec: [9],
         stats: {health: 11200e4, attack: 4400e4, agility: 3430e4, attack_speed: 1.3, defense: 2500e4}, 
         loot_list: [
@@ -5070,12 +5072,12 @@ class Enemy {
         ],
     });
     enemy_templates["黑森猿人战士"] = new Enemy({
-        name: "黑森猿人战士", 
-        description: "为什么只有人类不能做成肉排吃掉呢？", 
+        name: "Black Forest Ape Warrior",
+        description: "Why is it only humans that can't be made into steaks?",
         xp_value: 24157817, 
         rank: 3207,
         image: "image/enemy/E3207.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         spec: [],
         stats: {health: 9000e4, attack: 5400e4, agility: 3600e4, attack_speed: 1.3, defense: 3000e4}, 
         loot_list: [
@@ -5086,12 +5088,12 @@ class Enemy {
         ],
     });
     enemy_templates["怨灵探险者"] = new Enemy({
-        name: "怨灵探险者", 
-        description: "衣服都褪色了。在清野江漂了多少年了哇？", 
+        name: "Wraith Adventurer",
+        description: "Even its clothes have faded. How many years has it been drifting in the Qingye River?",
         xp_value: 24157817, 
         rank: 3208,
         image: "image/enemy/E3208.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         spec: [47],
         stats: {health: 1e4, attack: 5000e4, agility: 4000e4, attack_speed: 1.6, defense: 3200e4}, 
         loot_list: [
@@ -5102,12 +5104,12 @@ class Enemy {
         ],
     });
     enemy_templates["兰陵城深骑士"] = new Enemy({
-        name: "兰陵城深骑士", 
-        description: "别告诉我深骑士就是衣服的颜色比较深。似乎是B9级【蓝金精】镀层..真有钱啊。", 
+        name: "Lanling City Deep Knight",
+        description: "Don't tell me \"Deep Knight\" just means the clothing is darker. Seems like B9-grade [Blue Gold Essence] plating... truly wealthy.",
         xp_value: 24157817, 
         rank: 3209,
         image: "image/enemy/E3209.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         spec: [39],
         spec_value:{39:0.8e8},
         stats: {health: 11000e4, attack: 4200e4, agility: 4200e4, attack_speed: 1.2, defense: 2800e4}, 
@@ -5119,12 +5121,12 @@ class Enemy {
         ],
     });
     enemy_templates["黑森蝎龙"] = new Enemy({
-        name: "黑森蝎龙", 
-        description: "可曾记得在秘境深层被那个爆攻蝎龙支配的恐惧？从这里开始，小怪的生命比例要翻倍了！", 
+        name: "Black Forest Scorpion Dragon",
+        description: "Do you remember the terror of being dominated by that burst-attack Scorpion Dragon deep in the secret realm? From here on, normal enemy HP is doubled!",
         xp_value: 24157817, 
         rank: 3210,
         image: "image/enemy/E3210.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         spec: [42],
         stats: {health: 15842e4, attack: 5400e4, agility: 4400e4, attack_speed: 1.2, defense: 2700e4}, 
         loot_list: [
@@ -5137,12 +5139,12 @@ class Enemy {
     });
 
     enemy_templates["黑森猎兵"] = new Enemy({
-        name: "黑森猎兵", 
-        description: "嘿，爆攻的这不就来了~", 
+        name: "Black Forest Hunter",
+        description: "Hey, and here comes the burst-attack type~",
         xp_value: 24157817, 
         rank: 3211,
         image: "image/enemy/E3211.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         spec: [26],
         stats: {health: 6000e4, attack: 4500e4, agility: 4400e4, attack_speed: 1.4, defense: 3400e4}, 
         loot_list: [
@@ -5152,12 +5154,12 @@ class Enemy {
         ],
     });
     enemy_templates["石风家族队长"] = new Enemy({
-        name: "石风家族队长", 
-        description: "至今我们仍然不知道为什么石风家族要把天空级四阶和大地级一阶编成队伍。暴发户家族缺乏底蕴可见一斑。", 
+        name: "Shifeng Family Captain",
+        description: "To this day we still don't know why the Shifeng Family would put Sky Tier Four and Earth Tier One in the same team. The nouveau riche family's lack of depth is plain to see.",
         xp_value: 39088169, 
         rank: 3212,
         image: "image/enemy/E3212.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [],
         stats: {health: 13000e4, attack: 5600e4, agility: 4600e4, attack_speed: 1.3, defense: 3800e4}, 
         loot_list: [
@@ -5168,12 +5170,12 @@ class Enemy {
         ],
     });
     enemy_templates["凶悍树妖"] = new Enemy({
-        name: "凶悍树妖", 
-        description: "要是在雾岛上能有这么一颗，巴巴塔恐怕永远也找不到传人了。", 
+        name: "Ferocious Tree Fiend",
+        description: "If there were one of these on the Fog Island, Babata would probably never find a successor.",
         xp_value: 39088169, 
         rank: 3213,
         image: "image/enemy/E3213.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [],
         stats: {health: 20000e4, attack: 11000e4, agility: 4800e4, attack_speed: 1.2, defense: 0}, 
         loot_list: [
@@ -5184,12 +5186,12 @@ class Enemy {
         ],
     });
     enemy_templates["人立电法茸茸"] = new Enemy({
-        name: "人立电法茸茸", 
-        description: "滋滋滋滋——闪光皮卡丘（划掉，降临！", 
+        name: "Upright Lightning Mage Fluffy",
+        description: "Zzzzap—— Shiny Pikachu (crossed out), descends!",
         xp_value: 39088169, 
         rank: 3214,
         image: "image/enemy/E3214.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [0],
         stats: {health: 9600e4, attack: 2200e4, agility: 4800e4, attack_speed: 1.2, defense: 4400e4}, 
         loot_list: [
@@ -5201,12 +5203,12 @@ class Enemy {
         ],
     });
     enemy_templates["嫉妒毒虫"] = new Enemy({
-        name: "嫉妒毒虫", 
-        description: "嫉妒使茸茸面目全非。凭什么你有飞船反应堆造的剑柄！呜啊啊啊！", 
+        name: "Envious Poison Bug",
+        description: "Envy has made the Fluffy unrecognizable. Why do you get a sword hilt made from a ship's reactor?! Waaaaah!",
         xp_value: 39088169, 
         rank: 3215,
         image: "image/enemy/E3215.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [20,46],
         stats: {health: 3e8, attack: 6300e4, agility: 5000e4, attack_speed: 1.5, defense: 2800e4}, 
         loot_list: [
@@ -5220,12 +5222,12 @@ class Enemy {
 
 
     enemy_templates["冰原之痕"] = new Enemy({
-        name: "冰原之痕", 
-        description: "冰元素化生的骷髅，生命力相当顽强！", 
+        name: "Glacial Plain Trace",
+        description: "A skeleton born from ice elements — its vitality is remarkably tenacious!",
         xp_value: 39088169, 
         rank: 3301,
         image: "image/enemy/E3301.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [],
         stats: {health: 11.552e8, attack: 7225e4, agility: 5400e4, attack_speed: 1.2, defense: 2100e4}, 
         loot_list: [
@@ -5236,12 +5238,12 @@ class Enemy {
         ],
     });
     enemy_templates["出芽茸茸战士"] = new Enemy({
-        name: "出芽茸茸战士", 
-        description: "想不到还有续集~喵可对茸茸的潜力挖掘不足1%。", 
+        name: "Budding Fluffy Warrior",
+        description: "Didn't expect a sequel~ Neko has tapped less than 1% of the Fluffy's potential.",
         xp_value: 39088169, 
         rank: 3302,
         image: "image/enemy/E3302.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [4],
         stats: {health: 2.52e8, attack: 8200e4, agility: 5700e4, attack_speed: 1.4, defense: 4000e4}, 
         loot_list: [
@@ -5252,12 +5254,12 @@ class Enemy {
         ],
     });
     enemy_templates["冰原骑士"] = new Enemy({
-        name: "冰原骑士", 
-        description: "你不知道吗？散华这东西只有自己血够多才能削弱到人的。", 
+        name: "Glacial Plain Knight",
+        description: "Didn't you know? Scattered Blossom only weakens people when you yourself have enough HP.",
         xp_value: 39088169, 
         rank: 3303,
         image: "image/enemy/E3303.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [37],
         stats: {health: 4.232e8, attack: 7900e4, agility: 6000e4, attack_speed: 1.3, defense: 5200e4}, 
         loot_list: [
@@ -5268,12 +5270,12 @@ class Enemy {
         ],
     });
     enemy_templates["冰原近卫"] = new Enemy({
-        name: "冰原近卫", 
-        description: "冰凌剑倒是不管血多不多都能削到人。实在是强大的领悟...", 
+        name: "Glacial Plain Royal Guard",
+        description: "The Ice Spike Sword can cut people regardless of how much HP you have. Truly a powerful mastery...",
         xp_value: 39088169, 
         rank: 3304,
         image: "image/enemy/E3304.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [48],
         spec_value:{48:80e4},
         stats: {health: 2.16e8, attack: 8600e4, agility: 6300e4, attack_speed: 1.3, defense: 5700e4}, 
@@ -5285,12 +5287,12 @@ class Enemy {
         ],
     });
     enemy_templates["天空级死士"] = new Enemy({
-        name: "天空级死士", 
-        description: "作为死士居然不带个自爆，都是加伤害技能...而且天剑太难了所以没学会！", 
+        name: "Sky Rank Death Warrior",
+        description: "For a death warrior, it doesn't even have self-destruct — all damage-boosting skills... and Heavenly Sword was too hard so it never learned it!",
         xp_value: 39088169, 
         rank: 3305,
         image: "image/enemy/E3305.png",
-        realm: "<span class=realm_sky><b>天空级四阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 +</b></span>",
         spec: [3,7],
         stats: {health: 3.362e8, attack: 8100e4, agility: 6600e4, attack_speed: 1.3, defense: 4200e4}, 
         loot_list: [
@@ -5302,12 +5304,12 @@ class Enemy {
         ],
     });
     enemy_templates["司雍传道士"] = new Enemy({
-        name: "司雍传道士", 
-        description: "长得和结界湖的血牛一模一样耶，不过居然是个爆攻人！", 
+        name: "Siyong Missionary",
+        description: "Looks exactly like the HP tank from the Boundary Lake, but it's actually a burst-attack type!",
         xp_value: 63245986, 
         rank: 3306,
         image: "image/enemy/E3306.png",
-        realm: "<span class=realm_sky><b>天空级五阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5</b></span>",
         spec: [19],
         stats: {health: 6.48e8, attack: 10700e4, agility: 6200e4, attack_speed: 1.3, defense: 5200e4}, 
         loot_list: [
@@ -5318,12 +5320,12 @@ class Enemy {
         ],
     });
     enemy_templates["冰原出芽茸茸"] = new Enemy({
-        name: "冰原出芽茸茸", 
-        description: "失踪的青色出芽茸茸终于找到了！虽然是靠着外力把自己弄成这个颜色的就是了。", 
+        name: "Glacial Plain Budding Fluffy",
+        description: "The missing cyan Budding Fluffy has finally been found! Although it turned itself this color through external means.",
         xp_value: 63245986, 
         rank: 3307,
         image: "image/enemy/E3307.png",
-        realm: "<span class=realm_sky><b>天空级五阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5</b></span>",
         spec: [49],
         spec_value: {49:{rnd:200,hp:0.3e8}},
         stats: {health: 3.6e8, attack: 13000e4, agility: 7200e4, attack_speed: 0.9, defense: 5400e4}, 
@@ -5335,12 +5337,12 @@ class Enemy {
         ],
     });
     enemy_templates["出芽红茸战士"] = new Enemy({
-        name: "出芽红茸战士", 
-        description: "这就是彩虹攻击！茸茸家族，出发~", 
+        name: "Budding Red Fluffy Warrior",
+        description: "This is the rainbow attack! Fluffy family, move out~",
         xp_value: 63245986, 
         rank: 3308,
         image: "image/enemy/E3308.png",
-        realm: "<span class=realm_sky><b>天空级五阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5</b></span>",
         spec: [],
         stats: {health: 1.92e8, attack: 1.98e8, agility: 7800e4, attack_speed: 1.2, defense: 6800e4}, 
         loot_list: [
@@ -5351,12 +5353,12 @@ class Enemy {
         ],
     });
     enemy_templates["冰原之空骸"] = new Enemy({
-        name: "冰原之空骸", 
-        description: "看着很强，其实一点也不弱。被它来上40连击可够喝一壶的了。", 
+        name: "Glacial Plain Sky Skeleton",
+        description: "Looks powerful, and actually isn't weak at all. Taking a 40-hit combo from it would be quite a handful.",
         xp_value: 63245986, 
         rank: 3309,
         image: "image/enemy/E3309.png",
-        realm: "<span class=realm_sky><b>天空级五阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5</b></span>",
         spec: [48],
         spec_value: {48:100e4},
         stats: {health: 14.45e8, attack: 9216e4, agility: 8100e4, attack_speed: 1.5, defense: 4900e4}, 
@@ -5369,12 +5371,12 @@ class Enemy {
         ],
     });
     enemy_templates["掠冰之蝠"] = new Enemy({
-        name: "掠冰之蝠", 
-        description: "6连击...至少比那一帮开局先打出巨额伤害的好处理，对吧？", 
+        name: "Ice-Raiding Bat",
+        description: "6-hit combo... at least easier to deal with than those that front-load massive damage right at the start, right?",
         xp_value: 63245986, 
         rank: 3310,
         image: "image/enemy/E3310.png",
-        realm: "<span class=realm_sky><b>天空级五阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5</b></span>",
         spec: [33],
         spec_value: {33:6},
         stats: {health: 5.618e8, attack: 12900e4, agility: 8400e4, attack_speed: 1.1, defense: 6500e4}, 
@@ -5386,12 +5388,12 @@ class Enemy {
         ],
     });
     enemy_templates["霜傀儡"] = new Enemy({
-        name: "霜傀儡", 
-        description: "在下面铲一铲制造雪球会不会有点赚头的样子？", 
+        name: "Frost Golem",
+        description: "Would shoveling underneath it to make snowballs be somewhat profitable?",
         xp_value: 63245986, 
         rank: 3311,
         image: "image/enemy/E3311.png",
-        realm: "<span class=realm_sky><b>天空级五阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5</b></span>",
         spec: [50],
         spec_value: {50:210e4},
         stats: {health: 3.52e8, attack: 18500e4, agility: 8800e4, attack_speed: 1.4, defense: 7500e4}, 
@@ -5404,12 +5406,12 @@ class Enemy {
         ],
     });
     enemy_templates["冰原荒兽"] = new Enemy({
-        name: "冰原荒兽", 
-        description: "这地方怎么到处都是这些战前扣血的领悟！好可怕，好可怕，好可怕……", 
+        name: "Glacial Plain Wild Beast",
+        description: "Why are there HP-draining masteries everywhere in this place?! So scary, so scary, so scary……",
         xp_value: 63245986, 
         rank: 3312,
         image: "image/enemy/E3312.png",
-        realm: "<span class=realm_sky><b>天空级五阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5</b></span>",
         spec: [49],
         spec_value: {49:{rnd:100,hp:1.0e8}},
         stats: {health: 9e8, attack: 15000e4, agility: 9200e4, attack_speed: 1.2, defense: 7500e4}, 
@@ -5421,12 +5423,12 @@ class Enemy {
         ],
     });
     enemy_templates["射击卫戍"] = new Enemy({
-        name: "射击卫戍", 
-        description: "如果靠着激光可以融化这里的冰雪该有多好……", 
+        name: "Shooting Garrison",
+        description: "If only the laser could melt the ice and snow here……",
         xp_value: 63245986, 
         rank: 3313,
         image: "image/enemy/E3313.png",
-        realm: "<span class=realm_sky><b>天空级五阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5</b></span>",
         spec: [43],
         spec_value: {43:1e8},
         stats: {health: 57.6e8, attack: 14400e4, agility: 9600e4, attack_speed: 1.2, defense: 7200e4}, 
@@ -5438,12 +5440,12 @@ class Enemy {
         ],
     });
     enemy_templates["冰山石灵"] = new Enemy({
-        name: "冰山石灵", 
-        description: "难得有个属性正常一点的了。坚固比起那一帮开局嗷嗷冲上来冻住你的要和蔼可亲太多了叭……是的，这里是奖励关卡！", 
+        name: "Iceberg Stone Spirit",
+        description: "Finally something with more normal stats. Armored is so much more approachable than those that rush up and freeze you right at the start……yes, this is the bonus stage!",
         xp_value: 102334155, 
         rank: 3314,
         image: "image/enemy/E3314.png",
-        realm: "<span class=realm_sky><b>天空级五阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5 +</b></span>",
         spec: [1],
         stats: {health: 60, attack: 12250e4, agility: 10000e4, attack_speed: 1.4, defense: 8500e4}, 
         loot_list: [
@@ -5455,12 +5457,12 @@ class Enemy {
         ],
     });
     enemy_templates["冰原老人"] = new Enemy({
-        name: "冰原老人", 
-        description: "呼~我要在它面前呆着回血。谁也不要拦着我。", 
+        name: "Glacial Plain Elder",
+        description: "Phew~ I'm going to stand in front of it and regen HP. Nobody stop me.",
         xp_value: 102334155, 
         rank: 3315,
         image: "image/enemy/E3315.png",
-        realm: "<span class=realm_sky><b>天空级五阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5 +</b></span>",
         spec: [5],
         stats: {health: 15.644e8, attack: 22000e4, agility: 10400e4, attack_speed: 1.3, defense: 4400e4}, 
         loot_list: [
@@ -5470,12 +5472,12 @@ class Enemy {
         ],
     });
     enemy_templates["冰原骸骨骑士"] = new Enemy({
-        name: "冰原骸骨骑士", 
-        description: "是的，每个区域都有自己的冰凌剑~这就是我们的纯白冰原啊。", 
+        name: "Glacial Plain Skeleton Knight",
+        description: "Yes, every area has its own Ice Spike Sword~ This is our pure white Glacial Plain.",
         xp_value: 102334155, 
         rank: 3316,
         image: "image/enemy/E3316.png",
-        realm: "<span class=realm_sky><b>天空级五阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 5 +</b></span>",
         spec: [48],
         spec_value: {48:120e4},
         stats: {health: 13.6e8, attack: 17000e4, agility: 10800e4, attack_speed: 1.3, defense: 8500e4}, 
@@ -7293,13 +7295,13 @@ B9++ 7,778,742,049exp 16B
 //challenge enemies
 (function(){
     enemy_templates["纳家待从[BOSS]"] = new Enemy({
-        name: "纳家待从[BOSS]", 
-        description: "用出全部力量的纳家待从。在家里出手就是无所顾忌！", 
+        name: "Na Family Attendant [BOSS]",
+        description: "A Na Family Attendant using its full power. Fighting on home turf means no holding back!",
         add_to_bestiary: true,
         xp_value: 13, 
         rank: 1199,
         image: "image/boss/B1101.png",
-        realm: "<span class=realm_basic><b>万物级巅峰</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle</b></span>",
         size: "small",
         spec: [5],
         tags: [],
@@ -7312,13 +7314,13 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["百家小卒[BOSS]"] = new Enemy({
-        name: "百家小卒[BOSS]", 
-        description: "为了抢夺秘法而用出全力的百家小卒。", 
+        name: "Hundred Clans Pawn [BOSS]",
+        description: "A Hundred Clans Pawn going all-out to seize the secret technique.",
         add_to_bestiary: true,
         xp_value: 13, 
         rank: 1298,
         image: "image/boss/B1201.png",
-        realm: "<span class=realm_basic><b>万物级巅峰 +</b></span>",
+        realm: "<span class=realm_basic><b>Myriad Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [2],
         tags: [],
@@ -7330,13 +7332,13 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["腐蚀质石精[BOSS]"] = new Enemy({
-        name: "腐蚀质石精[BOSS]", 
-        description: "城门边上的大石头。对人类有着天然的仇恨，不死不休", 
+        name: "Corrosive Stone Spirit [BOSS]",
+        description: "A large rock by the city gate. It harbors a natural hatred for humans and will fight to the death.",
         add_to_bestiary: true,
         xp_value: 34, 
         rank: 1299,
         image: "image/boss/B1202.png",
-        realm: "<span class=realm_basic><b>潮汐级高等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -7349,13 +7351,13 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["百兰[BOSS]"] = new Enemy({
-        name: "百兰[BOSS]", 
-        description: "城外的大叔。看不起纳可，但实力却不比纳可强多少。", 
+        name: "Bai Lan [BOSS]",
+        description: "The man outside the city. He looks down on Neko, but his strength isn't much greater than Neko's.",
         add_to_bestiary: true,
         xp_value: 34, 
         rank: 1398,
         image: "image/boss/B1301.png",
-        realm: "<span class=realm_basic><b>潮汐级高等</b></span>",
+        realm: "<span class=realm_basic><b>Tidal Rank: Expert</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -7366,13 +7368,13 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["燕岗领佣兵[BOSS]"] = new Enemy({
-        name: "燕岗领佣兵[BOSS]", 
-        description: "守在地宫门口，伺机而动的佣兵。已经截胡许多修者，底蕴丰厚。", 
+        name: "Yangang Domain Mercenary [BOSS]",
+        description: "A mercenary guarding the dungeon entrance, waiting for the right moment. Has already ambushed many cultivators and amassed considerable reserves.",
         add_to_bestiary: true,
         xp_value: 144, 
         rank: 1399,
         image: "image/boss/B1302.png",
-        realm: "<span class=realm_terra><b>大地级一阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 1</b></span>",
         size: "small",
         spec: [2],
         tags: [],
@@ -7383,13 +7385,13 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["地宫看门人[BOSS]"] = new Enemy({
-        name: "地宫看门人[BOSS]", 
-        description: "听说，有喵在叠铁质皮肤...", 
+        name: "Dungeon Gatekeeper [BOSS]",
+        description: "Rumor has it, someone's out there stacking iron-quality skin layers...",
         add_to_bestiary: true,
         xp_value: 987, 
         rank: 1497,
         image: "image/boss/B1401.png",
-        realm: "<span class=realm_terra><b>大地级三阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3</b></span>",
         size: "small",
         spec: [28],
         tags: [],
@@ -7402,13 +7404,13 @@ B9++ 7,778,742,049exp 16B
     });
     
     enemy_templates["行走树妖[BOSS]"] = new Enemy({
-        name: "行走树妖[BOSS]", 
-        description: "相当灵活的树妖，想接近它必须做好被20条蓄力柳条先各抽一下的准备！", 
+        name: "Walking Tree Fiend [BOSS]",
+        description: "A remarkably agile tree fiend. To get close, you must be prepared to take a charged lash from each of its 20 willow branches first!",
         add_to_bestiary: true,
         xp_value: 377, 
         rank: 1498,
         image: "image/boss/B1402.png",
-        realm: "<span class=realm_terra><b>大地级二阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2</b></span>",
         size: "small",
         spec: [16],
         tags: [],
@@ -7418,13 +7420,13 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["深邃之影[BOSS]"] = new Enemy({
-        name: "深邃之影[BOSS]", 
-        description: "属性均衡的精英荒兽，地宫核心的守门人。", 
+        name: "Shadow of the Deep [BOSS]",
+        description: "A well-balanced elite wild beast, gatekeeper of the dungeon core.",
         add_to_bestiary: true,
         xp_value: 377, 
         rank: 1499,
         image: "image/boss/B1403.png",
-        realm: "<span class=realm_terra><b>大地级二阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2</b></span>",
         size: "small",
         spec: [17],
         tags: [],
@@ -7437,12 +7439,12 @@ B9++ 7,778,742,049exp 16B
     });
     
     enemy_templates["地下岩火[BOSS]"] = new Enemy({
-        name: "地下岩火[BOSS]", 
-        description: "这只屑BOSS的皮怎么那么脆啊！好像一下子就可以打死的样子。", 
+        name: "Underground Lava [BOSS]",
+        description: "Why is this trashy boss so fragile! Looks like it can be killed in one hit.",
         xp_value: 610, 
         rank: 1597,
         image: "image/boss/B1501.png",
-        realm: "<span class=realm_terra><b>大地级二阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 2 +</b></span>",
         size: "small",
         spec: [],
         tags: [],
@@ -7453,12 +7455,12 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["喵咕哩[BOSS]"] = new Enemy({
-        name: "喵咕哩[BOSS]", 
-        description: "~满·血·版·真·神·降·临~ 强大，无需多言！", 
+        name: "Nyaguri [BOSS]",
+        description: "~Full·HP·True·God·Descends~ Powerful, no further words needed!",
         xp_value: 1587, 
         rank: 1598,
         image: "image/boss/B1502.png",
-        realm: "<span class=realm_terra><b>大地级三阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 3 +</b></span>",
         size: "small",
         spec: [21],
         spec_value:{21:8000},
@@ -7468,12 +7470,13 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["地宫养殖者[BOSS]"] = new Enemy({
-        name: "地宫养殖者[BOSS]", 
-        description: "第一幕的最终BOSS。本来2-5也不一定打得过，幸好有镭射枪...", 
-        xp_value: 1346269, 
+        name: "Dungeon Breeder [BOSS]",
+        id: "地宫养殖者[BOSS]",
+        description: "The final boss of Act 1. You might not be able to beat 2-5 normally, thankfully there is the laser gun...",
+        xp_value: 1346269,
         rank: 1599,
         image: "image/boss/B1503.png",
-        realm: "<span class=realm_sky><b>天空级一阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1</b></span>",
         size: "small",
         spec: [28],
         spec_value:{},
@@ -7482,12 +7485,12 @@ B9++ 7,778,742,049exp 16B
         loot_list: [],
     });
     enemy_templates["百家近卫[BOSS]"] = new Enemy({
-        name: "百家近卫[BOSS]", 
-        description: "百方携带的护卫。为什么少爷会带比自己还弱的护卫呢...", 
+        name: "Baifang's Guard [BOSS]",
+        description: "The guard accompanying Baifang. Why would the young master bring a guard weaker than himself...",
         xp_value: 7575, 
         rank: 2198,
         image: "image/boss/B2101.png",
-        realm: "<span class=realm_terra><b>大地级五阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 5</b></span>",
         size: "small",
         spec: [33],
         spec_value:{33:6},
@@ -7496,12 +7499,12 @@ B9++ 7,778,742,049exp 16B
         loot_list: [{item_name:"极品蓝宝石",chance:1.00}],
     });
     enemy_templates["百方[荒兽森林 ver.][BOSS]"] = new Enemy({
-        name: "百方[荒兽森林 ver.][BOSS]", 
-        description: "和飞船里的百方比起来只低了两阶，属性却少了20余倍。大地级后期的跨度也太大了叭。", 
+        name: "Baifang [Wild Beast Forest ver.] [BOSS]",
+        description: "Only two tiers below the spaceship version of Baifang, yet stats are 20+ times weaker. The gap in late Earth Rank is just too massive.",
         xp_value: 46368, 
         rank: 2199,
         image: "image/boss/B2102.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [32,34],
         spec_value:{},
@@ -7510,12 +7513,12 @@ B9++ 7,778,742,049exp 16B
         loot_list: [{item_name:"玻璃小炮",chance:1.00}],
     });
     enemy_templates["威武武士[BOSS]"] = new Enemy({
-        name: "威武武士[BOSS]", 
-        description: "呐，这就叫做误闯天家...2-4的武士怎么跑来这里了！", 
+        name: "Mighty Warrior [BOSS]",
+        description: "Well, this is what they call trespassing... How did the 2-4 warrior end up here!",
         xp_value: 46368, 
         rank: 2297,
         image: "image/boss/B2201.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -7524,12 +7527,12 @@ B9++ 7,778,742,049exp 16B
         loot_list: [{item_name:"极品绿宝石",chance:1.00},{item_name:"极品绿宝石",chance:1.00}],
     });
     enemy_templates["礁石灵[BOSS]"] = new Enemy({
-        name: "礁石灵[BOSS]", 
-        description: "拦着前往清野瀑布的路的坚硬石头。温馨提醒：普攻倍率在坚固之后判定！", 
+        name: "Reef Spirit [BOSS]",
+        description: "A hard rock blocking the path to Qingye Waterfall. Friendly reminder: normal attack multiplier is calculated after Fortify!",
         xp_value: 17711, 
         rank: 2298,
         image: "image/boss/B2202.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [1],
         spec_value:{},
@@ -7538,12 +7541,12 @@ B9++ 7,778,742,049exp 16B
         loot_list: [],
     });
     enemy_templates["大门派杂役[BOSS]"] = new Enemy({
-        name: "大门派杂役[BOSS]", 
-        description: "不愧是大门派，连杂役都这么强...之前的小势力探险者都快穷死了！", 
+        name: "Major Sect Servant [BOSS]",
+        description: "Worthy of a major sect, even the servants are this strong... the small-faction explorers from before were nearly broke!",
         xp_value: 17711, 
         rank: 2299,
         image: "image/boss/B2203.png",
-        realm: "<span class=realm_terra><b>大地级六阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 6</b></span>",
         size: "small",
         spec: [32,6],
         spec_value:{},
@@ -7552,12 +7555,13 @@ B9++ 7,778,742,049exp 16B
         loot_list: [{item_name:"极品红宝石",chance:3.00}],
     });
     enemy_templates["秘境心火精灵[BOSS]"] = new Enemy({
-        name: "秘境心火精灵[BOSS]", 
-        description: "本来就够强了，还有光环用耶...幸好可以挖光环！", 
+        name: "Secret Realm Heart-Flame Spirit [BOSS]",
+        id: "秘境心火精灵[BOSS]",
+        description: "Already strong enough, and it uses a halo too... thankfully the halo can be removed!",
         xp_value: 46368, 
         rank: 2399,
         image: "image/boss/B2301.png",
-        realm: "<span class=realm_terra><b>大地级七阶</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7</b></span>",
         size: "small",
         spec: [27,13],
         spec_value:{},
@@ -7567,12 +7571,12 @@ B9++ 7,778,742,049exp 16B
     });
     
     enemy_templates["蓝帽行者[BOSS]"] = new Enemy({
-        name: "蓝帽行者[BOSS]", 
-        description: "等会？夺少血？？", 
+        name: "Blue-Hat Wanderer [BOSS]",
+        description: "Wait... how much HP?!",
         xp_value: 75025, 
         rank: 2499,
         image: "image/boss/B2403.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [3,5],
         spec_value:{},
@@ -7582,12 +7586,12 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["流云级魔法师[BOSS]"] = new Enemy({
-        name: "流云级魔法师[BOSS]", 
-        description: "前面有承伤的，嘻嘻嘻嘻嘻", 
+        name: "Drifting Cloud Mage [BOSS]",
+        description: "There is a damage-tanker up front, hehehehe~",
         xp_value: 75025, 
         rank: 2497,
         image: "image/boss/B2401.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [0,6],
         spec_value:{},
@@ -7597,12 +7601,12 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["威武异衣士[BOSS]"] = new Enemy({
-        name: "威武异衣士[BOSS]", 
-        description: "可以造成一定的伤害也有承伤能力。在4重攻击下似乎相当重要呢。", 
+        name: "Mighty Exotic Warrior [BOSS]",
+        description: "Can deal decent damage and also has damage-tanking ability. Seems quite important under 4-hit attacks.",
         xp_value: 75025, 
         rank: 2498,
         image: "image/boss/B2402.png",
-        realm: "<span class=realm_terra><b>大地级七阶 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Stage 7 +</b></span>",
         size: "small",
         spec: [],
         spec_value:{},
@@ -7614,12 +7618,12 @@ B9++ 7,778,742,049exp 16B
 
     
     enemy_templates["废墟追光者[BOSS]"] = new Enemy({
-        name: "废墟追光者[BOSS]", 
-        description: "正面打大概是要被追光给暴揍的。但是，追光只有3段伤害~", 
+        name: "Ruin Light-Chaser [BOSS]",
+        description: "Fighting head-on will likely get you demolished by the light-chasing. But the light-chasing only has 3 damage hits~",
         xp_value: 317811, 
         rank: 2599,
         image: "image/boss/B2501.png",
-        realm: "<span class=realm_terra><b>大地级巅峰</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle</b></span>",
         size: "small",
         spec: [23,40],
         spec_value:{},
@@ -7629,12 +7633,12 @@ B9++ 7,778,742,049exp 16B
     });
     
     enemy_templates["初级卫兵A9[BOSS]"] = new Enemy({
-        name: "初级卫兵A9[BOSS]", 
-        description: "散华真是麻烦的领悟呢...蛾眉月之祝福，魔攻药剂，你喜欢哪一种~", 
+        name: "Junior Guard A9 [BOSS]",
+        description: "Sublimation is such a troublesome insight... Crescent Moon Blessing or Magic Attack Potion, which do you prefer~",
         xp_value: 514229, 
         rank: 2699,
         image: "image/boss/B2601.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [37],
         spec_value:{},
@@ -7644,12 +7648,12 @@ B9++ 7,778,742,049exp 16B
     });
     
     enemy_templates["百方[BOSS]"] = new Enemy({
-        name: "百方[BOSS]", 
-        description: "这只是正牌的了！不过少爷和纳可比起来进步的有点慢呢——", 
+        name: "Baifang [BOSS]",
+        description: "This is the real one! Though the young master progresses a bit slowly compared to Neko~",
         xp_value: 514229, 
         rank: 2797,
         image: "image/boss/B2102.png",
-        realm: "<span class=realm_terra><b>大地级巅峰 +</b></span>",
+        realm: "<span class=realm_terra><b>Earth Rank: Pinnacle +</b></span>",
         size: "small",
         spec: [32,34],
         spec_value:{},
@@ -7659,12 +7663,12 @@ B9++ 7,778,742,049exp 16B
     });
 
     enemy_templates["空间三角B1[BOSS]"] = new Enemy({
-        name: "空间三角B1[BOSS]", 
-        description: "好大一只！好难打！不过，速度有点慢耶。", 
+        name: "Space Triangle B1 [BOSS]",
+        description: "So huge! So hard to beat! But it's a bit slow.",
         xp_value: 2178309, 
         rank: 2798,
         image: "image/boss/B2702.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [6],
         spec_value:{},
@@ -7674,12 +7678,12 @@ B9++ 7,778,742,049exp 16B
     });
     
     enemy_templates["储存姬B1[BOSS]"] = new Enemy({
-        name: "储存姬B1[BOSS]", 
-        description: "哈~自爆！我看谁敢嫌弃加血宝石~", 
+        name: "Storage Princess B1 [BOSS]",
+        description: "Ha~ Self-destruct! Let's see who dares complain about HP-boosting gems now~",
         xp_value: 2178309, 
         rank: 2799,
         image: "image/boss/B2703.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [36],
         spec_value:{},
@@ -7689,12 +7693,12 @@ B9++ 7,778,742,049exp 16B
     });
 
     enemy_templates["银色血眼B1[BOSS]"] = new Enemy({
-        name: "银色血眼B1[BOSS]", 
-        description: "守护着堪称【巨量】的宝物的它，作为重要的剧情节点——被加强了！", 
+        name: "Silver Blood-Eye B1 [BOSS]",
+        description: "Guarding what could be called a [massive] treasure, as an important story milestone — it has been powered up!",
         xp_value: 2178309, 
         rank: 2897,
         image: "image/boss/B2801.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [1],
         spec_value:{},
@@ -7710,12 +7714,12 @@ B9++ 7,778,742,049exp 16B
     });
     
     enemy_templates["质子粉碎机B1[BOSS]"] = new Enemy({
-        name: "质子粉碎机B1[BOSS]", 
-        description: "夭寿啦——夸克禁闭坏掉啦——", 
+        name: "Proton Smasher B1 [BOSS]",
+        description: "Oh no — quark confinement has broken down —",
         xp_value: 2178309, 
         rank: 2898,
         image: "image/boss/B2802.png",
-        realm: "<span class=realm_sky><b>天空级一阶 +</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 1 +</b></span>",
         size: "small",
         spec: [7],
         spec_value:{},
@@ -7726,12 +7730,13 @@ B9++ 7,778,742,049exp 16B
     });
     
     enemy_templates["舰船中枢B6[BOSS]"] = new Enemy({
-        name: "舰船中枢B6[BOSS]", 
-        description: "B6飞船的主战中枢。移速迅捷，战力强悍。不过，镭射枪也到了发挥作用的时候了。", 
-        xp_value: 165580141, 
+        name: "Ship Core B6 [BOSS]",
+        id: "舰船中枢B6[BOSS]",
+        description: "The main combat core of the B6 spaceship. Swift movement speed, formidable combat power. However, it is now time for the laser gun to shine.",
+        xp_value: 165580141,
         rank: 2899,
         image: "image/boss/B2803.png",
-        realm: "<span class=realm_sky><b>天空级六阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 6</b></span>",
         size: "small",
         spec: [45],//10回合
         spec_value:{},
@@ -7742,12 +7747,12 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["魅影幻姬[BOSS]"] = new Enemy({
-        name: "魅影幻姬[BOSS]", 
-        description: "擅长幻术的荒兽。本身实力不算强悍，但可以神不知鬼不觉地让人迷失方向。对了，10x固定凭证是天空级中期的击杀奖励，而4x受影响凭证是两只精英佣兵掉的。", 
+        name: "Phantom Illusion Princess [BOSS]",
+        description: "A wild beast skilled in illusions. Not particularly powerful itself, but can make people lose their way without them realizing. Also, the 10x fixed vouchers are mid Sky-rank kill rewards, while the 4x affected vouchers drop from two elite mercenaries.",
         xp_value: 24157817, 
         rank: 3199,
         image: "image/boss/B3101.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         size: "small",
         spec: [13,0],
         spec_value:{},
@@ -7763,12 +7768,12 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["蛮咕兽[BOSS]"] = new Enemy({
-        name: "蛮咕兽[BOSS]", 
-        description: "皮糙肉厚的荒兽。那边那个冒失的家伙在干什么啊！", 
+        name: "Brute Goo Beast [BOSS]",
+        description: "A tough-skinned and thick-fleshed wild beast. What is that reckless fellow over there doing!",
         xp_value: 24157817, 
         rank: 3298,
         image: "image/boss/B3201.png",
-        realm: "<span class=realm_sky><b>天空级四阶</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4</b></span>",
         size: "small",
         spec: [13,0],
         spec_value:{},
@@ -7779,12 +7784,12 @@ B9++ 7,778,742,049exp 16B
         ],
     });
     enemy_templates["天空级凶兽[BOSS]"] = new Enemy({
-        name: "天空级凶兽[BOSS]", 
-        description: "好潦草的名字...简直是荒兽里的路人甲。", 
+        name: "Sky-Rank Wild Beast [BOSS]",
+        description: "What a sloppy name... truly just another nameless face among wild beasts.",
         xp_value: 63245986, 
         rank: 3299,
         image: "image/boss/B3202.png",
-        realm: "<span class=realm_sky><b>天空级四阶 ++</b></span>",
+        realm: "<span class=realm_sky><b>Sky Rank: Stage 4 ++</b></span>",
         size: "small",
         spec: [20],
         spec_value:{},
@@ -8114,5 +8119,11 @@ B9++ 7,778,742,049exp 16B
         stats: {health: 400, attack: 60, agility: 60, dexterity: 60,intuition: 60, attack_speed: 2, defense: 30},
     });
 })()
+
+Object.keys(enemy_templates).forEach((enemy_key) => {
+    if(!enemy_templates[enemy_key].id) {
+        enemy_templates[enemy_key].id = enemy_key;
+    }
+});
 
 export {Enemy, enemy_templates, enemy_killcount};

@@ -147,6 +147,12 @@ const rarity_colors = {
     flawless: "rarity_flawless",
 }
 
+function resolve_location_ref(location_ref) {
+    return locations[location_ref] || Object.values(locations).find(existing_location => {
+        return existing_location?.id === location_ref || existing_location?.name === location_ref;
+    });
+}
+
 const crafting_pages = {
     crafting: {
         items: document.querySelector(`[data-crafting_category="crafting"] [data-crafting_subcategory="items"]`),
@@ -181,7 +187,7 @@ const crafting_pages = {
 const backup_load_button = document.getElementById("backup_load_button");
 const other_save_load_button = document.getElementById("import_other_save_button");
 
-const units=['','万','亿','兆','京','垓','秭','穣','沟','涧','正','载','极'];
+const units=['','W','E','T','Q','Qi','Sx','Sp','O','N','D','Ud','Dd'];
 
 function format_number(some_number)
 {
@@ -267,12 +273,12 @@ function create_item_tooltip_content({item, options={}}) {
         if(item.equip_slot != "props" && item.equip_slot != "method" && item.equip_slot != "special" && item.equip_slot != "realm")//disable quality
         {
             if(!options.skip_quality && options?.quality?.length == 2) {
-                item_tooltip += `<br><br><b>品质: <span class="${rarity_colors[item.getRarity(options.quality[0])]}"> ${options.quality[0]}% </span> - <span class="${rarity_colors[item.getRarity(options.quality[1])]}"> ${options.quality[1]}% </span></b>`;
+                item_tooltip += `<br><br><b>Quality: <span class="${rarity_colors[item.getRarity(options.quality[0])]}"> ${options.quality[0]}% </span> - <span class="${rarity_colors[item.getRarity(options.quality[1])]}"> ${options.quality[1]}% </span></b>`;
             } else {
-                item_tooltip += `<br><br><b><span class="${rarity_colors[item.getRarity(quality)]}">品质: ${quality}% </span></b>`;
+                item_tooltip += `<br><br><b><span class="${rarity_colors[item.getRarity(quality)]}">Quality: ${quality}% </span></b>`;
             }
         }
-        let SkillLevelMap = {"Mining":"挖掘","Woodcutting":"砍伐","Fishing":"钓鱼"};
+        let SkillLevelMap = {"Mining":"Excavation","Woodcutting":"Woodcutting","Fishing":"Fishing"};
         if(item.bonus_skill_levels != {})
         {
             let S_levels = item.bonus_skill_levels;
@@ -287,12 +293,12 @@ function create_item_tooltip_content({item, options={}}) {
             });
         }
 
-        let EquipSlotMap = {"sword":"剑","head":"头部","trident":"三叉戟","moonwheel":"月轮","torso":"躯干","legs":"腿部","feet":"脚部","pickaxe":"镐子","axe":"斧子","sickle":"镰刀","props":"道具","method":"秘法","special":"特殊","realm":"领域"}
+        let EquipSlotMap = {"sword":"Sword","head":"Head","trident":"Trident","moonwheel":"Moonwheel","torso":"Torso","legs":"Legs","feet":"Feet","pickaxe":"Pickaxe","axe":"Axe","sickle":"Sickle","props":"Prop","method":"Method","special":"Special","realm":"Realm"}
         if(item.equip_slot === "weapon") {
-            item_tooltip += `<br>类型: <b>${EquipSlotMap[item.weapon_type]}</b>`;
+            item_tooltip += `<br>Type: <b>${EquipSlotMap[item.weapon_type]}</b>`;
         }
         else if(item.offhand_type !== "shield") {
-            item_tooltip += `<br>槽位: <b>${EquipSlotMap[item.equip_slot]}</b>`;
+            item_tooltip += `<br>Slot: <b>${EquipSlotMap[item.equip_slot]}</b>`;
         }
 
         if(item.components) {
@@ -302,7 +308,7 @@ function create_item_tooltip_content({item, options={}}) {
             if(item.components) {
                 component_description += `[${item_templates[item.components[components[0]]].name}]`;
                 if(!item.components[components[1]]) {
-                    component_description += `+ 无 [${components[1]}]`;
+                    component_description += `+ None [${components[1]}]`;
                 } else {
                     component_description += `+[${item_templates[item.components[components[1]]].name}]`;
                 }
@@ -313,14 +319,14 @@ function create_item_tooltip_content({item, options={}}) {
         }
 
         
-        let EquipStatMap = {"Defense":"防御","Attack power":"攻击","Attack speed":"攻速","Agility":"敏捷","Crit rate":"暴率","Max health":"生命","Attack mul":"普攻倍率","Crit multiplier":"爆伤","Health regeneration_flat":"生命恢复","Health regeneration_percent":"生命恢复[%]","Luck":"幸运"}
+        let EquipStatMap = {"Defense":"Defense","Attack power":"Attack","Attack speed":"Speed","Agility":"Agility","Crit rate":"Crit Rate","Max health":"Health","Attack mul":"Normal Atk Mul","Crit multiplier":"Crit Dmg","Health regeneration_flat":"HP Regen","Health regeneration_percent":"HP Regen [%]","Luck":"Luck"}
         if(!options.skip_quality && options?.quality?.length == 2) {
             if(item.getAttack) {
                 item_tooltip += 
-                    `<br><br>攻击: ${format_number(item.getAttack(options.quality[0]))}-${format_number(item.getAttack(options.quality[1]))}`;
+                    `<br><br>Attack: ${format_number(item.getAttack(options.quality[0]))}-${format_number(item.getAttack(options.quality[1]))}`;
             } else if(item.getDefense) { 
                 item_tooltip += 
-                `<br><br>防御: ${format_number(item.getDefense(options.quality[0]))}-${format_number(item.getDefense(options.quality[1]))}`;
+                `<br><br>Defense: ${format_number(item.getDefense(options.quality[0]))}-${format_number(item.getDefense(options.quality[1]))}`;
             } else if(item.offhand_type === "shield") {
                 item_tooltip += 
                 `<br><br>Can block up to: ${Math.round(10*item.getShieldStrength(options.quality[0])*(character.stats.total_multiplier.block_strength))/10}-${Math.round(10*item.getShieldStrength(options.quality[1])*(character.stats.total_multiplier.block_strength))/10} damage [base: ${item.getShieldStrength(options.quality[0])}-${item.getShieldStrength(options.quality[1])}]`;
@@ -345,10 +351,10 @@ function create_item_tooltip_content({item, options={}}) {
         } else {
             if(item.getAttack) {
                 item_tooltip += 
-                    `<br><br>攻击: ${format_number(item.getAttack())}`;
+                    `<br><br>Attack: ${format_number(item.getAttack())}`;
             } else if(item.getDefense && item.equip_slot != "props" && item.equip_slot != "method" && item.equip_slot != "special" && item.equip_slot != "realm") { 
                 item_tooltip += 
-                `<br><br>防御: ${format_number(item.getDefense())}`;
+                `<br><br>Defense: ${format_number(item.getDefense())}`;
             } else if(item.offhand_type === "shield") {
                 item_tooltip += 
                 `<br><br>Can block up to: ${Math.round(10*item.getShieldStrength()*(character.stats.total_multiplier.block_strength))/10} damage [base: ${item.getShieldStrength()}]`;
@@ -375,11 +381,11 @@ function create_item_tooltip_content({item, options={}}) {
     else if (item.item_type === "USABLE") {
         item_tooltip += `<br>`;
         if(item.realmcap != -1){
-            item_tooltip += `<br>限制境界: <span class=realm_${window.REALMS[item.realmcap][5]}>${window.REALMS[item.realmcap][1]}</span> 及以下<br>`
+            item_tooltip += `<br>Realm Cap: <span class=realm_${window.REALMS[item.realmcap][5]}>${window.REALMS[item.realmcap][1]}</span> and below<br>`
         }
 
         if(item.effects.length > 0) {
-            item_tooltip += "<br>效果: "
+            item_tooltip += "<br>Effects: "
         }
         for(let i = 0; i < item.effects.length; i++) {
             item_tooltip += create_effect_tooltip(item.effects[i].effect, item.effects[i].duration).outerHTML;
@@ -399,33 +405,33 @@ function create_item_tooltip_content({item, options={}}) {
         }
 
         if(!options.skip_quality && options?.quality?.length == 2) {
-            item_tooltip += `<br><br><b>品质: <span class="${rarity_colors[item.getRarity(options.quality[0])]}"> ${options.quality[0]}% </span> - <span class="${rarity_colors[item.getRarity(options.quality[1])]}"> ${options.quality[1]}% </span></b>`;
+            item_tooltip += `<br><br><b>Quality: <span class="${rarity_colors[item.getRarity(options.quality[0])]}"> ${options.quality[0]}% </span> - <span class="${rarity_colors[item.getRarity(options.quality[1])]}"> ${options.quality[1]}% </span></b>`;
         } else {
-            item_tooltip += `<br><br><b class="${rarity_colors[item.getRarity(quality)]}">品质: ${quality}% </b>`;
+            item_tooltip += `<br><br><b class="${rarity_colors[item.getRarity(quality)]}">Quality: ${quality}% </b>`;
         }
         if(item.component_tier) {
-            item_tooltip += `<br>部件等级: ${item.component_tier}`;
+            item_tooltip += `<br>Component Tier: ${item.component_tier}`;
         }
         if(options?.quality?.length == 2){
             if(Object.keys(item.stats).length > 0 || item?.attack_value !== 0 || item?.attack_multiplier !== 1) {
-                item_tooltip += `<br>基础属性: `;
+                item_tooltip += `<br>Base Stats: `;
             }
             if(item?.attack_value) {
-                item_tooltip += `<br>攻击力: + ${format_number(item.attack_value)}`;
+                item_tooltip += `<br>Attack: + ${format_number(item.attack_value)}`;
             }
             if(item?.defense_value) {
-                item_tooltip += `<br>防御力: + ${format_number(item.defense_value)}`;
+                item_tooltip += `<br>Defense: + ${format_number(item.defense_value)}`;
             }
         }
         else{
             if(Object.keys(item.stats).length > 0 || item?.attack_value !== 0 || item?.attack_multiplier !== 1) {
-                item_tooltip += `<br>预期属性: `;
+                item_tooltip += `<br>Expected Stats: `;
             }
             if(item?.attack_value) {
-                item_tooltip += `<br>攻击力: + ${format_number(item.attack_value * quality/100 * rarity_multipliers[getItemRarity(quality)]) }`;
+                item_tooltip += `<br>Attack: + ${format_number(item.attack_value * quality/100 * rarity_multipliers[getItemRarity(quality)]) }`;
             }
             if(item?.defense_value) {
-                item_tooltip += `<br>防御力: + ${format_number(item.defense_value * quality/100 * rarity_multipliers[getItemRarity(quality)])}`;
+                item_tooltip += `<br>Defense: + ${format_number(item.defense_value * quality/100 * rarity_multipliers[getItemRarity(quality)])}`;
             }
         }
         let rarity_mul = rarity_multipliers[getItemRarity(quality)];
@@ -451,7 +457,7 @@ function create_item_tooltip_content({item, options={}}) {
     } else {
         item_tooltip += "<br>";
     }
-    item_tooltip += `<br>价值: ${format_money(round_item_price(item.getValue(quality) * ((options && options.trader) ? traders[current_trader].getProfitMargin() : 1) || 0))}`;
+    item_tooltip += `<br>Value: ${format_money(round_item_price(item.getValue(quality) * ((options && options.trader) ? traders[current_trader].getProfitMargin() : 1) || 0))}`;
 
     // if(item.saturates_market) {
     //     item_tooltip += ` [初始 ${format_money(round_item_price(item.getBaseValue(quality) * ((options && options.trader) ? traders[current_trader].getProfitMargin() : 1) || 1))}]`
@@ -486,7 +492,7 @@ function create_effect_tooltip(effect_name, duration) {
         //for regeneration bonuses, it is assumed they are only flat and not multiplicative
         //${capitalize_first_letter(key.replaceAll("_", " ").replace("flat","").replace("percent",""))}
             let sign = stat_value.flat > 0? "+":"";
-            const EffectToolTipMap = {"attack_power":"攻击","defense":"防御","agility":"敏捷","crit_multiplier":"爆伤","attack_mul":"普攻倍率","health_regeneration_flat":"生命恢复","health_regeneration_percent":"生命恢复[%]","crit_rate":"暴率","attack_speed":"攻速","max_health":"生命上限","luck":"幸运"}
+            const EffectToolTipMap = {"attack_power":"Attack","defense":"Defense","agility":"Agility","crit_multiplier":"Crit Dmg","attack_mul":"Normal Atk Mul","health_regeneration_flat":"HP Regen","health_regeneration_percent":"HP Regen [%]","crit_rate":"Crit Rate","attack_speed":"Speed","max_health":"Max HP","luck":"Luck"}
             if(stat_value.flat == undefined){
                 let sign = "";
                 tooltip.innerHTML += `${EffectToolTipMap[key]} : x${sign}${stat_value.multiplier}`;
@@ -697,7 +703,7 @@ function format_rewards(rewards) {
         const xp_multipliers = Object.keys(rewards.xp_multipliers);
         let name;
         
-        const MulNameMapR = {"all":"全部","hero":"等级","all skill":"技能"};
+        const MulNameMapR = {"all":"All","hero":"Level","all skill":"Skills"};
         if(xp_multipliers[0] !== "all" && xp_multipliers[0] !== "hero" && xp_multipliers[0] !== "all_skill") {
             name = skills[xp_multipliers[0]].name();
         } else {
@@ -705,9 +711,9 @@ function format_rewards(rewards) {
         }
 
         if(formatted) {
-            formatted += `, x${rewards.xp_multipliers[xp_multipliers[0]]} ${name} 经验获取`;
+            formatted += `, x${rewards.xp_multipliers[xp_multipliers[0]]} ${name} XP gain`;
         } else {
-            formatted = `x${rewards.xp_multipliers[xp_multipliers[0]]} ${name} 经验获取`;
+            formatted = `x${rewards.xp_multipliers[xp_multipliers[0]]} ${name} XP gain`;
         }
         for(let i = 1; i < xp_multipliers.length; i++) {
             let name;
@@ -716,7 +722,7 @@ function format_rewards(rewards) {
             } else {
                 name = MulNameMapR[xp_multipliers[i].replace("_"," ")];
             }
-            formatted += `, x${rewards.xp_multipliers[xp_multipliers[i]]} ${name} 经验获取`;
+            formatted += `, x${rewards.xp_multipliers[xp_multipliers[i]]} ${name} XP gain`;
         }
     }
     return formatted;
@@ -737,7 +743,7 @@ function log_loot(loot_list, is_combat=true) {
         return;
     }
     
-    let message = `${is_combat?"掉落 ":"获取 "} "` + loot_list[0]["item"]["name"] + `" x` + loot_list[0]["count"];
+    let message = `${is_combat?"Dropped ":"Gained "} "` + loot_list[0]["item"]["name"] + `" x` + loot_list[0]["count"];
     if(loot_list.length > 1) {
         for(let i = 1; i < loot_list.length; i++) {
             message += (`, "` + loot_list[i]["item"]["name"] + `" x` + loot_list[i]["count"]);
@@ -781,7 +787,7 @@ function update_displayed_trader() {
 }
 
 function update_displayed_money() {
-    document.getElementById("money_div").innerHTML = `你的钱包: ${format_money(character.money)}`;
+    document.getElementById("money_div").innerHTML = `Your wallet: ${format_money(character.money)}`;
 }
 
 /**
@@ -1181,7 +1187,7 @@ function create_inventory_item_div({key, item_count, target, is_equipped, trade_
     if("quality" in target_item) {
         item_control_div.dataset.item_quality = target_item.quality;
     }
-    let EquipSlotMap = {"sword":"剑","head":"头部","trident":"三叉戟","moonwheel":"月轮","torso":"躯干","legs":"腿部","feet":"脚部","weapon":"武器","props":"道具","method":"秘法","special":"特殊","realm":"领域"};
+    let EquipSlotMap = {"sword":"Sword","head":"Head","trident":"Trident","moonwheel":"Moonwheel","torso":"Torso","legs":"Legs","feet":"Feet","weapon":"Weapon","props":"Prop","method":"Method","special":"Special","realm":"Realm"};
     if(target_item.tags?.equippable) {
         if(target_item.tags.tool) {
             item_name_div.innerHTML = `<span class = "item_slot" >[tool]</span> <span>${target_item.getName()}</span>`;
@@ -1201,7 +1207,7 @@ function create_inventory_item_div({key, item_count, target, is_equipped, trade_
         }
         item_control_div.dataset.item_slot = target_item.equip_slot;
     } else if(target_item.tags.component) {
-        item_name_div.innerHTML = `<span class = "item_category">[部件]</span> <span class="item_name"><span class="${rarity_colors[target_item.getRarity()]}">${target_item.getName()}</span></span>`;
+        item_name_div.innerHTML = `<span class = "item_category">[Component]</span> <span class="item_name"><span class="${rarity_colors[target_item.getRarity()]}">${target_item.getName()}</span></span>`;
         item_name_div.classList.add(`${item_class}_name`);
         item_div.appendChild(item_name_div);
 
@@ -1262,13 +1268,13 @@ function create_inventory_item_div({key, item_count, target, is_equipped, trade_
             //}
             const item_use_button = document.createElement("div");
             item_use_button.classList.add("item_use_button");
-            item_use_button.innerText = "[使用]";
+            item_use_button.innerText = "[Use]";
             item_additional.appendChild(item_use_button);
             
         } else if(target_item.item_type === "BOOK") {
             const item_read_button = document.createElement("div");
             item_read_button.classList.add("item_use_button");
-            item_read_button.innerText = "[阅读]";
+            item_read_button.innerText = "[Read]";
             item_additional.appendChild(item_read_button);
 
             item_div.classList.add("item_book");
@@ -1276,12 +1282,12 @@ function create_inventory_item_div({key, item_count, target, is_equipped, trade_
         if(typeof trade_index === "undefined" && target_item.tags.equippable) {
             if(!is_equipped) {
                 let item_equip_span = document.createElement("span");
-                item_equip_span.innerHTML = "[装备]";
+                item_equip_span.innerHTML = "[Equip]";
                 item_equip_span.classList.add("equip_item_button", "item_controls");
                 item_additional.appendChild(item_equip_span);
             } else {
                 let item_unequip_div = document.createElement("div");
-                item_unequip_div.innerHTML = "[卸下]";
+                item_unequip_div.innerHTML = "[Unequip]";
                 item_unequip_div.classList.add("unequip_item_button", "item_controls");
                 item_additional.appendChild(item_unequip_div);
             }
@@ -1314,10 +1320,10 @@ function update_displayed_equipment() {
         if(character.equipment[key] == null) { //no item in slot
             eq_tooltip = document.createElement("span");
             eq_tooltip.classList.add("item_tooltip");
-            let mapp={"head":"头部","torso":"躯干","legs":"腿部","feet":"脚部","weapon":"武器","method":"秘法","realm":"领域","law":"法则","props":"道具","special":"特殊","sickle":"镰刀","pickaxe":"镐子","axe":"斧子","method":"秘法"};
-            equipment_slots_divs[key].innerHTML = `${mapp[key]} 槽位`;
+            let mapp={"head":"Head","torso":"Torso","legs":"Legs","feet":"Feet","weapon":"Weapon","method":"Method","realm":"Realm","law":"Law","props":"Prop","special":"Special","sickle":"Sickle","pickaxe":"Pickaxe","axe":"Axe"};
+            equipment_slots_divs[key].innerHTML = `${mapp[key]} Slot`;
             equipment_slots_divs[key].classList.add("equipment_slot_empty");
-            eq_tooltip.innerHTML = `你的 ${mapp[key]} 槽位`;
+            eq_tooltip.innerHTML = `Your ${mapp[key]} Slot`;
         }
         else 
         {
@@ -1384,13 +1390,13 @@ function update_displayed_enemies() {
             }
 
             //enemies_div.children[i].children[0].children[1].innerHTML = `AP : ${Math.round(ap)} | EP : ${Math.round(ep)}`;
-            enemies_div.children[i].children[0].children[1].children[0].innerHTML = `伤害:${format_number(current_enemies[i].stats.attack)}`;
-            enemies_div.children[i].children[0].children[1].children[1].innerHTML = `防御:${format_number(current_enemies[i].stats.defense)}`;
-            enemies_div.children[i].children[0].children[1].children[2].innerHTML = `攻速:${format_number(disp_speed)}`;
+            enemies_div.children[i].children[0].children[1].children[0].innerHTML = `Damage:${format_number(current_enemies[i].stats.attack)}`;
+            enemies_div.children[i].children[0].children[1].children[1].innerHTML = `Defense:${format_number(current_enemies[i].stats.defense)}`;
+            enemies_div.children[i].children[0].children[1].children[2].innerHTML = `Speed:${format_number(disp_speed)}`;
             let HIT = Math.floor(100*hit_chance);
             let EVA = Math.floor(100*evasion_chance)
-            enemies_div.children[i].children[0].children[1].children[3].innerHTML = `命中:${(HIT!=100)?(HIT+'%'):'MAX'}`; //100% if shield!
-            enemies_div.children[i].children[0].children[1].children[4].innerHTML = `闪避:${(EVA!=100)?(EVA+'%'):'MAX'}`;
+            enemies_div.children[i].children[0].children[1].children[3].innerHTML = `Hit:${(HIT!=100)?(HIT+'%'):'MAX'}`; //100% if shield!
+            enemies_div.children[i].children[0].children[1].children[4].innerHTML = `Dodge:${(EVA!=100)?(EVA+'%'):'MAX'}`;
             
         } else {
             enemies_div.children[i].children[0].style.display = "none"; //just hide it
@@ -1580,7 +1586,7 @@ function update_displayed_normal_location(location) {
         locations_button.setAttribute("data-location", location.name);
         locations_button.classList.add("location_choices");
         locations_button.setAttribute("onclick", 'update_displayed_location_choices({location_name: this.getAttribute("data-location"), category: "travel"});');
-        locations_button.innerHTML = '<i class="material-icons">format_list_bulleted</i>  展开';
+        locations_button.innerHTML = '<i class="material-icons">format_list_bulleted</i>  Expand';
         action_div.appendChild(locations_button);
     } else if(available_locations.length > 0) {
         action_div.append(...create_location_choices({location: location, category: "travel"}));
@@ -1755,7 +1761,7 @@ function create_location_choices({location, category, add_icons = true, is_comba
                         action.innerHTML = `<i class="material-icons">directions</i> ` + location.connected_locations[i].custom_text;
                     }
                     else {
-                        action.innerHTML = `<i class="material-icons">directions</i>  ` + "前往 [" + location.connected_locations[i].location.name+"]";
+                        action.innerHTML = `<i class="material-icons">directions</i>  ` + "Go to [" + location.connected_locations[i].location.name+"]";
                     }
                 } else {
                     action.classList.add("travel_combat");
@@ -1763,26 +1769,28 @@ function create_location_choices({location, category, add_icons = true, is_comba
                         action.innerHTML = `<span style="color:#ffc0c0"><i class="material-icons">warning_amber</i> ` + location.connected_locations[i].custom_text + `</span>`;
                     }
                     else {
-                        action.innerHTML = `<span style="color:#ffc0c0"><i class="material-icons">warning_amber</i>  ` + "进入 [" + location.connected_locations[i].location.name+"]</span>";
+                        action.innerHTML = `<span style="color:#ffc0c0"><i class="material-icons">warning_amber</i>  ` + "Enter [" + location.connected_locations[i].location.name+"]</span>";
                     }
                 }
             
                 action.classList.add("action_travel");
-                action.setAttribute("data-travel", location.connected_locations[i].location.name);
+                action.setAttribute("data-travel", location.connected_locations[i].location.id || location.connected_locations[i].location.name);
                 action.setAttribute("onclick", "change_location(this.getAttribute('data-travel'));");
         
                 choice_list.push(action);
             } 
 
-            if(last_combat_location && location.connected_locations.filter(loc => loc.location.name === last_combat_location).length == 0) {
-                const last_combat = locations[last_combat_location];
+            const last_combat = resolve_location_ref(last_combat_location);
+            if(last_combat && location.connected_locations.filter(loc => {
+                return loc.location?.id === last_combat.id || loc.location?.name === last_combat.name;
+            }).length == 0) {
                 const action = document.createElement("div");
                 action.classList.add("travel_combat");
                 
-                action.innerHTML = `<span style="color:#ffd8c0"><i class="material-icons">warning_amber</i>  快速返回 [${last_combat.name}]</span>`;
+                action.innerHTML = `<span style="color:#ffd8c0"><i class="material-icons">warning_amber</i>  Quick return to [${last_combat.name}]</span>`;
                 
                 action.classList.add("action_travel");
-                action.setAttribute("data-travel", last_combat.name);
+                action.setAttribute("data-travel", last_combat.id || last_combat.name);
                 action.setAttribute("onclick", "change_location(this.getAttribute('data-travel'));");
         
                 choice_list.push(action);
@@ -1793,24 +1801,26 @@ function create_location_choices({location, category, add_icons = true, is_comba
             if(location.leave_text) {
                 action.innerHTML = `<i class="material-icons">directions</i>  ` + location.leave_text;
             } else {
-                action.innerHTML = `<i class="material-icons">directions</i>  ` + "回到 " + location.parent_location.name;
+                action.innerHTML = `<i class="material-icons">directions</i>  ` + "Return to " + location.parent_location.name;
             }
-            action.setAttribute("data-travel", location.parent_location.name);
+            action.setAttribute("data-travel", location.parent_location.id || location.parent_location.name);
             action.setAttribute("onclick", "change_location(this.getAttribute('data-travel'));");
 
             choice_list.push(action);
         }
 
-        if(last_location_with_bed && !location.sleeping && (!location.connected_locations || location?.connected_locations?.filter(loc => loc.location.name === last_location_with_bed).length == 0)) {
-            const last_bed = locations[last_location_with_bed];
+        const last_bed = resolve_location_ref(last_location_with_bed);
+        if(last_bed && !location.sleeping && (!location.connected_locations || location?.connected_locations?.filter(loc => {
+            return loc.location?.id === last_bed.id || loc.location?.name === last_bed.name;
+        }).length == 0)) {
 
             const action = document.createElement("div");
             action.classList.add("travel_normal");
             
-            action.innerHTML = `<span style="color:#c0c0ff"><i class="material-icons">directions</i> 快速返回 [${last_bed.name}]</span>`;
+            action.innerHTML = `<span style="color:#c0c0ff"><i class="material-icons">directions</i> Quick return to [${last_bed.name}]</span>`;
             
             action.classList.add("action_travel");
-            action.setAttribute("data-travel", last_bed.name);
+            action.setAttribute("data-travel", last_bed.id || last_bed.name);
             action.setAttribute("onclick", "change_location(this.getAttribute('data-travel'));");
     
             choice_list.push(action);
@@ -1829,11 +1839,11 @@ function create_location_choices({location, category, add_icons = true, is_comba
                 action.innerHTML = `<span style="color:#ff8080"><i class="material-icons icon">warning_amber</i>  ` + available_challenges[i].custom_text + `</span>`;
             }
             else {
-                action.innerHTML = `<span style="color:#ff8080"><i class="material-icons">warning_amber</i>  ` + "进入 " + available_challenges[i].location.name + `</span>`;
+                action.innerHTML = `<span style="color:#ff8080"><i class="material-icons">warning_amber</i>  ` + "Enter " + available_challenges[i].location.name + `</span>`;
             }
             
             action.classList.add("action_travel");
-            action.setAttribute("data-travel", available_challenges[i].location.name);
+            action.setAttribute("data-travel", available_challenges[i].location.id || available_challenges[i].location.name);
             action.setAttribute("onclick", "change_location(this.getAttribute('data-travel'));");
     
             choice_list.push(action);
@@ -1844,9 +1854,16 @@ function create_location_choices({location, category, add_icons = true, is_comba
 }
 
 function update_displayed_location_choices({location_name, category, add_icons, is_combat}) {
-    action_div.replaceChildren(...create_location_choices({location: locations[location_name], category: category, add_icons: add_icons, is_combat: is_combat}));
+    const target_location = resolve_location_ref(location_name);
+    if(!target_location) {
+        console.error(`Unable to resolve location for choices: "${location_name}"`);
+        reload_normal_location();
+        return;
+    }
+
+    action_div.replaceChildren(...create_location_choices({location: target_location, category: category, add_icons: add_icons, is_combat: is_combat}));
     const return_button = document.createElement("div");
-    return_button.innerHTML = "<i class='material-icons'>arrow_back</i> 收起";
+    return_button.innerHTML = "<i class='material-icons'>arrow_back</i> Collapse";
     return_button.setAttribute("onclick", "reload_normal_location()");
     return_button.classList.add("choices_return_button");
     action_div.appendChild(return_button);
@@ -1902,19 +1919,19 @@ function create_location_types_display(current_location){
     {
         const type_div = document.createElement("div");
         let c_halo = current_location.enemy_stat_halo;
-        if(current_location.name == "纳家秘境 - ∞"){
+        if(current_location.name == "Na Family Secret Realm - ∞"){
             c_halo = inf_combat.A6.cur * 0.08;
         }
-        if(current_location.name.includes("赫尔沼泽")){
+        if(current_location.name.includes("Hel Swamp")){
             inf_combat.B3 = inf_combat.B3 || 0;
             c_halo = inf_combat.B3 * 0.01;
         }
-        type_div.innerHTML += `光环 ${format_number(c_halo*100.0)} %`;
+        type_div.innerHTML += `Aura ${format_number(c_halo*100.0)} %`;
         location_types_div.appendChild(type_div);
     }
     for(let i = 0; i < current_location.types?.length; i++) {
         const type_div = document.createElement("div");
-        const LocationTypesMap = {"dark":"黑暗","aura":"光环","stress":"威压"}
+        const LocationTypesMap = {"dark":"Dark","aura":"Aura","stress":"Oppression"}
         type_div.innerHTML = LocationTypesMap[current_location.types[i].type] + (current_location.types[i].stage>1?` ${"I".repeat(current_location.types[i].stage)}`:"");
         type_div.classList.add("location_type_div");
 
@@ -1936,7 +1953,7 @@ function create_location_types_display(current_location){
                 const actual = get_location_type_penalty(type, stage, stat);
                 type_tooltip.innerHTML += `<br>${stat_names[stat]} x${Math.round(1000*actual)/1000}`;
                 if(base != actual) {
-                    type_tooltip.innerHTML += ` [基础值: x${effects.multipliers[stat]}]`
+                    type_tooltip.innerHTML += ` [Base value: x${effects.multipliers[stat]}]`
                 }
             })
         } //other effects to be done when/if they are added
@@ -2038,7 +2055,7 @@ function create_displayed_crafting_recipes() {
                 crafting_pages[recipe_category][recipe_subcategory].innerHTML = "";
             }
             Object.keys(recipes[recipe_category][recipe_subcategory]).forEach(recipe => {
-                if(!((recipe == '月轮' ) && (!global_flags["is_moonwheel_unlocked"]))) add_crafting_recipe_to_display({category: recipe_category, subcategory: recipe_subcategory, recipe_id: recipe});
+                if(!((recipe == 'Moonwheel' ) && (!global_flags["is_moonwheel_unlocked"]))) add_crafting_recipe_to_display({category: recipe_category, subcategory: recipe_subcategory, recipe_id: recipe});
             });
         });
     });
@@ -2050,7 +2067,7 @@ function unlock_moonwheel() {
     Object.keys(recipes).forEach(recipe_category => {
         Object.keys(recipes[recipe_category]).forEach(recipe_subcategory => {
             Object.keys(recipes[recipe_category][recipe_subcategory]).forEach(recipe => {
-                if((recipe == '月轮')) add_crafting_recipe_to_display({category: recipe_category, subcategory: recipe_subcategory, recipe_id: recipe});
+                if((recipe == 'Moonwheel')) add_crafting_recipe_to_display({category: recipe_category, subcategory: recipe_subcategory, recipe_id: recipe});
             });
         });
     });
@@ -2138,16 +2155,16 @@ function add_crafting_recipe_to_display({category, subcategory, recipe_id}) {
         }
         
         recipe_div.children[0].innerHTML = '<i class="material-icons icon crafting_dropdown_icon"> keyboard_double_arrow_down </i>' +  recipe_div.children[0].innerHTML;
-        let ComponentNameMap = {"long blade":"剑刃","triple blade":"三叉戟头","short handle":"剑柄","helmet exterior":"头部外甲","chestplate exterior":"胸部外甲","leg armor exterior":"腿部外甲","shoes exterior":"脚部外甲","helmet interior":"头部内甲","chestplate interior":"胸部内甲","leg armor interior":"腿部内甲","shoes interior":"脚部内甲","wheel core":"轮芯","wheel head":"轮锋"}
+        let ComponentNameMap = {"long blade":"Sword Blade","triple blade":"Trident Head","short handle":"Sword Handle","helmet exterior":"Helmet Exterior","chestplate exterior":"Chestplate Exterior","leg armor exterior":"Leg Armor Exterior","shoes exterior":"Shoe Exterior","helmet interior":"Helmet Interior","chestplate interior":"Chestplate Interior","leg armor interior":"Leg Armor Interior","shoes interior":"Shoe Interior","wheel core":"Moonwheel Core","wheel head":"Moonwheel Blade"}
         const component_selection_1 = document.createElement("div"); //weapon head or internal armor
-        component_selection_1.innerHTML = `<span class="crafting_selection"><i class="material-icons icon subcrafting_dropdown_icon"> keyboard_double_arrow_down </i>选择一个[${ComponentNameMap[recipe.components[0]]}]</span>`;
+        component_selection_1.innerHTML = `<span class="crafting_selection"><i class="material-icons icon subcrafting_dropdown_icon"> keyboard_double_arrow_down </i>Select a [${ComponentNameMap[recipe.components[0]]}]</span>`;
         
         const component_1_list = document.createElement("div");
         component_1_list.classList.add("folded_crafting_selection");
         component_selection_1.appendChild(component_1_list);
 
         const component_selection_2 = document.createElement("div"); //weapon handle or external armor
-        component_selection_2.innerHTML = `<span class="crafting_selection"><i class="material-icons icon subcrafting_dropdown_icon"> keyboard_double_arrow_down </i>选择一个[${ComponentNameMap[recipe.components[1]]}]</span>`;
+        component_selection_2.innerHTML = `<span class="crafting_selection"><i class="material-icons icon subcrafting_dropdown_icon"> keyboard_double_arrow_down </i>Select a [${ComponentNameMap[recipe.components[1]]}]</span>`;
         
         const component_2_list = document.createElement("div");
         component_2_list.classList.add("folded_crafting_selection");
@@ -2197,7 +2214,7 @@ function add_crafting_recipe_to_display({category, subcategory, recipe_id}) {
         });
 
         const accept_recipe_button = document.createElement("div");
-        accept_recipe_button.innerHTML = "制作";
+        accept_recipe_button.innerHTML = "Craft";
         accept_recipe_button.classList.add("recipe_creation_button");
         accept_recipe_button.addEventListener("click", (event)=>{
             window.useRecipe(event.target);
@@ -2205,7 +2222,7 @@ function add_crafting_recipe_to_display({category, subcategory, recipe_id}) {
         });
 
         const equip_max_button = document.createElement("div");
-        equip_max_button.innerHTML = "[制作最大]"
+        equip_max_button.innerHTML = "[Craft Max]"
         equip_max_button.classList.add("recipe_creation_button");
         equip_max_button.addEventListener("click", (event)=>{
             window.useRecipemax(event.target);
@@ -2353,8 +2370,8 @@ function create_recipe_tooltip_content({category, subcategory, recipe_id, materi
     let tooltip = "";
     if(subcategory === "items" || subcategory === "items2" || subcategory === "items3") {
         const success_chance = Math.round(100*recipe.get_success_chance(station_tier));
-        tooltip += `配方等级：${recipe.recipe_level[1]}<br>`
-        tooltip += `成功率: <b><span style="color:${success_chance > 74?"lime":success_chance>49?"yellow":success_chance>24?"orange":"red"}">${success_chance}%</span></b><br><br>材料:<br>`;
+        tooltip += `Recipe Level:${recipe.recipe_level[1]}<br>`
+        tooltip += `Success rate: <b><span style="color:${success_chance > 74?"lime":success_chance>49?"yellow":success_chance>24?"orange":"red"}">${success_chance}%</span></b><br><br>Materials:<br>`;
         for(let i = 0; i < recipe.materials.length; i++) {
             const key = item_templates[recipe.materials[i].material_id].getInventoryKey();
             if(character.inventory[key]?.count >= recipe.materials[i].count) {
@@ -2363,16 +2380,16 @@ function create_recipe_tooltip_content({category, subcategory, recipe_id, materi
                 tooltip += `<span style="color:red"><b>${item_templates[recipe.materials[i].material_id].getName()} x${character.inventory[key]?.count || 0}/${recipe.materials[i].count}</b></span><br>`;
             }
         }
-        tooltip += `<br>产物:<br><div class="recipe_result">${create_item_tooltip_content({item: item_templates[recipe.getResult().result_id], options: {skip_quality: true}})}</div>`;
+        tooltip += `<br>Result:<br><div class="recipe_result">${create_item_tooltip_content({item: item_templates[recipe.getResult().result_id], options: {skip_quality: true}})}</div>`;
     } else if(subcategory === "components"  || recipe.recipe_type === "component") {
-        tooltip += `材料:<br>`;
+        tooltip += `Materials:<br>`;
         if(character.inventory[item_templates[material.material_id].getInventoryKey()]?.count >= material.count) {
             tooltip += `<span style="color:lime"><b>${item_templates[material.material_id].getName()} x${character.inventory[item_templates[material.material_id].getInventoryKey()]?.count || 0}/${material.count}</b></span><br>`;
         } else {
             tooltip += `<span style="color:red"><b>${item_templates[material.material_id].getName()} x${character.inventory[item_templates[material.material_id].getInventoryKey()]?.count || 0}/${material.count}</b></span><br>`;
         }
         const quality_range = recipe.get_quality_range(station_tier - item_templates[material.result_id].component_tier);
-        tooltip += `<br>产物:<br><div class="recipe_result">${create_item_tooltip_content({item:item_templates[material.result_id], options: {quality: quality_range}})}</div>`;
+        tooltip += `<br>Result:<br><div class="recipe_result">${create_item_tooltip_content({item:item_templates[material.result_id], options: {quality: quality_range}})}</div>`;
     } else if(subcategory === "equipment") {
         if(!components) {
             //it's a componentless equipment recipe, most probably a clothing
@@ -2382,9 +2399,9 @@ function create_recipe_tooltip_content({category, subcategory, recipe_id, materi
                 tooltip += `<span style="color:red"><b>${item_templates[material.material_id].getName()} x${character.inventory[material.material_id]?.count || 0}/${material.count}</b></span><br>`;
             }
             const quality_range = recipe.get_quality_range(station_tier - item_templates[material.result_id].component_tier);
-            tooltip += `<br>产物:<br><div class="recipe_result">${create_item_tooltip_content({item:item_templates[material.result_id], options: {quality: quality_range}})}</div>`;
+            tooltip += `<br>Result:<br><div class="recipe_result">${create_item_tooltip_content({item:item_templates[material.result_id], options: {quality: quality_range}})}</div>`;
         } else if(components.length < 2) {
-            tooltip += `产物:<br><div class="recipe_result">请在每一类中选择一个部件</div>`;
+            tooltip += `Result:<br><div class="recipe_result">Please select one component from each category</div>`;
         } else if(components.length == 2) {
             let item = "";
             
@@ -2420,7 +2437,7 @@ function create_recipe_tooltip_content({category, subcategory, recipe_id, materi
             }
 
             const quality_range = recipe.get_quality_range(recipe.get_component_quality_weighted(components[0].item, components[1].item), (station_tier-Math.max(components[0].item.component_tier, components[1].item.component_tier)) || 0);
-            tooltip += `产物:<br><div class="recipe_result">${create_item_tooltip_content({item, options: {quality: quality_range}})}</div>`;
+            tooltip += `Result:<br><div class="recipe_result">${create_item_tooltip_content({item, options: {quality: quality_range}})}</div>`;
         } else {
             throw new Error(`Somehow recipe "${category}" -> "${subcategory}" -> "${recipe_id}" received more components than there should be (${components.length} instead of 2)`)
         }
@@ -2603,21 +2620,24 @@ function create_gathering_tooltip(location_activity) {
     }
 
     if(location_activity.gained_resources.scales_with_skill) {
-        gathering_tooltip.innerHTML = `<span class="activity_efficiency_info">效率折算:<br>"${skill_names}" 技能等级 ${location_activity.gained_resources.skill_required[0]} 到 ${location_activity.gained_resources.skill_required[1]}</span><br><br>`;
+        gathering_tooltip.innerHTML = `<span class="activity_efficiency_info">Efficiency:<br>"${skill_names}" skill level ${location_activity.gained_resources.skill_required[0]} to ${location_activity.gained_resources.skill_required[1]}</span><br><br>`;
     }
 
-    gathering_tooltip.innerHTML += `每 ${format_reading_time(gathering_time_needed)}, 发现的机会:`;
+    gathering_tooltip.innerHTML += `Every ${format_reading_time(gathering_time_needed)}, chance of finding:`;
     
     for(let i = 0; i < gained_resources.length; i++) {
+        const resource_key = gained_resources[i].name;
+        const resource_item = item_templates[resource_key];
+        const resource_name = resource_item?.getName?.() ?? resource_key;
         let chance = gained_resources[i].chance>0.01?Math.round(100*gained_resources[i].chance):"???";
-        gathering_tooltip.innerHTML += `<br>x${gained_resources[i].count[0]===gained_resources[i].count[1]?gained_resources[i].count[0]:`${gained_resources[i].count[0]}-${gained_resources[i].count[1]}`} "${gained_resources[i].name}" (${chance}%)`;
+        gathering_tooltip.innerHTML += `<br>x${gained_resources[i].count[0]===gained_resources[i].count[1]?gained_resources[i].count[0]:`${gained_resources[i].count[0]}-${gained_resources[i].count[1]}`} "${resource_name}" (${chance}%)`;
     }
     
     if(location_activity.exp_scaling && location_activity.done_actions != 0 )
     {
         let exp_t = location_activity.done_actions;
         let exp_s = location_activity.exp_o;
-        gathering_tooltip.innerHTML += `<br><br><b><span style="color:red">收益递减:</span></b><br>因为已经进行的 ${exp_t} 次行动,<br> 消耗的时间 x ${format_number(Math.pow(exp_s,exp_t))}`;
+        gathering_tooltip.innerHTML += `<br><br><b><span style="color:red">Diminishing returns:</span></b><br>Because ${exp_t} actions,<br> time cost x ${format_number(Math.pow(exp_s,exp_t))}`;
     }
 
     
@@ -2639,17 +2659,20 @@ function update_gathering_tooltip(current_activity) {
     }
 
     if(current_activity.gained_resources.scales_with_skill) {
-        gathering_tooltip.innerHTML = `<span class="activity_efficiency_info">效率折算:<br>"${skill_names}" 技能等级 ${current_activity.gained_resources.skill_required[0]} 到 ${current_activity.gained_resources.skill_required[1]}</span><br><br>`;
+        gathering_tooltip.innerHTML = `<span class="activity_efficiency_info">Efficiency:<br>"${skill_names}" skill level ${current_activity.gained_resources.skill_required[0]} to ${current_activity.gained_resources.skill_required[1]}</span><br><br>`;
     }
-    gathering_tooltip.innerHTML += `每 ${format_reading_time(gathering_time_needed)}, 发现的机会:`;
+    gathering_tooltip.innerHTML += `Every ${format_reading_time(gathering_time_needed)}, chance of finding:`;
     for(let i = 0; i < gained_resources.length; i++) {
-        gathering_tooltip.innerHTML += `<br>x${gained_resources[i].count[0]===gained_resources[i].count[1]?gained_resources[i].count[0]:`${gained_resources[i].count[0]}-${gained_resources[i].count[1]}`} "${gained_resources[i].name}" (${Math.round(100*gained_resources[i].chance)}%)`;
+        const resource_key = gained_resources[i].name;
+        const resource_item = item_templates[resource_key];
+        const resource_name = resource_item?.getName?.() ?? resource_key;
+        gathering_tooltip.innerHTML += `<br>x${gained_resources[i].count[0]===gained_resources[i].count[1]?gained_resources[i].count[0]:`${gained_resources[i].count[0]}-${gained_resources[i].count[1]}`} "${resource_name}" (${Math.round(100*gained_resources[i].chance)}%)`;
     }
     if(current_activity.exp_scaling)
     {
         let exp_t = current_activity.done_actions;
         let exp_s = current_activity.exp_o;
-        gathering_tooltip.innerHTML += `<br><br><b><span style="color:red">收益递减:</span></b><br>因为已经进行的 ${exp_t} 次行动,<br> 消耗的时间 x ${format_number(Math.pow(exp_s,exp_t))}`;
+        gathering_tooltip.innerHTML += `<br><br><b><span style="color:red">Diminishing returns:</span></b><br>Because ${exp_t} actions,<br> time cost x ${format_number(Math.pow(exp_s,exp_t))}`;
     }
 }
 
@@ -2662,11 +2685,11 @@ function update_displayed_stats() { //updates displayed stats
     const A_mul = document.getElementById("A_mul_slot");
     A_mul.innerHTML = character.xp.current_level<=8?"Locked":"A.mul:";
     const A_mul_tt = document.getElementById("A_mul_tooltip");
-    A_mul_tt.innerHTML = character.xp.current_level<=8?"Not availiable":"普通攻击的伤害倍率";
+    A_mul_tt.innerHTML = character.xp.current_level<=8?"Not availiable":"Normal Attack Damage Multiplier";
     const Luck = document.getElementById("Luck_slot");
     Luck.innerHTML = character.xp.current_level<=18?"Locked":"Luck:";
     const Luck_tt = document.getElementById("Luck_tooltip");
-    Luck_tt.innerHTML = character.xp.current_level<=18?"Not availiable":"幸运(影响材料掉率,杀怪经验)";
+    Luck_tt.innerHTML = character.xp.current_level<=18?"Not availiable":"Luck (affects material drop rate, kill XP)";
 
     Object.keys(stats_divs).forEach(function(key){
         if(key === "crit_rate" || key === "crit_multiplier") {
@@ -2724,7 +2747,7 @@ function update_displayed_stats() { //updates displayed stats
     //
     let chara_result = Math.round(Math.pow(10,lgresult));
     
-    character_rank_div.innerText = `燕岗领排名: ` + chara_result.toLocaleString('en-US');
+    character_rank_div.innerText = `Yangang Ranking: ` + chara_result.toLocaleString('en-US');
     
 
 
@@ -2743,11 +2766,11 @@ function update_stat_description(stat) {
 
     if(stat === "attack_power") {
         target.innerHTML = 
-        `<br>分析:
-        <br>基础值: ${Math.round(100* character.base_stats[stat])/100}`;
+        `<br>Breakdown:
+        <br>Base value: ${Math.round(100* character.base_stats[stat])/100}`;
     } else if (stat === "attack_points"){
         target.innerHTML = 
-        `<br>基础值: ${Math.round(100* character.stats.total_flat.attack_points)/100}`;
+        `<br>Base value: ${Math.round(100* character.stats.total_flat.attack_points)/100}`;
     } else if(stat === "defensive_points"){
         if(character.equipment["off-hand"] != null && character.equipment["off-hand"].offhand_type === "shield") {
             stat = "block_chance";
@@ -2755,19 +2778,19 @@ function update_stat_description(stat) {
             stat = "evasion_points";
         }
         target.innerHTML = 
-            `<br>分析:
-            <br>基础值: ${Math.round(100 * character.stats.total_flat[stat])/100}`;
+            `<br>Breakdown:
+            <br>Base value: ${Math.round(100 * character.stats.total_flat[stat])/100}`;
     } else {
         target.innerHTML = 
-        `<br>分析:
-        <br>基础值: ${Math.round(100*character.base_stats[stat])/100}`;
+        `<br>Breakdown:
+        <br>Base value: ${Math.round(100*character.base_stats[stat])/100}`;
     }
 
-    let BreakDownMap = {"level":"境界","skills":"技能","skill_milestones":"技能里程碑","equipment":"装备","environment":"环境","light_level":"光照","gems":"宝石","stance":"秘法","active_effect":"效果","coins":"贪婪之神"};
+    let BreakDownMap = {"level":"Realm","skills":"Skills","skill_milestones":"Skill Milestones","equipment":"Equipment","environment":"Environment","light_level":"Light Level","gems":"Gems","stance":"Method","active_effect":"Effect","coins":"God of Greed"};
     
     if(stat === "attack_power" && character.equipment.weapon != undefined) {
         target.innerHTML += 
-        `<br>武器: +${format_number(character.equipment.weapon.attack_power)}`;
+        `<br>Weapon: +${format_number(character.equipment.weapon.attack_power)}`;
     } 
     Object.keys(character.stats.flat).forEach(stat_type => {
         if(character.stats.flat[stat_type][stat] && character.stats.flat[stat_type][stat] !== 0) {
@@ -2795,7 +2818,7 @@ function update_displayed_effects() {
             active_effects_tooltip.appendChild(effect_divs[effect.name]);
         });
     } else {
-        active_effects_tooltip.innerHTML = '无效果';
+        active_effects_tooltip.innerHTML = 'No effects';
     }
     update_displayed_effect_durations();
 }
@@ -2878,14 +2901,14 @@ function update_displayed_character_xp(did_level = false) {
     character_xp_div.children[1].innerText = `Next : ${format_number(character.xp.current_xp)}/${format_number(window.REALMS[character.xp.current_level+1][4])}`;
 
     if(did_level) {
-        character_level_div.innerHTML = `<span class=realm_${window.REALMS[character.xp.current_level][5]}>境界 : ${window.REALMS[character.xp.current_level][1]}</span>`;
+        character_level_div.innerHTML = `<span class=realm_${window.REALMS[character.xp.current_level][5]}>Realm: ${window.REALMS[character.xp.current_level][1]}</span>`;
         update_displayed_health();
     }
 }
 
 function update_displayed_xp_bonuses() {
-    data_entry_divs.character.innerHTML = `<span class="data_entry_name">基础等级经验获取:</span><span class="data_entry_value">x${format_number(get_hero_xp_gain())}</span>`;
-    data_entry_divs.skills.innerHTML = `<span class="data_entry_name">基础技能经验获取:</span><span class="data_entry_value">x${format_number(get_skills_overall_xp_gain())}</span>`;
+    data_entry_divs.character.innerHTML = `<span class="data_entry_name">Base Level XP Gain:</span><span class="data_entry_value">x${format_number(get_hero_xp_gain())}</span>`;
+    data_entry_divs.skills.innerHTML = `<span class="data_entry_name">Base Skill XP Gain:</span><span class="data_entry_value">x${format_number(get_skills_overall_xp_gain())}</span>`;
 }
 
 
@@ -2968,9 +2991,9 @@ function start_activity_display(current_activity) {
     if(activities[current_activity.activity_name].base_skills_names) {
         const needed_xp = skills[activities[current_activity.activity_name].base_skills_names].current_level == skills[activities[current_activity.activity_name].base_skills_names].max_level? "Max": `${Math.round(10000*skills[activities[current_activity.activity_name].base_skills_names].current_xp/skills[activities[current_activity.activity_name].base_skills_names].xp_to_next_lvl)/100}%`
         if(activities[current_activity.activity_name].type !== "GATHERING") {
-            action_xp_div.innerText = `每秒得到 ${current_activity.skill_xp_per_tick} ${skills[activities[current_activity.activity_name].base_skills_names].name()} 基础经验值   (${needed_xp})`;
+            action_xp_div.innerText = `Gains ${current_activity.skill_xp_per_tick} ${skills[activities[current_activity.activity_name].base_skills_names].name()} base XP (${needed_xp})`;
         } else {
-            action_xp_div.innerText = `得到 ${current_activity.skill_xp_per_tick} 基本经验 每个采集循环 对于 ${skills[activities[current_activity.activity_name].base_skills_names].name()} (${needed_xp})`;
+            action_xp_div.innerText = `Gains ${current_activity.skill_xp_per_tick} base XP per gather cycle for ${skills[activities[current_activity.activity_name].base_skills_names].name()} (${needed_xp})`;
         }
     }
     else {
@@ -2986,9 +3009,9 @@ function start_activity_display(current_activity) {
 
 
     const action_end_text = document.createElement("div");
-    const ActivityNameMap = {"Running":"跑步","Swimming":"游泳","mining":"挖掘","woodcutting":"砍伐","fishing":"钓鱼","AquaElement":"水元素感应"};
+    const ActivityNameMap = {"Running":"Running","Swimming":"Swimming","mining":"Excavation","woodcutting":"Woodcutting","fishing":"Fishing","AquaElement":"Aqua Element Sensing"}; // TODO: verify "AquaElement" translation
     const dev_ACNMap = false;
-    action_end_text.innerText = `结束 ${dev_ACNMap?current_activity.activity_name:ActivityNameMap[current_activity.activity_name]}`;
+    action_end_text.innerText = `Stop ${dev_ACNMap?current_activity.activity_name:ActivityNameMap[current_activity.activity_name]}`;
     action_end_text.id = "action_end_text";
 
 
@@ -3049,9 +3072,9 @@ function update_displayed_ongoing_activity(current_activity, is_job){
     const action_xp_div = document.getElementById("action_xp_div");
     const needed_xp = skills[activities[current_activity.activity_name].base_skills_names].current_level == skills[activities[current_activity.activity_name].base_skills_names].max_level? "Max": `${Math.round(10000*skills[activities[current_activity.activity_name].base_skills_names].current_xp/skills[activities[current_activity.activity_name].base_skills_names].xp_to_next_lvl)/100}%`
     if(activities[current_activity.activity_name].type !== "GATHERING") {
-        action_xp_div.innerText = `每秒获取 ${format_number(current_activity.skill_xp_per_tick*get_skills_overall_xp_gain())}  ${skills[activities[current_activity.activity_name].base_skills_names].name()} 经验值 (${needed_xp})`;
+        action_xp_div.innerText = `Gains ${format_number(current_activity.skill_xp_per_tick*get_skills_overall_xp_gain())} ${skills[activities[current_activity.activity_name].base_skills_names].name()} XP per second (${needed_xp})`;
     } else {
-        action_xp_div.innerText = `得到 ${current_activity.skill_xp_per_tick} 基本经验 每个采集循环 对于 ${skills[activities[current_activity.activity_name].base_skills_names].name()} (${needed_xp})`;
+        action_xp_div.innerText = `Gains ${current_activity.skill_xp_per_tick} base XP per gather cycle for ${skills[activities[current_activity.activity_name].base_skills_names].name()} (${needed_xp})`;
     }
     if(current_activity.spec != ""){
         if(current_activity.spec == "goto2-5")
@@ -3059,18 +3082,18 @@ function update_displayed_ongoing_activity(current_activity, is_job){
             inf_combat.A7 = inf_combat.A7 || {cur:0}; 
             if(inf_combat.A7.cur >= 3.2e6){
                 unlock_location(locations["声律城废墟"],true);
-                action_xp_div.innerHTML += "<br>目的地 已抵达.(从[纳家秘境]出发)"   
+                action_xp_div.innerHTML += "<br>Destination reached. (Starting from [Na Family Secret Realm])"   
             }
             else{
-                action_xp_div.innerHTML += "<br>前往声律城..."   
+                action_xp_div.innerHTML += "<br>Heading to Shenlv City..."   
                 let speed = Math.pow(character.stats.full.agility,0.5)/10;
-                action_xp_div.innerHTML += `<br>基础速度: ${format_number(speed)} m / s.`   
+                action_xp_div.innerHTML += `<br>Base speed: ${format_number(speed)} m / s.`   
                 speed *= Math.pow(1.1,skills["Running"].current_level);
-                action_xp_div.innerHTML += `<br>速度: ${format_number(speed)} m / s. <br>(跑步 lv.${skills["Running"].current_level}, + ${format_number(Math.pow(1.1,skills["Running"].current_level)*100-100)}%)`;  
+                action_xp_div.innerHTML += `<br>Speed: ${format_number(speed)} m / s. <br>(Running lv.${skills["Running"].current_level}, + ${format_number(Math.pow(1.1,skills["Running"].current_level)*100-100)}%)`;  
                 
-                action_xp_div.innerHTML += `<br>时间流速: 36000 s / s.`   
-                action_xp_div.innerHTML += `<br>最终速度: ${format_number(speed*36)} km / s.`
-                action_xp_div.innerHTML += `<br>剩余距离：${Math.round(3.2e6 - inf_combat.A7.cur).toLocaleString('en-US')} / 3,200,000 km.`; 
+                action_xp_div.innerHTML += `<br>Time flow rate: 36000 s / s.`   
+                action_xp_div.innerHTML += `<br>Final speed: ${format_number(speed*36)} km / s.`
+                action_xp_div.innerHTML += `<br>Remaining distance: ${Math.round(3.2e6 - inf_combat.A7.cur).toLocaleString('en-US')} / 3,200,000 km.`; 
                 inf_combat.A7.cur += speed*36;
                 current_game_time.go_up(594);
             }
@@ -3086,7 +3109,7 @@ function start_sleeping_display(){
     clear_action_div();
 
     const action_status_div = document.createElement("div");
-    action_status_div.innerText = "睡觉...";
+    action_status_div.innerText = "Sleeping...";
     action_status_div.id = "action_status_div";
 
     const action_end_div = document.createElement("div");
@@ -3095,7 +3118,7 @@ function start_sleeping_display(){
 
 
     const action_end_text = document.createElement("div");
-    action_end_text.innerText = `起床`;
+    action_end_text.innerText = `Wake up`;
     action_end_text.id = "action_end_text";
 
     
@@ -3138,8 +3161,8 @@ function create_new_skill_bar(skill) {
         skill_bar_divs[skill.category] = {};
 
         const skill_category_div = document.createElement("div");
-        const SkillsCategoryMap = {"Activity":"行动","Character":"角色","Combat":"战斗","Environmental":"环境","Weapon":"武器","Stance":"秘法","Crafting":"合成","Gathering":"收集"};
-        skill_category_div.innerHTML = `<i class="material-icons icon skill_dropdown_icon"> keyboard_double_arrow_down </i>${SkillsCategoryMap[skill.category]} 技能`;
+        const SkillsCategoryMap = {"Activity":"Activity","Character":"Character","Combat":"Combat","Environmental":"Environmental","Weapon":"Weapon","Stance":"Method","Crafting":"Crafting","Gathering":"Gathering"};
+        skill_category_div.innerHTML = `<i class="material-icons icon skill_dropdown_icon"> keyboard_double_arrow_down </i>${SkillsCategoryMap[skill.category]} Skills`;
         skill_category_div.dataset.skill_category = skill.category;
         skill_category_div.classList.add("skill_category_div");
 
@@ -3250,7 +3273,7 @@ function update_displayed_skill_bar(skill, leveled_up=true) {
 
     } else {
         skill_bar_divs[skill.category][skill.skill_id].children[0].children[0].children[1].innerHTML = `Max!`;
-        skill_bar_divs[skill.category][skill.skill_id].children[0].children[2].children[0].innerHTML = `已满级`;
+        skill_bar_divs[skill.category][skill.skill_id].children[0].children[2].children[0].innerHTML = `Max Level`;
     }
     //skill_bar_xp && tooltip_xp
 
@@ -3290,7 +3313,7 @@ function update_displayed_skill_xp_gain(skill) {
         return;
     }
     const xp_gain = Math.round(100*skill.get_parent_xp_multiplier()*get_skill_xp_gain(skill.skill_id))/100 || 1;
-    skill_bar_divs[skill.category][skill.skill_id].children[0].children[2].children[1].innerHTML = `经验获取: x${xp_gain}<br><span>经验消耗蠕变: x${skill.xp_scaling}</span>`;
+    skill_bar_divs[skill.category][skill.skill_id].children[0].children[2].children[1].innerHTML = `XP gain: x${xp_gain}<br><span>XP scaling: x${skill.xp_scaling}</span>`;
 }
 
 function update_all_displayed_skills_xp_gain(){
@@ -3375,9 +3398,9 @@ function update_displayed_stance_list() {
 
     stance_list.innerHTML = 
     `<tr class="stance_list_entry stance_list_header">
-        <th class="stance_list_header stance_list_header_fav">星标</th>
-        <th class="stance_list_header stance_list_header_select">选择</th>
-        <th class="stance_list_header stance_list_header_name">名称</th>
+        <th class="stance_list_header stance_list_header_fav">Starred</th>
+        <th class="stance_list_header stance_list_header_select">Select</th>
+        <th class="stance_list_header stance_list_header_name">Name</th>
     </tr>`
 
     Object.keys(stances).forEach(stance => {
@@ -3443,7 +3466,7 @@ function create_stance_tooltip(stance_id) {
 
     if(target_count > 1) {
         tooltip_div.innerHTML += `
-        <br><div class='stance_tooltip_hitcount'>${stances[stance_id].randomize_target_count?"Randomly hits up to":"同时攻击最多 "} ${target_count} 个敌人</div>`;
+        <br><div class='stance_tooltip_hitcount'>${stances[stance_id].randomize_target_count?"Randomly hits up to":"Simultaneously attacks up to"} ${target_count} enemies</div>`;
     }
 
     return tooltip_div;
@@ -3467,7 +3490,7 @@ function update_stance_tooltip(stance_id) {
         if(stances[stance_id].related_skill) {
             target_count = target_count + Math.round(target_count * skills[stances[stance_id].related_skill].current_level/skills[stances[stance_id].related_skill].max_level);
         }
-        stance_bar_divs[stance_id].querySelector(".stance_tooltip_hitcount").innerHTML = `${stances[stance_id].randomize_target_count?"Randomly hits up to":"同时攻击"} ${target_count} 个敌人</div>`;
+        stance_bar_divs[stance_id].querySelector(".stance_tooltip_hitcount").innerHTML = `${stances[stance_id].randomize_target_count?"Randomly hits up to":"Simultaneously attacks"} ${target_count} enemies</div>`;
     } 
 }
 
@@ -3531,61 +3554,62 @@ Create anything needed about 'special stats' Display
 
 */
 
-let spec_stat = [[0, '魔攻', '#bbb0ff','这个敌人似乎掌握了魔法。<br>敌人无视角色的防御。'],
-[1, "坚固", "#c0b088","这个敌人拥有土元素之力，坚不可摧。<br>单次对敌人的伤害不能超过<span style='color:#87CEFA'>1</span>。"],
-[2, "迅捷", "#ffcc33","这个敌人出手快人一步。<br>敌人首先发动一次<span style='color:yellow'>额外攻击</span>。"],
-[3, "2连击", "#ffee77", "敌人进攻速度很快，拥有更加恐怖的杀伤力，但同时也意味着生命力会较为脆弱。<br>敌人每回合攻击<span style='color:#87CEFA'>2次</span>。"],
-[4, "疾走", "#5dc44b", "这个敌人出手快而敏捷。<br>敌人首先发动一次<span style='color:#87CEFA'>3连击</span>。"],
-[5, "牵制", "#25c1d9", "牵制对手的招式可能成为窍门或是负累。<br>敌人每回合伤害*<span style='color:#87CEFA'>（敌人防御力/角色防御力）</span>。"],
-[6, "3连击", "#ffee77", "敌人进攻速度很快，拥有更加恐怖的杀伤力，但同时也意味着生命力会较为脆弱。<br>敌人每回合攻击<span style='color:#87CEFA'>3次</span>。"],
-[7, "撕裂", "#a52a2a", "这个敌人攻击非常凶猛，造成了撕裂效果。<br>敌人的战斗伤害增加<span style='color:#87CEFA'>一半</span>。"],
-[8, "衰弱", "#f2a4e8", function(enemy){return "用毒魔法弱化对手的能力。<br>与该敌人战斗时，角色的攻防效力削弱<span style='color:#87CEFA'>"+enemy.spec_value[8]+"%</span>。"}],
-[9, "反转", "#FFC0CB", "微妙的战斗领悟，使用诡异的战法，为攻守双方带来全新的策略维度。<br>战斗中，角色<span style='color:yellow'>攻击与防御效力交换</span>。"],
-[10, "回风", "#8ED1A6","借助风元素的势进行的二段不对等打击。<br>敌人每回合以<span style='color:#87CEFA'>0.8、1.2倍</span>攻击<span style='color:yellow'>各攻击一次</span>。"],
-[11, "光环", "#E6E099","光环异兽的身周总是围着一群异兽，并且个个都看起来很亢奋。(效果整合在楼层属性中)"],
-[12, "时封", "#917881","时元素领悟。短暂延缓自身周围区域内时间的流速，为某些关键时刻创造机会。<br>每一回合战斗伤害变为<span style='color:#87CEFA'>回合数</span>倍。"],			
-[13, "惑幻", "#B20EB2","制人于幻境中，受到幻境的蛊惑。<br>前<span style='color:#87CEFA'>3回合</span>，以角色攻击各额外攻击一次。"],
-[14, "斩阵", "#5269B7","看起来很像虚张声势的剑阵。<br>敌人布下诡秘的杀阵，在战斗进行到第<span style='color:#87CEFA'>二、四、六</span>回合时，分别对角色额外造成<span style='color:#87CEFA'>2倍、3倍、4倍</span>敌人攻击力的伤害。"],
-[15, "异界之门", "#808080","时元素领悟。触及了一丝命运规律的领悟，张开的黑暗之门似通向另一个世界。<br>每一回合战斗伤害变为<span style='color:#87CEFA'>2*回合数-1</span>倍。"],
-[16, "飓风", "#337d3d","这个敌人迅疾如风，引动了天地间的风元素异象。<br>敌人首先发动4段<span style='color:#87CEFA'>5倍伤害</span>的攻击。"],
-[17, "执着", "#cbb2d9","铁杵磨成针。<br>敌人的攻击额外增加角色生命的0.5%。"],
-[18, "贪婪", "#dfe650",function(enemy){return `这个敌人似乎对金钱十分敏感。<br>角色每拥有${format_money(enemy.spec_value[18])},该敌人伤害减少<span style='color:#87CEFA'>1%</span>.`}],
-[19, "同调", "#FF6A6A","玄妙且具备威胁的领悟，可以共享属性。<br>敌人会随着角色的变强而变强，其攻防敏附加<span style='color:#87CEFA'>10%</span>角色的攻防。"],
-[20, "天剑", "#9B8AFC","可将天地能量汇聚于自身的攻势进行战斗。<br>敌人每回合额外造成自身攻击<span style='color:#87CEFA'>3倍</span>与角色防御<span style='color:#87CEFA'>2倍</span>差值的伤害。"],
-[21, "灵体", "#ff9977",function(enemy){return "以特殊的生命形式而存在。<br>敌人对角色每回合造成<span style='color:#87CEFA'>" + (enemy.spec_value[21]) + "与角色敏捷之差的五倍</span>点伤害。<br>此额外伤害下限为0."}],
-[22, "绝世", "#DEF27B","五连绝世。<br>战斗前，敌人以0.9倍的攻击力发动一次<span style='color:#87CEFA'>5连击</span>。"],
-[23, "灵闪", "#F2EC41","光元素领悟。以快而强大的进攻压制对手。<br>当<span style='color:#FFFF00'>角色的攻击（计算加成）少于敌人</span>时，敌人受到的伤害比例减少<span style='color:#87CEFA'>（敌人防御/角色防御）的二分之一</span>。"],
-[24, "饮剑", "#F0A078","将炽烈的进攻元素吸收并化为自身的能力。<br>敌人的生命增加角色攻击的<span style='color:#87CEFA'>0.5倍</span>。"],
-[25, "饮盾", "#3C6794","将刚猛的防守元素吸收并化为自身的能力。<br>敌人的生命增加角色防御的<span style='color:#87CEFA'>0.5倍</span>。"],
-[26, "分裂", "#8EA5D1","拥有两种能力的战斗法师。敌人每回合的攻击<span style='color:#87CEFA'>翻倍</span>"],
-[27, "柔骨", "#2CBA3A","接下攻击，并化为另一种劲力发回。<br>战斗时，角色的攻击效力转移<span style='color:#87CEFA'>10%</span>到防御上。"],
-[28, "肤·免疫", "#808080","别想用它刷坚韧皮肤！"],
-[29, "阻击", "#8888e6",function(enemy){return "这个敌人似乎懂得且战且退的道理。<br>如果敌人闪避了攻击，则额外对角色造成<span style='color:#87CEFA'>" + (enemy.spec_value[29]) + "</span>点魔法伤害。"}],
-[30, "净化", "#80eed6",function(enemy){return "战斗前，敌人将角色敏捷的<span style='color:#87CEFA'>" + enemy.spec_value[30] + "倍</span>加到自己的攻击上。"}],
-[31, "回春", "#ccff99","木元素领悟。修习了战复魔法的冒险者钟爱的属性。<br>敌人每次命中恢复自身生命上限<span style='color:#87CEFA'>30%</span>的生命。"],
-[32, "反戈", "#d3a547","反戈一击。<br>敌人将角色伤害的<span style='color:#87CEFA'>20%</span>反弹给角色。"],
-[33, function(enemy){return enemy.spec_value[33] + "连击"}, "#ffee77",function(enemy){return "敌人进攻速度很快，拥有更加恐怖的杀伤力，但同时也意味着生命力会较为脆弱。<br>敌人每回合攻击<span style='color:#87CEFA'>" + enemy.spec_value[33] + "次</span>。"}],
-[34, "凌弱","#109996","欺凌弱小的敌人容易被防杀。<br>当角色<span style='color:#FFFF00'>防御小于敌人</span>时，其<span style='color:#FFFF00'>与敌人防御的差值</span>将拉大<span style='color:#87CEFA'>一倍</span>。"],
-[35, "领域", "#c677dd",function(enemy){return "这个敌人似乎懂得力量外放的道理。<br>敌人每次被攻击，则额外对角色造成<span style='color:#87CEFA'>" + (enemy.spec_value[35]) + "</span>点领域伤害。此伤害可被敏捷1:1减免。"}],
-[36, "自爆", "#597a80","强者在绝望之下最后的尊严。<br>第20回合触发，血量下降到1，对角色造成<span style='color:#87CEFA'>自身剩余生命*4</span>的伤害。"],
-[37, "散华", "#d08e53","奇妙的能力，感应血气并作用于攻击。<br>角色攻击的效力削弱（敌人生命/角色生命）的<span style='color:#87CEFA'>一倍</span><br>。"],
-[38, "冰符咒", "#6699FF", "由传说中的最强妖精创造的符咒，虽然她的生命力并不如何高。<br>在<span style='color:#FFFF00'>第9回合</span>施展冰符咒，额外造成<span style='color:#87CEFA'>20倍攻击力</span>的魔法伤害。"],
-[39, "贪婪·宝石", "#50dfe6",function(enemy){return `这个敌人似乎对宝石十分敏感。<br>角色每在[心之境界-一重]拥有${format_number(enemy.spec_value[39])}价值点<br>,该敌人伤害减少<span style='color:#87CEFA'>1%</span>.`}],
-[40, "追光", "#ecff17", "光元素领悟。这个敌人快得恍若一道照亮世界的光。<br>敌人首先发动一次敌人首先发动3段<span style='color:#87CEFA'>50倍伤害</span>的<span style='color:#FFFF00'>必中攻击</span>。"],
-[41, "召唤", "#f5deb3", "群居生物同心协力的体现。敌人刷新时，额外刷新3只【紫锈胎人】。"],
-[42, "圣阵", "#d9964a", "才德全尽谓之圣人，十圆无缺谓之圣阵。<br>敌人布下圣阵，在战斗进行到第<span style='color:#87CEFA'>五、十、二十</span>回合时，分别对角色造成<span style='color:#87CEFA'>3倍、9倍、27倍</span>角色与敌人攻防之和的穿透伤害。"],
-[43, "激光", "#dda0dd",function(enemy){return "攻击时，无论是否命中，都额外造成<span style='color:#87CEFA'>" + (enemy.spec_value[43]) + "</span>点魔法伤害。"}],
-[44, "召唤", "#f5deb3", "群居生物同心协力的体现。敌人刷新时，额外刷新3只【舰船除草机B1】。"],
-[45, "10回合", "#524fdb","在敌人的手中走过十回合！敌人会在第10回合被镭射枪击中，将<span style='color:#87CEFA'>血量降为1</span>.<br><span style='color:#FF0000'><b>前提是,姐姐被你带在身边.</b></span>"],
-[46, "饮剑·改", "#F0A078","将炽烈的进攻元素吸收并化为自身的能力。<br>敌人的生命增加角色攻击的<span style='color:#87CEFA'>2.5倍</span>。"],
-[47, "饮盾·改", "#3C6794","将刚猛的防守元素吸收并化为自身的能力。<br>敌人的生命增加角色防御的<span style='color:#87CEFA'>2.5倍</span>。"],
-[48, "冰凌剑", "#87CEEB",function(enemy){return `冰元素领悟。将冰元素变换为剑形态，刺穿对手的术式，唯有灵活的腾挪方可抵挡。<br>战斗前，对角色造成相当于角色攻防和<span style='color:#87CEFA'>20倍</span>的必中伤害。该技能效果可被敏捷减免，每${format_number(enemy.spec_value[48])}点敏捷可减免1%伤害。`}],
-[49, "冰封术", "#73E4D4",function(enemy){return `冰元素领悟。可以让人瞬间变成冰块的术式，唯有蓬勃的生命得以顽强成长。<br>战斗前，对角色进行<span style='color:#87CEFA'>5段${format_number(enemy.spec_value[49].rnd / 5)}倍</span>的先攻。该技能效果可被生命减免，每${enemy.spec_value[49].hp}点生命可免除0.2倍先攻倍率。`}],
-[50, "冻伤", "#97C6E8",function(enemy){return `冰元素领悟。让对手在低温中感受到难以言喻的痛苦，强大的体魄是镇痛的必要条件。<br>战斗前，对角色造成相当于角色敏捷<span style='color:#87CEFA'>40倍</span>的必中伤害。该技能效果可被攻防和减免，每${enemy.spec_value[50]}点攻防和可减免1%伤害。`}],
-[51, "压制", "#e3e647", "压制对手的招式可能成为窍门或是负累。<br>敌人每回合伤害*<span style='color:#87CEFA'>（敌人攻防和/角色攻防和）</span>。"],
-[52, "压制·伪", "#47e6a4", "压制/牵制对手的招式可能成为窍门或是负累。<br>敌人每回合伤害*<span style='color:#87CEFA'>(敌人攻防和/角色攻防和)^(1-0.01*牵制领悟度)*(敌人防御力/角色防御力)^(0.01*牵制领悟度)</span>。"],
-[53, "同调·魔", "#FF6A00","玄妙且具备威胁的领悟，可以共享属性。<br>敌人会随着角色的变强而变强，其攻击附加<span style='color:#87CEFA'>200%</span>角色的攻击。"],
-[54, "生命限制", "#ffacc5","限制对手的能力可能成为窍门或是负累。<br>敌人每回合伤害*（敌人生命/角色生命）。"],
+let spec_stat = [[0, 'Magic Attack', '#bbb0ff','This enemy seems to have mastered magic.<br>The enemy ignores the player\'s defense.'],
+[1, "Stalwart", "#c0b088","This enemy possesses the power of earth, unbreakable.<br>Single hit damage cannot exceed <span style='color:#87CEFA'>1</span>."],
+[2, "Swift", "#ffcc33","This enemy strikes first.<br>The enemy first launches an <span style='color:yellow'>extra attack</span>."],
+[3, "Double Strike", "#ffee77", "The enemy attacks with great speed and terrifying power, but is more fragile.<br>The enemy attacks <span style='color:#87CEFA'>2 times</span> per round."],
+[4, "Dash", "#5dc44b", "This enemy is fast and agile.<br>The enemy first launches a <span style='color:#87CEFA'>triple strike</span>."],
+[5, "Suppress", "#25c1d9", "A technique to restrain the opponent — a trick or a burden.<br>Enemy damage per round * <span style='color:#87CEFA'>(enemy defense / player defense)</span>."],
+[6, "Triple Strike", "#ffee77", "The enemy attacks with great speed and terrifying power, but is more fragile.<br>The enemy attacks <span style='color:#87CEFA'>3 times</span> per round."],
+[7, "Rend", "#a52a2a", "This enemy attacks ferociously, creating a rend effect.<br>Enemy combat damage increased by <span style='color:#87CEFA'>half</span>."],
+[8, "Weaken", "#f2a4e8", function(enemy){return "Uses poison magic to weaken the opponent.<br>When fighting this enemy, the player's attack and defense are reduced by <span style='color:#87CEFA'>"+enemy.spec_value[8]+"%</span>."}],
+[9, "Reverse", "#FFC0CB", "A subtle combat insight using strange tactics, bringing a new strategic dimension.<br>In combat, the player's <span style='color:yellow'>attack and defense effectiveness are swapped</span>."],
+[10, "Whirlwind", "#8ED1A6","A two-hit asymmetric strike using wind energy.<br>The enemy attacks <span style='color:yellow'>once each</span> at <span style='color:#87CEFA'>0.8x and 1.2x</span> per round."],
+[11, "Aura", "#E6E099","Aura monsters are always surrounded by other monsters, all looking very excited. (Effect integrated in floor properties)"],
+[12, "Time Lock", "#917881","Time element insight. Briefly slows time around itself, creating opportunities at key moments.<br>Combat damage each round becomes <span style='color:#87CEFA'>turn number</span>x."],
+[13, "Illusion", "#B20EB2","Traps the opponent in an illusion, ensnaring them.<br>For the first <span style='color:#87CEFA'>3 rounds</span>, attacks once extra for each player attack."],
+[14, "Sword Array", "#5269B7","Looks like a bluffing sword formation.<br>The enemy sets a deadly array, dealing extra <span style='color:#87CEFA'>2x, 3x, 4x</span> enemy attack damage at rounds <span style='color:#87CEFA'>2, 4, 6</span>."],
+[15, "Dimensional Gate", "#808080","Time element insight. A glimpse of fate's laws; a dark gate opening to another world.<br>Combat damage each round becomes <span style='color:#87CEFA'>2*turn-1</span>x."],
+[16, "Hurricane", "#337d3d","This enemy is swift as wind, stirring up wind elemental phenomena.<br>The enemy first launches a 4-hit attack dealing <span style='color:#87CEFA'>5x damage</span>."],
+[17, "Persistence", "#cbb2d9","Persistence grinds iron into needles.<br>Enemy attacks additionally deal 0.5% of the player's HP."],
+[18, "Greed", "#dfe650",function(enemy){return `This enemy seems very sensitive to money.<br>For every ${format_money(enemy.spec_value[18])} the player has, this enemy's damage decreases by <span style='color:#87CEFA'>1%</span>.`}],
+[19, "Synchronize", "#FF6A6A","A mysterious and threatening insight that can share attributes.<br>The enemy grows stronger as the player does, adding <span style='color:#87CEFA'>10%</span> of the player's attack and defense."],
+[20, "Heaven Sword", "#9B8AFC","Gathers heaven and earth energy into an offensive stance.<br>The enemy deals extra damage equal to (own attack x<span style='color:#87CEFA'>3</span>) minus (player defense x<span style='color:#87CEFA'>2</span>) per round."],
+[21, "Wraith", "#ff9977",function(enemy){return "Exists as a special life form.<br>The enemy deals <span style='color:#87CEFA'>" + (enemy.spec_value[21]) + " minus player agility, times 5</span> damage per round.<br>This bonus damage has a minimum of 0."}],
+[22, "Peerless", "#DEF27B","Peerless 5-hit.<br>Before battle, the enemy launches a <span style='color:#87CEFA'>5-hit combo</span> at 0.9x attack power."],
+[23, "Spirit Flash", "#F2EC41","Light element insight. Suppresses opponents with fast, powerful attacks.<br>When <span style='color:#FFFF00'>player's attack (with bonuses) is less than enemy's</span>, damage to enemy is reduced by <span style='color:#87CEFA'>half of (enemy defense / player defense)</span>."],
+[24, "Drink Blade", "#F0A078","Absorbs fierce offensive elements and converts them to power.<br>Enemy HP increases by <span style='color:#87CEFA'>0.5x</span> the player's attack."],
+[25, "Drink Shield", "#3C6794","Absorbs strong defensive elements and converts them to power.<br>Enemy HP increases by <span style='color:#87CEFA'>0.5x</span> the player's defense."],
+[26, "Split", "#8EA5D1","A combat mage with two abilities. The enemy's attack <span style='color:#87CEFA'>doubles</span> each round."],
+[27, "Yielding", "#2CBA3A","Receives attacks and converts them into another force.<br>In combat, 10% of the player's attack effectiveness is transferred to defense."],
+[28, "Skin Immunity", "#808080","Don't try to farm tough skin with this!"],
+[29, "Intercept", "#8888e6",function(enemy){return "This enemy understands fighting while retreating.<br>If the enemy evades an attack, it deals an additional <span style='color:#87CEFA'>" + (enemy.spec_value[29]) + "</span> magic damage."}],
+[30, "Purify", "#80eed6",function(enemy){return "Before battle, the enemy adds <span style='color:#87CEFA'>" + enemy.spec_value[30] + "x</span> of the player's agility to its own attack."}],
+[31, "Rejuvenate", "#ccff99","Wood element insight. A favorite ability of adventurers who master battle-recovery magic.<br>The enemy recovers <span style='color:#87CEFA'>30%</span> of its max HP with each hit."],
+[32, "Retaliate", "#d3a547","Strike back.<br>The enemy reflects <span style='color:#87CEFA'>20%</span> of the player's damage back."],
+[33, function(enemy){return enemy.spec_value[33] + "-Strike"}, "#ffee77",function(enemy){return "The enemy attacks with great speed and terrifying power, but is more fragile.<br>The enemy attacks <span style='color:#87CEFA'>" + enemy.spec_value[33] + " times</span> per round."}],
+[34, "Bully","#109996","An enemy that bullies the weak is easily countered.<br>When the player's <span style='color:#FFFF00'>defense is less than the enemy's</span>, the <span style='color:#FFFF00'>difference with enemy defense</span> is <span style='color:#87CEFA'>doubled</span> in effect."],
+[35, "Realm", "#c677dd",function(enemy){return "This enemy understands the art of projecting power outward.<br>Each time the enemy is attacked, it deals an additional <span style='color:#87CEFA'>" + (enemy.spec_value[35]) + "</span> realm damage. This damage is mitigated 1:1 by agility."}],
+[36, "Detonate", "#597a80","The last dignity of the strong in despair.<br>Triggers at round 20, HP drops to 1, deals <span style='color:#87CEFA'>remaining HP * 4</span> damage."],
+[37, "Scatter", "#d08e53","A wondrous ability that senses vitality and affects attacks.<br>Player attack effectiveness is reduced by <span style='color:#87CEFA'>1x</span> (enemy HP / player HP)<br>."],
+[38, "Ice Curse", "#6699FF", "A curse created by the legendary most powerful fairy, though her HP isn't that high.<br>At <span style='color:#FFFF00'>round 9</span>, casts Ice Curse, dealing <span style='color:#87CEFA'>20x attack power</span> magic damage."],
+[39, "Greed: Gem", "#50dfe6",function(enemy){return `This enemy seems very sensitive to gems.<br>For every ${format_number(enemy.spec_value[39])} value in [Heart's Realm - 1st Level], this enemy's damage decreases by <span style='color:#87CEFA'>1%</span>.`}],
+[40, "Chase Light", "#ecff17", "Light element insight. This enemy is as fast as a beam of light.<br>The enemy first launches a 3-hit <span style='color:#87CEFA'>50x damage</span> <span style='color:#FFFF00'>guaranteed hit</span>."],
+[41, "Summon", "#f5deb3", "The embodiment of social creatures working together. When the enemy spawns, 3 extra [Violet-Rust Fetal Men] spawn."],
+[42, "Sacred Array", "#d9964a", "Perfect virtue makes a sage; ten perfect circles make a sacred array.<br>The enemy sets a sacred array, dealing <span style='color:#87CEFA'>3x, 9x, 27x</span> of the combined player+enemy attack+defense as piercing damage at rounds <span style='color:#87CEFA'>5, 10, 20</span>."],
+[43, "Laser", "#dda0dd",function(enemy){return "On each attack, regardless of whether it hits, deals an additional <span style='color:#87CEFA'>" + (enemy.spec_value[43]) + "</span> magic damage."}],
+[44, "Summon", "#f5deb3", "The embodiment of social creatures working together. When the enemy spawns, 3 extra [Ship Weeder B1] spawn."],
+[45, "10 Rounds", "#524fdb","Survive ten rounds against this enemy! At round 10, the enemy is hit by a laser gun, <span style='color:#87CEFA'>reducing HP to 1</span>.<br><span style='color:#FF0000'><b>Prerequisite: your sister must be with you.</b></span>"],
+[46, "Drink Blade+", "#F0A078","Absorbs fierce offensive elements and converts them to power.<br>Enemy HP increases by <span style='color:#87CEFA'>2.5x</span> the player's attack."],
+[47, "Drink Shield+", "#3C6794","Absorbs strong defensive elements and converts them to power.<br>Enemy HP increases by <span style='color:#87CEFA'>2.5x</span> the player's defense."],
+[48, "Ice Ling Sword", "#87CEEB",function(enemy){return `Ice element insight. Transforms ice into a sword to pierce the opponent's defenses; only agile movement can counter it.<br>Before battle, deals guaranteed damage equal to <span style='color:#87CEFA'>20x</span> the player's combined attack+defense. This skill is mitigated by agility: every ${format_number(enemy.spec_value[48])} agility reduces damage by 1%.`}],
+[49, "Ice Seal", "#73E4D4",function(enemy){return `Ice element insight. A technique that can instantly freeze targets; only vigorous life can resist it.<br>Before battle, launches a <span style='color:#87CEFA'>5-hit ${format_number(enemy.spec_value[49].rnd / 5)}x</span> pre-emptive attack. This skill is mitigated by HP: every ${enemy.spec_value[49].hp} HP reduces the pre-emptive multiplier by 0.2x.`}],
+[50, "Frostbite", "#97C6E8",function(enemy){return `Ice element insight. Inflicts unspeakable pain in extreme cold; a strong physique is the essential painkiller.<br>Before battle, deals guaranteed damage equal to <span style='color:#87CEFA'>40x</span> the player's agility. This skill is mitigated by combined attack+defense: every ${enemy.spec_value[50]} attack+defense reduces damage by 1%.`}],
+[51, "Suppress: Total", "#e3e647", "A technique to restrain the opponent — a trick or a burden.<br>Enemy damage per round * <span style='color:#87CEFA'>(enemy attack+defense / player attack+defense)</span>."], // TODO: verify name for 压制
+[52, "Pseudo-Suppress", "#47e6a4", "A combined suppress/restrain technique.<br>Enemy damage per round * <span style='color:#87CEFA'>(enemy atk+def / player atk+def)^(1-0.01*Suppress mastery) * (enemy def / player def)^(0.01*Suppress mastery)</span>."], // TODO: verify name for 压制·伪
+[53, "Synchronize: Demon", "#FF6A00","A mysterious and threatening insight that can share attributes.<br>The enemy grows stronger as the player does, adding <span style='color:#87CEFA'>200%</span> of the player's attack."],
+[54, "Life Limit", "#ffacc5","Limiting the opponent's ability can be a trick or a burden.<br>Enemy damage per round * (enemy HP / player HP)."],
+];
 
 
 
@@ -3608,10 +3632,14 @@ function format_numberL(perc){
 function create_new_bestiary_entry(enemy_name) {
     bestiary_entry_divs[enemy_name] = document.createElement("div");
     
-    const enemy = enemy_templates[enemy_name];
+    const enemy = enemy_templates[enemy_name] || Object.values(enemy_templates).find((template_enemy) => template_enemy.name === enemy_name);
+    if(!enemy) {
+        console.error(`Couldn't create bestiary entry for enemy '${enemy_name}' - matching template not found`);
+        return;
+    }
 
     const name_div = document.createElement("div");
-    name_div.innerHTML = enemy_name;
+    name_div.innerHTML = enemy.name || enemy_name;
     name_div.classList.add("bestiary_entry_name");
     const kill_counter = document.createElement("div");
     kill_counter.innerHTML = enemy_killcount[enemy_name];
@@ -3630,7 +3658,7 @@ function create_new_bestiary_entry(enemy_name) {
     stat_realm.innerHTML = `${enemy.realm}<br><br>`;
 
     const tooltip_stats = document.createElement("div"); //base enemy stats
-    tooltip_stats.innerHTML = "<br>属性: <br>"
+    tooltip_stats.innerHTML = "<br>Stats:<br>"
 
     const stat_line_0 = document.createElement("div");
     stat_line_0.classList.add("grid_container");
@@ -3747,7 +3775,7 @@ function create_new_bestiary_entry(enemy_name) {
 
     const tooltip_drops = document.createElement("div"); //enemy drops
     if(enemy.loot_list.length > 0) {
-        tooltip_drops.innerHTML = "<br>战利品:";
+        tooltip_drops.innerHTML = "<br>Loot:";
         const loot_line = document.createElement("div");
         const loot_name = document.createElement("div");
         const loot_chance = document.createElement("div");
@@ -3760,7 +3788,7 @@ function create_new_bestiary_entry(enemy_name) {
         loot_chance_base.classList.add("loot_chance_base");
         loot_chance_current.classList.add("loot_chance_current");
 
-        loot_name.innerHTML = `名称`;
+        loot_name.innerHTML = `Name`;
         loot_chance_base.innerHTML = `Base`;
         loot_chance_current.innerHTML = `Current`;
         loot_chance.append(loot_chance_current, loot_chance_base);
@@ -3775,6 +3803,9 @@ function create_new_bestiary_entry(enemy_name) {
         const loot_chance = document.createElement("div");
         const loot_chance_base = document.createElement("div");
         const loot_chance_current = document.createElement("div");
+        const loot_item_key = enemy.loot_list[i].item_name;
+        const loot_item = item_templates[loot_item_key];
+        if(!loot_item) continue;
 
         loot_line.classList.add("loot_slot_div");
         loot_name.classList.add("loot_name");
@@ -3782,9 +3813,9 @@ function create_new_bestiary_entry(enemy_name) {
         loot_chance_base.classList.add("loot_chance_base");
         loot_chance_current.classList.add("loot_chance_current");
 
-        loot_name.innerHTML = `${enemy.loot_list[i].item_name}`;
-        loot_chance_base.innerHTML = `[${format_numberL(enemy.loot_list[i].chance)}]`;
-        loot_chance_current.innerHTML = `${enemy.loot_list[i].ignore_luck?("[Fixed]"):(format_numberL(enemy.loot_list[i].chance*enemy.get_droprate_modifier()))}`;
+        loot_name.innerHTML = `${loot_item?.getName?.() ?? loot_item_key}`;
+        loot_chance_base.innerHTML = `[${format_percent(enemy.loot_list[i].chance)}]`;
+        loot_chance_current.innerHTML = `${enemy.loot_list[i].ignore_luck?("[Fixed]"):(format_percent(enemy.loot_list[i].chance*enemy.get_droprate_modifier()))}`;
         loot_chance.append(loot_chance_current, loot_chance_base);
         loot_line.append(loot_name, loot_chance);
 
@@ -3820,13 +3851,13 @@ function add_bestiary_lines(zone)
     //zone 11-> 1-1，rank作为1200处理
     //sorts bestiary_list div by enemy rank
     bestiary_entry_divs[zone] = document.createElement("div");
-    let ZoneNameMap = {11:"纳家练兵场",12:"燕岗城",13:"燕岗城郊",14:"地宫",15:"地宫核心",21:"荒兽森林",22:"清野江畔",23:"纳家秘境",24:"结界湖",25:"声律城废墟",26:"声律城战场",27:"天外飞船",28:"飞船核心",31:"赫尔沼泽",32:"黑暗森林",33:"纯白冰原",34:"极寒冰宫",35:"时封水牢",36:"传承幻境",37:"幻境核心",41:"城门战",42:"【WIP】战",43:"【WIP】战",44:"毬毬山谷",45:"鲜血峰",46:"破败之域",47:"破败危壁",48:"灭门战【WIP/需要剧情修正】",51:"枯叶走廊",52:"灰魇【WIP】",53:"灰魇庭院",54:"珍珠海",55:"风雷大会",56:"行道盟审判战",61:"深林【WIP】",62:"血魔海",63:"炎眸【WIP】",64:"葬地【WIP】",65:"冗音圣树",66:"冗音之塔",67:"音界",68:"圣城【WIP】"}
+    let ZoneNameMap = {11:"Nayaka Training Ground",12:"Yangang City",13:"Yangang Outskirts",14:"Underground Palace",15:"Underground Palace Core",21:"Wild Beast Forest",22:"Qingye Riverside",23:"Na Family Secret Realm",24:"Barrier Lake",25:"Shenlv City Ruins",26:"Shenlv City Battlefield",27:"Sky Vessel",28:"Ship Core",31:"Hel Swamp",32:"Dark Forest",33:"Pure White Ice Plains",34:"Extreme Cold Ice Palace",35:"Time-Locked Water Prison",36:"Inheritance Realm",37:"幻境核心",41:"城门战",42:"【WIP】战",43:"【WIP】战",44:"毬毬山谷",45:"鲜血峰",46:"破败之域",47:"破败危壁",48:"灭门战【WIP/需要剧情修正】",51:"枯叶走廊",52:"灰魇【WIP】",53:"灰魇庭院",54:"珍珠海",55:"风雷大会",56:"行道盟审判战",61:"深林【WIP】",62:"血魔海",63:"炎眸【WIP】",64:"葬地【WIP】",65:"冗音圣树",66:"冗音之塔",67:"音界",68:"圣城【WIP】"} // TODO: translate zones 37+
     const name_div = document.createElement("div");
     name_div.innerHTML = `<b>【${ZoneNameMap[zone]}】</b>`;
     name_div.classList.add("bestiary_entry_name");
 
     const kill_counter = document.createElement("div");
-    kill_counter.innerHTML = `<b>区域 ${Math.floor(zone/10)} - ${zone%10}</b>`;
+    kill_counter.innerHTML = `<b>Zone ${Math.floor(zone/10)} - ${zone%10}</b>`;
 
     //if(zone==0) return;
      
@@ -3895,12 +3926,16 @@ function reload_bestiary(){
 
 function create_new_levelary_entry(level_name) {
     levelary_entry_divs[level_name] = document.createElement("div");
-    
-    const level = locations[level_name];
+
+    const level = locations[level_name] || Object.values(locations).find(l => l.name === level_name);
+    if(!level) {
+        console.error(`create_new_levelary_entry: no location found for '${level_name}'`);
+        return;
+    }
 
 
     const name_div = document.createElement("div");
-    name_div.innerHTML = level_name;
+    name_div.innerHTML = level.name;
     name_div.classList.add("bestiary_entry_name");
     const kill_counter = document.createElement("div");
     kill_counter.innerHTML = `${Math.floor(level.rank/100)+1} - ${Math.floor((level.rank%100)/10)+1} - ${level.rank%10}`;
@@ -3919,9 +3954,9 @@ function create_new_levelary_entry(level_name) {
     const tooltip_enemies = document.createElement("div");
     
     if(level.types.length > 0) {
-        tooltip_tags.innerHTML = `<br><br>楼层属性：`;
+        tooltip_tags.innerHTML = `<br><br>Floor Properties:`;
         
-        const LocationTypesMap = {"dark":"黑暗","aura":"光环","stress":"威压"}
+        const LocationTypesMap = {"dark":"Dark","aura":"Aura","stress":"Oppression"}
         const LocationStageMap = {1:"I",2:"II",3:"III"};
         for(let j=0;j<level.types.length;j++)
         {
@@ -3933,23 +3968,23 @@ function create_new_levelary_entry(level_name) {
     if(level.enemy_stat_halo != 0)
     {
         let c_halo = level.enemy_stat_halo;
-        if(level_name == "纳家秘境 - ∞"){
+        if(level.id == "纳家秘境 - ∞"){
             c_halo = inf_combat.A6.cur * 0.08;
         }
-        if(level_name.includes("赫尔沼泽")){
+        if(level.id?.includes("赫尔沼泽")){
             inf_combat.B3 = inf_combat.B3 || 0;
             c_halo = inf_combat.B3 * 0.01;
         }
-        tooltip_tags.innerHTML += `<br>光环 ${format_number(c_halo * 100.0)} %(掉落 + ${format_number((Math.pow(c_halo+1,1)-1)*100.0)}%,经验 + ${format_number((Math.pow(c_halo+1,1.5)-1)*100.0)}%)`;
+        tooltip_tags.innerHTML += `<br>Aura ${format_number(c_halo * 100.0)} %(Loot +${format_number((Math.pow(c_halo+1,1)-1)*100.0)}%, XP +${format_number((Math.pow(c_halo+1,1.5)-1)*100.0)}%)`;
     }
-    tooltip_enemies.innerHTML = `<br><br>此处敌人：<br>`;
+    tooltip_enemies.innerHTML = `<br><br>Enemies here:<br>`;
     for(let j=0;j<level.enemies_list.length;j++)
     {
         tooltip_enemies.innerHTML += `<img src=${enemy_templates[level.enemies_list[j]].image}>`;
      }
      
     const tooltip_loots = document.createElement("div");
-     tooltip_loots.innerHTML += `<br>此处战利品(平均)：<br>`;
+     tooltip_loots.innerHTML += `<br>Loot here (avg):<br>`;
     let lootlist = {0:0};
     let I_list = [];
      for(let j=0;j<level.enemies_list.length;j++)
@@ -3974,7 +4009,7 @@ function create_new_levelary_entry(level_name) {
             if(lootlist[I_name] == undefined)
             {
                 lootlist[I_name] = 1;
-                tooltip_loots.innerHTML += `[ ${I_name} ] - ${format_numberL(I_list[I_name] * character.stats.full.luck / level.enemies_list.length)} <br>`
+                tooltip_loots.innerHTML += `[ ${item_templates[I_name]?.getName?.() ?? I_name} ] - ${format_percent(I_list[I_name] * character.stats.full.luck / level.enemies_list.length)} <br>`
             }
         }
         //tooltip_enemies.innerHTML += `<img src=${enemy_templates[level.enemies_list[j]].image}>`;
@@ -4028,7 +4063,7 @@ function update_character_attack_bar(num) {
 
 function update_backup_load_button(date_string){
     if(date_string) {
-        backup_load_button.innerText = `加载自动存档 [${date_string.replaceAll("_",":")}]`;
+        backup_load_button.innerText = `Load Auto-Save [${date_string.replaceAll("_",":")}]`;
         backup_load_button.style["background-image"] = `var(--options_gradient);`;
         backup_load_button.style["background-color"] = "transparent";
         backup_load_button.style.color = "white";

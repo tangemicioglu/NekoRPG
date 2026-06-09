@@ -21,22 +21,22 @@ function round_item_price(price) {
 }
 
 function format_reading_time(time) {
-    return `${Math.round(time)} 秒`;
+    return `${Math.round(time)} sec`;
 }
-                
+
 const stat_names = {"strength": "str",
                     "health": "hp",
-                    "max_health": "生命上限", //same as for "health"
-                    "health_regeneration_flat": "生命恢复", //same as for "health"
-                    "agility": "敏捷",
+                    "max_health": "Max HP", //same as for "health"
+                    "health_regeneration_flat": "HP Regen", //same as for "health"
+                    "agility": "agility",
                     "dexterity": "dex",
                     "UK1": "UK1",
-                    "attack_speed": "攻击速度",
-                    "attack_power": "攻击",
-                    "crit_rate": "暴击概率",
-                    "crit_multiplier": "暴击伤害",
-                    "attack_mul": "普攻倍率",
-                    "luck": "幸运",
+                    "attack_speed": "Attack Speed",
+                    "attack_power": "Attack",
+                    "crit_rate": "Crit Rate",
+                    "crit_multiplier": "Crit Damage",
+                    "attack_mul": "Normal Attack Multiplier",
+                    "luck": "Luck",
                     "intuition": "int",
                     "block_strength": "shield strength",
                     "hit_chance": "hit chance",

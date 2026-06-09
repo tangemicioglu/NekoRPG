@@ -65,10 +65,10 @@ class Stance {
 }
 
 stances["normal"] = new Stance({
-    name: "[无]",
+    name: "[None]",
     id: "normal",
     is_unlocked: true,
-    description: "不使用任何秘法，仅仅利用蛮力来战斗。",
+    description: "Fight without any arcane arts, relying purely on brute force.",
     stat_multipliers: {}
 })
 
@@ -143,9 +143,9 @@ stances["flowing water"] = new Stance({
 });
 //血洛大陆秘法↓
 stances["MB_Speed"] = new Stance({
-    name: "融血·疾",
+    name: "Blood-Fusion: Swift",
     id: "MB_Speed",
-    description: "可以稍微加快攻击速度。",
+    description: "Slightly increases attack speed.",
     related_skill: "MergeBlood",
     stat_multipliers: {
         attack_speed: 1.1,
@@ -156,10 +156,10 @@ stances["MB_Speed"] = new Stance({
 });
 
 stances["MB_Power"] = new Stance({
-    name: "融血·锐",
+    name: "Blood-Fusion: Sharp",
     id: "MB_Power",
     related_skill: "MergeBlood",
-    description: "可以略微增强攻击力。",
+    description: "Slightly increases attack power.",
     stat_multipliers: {
         attack_power: 1.1,
         max_health: 0.75,
@@ -168,9 +168,9 @@ stances["MB_Power"] = new Stance({
 });
 
 stances["WH_Speed"] = new Stance({
-    name: "水无心·流水",
-    id: "水无心·流水",
-    description: "加快攻击速度，并稍微加强攻击力。",
+    name: "Waterless Mind: Flowing Water",
+    id: "WH_Speed",
+    description: "Increases attack speed and slightly enhances attack power.",
     related_skill: "WaterHeartless",
     stat_multipliers: {
         attack_speed: 1.15,
@@ -182,9 +182,9 @@ stances["WH_Speed"] = new Stance({
 });
 
 stances["WH_Power"] = new Stance({
-    name: "水无心·洪水",
-    id: "水无心·洪水",
-    description: "加强攻击力，并稍微加快攻击速度。",
+    name: "Waterless Mind: Flood",
+    id: "WH_Power",
+    description: "Enhances attack power and slightly increases attack speed.",
     related_skill: "WaterHeartless",
     stat_multipliers: {
         attack_speed: 1.05,
@@ -196,9 +196,9 @@ stances["WH_Power"] = new Stance({
 });
 
 stances["WH_Multi"] = new Stance({
-    name: "水无心·雨水",
-    id: "水无心·雨水",
-    description: "稍微增幅攻击力和攻击速度，但一次可以攻击多个目标。",
+    name: "Waterless Mind: Rainfall",
+    id: "WH_Multi",
+    description: "Slightly amplifies attack power and speed, but can attack multiple targets at once.",
     related_skill: "WaterHeartless",
     stat_multipliers: {
         attack_speed: 1.05,
@@ -210,9 +210,9 @@ stances["WH_Multi"] = new Stance({
 
 
 stances["SF_Power"] = new Stance({
-    name: "映星花·巨星",
-    id: "映星花·巨星",
-    description: "强大的单体攻击秘法，从3个方面对攻击进行叠乘。",
+    name: "Starlight Bloom: Giant Star",
+    id: "SF_Power",
+    description: "A powerful single-target arcane art that stacks attack multipliers from 3 aspects.",
     related_skill: "ReflectStarFlower",
     stat_multipliers: {
         attack_speed: 1.40,
@@ -223,9 +223,9 @@ stances["SF_Power"] = new Stance({
     max_bonus: 2,
 });
 stances["SF_Multi"] = new Stance({
-    name: "映星花·繁星",
-    id: "映星花·繁星",
-    description: "群体攻击秘法，乘区不如单体攻击，但可以一次攻击3-6个目标。",
+    name: "Starlight Bloom: Starfield",
+    id: "SF_Multi",
+    description: "An AoE arcane art with weaker multipliers than single-target, but attacks 3-6 targets at once.",
     related_skill: "ReflectStarFlower",
     stat_multipliers: {
         attack_speed: 1.20,
@@ -235,9 +235,9 @@ stances["SF_Multi"] = new Stance({
     max_bonus: 2,
 });
 stances["SF_Lucky"] = new Stance({
-    name: "映星花·花海",
-    id: "映星花·花海",
-    description: "抛弃了更强的杀伤力，而是专注于保存敌人战利品的价值。同样是攻击3-6个目标。",
+    name: "Starlight Bloom: Flower Sea",
+    id: "SF_Lucky",
+    description: "Sacrifices stronger damage to focus on preserving enemy loot value. Also attacks 3-6 targets.",
     related_skill: "ReflectStarFlower",
     stat_multipliers: {
         attack_power: 0.80,

@@ -154,7 +154,7 @@ class Combat_zone {
         this.enemy_stat_halo = enemy_stat_halo;//improving
 
         this.parent_location = parent_location;
-        if(!locations[this.parent_location.name]) {
+        if(!this.parent_location) {
             throw new Error(`Couldn't add parent location "${this.parent_location.name}" to zone "${this.name}"`)
         }
 
@@ -186,8 +186,9 @@ class Combat_zone {
     get_enemy(f_halo,f_enemy){
         
             let newEnemy;
-                newEnemy = new Enemy({name: f_enemy.name, 
-                    description: f_enemy.description, 
+                newEnemy = new Enemy({name: f_enemy.name,
+                    id: f_enemy.id,
+                    description: f_enemy.description,
                     xp_value: f_enemy.xp_value * Math.pow(f_halo,1.5),
                     spec: f_enemy.spec,
                     spec_value:f_enemy.spec_value,
@@ -214,65 +215,65 @@ class Combat_zone {
                 newEnemy.stats.attack += character.stats.full.attack_power * 0.1;
                 newEnemy.stats.defense += character.stats.full.defense * 0.1;
                 newEnemy.stats.agility += character.stats.full.agility * 0.1;
-                log_message(`${f_enemy.name} 吸取了 ${format_number(character.stats.full.attack_power * 0.1)} 攻击，${format_number(character.stats.full.defense * 0.1)}防御 ，${format_number(character.stats.full.agility * 0.1)} 敏捷 [同调]`,"enemy_enhanced");
+                log_message(`${f_enemy.name} absorbed ${format_number(character.stats.full.attack_power * 0.1)} attack, ${format_number(character.stats.full.defense * 0.1)} defense, and ${format_number(character.stats.full.agility * 0.1)} agility [Synchronize]`,"enemy_enhanced");
             }//同调
             if(newEnemy.spec.includes(53))
             {
                 newEnemy.stats.attack += character.stats.full.attack_power * 2.0;
-                log_message(`${f_enemy.name} 吸取了 ${format_number(character.stats.full.attack_power * 2.0)} 攻击 [同调·魔]`,"enemy_enhanced");
+                log_message(`${f_enemy.name} absorbed ${format_number(character.stats.full.attack_power * 2.0)} attack [Synchronize: Demon]`,"enemy_enhanced"); // TODO: verify "同调·魔" translation
             }//同调
             if(newEnemy.spec.includes(24)){
-                log_message(`${f_enemy.name} 吸取了 ${format_number(character.stats.full.attack_power * 0.5)} 生命 [饮剑]`,"enemy_enhanced");
+                log_message(`${f_enemy.name} absorbed ${format_number(character.stats.full.attack_power * 0.5)} health [Sword Drain]`,"enemy_enhanced");
                 newEnemy.stats.health += character.stats.full.attack_power * 0.5;//饮剑
             }
             if(newEnemy.spec.includes(25)){ 
-                log_message(`${f_enemy.name} 吸取了 ${format_number(character.stats.full.defense * 0.5)} 生命 [饮盾]`,"enemy_enhanced");
+                log_message(`${f_enemy.name} absorbed ${format_number(character.stats.full.defense * 0.5)} health [Shield Drain]`,"enemy_enhanced");
                 newEnemy.stats.health += character.stats.full.defense * 0.5;//饮盾
             }
             if(newEnemy.spec.includes(46)){
-                log_message(`${f_enemy.name} 吸取了 ${format_number(character.stats.full.attack_power * 2.5)} 生命 [饮剑]`,"enemy_enhanced");
+                log_message(`${f_enemy.name} absorbed ${format_number(character.stats.full.attack_power * 2.5)} health [Sword Drain]`,"enemy_enhanced");
                 newEnemy.stats.health += character.stats.full.attack_power * 2.5;//饮剑·改
             }
             if(newEnemy.spec.includes(47)){ 
-                log_message(`${f_enemy.name} 吸取了 ${format_number(character.stats.full.defense * 2.5)} 生命 [饮盾]`,"enemy_enhanced");
+                log_message(`${f_enemy.name} absorbed ${format_number(character.stats.full.defense * 2.5)} health [Shield Drain]`,"enemy_enhanced");
                 newEnemy.stats.health += character.stats.full.defense * 2.5;//饮盾·改
             }
             if(newEnemy.spec.includes(30)){ 
-                log_message(`${f_enemy.name} 吸取了 ${format_number(character.stats.full.agility * newEnemy.spec_value[30])} 攻击 [净化]`,"enemy_enhanced");
+                log_message(`${f_enemy.name} absorbed ${format_number(character.stats.full.agility * newEnemy.spec_value[30])} attack [Purify]`,"enemy_enhanced");
                 newEnemy.stats.attack += character.stats.full.agility * newEnemy.spec_value[30];//净化
             }
-            if(newEnemy.name == "地宫养殖者[BOSS]")//特判地宫养殖者
+            if(newEnemy.id == "地宫养殖者[BOSS]")//特判地宫养殖者
             {
                 if(enemy_killcount["地宫养殖者[BOSS]"]) console.log("试图再次击杀");
                 else{
-                    if(character.equipment.special?.name == "纳娜米")//姐姐在！
+                    if(character.equipment.special?.name == "Nanami")//姐姐在！
                     {
-                        log_message(`[地宫养殖者]嚯，有人闯到这里来了？`,"hero_attacked_critically");
-                        log_message(`[纳娜米]我不会和你废话。说，你为什么要害我纳家！`,"enemy_defeated");
-                        log_message(`[纱雪]此处省略22句关于血杀殿，地宫养殖者的广为人知的剧情。`,"sayuki");
-                        log_message(`[纳娜米]既然如此，时间也差不多了……可可！`,"enemy_defeated");
-                        log_message(`少女手上突然出现了一把奇异的武器。武器一米见长，前端有着深黑色的空洞。通体的质感，带来的威慑力令人窒息。`,"enemy_enhanced");
-                        log_message(`几乎零点一秒之内，纳娜米手中的武器，绽放出耀眼的银白色光芒。只听轰隆一声巨响，整座地宫都似乎为之震颤！`,"enemy_enhanced");
-                        log_message(`遭到反震力冲击的纳娜米吐出鲜血。反应过来的纳可，第一时间抱住了姐姐，一同抵挡着这武器带来的惊人的后坐力。`,"enemy_enhanced");
-                        log_message(`[纳可]没事吧，姐姐——`,"enemy_defeated");
-                        log_message(`[纳娜米]咳……还没有结束，可可。接下来，就交给你了！`,"enemy_defeated");
-                        log_message(`正面被武器击中的地宫养殖者，几乎瞬间失去了半边身体，发出了怨毒的咆哮声。`,"enemy_enhanced");
-                        log_message(`[地宫养殖者]啊，什么东西，不可能！！该死，中计了，我要杀了你，杀了你们，杀光你们燕岗领的人——`,"hero_attacked_critically");
-                        log_message(`[纳娜米]可可，不要大意！这是天空级强者的回光返照，只要撑过这一会就足够了！`,"enemy_enhanced");
-                        log_message(`[纳可]明白！`,"enemy_defeated");
+                        log_message(`[Dungeon Cultivator] Oh ho, someone dared to break in here?`,"hero_attacked_critically");
+                        log_message(`[Nanami] I won't waste words with you. Tell me - why are you targeting my Na Family!`,"enemy_defeated");
+                        log_message(`[Sayuki] 22 lines of the widely-known story about the Blood-Kill Hall and the Dungeon Cultivator are omitted here.`,"sayuki");
+                        log_message(`[Nanami] In that case, the time has come... Koko!`,"enemy_defeated");
+                        log_message(`Suddenly, a strange weapon appeared in the girl's hands. About a meter long, with a deep black void at its tip. Its overall texture radiates an overwhelming, suffocating presence.`,"enemy_enhanced");
+                        log_message(`In almost a tenth of a second, the weapon in Nanami's hands burst forth with dazzling silver-white light. There was a thunderous boom, and the entire Dungeon seemed to tremble!`,"enemy_enhanced");
+                        log_message(`Hit by the recoil, Nanami spat blood. Neko, realizing what happened, immediately embraced her sister, together bracing against the weapon's incredible recoil force.`,"enemy_enhanced");
+                        log_message(`[Neko] Are you okay, sister—`,"enemy_defeated");
+                        log_message(`[Nanami] Cough... it's not over yet, Koko. What comes next, I'll leave to you!`,"enemy_defeated");
+                        log_message(`The Dungeon Cultivator, struck head-on by the weapon, almost instantly lost half its body and let out a venomous roar.`,"enemy_enhanced");
+                        log_message(`[Dungeon Cultivator] What— impossible!! Damn it, I've been tricked. I'll kill you, kill all of you, slaughter everyone in Yangang Territory—`,"hero_attacked_critically");
+                        log_message(`[Nanami] Koko, don't let your guard down! This is a Sky Rank cultivator's last burst of power. Just hold out for a moment longer!`,"enemy_enhanced");
+                        log_message(`[Neko] Understood!`,"enemy_defeated");
                         //sleep(1000);
                         newEnemy.stats.attack *= 0.01;
                         newEnemy.stats.defense *= 0.01;
                         newEnemy.stats.agility *= 0.01;
                         newEnemy.stats.health *= 0.01;
-                        log_message(`地宫养殖者已经奄奄一息！攻防敏血削弱为之前的百分之一！`,"enemy_enhanced");
+                        log_message(`The Dungeon Cultivator is on its last legs! Attack, defense, agility, and health are all reduced to one percent of their former values!`,"enemy_enhanced");
                     }
                     else
                     {
-                        log_message(`[地宫养殖者]嚯，有人闯到这里来了？`,"hero_attacked_critically");
+                        log_message(`[Dungeon Cultivator] Oh ho, someone dared to break in here?`,"hero_attacked_critically");
                         log_message(`[???]...`,"enemy_defeated");
-                        log_message(`[纱雪]高能反应！检测到纳娜米未在队伍中！`,"sayuki");
-                        log_message(`地宫养殖者现在活力满满！攻防敏血都保持着之前的状态！`,"enemy_enhanced");
+                        log_message(`[Sayuki] High-energy reaction! Nanami is not detected in the party!`,"sayuki");
+                        log_message(`The Dungeon Cultivator is in full health! Attack, defense, agility, and health remain at their previous levels!`,"enemy_enhanced");
                     
                     }
                 }
@@ -301,8 +302,9 @@ class Combat_zone {
  
         for(let i = 0; i < enemy_group.length; i++) {
             const enemy = enemy_templates[enemy_group[i]];
-            if(enemy.name == undefined){
-                console.error("试图在 " + this.name + " 中生成未定义的敌人 [" + enemy_group[i].name + "]");
+            if(!enemy || enemy.name == undefined){
+                console.error("试图在 " + this.name + " 中生成未定义的敌人 [" + enemy_group[i] + "]");
+                continue;
             }
             // if(this.enemy_stat_variation != 0) {
 
@@ -332,39 +334,39 @@ class Combat_zone {
 
             // } else {
             let halo_fix = 0;
-            if(enemy.name == "秘境心火精灵[BOSS]")//特判秘境心火
+            if(enemy.id == "秘境心火精灵[BOSS]")//特判秘境心火
             {
                 const key_id = item_templates["微花残片"].getInventoryKey();
                 let key_cnt = character.inventory[key_id]?character.inventory[key_id].count:0;
                 key_cnt = Math.min(key_cnt,5);
                 if(key_cnt != 0)
                 {
-                    log_message(`由于持有 ${key_cnt} 个微花残片，光环削弱：140% -> ${140-key_cnt*8}%！`,"enemy_enhanced");
+                    log_message(`Due to holding ${key_cnt} Micro-Petal Fragments, the halo is weakened: 140% -> ${140-key_cnt*8}%!`,"enemy_enhanced");
                     halo_fix -= 0.08*key_cnt;
                 }
             }
-            else if(this.name == "结界湖 - X"){
+            else if(this.name == "Barrier Lake - X"){
                 const key_id = item_templates["微花残片"].getInventoryKey();
                 let key_cnt = character.inventory[key_id]?character.inventory[key_id].count:0;
                 key_cnt = Math.min(key_cnt,4);
                 if(key_cnt != 0)
                 {
-                    log_message(`由于持有 ${key_cnt} 个微花残片，光环削弱：132% -> ${132-key_cnt*8}%！`,"enemy_enhanced");
+                    log_message(`Due to holding ${key_cnt} Micro-Petal Fragments, the halo is weakened: 132% -> ${132-key_cnt*8}%!`,"enemy_enhanced");
                     halo_fix -= 0.08*key_cnt;
                 }
             }
-            else if(this.name == "纳家秘境 - ∞"){
+            else if(this.name == "Na Family Secret Realm - ∞"){
                 inf_combat.A6.cur = Math.min(inf_combat.A6.cur,9999);
                 halo_fix = (inf_combat.A6.cur - 6) * 0.08;
             }
-            else if(this.name.includes("赫尔沼泽")){
+            else if(this.name.includes("Hel Swamp")){
                 inf_combat.B3 = inf_combat.B3 || 0;
                 halo_fix = inf_combat.B3 * 0.01 - 0.01;
             }
-            else if(this.name.includes("纯白冰原") && character.is_in_inventory_nanami("{\"id\":\"峰\"}")){
+            else if(this.name.includes("Pure White Arctic Tundra") && character.is_in_inventory_nanami("{\"id\":\"峰\"}")){
                 remove_from_character_inventory([{item_key:"{\"id\":\"峰\"}"}]);
-                log_message("[峰]终于到地方了，不枉我盯了她一路。","enemy_enhanced");
-                log_message("[峰]那么，我也差不多该走了……","enemy_enhanced");
+                log_message("[Feng] We finally made it. Worth every step I spent tailing her.","enemy_enhanced");
+                log_message("[Feng] Well then, I suppose it's time for me to take my leave...","enemy_enhanced");
             }
             if(character.equipment.props?.name == "光环法杖"){
                 if(enemy.rank >= 4000){
@@ -383,13 +385,13 @@ class Combat_zone {
 
             enemies.push(this.get_enemy(halo,enemy)); 
             if(enemy.spec.includes(41)) {
-                log_message(`召唤了 3x 紫锈胎人`,"enemy_enhanced");
+                log_message(`Summoned 3x Purple-Rust Fetal`,"enemy_enhanced");
                 enemies.push(this.get_enemy(halo,enemy_templates["紫锈胎人"])); 
                 enemies.push(this.get_enemy(halo,enemy_templates["紫锈胎人"])); 
                 enemies.push(this.get_enemy(halo,enemy_templates["紫锈胎人"])); 
             }//召唤
             if(enemy.spec.includes(44)) {
-                log_message(`召唤了 3x 舰船除草机B1`,"enemy_enhanced");
+                log_message(`Summoned 3x Ship Weeder B1`,"enemy_enhanced");
                 enemies.push(this.get_enemy(halo,enemy_templates["舰船除草机B1"])); 
                 enemies.push(this.get_enemy(halo,enemy_templates["舰船除草机B1"])); 
                 enemies.push(this.get_enemy(halo,enemy_templates["舰船除草机B1"])); 
@@ -662,12 +664,12 @@ function get_location_type_penalty(type, stage, stat) {
         name: "dark",
         stages: {
             1: {
-                description: "一个永远和清朗夜晚一般昏暗的地方",
+                description: "A place that's always as dim as a clear night",
                 related_skill: "Night vision",
                 //no effects here, since in this case they are provided via the overall "night" penalty
             },
             2: {
-                description: "一个十分黑暗的地方，比大多暗夜更暗",
+                description: "A very dark place, darker than most nights",
                 related_skill: "Night vision",
                 effects: {
                     multipliers: {
@@ -678,7 +680,7 @@ function get_location_type_penalty(type, stage, stat) {
                 }
             },
             3: {
-                description: "纯粹的黑暗，连一丝闪光都没有",
+                description: "Pure darkness, not even a glimmer of light",
                 related_skill: "Presence sensing",
                 effects: {
                     multipliers: {
@@ -694,7 +696,7 @@ function get_location_type_penalty(type, stage, stat) {
         name: "stress",
         stages: {
             1: {
-                description: "四周弥漫着稀薄的威压，对攻击的效力和速度产生些许影响",
+                description: "A faint oppressive aura permeates the area, slightly affecting the power and speed of attacks",
                 related_skill: "Resistance",
                 effects: {
                     multipliers: {
@@ -704,7 +706,7 @@ function get_location_type_penalty(type, stage, stat) {
                 }
             },
             2: {
-                description: "四周弥漫着浓厚的威压，对攻击的效力和速度产生较大影响",
+                description: "A thick oppressive aura permeates the area, significantly affecting the power and speed of attacks",
                 related_skill: "Resistance",
                 effects: {
                     multipliers: {
@@ -877,20 +879,20 @@ function get_location_type_penalty(type, stage, stat) {
         bgm: 1,
         connected_locations:[],
         
-        description: "一处明亮整洁的大厅，纳可平时活动的地方。",
-        traders: ["自动售货机"],
+        description: "A bright and tidy hall, the place where Neko usually spends her time.",
+        traders: ["Vending Machine"],
         dialogues: ["猫妖"],
-        name: "纳家大厅", 
+        name: "Na Family Hall",
     });//1-1
     locations["练兵场深处"] = new Location({ 
-        connected_locations: [{location: locations["纳家大厅"], custom_text: "返回大厅"}], 
-        description: "练兵场深处的一间小木屋",
-        
+        connected_locations: [{location: locations["纳家大厅"], custom_text: "Return to the Hall"}],
+        description: "A small wooden cabin in the depths of the training grounds",
+
         bgm: 1,
-        
+
         is_unlocked: false,
-        unlock_text: "前面的路似乎无人值守...会不会这里就是前往外界的通道呢？",
-        name: "练兵场深处", 
+        unlock_text: "The path ahead seems unguarded... could this be the passage to the outside world?",
+        name: "Training Grounds Depths",
     });
 
 
@@ -898,17 +900,17 @@ function get_location_type_penalty(type, stage, stat) {
     locations["Village"].connected_locations.push({location: locations["纳家大厅"]});
 
     locations["纳可的房间"] = new Location({
-        connected_locations: [{location: locations["纳家大厅"], custom_text: "前往大厅"}],
-        description: "温馨的小房间，里面摆着一张粉色小床和一张练习用的工作台。",
-        name: "纳可的房间",
+        connected_locations: [{location: locations["纳家大厅"], custom_text: "Go to the Hall"}],
+        description: "A cozy little room with a pink bed and a practice workbench.",
+        name: "Neko's Room",
         is_unlocked: true,
         bgm: 1,
         sleeping: {
-            text: "睡一会",
+            text: "Take a nap",
             xp: 1},
             crafting: {
                 is_unlocked: true, 
-                use_text: "前往工作台", 
+                use_text: "Go to the Workbench",
                 tiers: {
                     crafting: 0,
                     forging: 0,
@@ -948,13 +950,13 @@ function get_location_type_penalty(type, stage, stat) {
     //NekoRPG conbat locations below
 
     locations["纳家练兵场 - 1"] = new Combat_zone({
-        description: "纳家给小辈练武的场所。有幼小的魔物用于对战",  //MT1
+        description: "A place where the Na family trains their younger members. Small monsters are kept here for sparring.",  //MT1
         enemy_count: 20, 
         enemies_list: ["毛茸茸","武装毛茸茸","红毛茸茸"],
         types: [],
         enemy_stat_variation: 0.1,
         is_unlocked: false, 
-        name: "纳家练兵场 - 1", 
+        name: "Na Family Training Grounds - 1", 
         parent_location: locations["纳家大厅"],
         first_reward: {
             xp: 8,
@@ -967,18 +969,18 @@ function get_location_type_penalty(type, stage, stat) {
         },
         rank:1,
         bgm:1,
-        
-        unlock_text: "要救姐姐，必须先提升自己的实力！先去练兵场与魔物对战吧。",
+
+        unlock_text: "To save my sister, I need to get stronger first! Let's go to the training grounds and fight some monsters.",
     });
 
     locations["纳家练兵场 - 2"] = new Combat_zone({
-        description: "练兵场的稍深处。有幼小的魔物用于对战", //MT2
+        description: "Deeper into the training grounds. Small monsters are kept here for sparring.", //MT2
         enemy_count: 20, 
         enemies_list: ["红毛茸茸","小飞蛾","骸骨","武装红毛茸茸","少年法师"],
         types: [],
         enemy_stat_variation: 0.1,
         is_unlocked: false, 
-        name: "纳家练兵场 - 2", 
+        name: "Na Family Training Grounds - 2", 
         parent_location: locations["纳家大厅"],
         first_reward: {
             xp: 12,
@@ -991,18 +993,18 @@ function get_location_type_penalty(type, stage, stat) {
         
         rank:2,
         bgm:1,
-        unlock_text: "还不够...不要为了击败最弱的魔物沾沾自喜啊，路还很长！",
+        unlock_text: "Not enough... don't get complacent just because you beat the weakest monsters. There's still a long road ahead!",
     });
 
     locations["纳家练兵场 - 3"] = new Combat_zone({
-        description: "练兵场的深处。有成长期魔物用于对战", //MT3
+        description: "Deep within the training grounds. Growing-stage monsters are kept here for sparring.", //MT3
         enemy_count: 20, 
         enemies_list: ["骸骨","微尘级野兽","废弃傀儡","黑毛茸茸"],
         
         types: [],
         enemy_stat_variation: 0.1,
         is_unlocked: false, 
-        name: "纳家练兵场 - 3", 
+        name: "Na Family Training Grounds - 3", 
         parent_location: locations["纳家大厅"],
         first_reward: {
             xp: 16,
@@ -1017,13 +1019,13 @@ function get_location_type_penalty(type, stage, stat) {
     });
 
     locations["纳家练兵场 - 4"] = new Combat_zone({
-        description: "练兵场中的黑暗小道。成长期魔物的实力上了一个台阶", //MT4
+        description: "A dark alleyway within the training grounds. Growing-stage monsters of a higher caliber.", //MT4
         enemy_count: 20, 
         enemies_list: ["黑毛茸茸","荧光飞蛾","橙毛茸茸","大飞蛾","聚灵骸骨"],
         types: [{type: "dark", stage: 1, xp_gain: 1}],
         enemy_stat_variation: 0.1,
         is_unlocked: true, 
-        name: "纳家练兵场 - 4", 
+        name: "Na Family Training Grounds - 4", 
         
         rank:4,
         bgm:1,
@@ -1039,13 +1041,13 @@ function get_location_type_penalty(type, stage, stat) {
     });
 
     locations["纳家练兵场 - 5"] = new Combat_zone({
-        description: "练兵场中黑暗的通道，亮度已经影响到了战斗", //MT5~6
+        description: "A dark corridor within the training grounds. The darkness is now affecting combat.", //MT5~6
         enemy_count: 20, 
         enemies_list: ["聚灵骸骨","血洛游卒","石精","弱小意念","聚魂骸骨"],
         types: [{type: "dark", stage: 1, xp_gain: 2}],
         enemy_stat_variation: 0.1,
         is_unlocked: false, 
-        name: "纳家练兵场 - 5", 
+        name: "Na Family Training Grounds - 5", 
         
         rank:5,
         bgm:1,
@@ -1058,16 +1060,16 @@ function get_location_type_penalty(type, stage, stat) {
             
             locations: [{location: "纳家练兵场 - 6"}],
         },
-        unlock_text: "好黑..好可怕..或许应该打造一些盔甲，防护自己了。",
+        unlock_text: "It's so dark... so scary... maybe I should craft some armor to protect myself.",
     });
     locations["纳家练兵场 - 6"] = new Combat_zone({
-        description: "黑暗的通道，尽头处似乎传来点点光亮？", //MT7~8
+        description: "A dark corridor - there seems to be a faint light at the end?", //MT7~8
         enemy_count: 20, 
         enemies_list: ["弱小意念","聚魂骸骨","青年法师","武装橙毛茸茸","万物级凶兽","习武孩童"],
         types: [{type: "dark", stage: 1, xp_gain: 2}],
         enemy_stat_variation: 0.1,
         is_unlocked: false, 
-        name: "纳家练兵场 - 6", 
+        name: "Na Family Training Grounds - 6", 
         
         rank:6,
         bgm:1,
@@ -1080,10 +1082,10 @@ function get_location_type_penalty(type, stage, stat) {
             
             locations: [{location: "纳家练兵场 - 7"}],
         },
-        unlock_text: "小孩都能混进来了，说明这里肯定是正确的道路哇！好耶！",
+        unlock_text: "Even kids can sneak in here, so this must be the right path! Yay!",
     });
     locations["纳家练兵场 - 7"] = new Combat_zone({
-        description: "尽管不再黑暗，却遍布魔物的侧门附近", //MT9~10
+        description: "No longer dark, but the area near the side gate is swarming with monsters.", //MT9~10
         enemy_count: 20, 
         enemies_list: ["试炼木偶","聚魂骸骨","荧光飞蛾","出芽茸茸","万物级凶兽","习武孩童"],
         enemy_group_size: [2,2],
@@ -1093,7 +1095,7 @@ function get_location_type_penalty(type, stage, stat) {
         
         rank:7,
         bgm:1,
-        name: "纳家练兵场 - 7", 
+        name: "Na Family Training Grounds - 7", 
         parent_location: locations["练兵场深处"],
         first_reward: {
             xp: 50,
@@ -1102,25 +1104,25 @@ function get_location_type_penalty(type, stage, stat) {
             xp: 10,
             locations: [{location: "纳家练兵场 - X"}],
         },
-        unlock_text: "附近有许多可疑的门！不过想要检查它们的话，必须先击败眼前成群结对的敌人..",
+        unlock_text: "There are many suspicious doors around! But to check them out, we'll have to defeat the swarms of enemies in the way first...",
     });
     
     locations["纳家练兵场 - X"] = new Challenge_zone({
-        description: "一扇厚重的门前。看起来想出去必须把待从打晕过去...",
+        description: "In front of a heavy door. Looks like you'll have to knock out the attendant to get through...",
         enemy_count: 1, 
         bgm:1,
         enemies_list: ["纳家待从[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: false, 
         is_challenge: true,
-        name: "纳家练兵场 - X", 
-        leave_text: "听话离去",
+        name: "Na Family Training Grounds - X", 
+        leave_text: "Leave obediently",
         parent_location: locations["练兵场深处"],
         repeatable_reward: {
             //textlines: [{dialogue: "猫妖", lines: ["MT10_clear"]}],
             locations: [{location: "燕岗城"}],
         },
-        unlock_text: "请留步，小姐。<br>这里禁止大地级之下的子弟随意出入。"
+        unlock_text: "Please stop right there, miss.<br>Entry below the Earth Rank is not permitted here."
     });
 
     
@@ -1134,33 +1136,33 @@ function get_location_type_penalty(type, stage, stat) {
     locations["练兵场深处"].connected_locations.push({location: locations["纳家练兵场 - 5"]});
     locations["练兵场深处"].connected_locations.push({location: locations["纳家练兵场 - 6"]});
     locations["练兵场深处"].connected_locations.push({location: locations["纳家练兵场 - 7"]});
-    locations["练兵场深处"].connected_locations.push({location: locations["纳家练兵场 - X"], custom_text: "前往挑战门边的待从"});
+    locations["练兵场深处"].connected_locations.push({location: locations["纳家练兵场 - X"], custom_text: "Challenge the attendant by the gate"});
 
 
 
     
     locations["燕岗城"] = new Location({ 
-        connected_locations: [{location: locations["练兵场深处"], custom_text: "回到纳家"}], 
-        description: "熙熙攘攘的燕岗城外城。尽管是崇尚力量的世界，市民间仍然有讲不完的话题。",
-        
+        connected_locations: [{location: locations["练兵场深处"], custom_text: "Return to the Na Family"}],
+        description: "The bustling outer city of Yangang. Even in a world that worships strength, the townsfolk always have plenty to talk about.",
+
         bgm: 2,
         dialogues: ["秘法石碑 - 1","路人甲"],
-        traders: ["燕岗杂货铺"],
+        traders: ["Yangang General Store"],
         is_unlocked: false,
-        unlock_text: "无论见到多少次，城市的繁华仍然令人侧目。但现在，尽快出城才是最重要的！",
-        name: "燕岗城", 
+        unlock_text: "No matter how many times you see it, the city's splendor is always striking. But right now, leaving the city as fast as possible is what matters!",
+        name: "Yangang City",
     });//1-2
     locations["练兵场深处"].connected_locations.push({location: locations["燕岗城"]});
 
     locations["燕岗城 - 1"] = new Combat_zone({
-        description: "燕岗城14环的普通街道。", //MT11-12
+        description: "An ordinary street in Yangang City's 14th ring.", //MT11-12
         enemy_count: 20, 
         enemies_list: ["试炼木偶","纳家待从","出芽红茸茸","轻型傀儡","万物级异兽"],
         enemy_group_size: [1,1],
         types: [],
         enemy_stat_variation: 0.1,
         is_unlocked: true, 
-        name: "燕岗城 - 1",
+        name: "Yangang City - 1",
         
         rank:11, 
         bgm:2,
@@ -1175,7 +1177,7 @@ function get_location_type_penalty(type, stage, stat) {
     });
 
     locations["燕岗城 - 2"] = new Combat_zone({
-        description: "燕岗城15环的普通街道。", //MT13-14
+        description: "An ordinary street in Yangang City's 15th ring.", //MT13-14
         enemy_count: 20, 
         enemies_list: ["出芽红茸茸","轻型傀儡","万物级异兽","高速傀儡","黄毛茸茸","纳家塑像"],
         enemy_group_size: [1,1],
@@ -1185,7 +1187,7 @@ function get_location_type_penalty(type, stage, stat) {
         rank:12,
         bgm:2,
         is_unlocked: false, 
-        name: "燕岗城 - 2", 
+        name: "Yangang City - 2", 
         parent_location: locations["燕岗城"],
         first_reward: {
             xp: 90,
@@ -1197,25 +1199,25 @@ function get_location_type_penalty(type, stage, stat) {
     });
 
     locations["燕岗城 - 秘法石碑"] = new Challenge_zone({
-        description: "燕岗城主“石风雄”刻录的石碑，记载了基础的血洛秘法。",
+        description: "A stone stele inscribed by Yangang City Lord 'Shi Fengxiong', containing basic Blood-Luo secret arts.",
         enemy_count: 1, 
         enemies_list: ["百家小卒[BOSS]"],
         enemy_group_size: [2,2],
         bgm:2,
         is_unlocked: false, 
         is_challenge: true,
-        name: "燕岗城 - 秘法石碑", 
-        leave_text: "暂时退避",
+        name: "Yangang City - Arcane Stele", 
+        leave_text: "Retreat for now",
         parent_location: locations["燕岗城"],
         repeatable_reward: {
             //此处应有战斗姿态
             textlines: [{dialogue: "秘法石碑 - 1", lines: ["Power", "Speed"]}],
         },
-        unlock_text: "哪来的小丫头？想参悟这里的秘法，先过了我们这关！"
+        unlock_text: "Where did this little girl come from? Want to comprehend the secret arts here? Get past us first!"
     });
 
     locations["燕岗城 - 3"] = new Combat_zone({
-        description: "燕岗城16环的普通街道。", //MT15-16
+        description: "An ordinary street in Yangang City's 16th ring.", //MT15-16
         enemy_count: 20, 
         enemies_list: ["高速傀儡","黄毛茸茸","纳家塑像","出芽橙茸茸","森林野蝠","血洛喽啰"],
         enemy_group_size: [1,1],
@@ -1225,7 +1227,7 @@ function get_location_type_penalty(type, stage, stat) {
         rank: 13,
         bgm:2,
         is_unlocked: false, 
-        name: "燕岗城 - 3", 
+        name: "Yangang City - 3", 
         parent_location: locations["燕岗城"],
         first_reward: {
             xp: 110,
@@ -1238,7 +1240,7 @@ function get_location_type_penalty(type, stage, stat) {
     });
 
     locations["燕岗城 - 4"] = new Combat_zone({
-        description: "燕岗城17环的普通街道。", //MT17-18
+        description: "An ordinary street in Yangang City's 17th ring.", //MT17-18
         enemy_count: 20, 
         enemies_list: ["森林野蝠","血洛喽啰","百家小卒","下位佣兵","地龙荒兽","毒虫"],
         enemy_group_size: [1,2],
@@ -1248,7 +1250,7 @@ function get_location_type_penalty(type, stage, stat) {
         rank: 14,
         bgm:2,
         is_unlocked: false, 
-        name: "燕岗城 - 4", 
+        name: "Yangang City - 4", 
         parent_location: locations["燕岗城"],
         first_reward: {
             xp: 130,
@@ -1257,11 +1259,11 @@ function get_location_type_penalty(type, stage, stat) {
             xp: 32,
             locations: [{location: "燕岗城 - 5"}],
         },
-        unlock_text: "从这里已经可以隐隐约约看见城门了..燕岗城共有18环，再往外就是城郊。"
+        unlock_text: "From here, the city gate is just barely visible... Yangang City has 18 rings in total; beyond that is the outskirts."
     });
     
     locations["燕岗城 - 5"] = new Combat_zone({
-        description: "燕岗城最外环的环城街道。", //MT17-18
+        description: "The outermost ring road of Yangang City.", //MT17-18
         enemy_count: 20, 
         enemies_list: ["下位佣兵","地龙荒兽","毒虫","精壮青年","法师学徒","生灵骸骨"],
         enemy_group_size: [2,3],
@@ -1271,7 +1273,7 @@ function get_location_type_penalty(type, stage, stat) {
         rank: 15,
         bgm:2,
         is_unlocked: false, 
-        name: "燕岗城 - 5", 
+        name: "Yangang City - 5", 
         parent_location: locations["燕岗城"],
         first_reward: {
             xp: 150,
@@ -1284,20 +1286,20 @@ function get_location_type_penalty(type, stage, stat) {
 
     
     locations["燕岗城 - X"] = new Challenge_zone({
-        description: "燕岗城的城门，只要击败拦路的石精即可出门！",
+        description: "The city gate of Yangang City. Just defeat the blocking Stone Spirit and you can get out!",
         enemy_count: 1, 
         bgm:2,
         enemies_list: ["腐蚀质石精[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: false, 
         is_challenge: true,
-        name: "燕岗城 - X", 
-        leave_text: "暂时返回",
+        name: "Yangang City - X", 
+        leave_text: "Retreat for now",
         parent_location: locations["燕岗城"],
         repeatable_reward: {
             locations: [{location: "燕岗近郊"}],
         },
-        unlock_text: "终于到城门脚下了...<br>这成精的花岗岩是什么啊！只能先击败它了。"
+        unlock_text: "Finally at the foot of the city gate...<br>What on earth is this granite monster?! I'll have to defeat it first."
     });
 
     locations["燕岗城"].connected_locations.push({location: locations["燕岗城 - 1"]});
@@ -1306,49 +1308,49 @@ function get_location_type_penalty(type, stage, stat) {
     locations["燕岗城"].connected_locations.push({location: locations["燕岗城 - 3"]});
     locations["燕岗城"].connected_locations.push({location: locations["燕岗城 - 4"]});
     locations["燕岗城"].connected_locations.push({location: locations["燕岗城 - 5"]});
-    locations["燕岗城"].connected_locations.push({location: locations["燕岗城 - X"], custom_text: "与城门下的石精战斗"});
+    locations["燕岗城"].connected_locations.push({location: locations["燕岗城 - X"], custom_text: "Fight the Stone Spirit at the city gate"});
 
 
     
     locations["燕岗近郊"] = new Location({ 
-        connected_locations: [{location: locations["燕岗城"], custom_text: "回城"}], 
-        description: "燕岗城外的区域。鸟语花香，绿树成荫，却潜藏着大量潮汐级魔物。",
-        
+        connected_locations: [{location: locations["燕岗城"], custom_text: "Return to city"}],
+        description: "The area outside Yangang City. Birds sing and trees provide shade, but it's teeming with Tidal Rank monsters lurking in the shadows.",
+
         bgm: 3,
         is_unlocked: false,
         dialogues: ["百兰"],
-        unlock_text: "终于出城了！现在，找个人问问一些情报吧。",//先触发百兰剧情再解锁1-3-1！
-        name: "燕岗近郊", 
+        unlock_text: "Finally out of the city! Now, let's find someone to ask for information.",//先触发百兰剧情再解锁1-3-1！
+        name: "Yangang Outskirts",
     });//1-3
     
     locations["燕岗城"].connected_locations.push({location: locations["燕岗近郊"]});
 
 
     locations["燕岗近郊 - 0"] = new Challenge_zone({
-        description: "城门外不远处。看起来是时候给看不起人的大叔一点教训了！",//MT22
+        description: "Not far from the city gate. Looks like it's time to teach this dismissive old man a lesson!",//MT22
         enemy_count: 1, 
         enemies_list: ["百兰[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: false, 
         is_challenge: true,
-        name: "燕岗近郊 - 0", 
-        leave_text: "暂时返回",
+        name: "Yangang Outskirts - 0", 
+        leave_text: "Retreat for now",
         parent_location: locations["燕岗近郊"],
         repeatable_reward: {
             textlines: [{dialogue: "百兰", lines: ["defeat"]}],
         },
         bgm:3,
-        unlock_text: "我说大叔，这么大年纪了欺负一个女孩子，不太好吧。看来需要一点教训呢。"
+        unlock_text: "Hey uncle, at your age you're picking on a young girl? That's not very nice. Looks like you need a lesson."
     });
     locations["燕岗近郊 - 1"] = new Combat_zone({
-        description: "沿着藏宝图向前，必经之路上的魔物区域", //MT23-24
+        description: "Following the treasure map forward, a monster-infested area along the unavoidable route.", //MT23-24
         enemy_count: 20, 
         enemies_list: ["生灵骸骨","腐蚀质石精","绿毛茸茸","切叶虫茧","荒野蜂","花灵液"],
         enemy_group_size: [1,1],
         types: [],
         enemy_stat_variation: 0.1,
         is_unlocked: false, 
-        name: "燕岗近郊 - 1",
+        name: "Yangang Outskirts - 1",
         
         rank:21, 
         bgm:3,
@@ -1362,14 +1364,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["燕岗近郊 - 2"] = new Combat_zone({
-        description: "沿着藏宝图向前，埋伏着不怀好意修士的区域", //MT25-26
+        description: "Following the treasure map forward, an area where ill-intentioned cultivators lie in ambush.", //MT25-26
         enemy_count: 20, 
         enemies_list: ["荒野蜂","花灵液","燕岗领从者","野生幽灵","司雍世界修士"],//荒兽尼尔在原作中就不存在
         enemy_group_size: [1,1],
         types: [],
         enemy_stat_variation: 0.1,
         is_unlocked: false, 
-        name: "燕岗近郊 - 2",
+        name: "Yangang Outskirts - 2",
         
         rank:22, 
         bgm:3,
@@ -1384,13 +1386,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["燕岗近郊 - 3"] = new Combat_zone({
-        description: "沿着藏宝图向前，存在大量荒兽的区域", //MT27-28
+        description: "Following the treasure map forward, an area teeming with wild beasts.", //MT27-28
         enemy_count: 20, 
         enemies_list: ["荒兽尼尔","司雍世界修士","潮汐级荒兽","掠原蝠","黑夜傀儡"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "燕岗近郊 - 3",
+        name: "Yangang Outskirts - 3",
         
         rank:23, 
         bgm:3,
@@ -1404,14 +1406,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["燕岗近郊 - 4"] = new Combat_zone({
-        description: "存在光环荒兽的区域，荒兽的整体实力被影响着上了一个台阶", //MT29-30
+        description: "An area with halo-enhanced wild beasts; their overall strength has risen by a level.", //MT29-30
         enemy_count: 20, 
         enemies_list: ["掠原蝠","黑夜傀儡","来一口","绿原行者","初生鬼","灵蔓茸茸"],//16-18三只怪放在-5
         enemy_group_size: [1,1],
         types: [],
         enemy_stat_halo: 0.1,
         is_unlocked: false, 
-        name: "燕岗近郊 - 4",
+        name: "Yangang Outskirts - 4",
         
         rank:24, 
         bgm:3,
@@ -1425,14 +1427,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["燕岗近郊 - 5"] = new Combat_zone({
-        description: "更接近光环来源的区域，吸引来了大地级强者", //MT31-32
+        description: "An area closer to the source of the halo, attracting Earth Rank cultivators.", //MT31-32
         enemy_count: 20, 
         enemies_list: ["绿原行者","初生鬼","燕岗领佣兵","冷冻火","缠绕骸骨","灵蔓茸茸"],//16-18三只怪放在-5
         enemy_group_size: [1,1],
         types: [],
         enemy_stat_halo: 0.1,
         is_unlocked: false, 
-        name: "燕岗近郊 - 5",
+        name: "Yangang Outskirts - 5",
         
         rank:25, 
         bgm:3,
@@ -1447,14 +1449,14 @@ function get_location_type_penalty(type, stage, stat) {
     });
 
     locations["燕岗近郊 - 6"] = new Combat_zone({
-        description: "地宫浮现在地平线上，触手可及。不过，附近的怪物已经愈加狂暴了。", //MT33-34
+        description: "The Dungeon appears on the horizon, almost within reach. However, the nearby monsters are becoming increasingly frenzied.", //MT33-34
         enemy_count: 20, 
         enemies_list: ["绿原行者","初生鬼","燕岗领佣兵","冷冻火","缠绕骸骨","灵蔓茸茸"],
         enemy_group_size: [1,1],
         types: [],
         enemy_stat_halo: 0.2,
         is_unlocked: false, 
-        name: "燕岗近郊 - 6",
+        name: "Yangang Outskirts - 6",
         
         rank:26, 
         bgm:3,
@@ -1466,61 +1468,61 @@ function get_location_type_penalty(type, stage, stat) {
             xp: 120,
             locations: [{location: "燕岗近郊 - X"}],
         },
-        unlock_text: "眼前的建筑物，应该就是藏宝地了吧。前面有人，这身装束是燕岗领的佣兵？"
+        unlock_text: "That building ahead must be the treasure location. There are people there - that attire... are they mercenaries of Yangang Territory?"
         
     });
 
     
     locations["燕岗近郊 - X"] = new Challenge_zone({
-        description: "地宫的门口，狂暴气息的来源。部分着魔的佣兵滞留在此处。",
+        description: "The entrance to the Dungeon, source of the frenzied aura. Some possessed mercenaries are lingering here.",
         enemy_count: 1, 
         enemies_list: ["燕岗领佣兵[BOSS]"],
         enemy_group_size: [2,2],
         is_unlocked: false, 
         is_challenge: true,
-        name: "燕岗近郊 - X", 
+        name: "Yangang Outskirts - X", 
         bgm:3,
-        leave_text: "暂时返回",
+        leave_text: "Retreat for now",
         parent_location: locations["燕岗近郊"],
         repeatable_reward: {
             locations: [{location: "地宫入口"}],
         },
-        unlock_text: "不对劲，这些人看向我的时候，眼神怎么这么疯狂？难道是中了邪术吗？"
+        unlock_text: "Something's wrong. Why do these people look at me with such crazed eyes? Have they been cursed?"
     });
 
-    locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - 0"], custom_text: "与百兰战斗"});
+    locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - 0"], custom_text: "Fight Bailan"});
     locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - 1"]});
     locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - 2"]});
     locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - 3"]});
     locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - 4"]});
     locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - 5"]});
     locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - 6"]});
-    locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - X"], custom_text: "强行进入地宫"});
+    locations["燕岗近郊"].connected_locations.push({location: locations["燕岗近郊 - X"], custom_text: "Force entry into the Dungeon"});
     
     
     
     locations["郊区河流"] = new Location({ 
-        connected_locations: [{location: locations["燕岗近郊"], custom_text: "回到藏宝图的路线上"}], 
-        description: "敞亮的小河，可以用于练习游泳技术！",
-        
+        connected_locations: [{location: locations["燕岗近郊"], custom_text: "Return to the treasure map route"}],
+        description: "A bright little river, great for practicing swimming!",
+
         bgm: 3,
         is_unlocked: false,
-        name: "郊区河流", 
+        name: "Suburban River",
     });
     locations["燕岗矿井"] = new Location({ 
-        connected_locations: [{location: locations["燕岗近郊"], custom_text: "回到藏宝图的路线上"}], 
-        description: "围绕着矿井的修者聚集地，内有比练习用工作台略好的工作台，简单的休息室，地下还有部分残余的A1级金属！",
-        traders: ["矿井集市"],
-        
+        connected_locations: [{location: locations["燕岗近郊"], custom_text: "Return to the treasure map route"}],
+        description: "A cultivator settlement surrounding a mine, with a slightly better workbench than the practice one, a simple rest room, and some remaining A1-grade metal underground!",
+        traders: ["Mine Market"],
+
         bgm: 3,
         is_unlocked: false,
         sleeping: {
-            text: "闭好门窗，睡一会",
+            text: "Close the doors and windows, take a nap",
             xp: 2
         },
         crafting: {
-           is_unlocked: true, 
-            use_text: "使用共享工作台[Tier+2]", 
+           is_unlocked: true,
+            use_text: "Use the shared Workbench [Tier+2]",
             tiers: {
                    crafting: 2,
                 forging: 2,
@@ -1529,7 +1531,7 @@ function get_location_type_penalty(type, stage, stat) {
                 alchemy: 2,
             }
             },
-        name: "燕岗矿井", 
+        name: "Yangang Mine", 
     });
     locations["燕岗近郊"].connected_locations.push({location: locations["郊区河流"]});
     locations["燕岗近郊"].connected_locations.push({location: locations["燕岗矿井"]});
@@ -1537,52 +1539,52 @@ function get_location_type_penalty(type, stage, stat) {
 
     
     locations["地宫入口"] = new Location({ 
-        connected_locations: [{location: locations["燕岗近郊"], custom_text: "离开地宫"}], 
-        description: "地宫的入口处。宝石的气息浓郁，但有大地级三阶的敌人把守。",
-        
+        connected_locations: [{location: locations["燕岗近郊"], custom_text: "Leave the Dungeon"}],
+        description: "The entrance to the Dungeon. The scent of gems is heavy in the air, but Earth Rank Tier 3 enemies guard the passage.",
+
         dialogues: ["地宫老人"],
         is_unlocked: false,
         //此处应有一个boss战和一个偷宝石的法子(10颗高级蓝宝石)
-        name: "地宫入口", 
+        name: "Dungeon Entrance",
         bgm: 4,
-        unlock_text: "好可怕的气息，刚进门就是这么可怕的怪物！"
+        unlock_text: "What a terrifying aura - and we've barely stepped through the door!"
     });//1-4pre
     locations["地宫 - 看门人"] = new Challenge_zone({
-        description: "你确定要和它战斗吗..挨打变强现在可是削弱了哦！",
+        description: "Are you sure you want to fight it... the \"get stronger through getting hit\" ability is nerfed now!",
         enemy_count: 4, 
         enemies_list: ["地宫看门人[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: true, 
         is_challenge: true,
-        name: "地宫 - 看门人", 
+        name: "The Dungeon - Gatekeeper", 
         bgm:4,
-        leave_text: "离开这个是非之地",
+        leave_text: "Leave this dangerous place",
         parent_location: locations["地宫入口"],
         repeatable_reward: {},
 
         //unlock_text: "不对劲，这些人看向我的时候，眼神怎么这么疯狂？难道是中了邪术吗？"
     });
     locations["地宫浅层"] = new Location({ 
-        connected_locations: [{location: locations["地宫入口"], custom_text: "回到入口处"}], 
-        description: "地宫的浅层。盘踞着大量荒兽，也潜藏着许多宝藏。",
-        traders: ["金属批发商"],
-        
+        connected_locations: [{location: locations["地宫入口"], custom_text: "Return to the entrance"}],
+        description: "The shallow floors of the Dungeon. Infested with wild beasts, but also hiding many treasures.",
+        traders: ["Metal Wholesaler"],
+
         is_unlocked: true,
-        name: "地宫浅层", 
+        name: "Dungeon Shallow Floors",
         bgm: 4,
     });//1-4
     
     locations["燕岗近郊"].connected_locations.push({location: locations["地宫入口"]});
     locations["地宫入口"].connected_locations.push({location: locations["地宫浅层"]});
-    locations["地宫入口"].connected_locations.push({location: locations["地宫 - 看门人"], custom_text: "与大地级三阶敌人抢夺宝石"});
+    locations["地宫入口"].connected_locations.push({location: locations["地宫 - 看门人"], custom_text: "Fight the Earth Rank Tier 3 enemy for the gems"});
     locations["地宫 - 1"] = new Combat_zone({
-        description: "遍地都是大地级强者的空旷“藏宝地”。", 
+        description: "A wide open \"treasure ground\" filled with Earth Rank cultivators.",
         enemy_count: 20, 
         enemies_list: ["夜行幽灵","石风家族剑士","能量络合球","地宫妖偶","金衣除草者"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: true, 
-        name: "地宫 - 1",
+        name: "The Dungeon - 1",
         
         rank:31, 
         bgm:4,
@@ -1596,13 +1598,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["地宫 - 2"] = new Combat_zone({
-        description: "充满荒兽与狂暴的人类的地宫区域，其中的人类似乎已经变成了杀戮机器。", 
+        description: "A Dungeon area filled with wild beasts and frenzied humans - the humans here seem to have become killing machines.",
         enemy_count: 20, 
         enemies_list: ["短视蝠","金衣除草者","阴暗茸茸","地宫妖偶","地宫虫卒"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "地宫 - 2",
+        name: "The Dungeon - 2",
         
         rank:32, 
         bgm:4,
@@ -1613,18 +1615,18 @@ function get_location_type_penalty(type, stage, stat) {
         repeatable_reward: {
             xp: 180,
             locations: [{location: "地宫 - 3"}],
-            traders: [{traders:"金属批发商"}],
+            traders: [{traders:"Metal Wholesaler"}],
         },
-        unlock_text: "回去呼叫家族的人吗？恐怕要耽误太多的时间，姐姐也会有危险。不，现在不是想这些的时候。"
+        unlock_text: "Should I go back and call for family backup? That would take too much time, and my sister would be in danger. No, now isn't the time to think about that."
     });
     locations["地宫 - 3"] = new Combat_zone({
-        description: "危机四伏的地宫区域。对了，地宫金属正在打折出售！", 
+        description: "A Dungeon area fraught with danger. By the way, Dungeon metals are on sale!",
         enemy_count: 20, 
         enemies_list: ["地宫虫卒","短视蝠","地刺","布菇妖","腾风塑像"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "地宫 - 3",
+        name: "The Dungeon - 3",
         
         rank:33, 
         bgm:4,
@@ -1636,16 +1638,16 @@ function get_location_type_penalty(type, stage, stat) {
             xp: 200,
             locations: [{location: "地宫 - 4"},{location: "地宫 - 石壁"}],
         },
-        unlock_text: "有强者说过……机缘永远是自己争取到的。想要静坐着，等着它砸到头上并不现实。"
+        unlock_text: "A powerful cultivator once said... opportunities are always earned by oneself. Waiting around for fortune to fall into your lap just isn't realistic."
     });
     locations["地宫 - 4"] = new Combat_zone({
-        description: "荒兽组成的海洋，在石壁上可以发现找到修炼用的功法。", 
+        description: "An ocean of wild beasts. Cultivation techniques can be found inscribed on the stone walls.",
         enemy_count: 20, 
         enemies_list: ["地刺","探险者亡魂","布菇妖","腾风塑像","出芽黄茸茸","大地级卫戍"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "地宫 - 4",
+        name: "The Dungeon - 4",
         
         rank:34, 
         bgm:4,
@@ -1658,36 +1660,36 @@ function get_location_type_penalty(type, stage, stat) {
             locations: [{location: "地宫 - X"}],
         },
         
-        unlock_text: "石壁上镌刻着一些字样。看起来好像是一种修炼的功法。"
+        unlock_text: "There are words carved into the stone wall. They seem to be some sort of cultivation technique."
     });
     
     locations["地宫 - X"] = new Challenge_zone({
-        description: "地宫的15层，荒兽海的终点。继续往下的路被深邃之影堵住了。",
+        description: "Floor 15 of the Dungeon, the end of the wild beast sea. The path forward is blocked by the Abyssal Shadow.",
         enemy_count: 1, 
         enemies_list: ["深邃之影[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: false, 
         is_challenge: true,
-        name: "地宫 - X", 
+        name: "The Dungeon - X", 
         bgm:4,
-        leave_text: "暂时返回",
+        leave_text: "Retreat for now",
         parent_location: locations["地宫浅层"],
         repeatable_reward: {
             locations: [{location: "地宫深层"}],
         },
-        unlock_text: "大地级二阶，而且很明显，不是刚突破的那一种。是这些荒兽的头目吗？"
+        unlock_text: "Earth Rank Tier 2, and clearly not a fresh breakthrough. Is this the leader of these wild beasts?"
     });
     
     locations["地宫 - 石壁"] = new Challenge_zone({
-        description: "地宫13层刻录着修炼功法的石壁。不过，只有清理荒兽才有时间参悟它们。",
+        description: "Floor 13 of the Dungeon, a stone wall inscribed with cultivation techniques. You'll need to clear the wild beasts before you have time to study them.",
         enemy_count: 1, 
         enemies_list: ["行走树妖[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: false, 
         is_challenge: true,
-        name: "地宫 - 石壁", 
+        name: "The Dungeon - Stone Wall", 
         bgm:4,
-        leave_text: "暂时返回",
+        leave_text: "Retreat for now",
         parent_location: locations["地宫浅层"],
         repeatable_reward: {
         },
@@ -1697,29 +1699,29 @@ function get_location_type_penalty(type, stage, stat) {
     locations["地宫浅层"].connected_locations.push({location: locations["地宫 - 2"]});
     locations["地宫浅层"].connected_locations.push({location: locations["地宫 - 3"]});
     locations["地宫浅层"].connected_locations.push({location: locations["地宫 - 4"]});
-    locations["地宫浅层"].connected_locations.push({location: locations["地宫 - 石壁"], custom_text: "清理石壁周围的二阶荒兽"});
-    locations["地宫浅层"].connected_locations.push({location: locations["地宫 - X"], custom_text: "与荒兽头目交战"});
+    locations["地宫浅层"].connected_locations.push({location: locations["地宫 - 石壁"], custom_text: "Clear the Tier 2 wild beasts around the stone wall"});
+    locations["地宫浅层"].connected_locations.push({location: locations["地宫 - X"], custom_text: "Battle the wild beast leader"});
     
     
     
     locations["地宫深层"] = new Location({ 
-        connected_locations: [{location: locations["地宫浅层"], custom_text: "回到浅层处"}], 
-        description: "荒兽海之后的区域。纳娜米被困在此处。",
-        
+        connected_locations: [{location: locations["地宫浅层"], custom_text: "Return to the shallow floors"}],
+        description: "The area beyond the wild beast sea. Nanami is trapped here.",
+
         is_unlocked: false,
-        name: "地宫深层", 
+        name: "Dungeon Deep Floors",
         dialogues: ["纳娜米"],
         bgm: 5,
-        unlock_text: "好阴森的气息。这里不像是一个强者留下的遗迹，因为强者在创造遗迹时，一般都会留下引导。"
+        unlock_text: "What a sinister aura. This doesn't feel like the ruins left by a strong cultivator, because when they create ruins, they usually leave guidance behind."
     });//1-5
     locations["地宫核心 - 1"] = new Combat_zone({
-        description: "杂乱不堪的廊道，刺鼻的腥味。环境比地宫浅层更恶劣一层。", 
+        description: "A chaotic corridor with a pungent, bloody smell. The environment is a notch worse than the Dungeon's shallow floors.",
         enemy_count: 20, 
         enemies_list: ["行走树妖","深邃之影","抽丝鬼","燕岗堕落狩士","二极蝠"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: true, 
-        name: "地宫核心 - 1",
+        name: "Dungeon Core - 1",
         
         rank:41, 
         bgm:5,
@@ -1733,13 +1735,13 @@ function get_location_type_penalty(type, stage, stat) {
         }, 
     });
     locations["地宫核心 - 2"] = new Combat_zone({
-        description: "地宫的更深处，远处似乎有青紫二色的光幕浮现。", 
+        description: "Deeper into the Dungeon - a blue-purple barrier seems to be shimmering in the distance.",
         enemy_count: 20, 
         enemies_list: ["二极蝠","武装绿毛茸茸","二阶荒兽","地下岩火","初级魔法师","颂歌符文"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "地宫核心 - 2",
+        name: "Dungeon Core - 2",
         
         rank:42, 
         bgm:5,
@@ -1753,13 +1755,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["地宫核心 - 3"] = new Combat_zone({
-        description: "靠近青紫二色光幕的区域，前方存在一些悬空平台。", 
+        description: "An area close to the blue-purple barrier, with some floating platforms ahead.",
         enemy_count: 20, 
         enemies_list: ["二阶荒兽","地下岩火","初级魔法师","地宫执法者","地宫看门人","凶戾骨将"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "地宫核心 - 3",
+        name: "Dungeon Core - 3",
         
         rank:43, 
         bgm:5,
@@ -1773,13 +1775,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["地宫核心 - 4"] = new Combat_zone({
-        description: "悬空平台之后的深处区域。这里的荒兽已经普遍达到大地级三阶。", 
+        description: "The deep area beyond the floating platforms. Wild beasts here have commonly reached Earth Rank Tier 3.",
         enemy_count: 20, 
         enemies_list: ["地宫执法者","地宫看门人","凶戾骨将","巨型蜘蛛","出芽绿茸茸","地穴飞鸟"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "地宫核心 - 4",
+        name: "Dungeon Core - 4",
         
         rank:44, 
         bgm:5,
@@ -1793,13 +1795,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["地宫核心 - 5"] = new Combat_zone({
-        description: "荒兽已经拥挤到成双成对的深处区域。暴戾气息的源头已经不远了...", 
+        description: "A deep area so packed with wild beasts they come in pairs. The source of the violent aura is not far now...",
         enemy_count: 20, 
         enemies_list: ["出芽绿茸茸","地穴飞鸟","小势力探险者","踏地荒兽","扭曲菇菇","喵咕哩"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "地宫核心 - 5",
+        name: "Dungeon Core - 5",
         
         rank:45, 
         bgm:5,
@@ -1813,13 +1815,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["地宫核心 - 6"] = new Combat_zone({
-        description: "就是它！三阶荒兽海的彼岸，一切的罪魁祸首...", 
+        description: "This is it! Beyond the sea of Tier 3 wild beasts, the source of everything...",
         enemy_count: 20, 
         enemies_list: ["踏地荒兽","扭曲菇菇","喵咕哩","温热飞蛾","苍白之触","燕岗城守卫"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "地宫核心 - 6",
+        name: "Dungeon Core - 6",
         
         rank:46, 
         bgm:5,
@@ -1834,48 +1836,48 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["地宫核心 - 悬空平台"] = new Challenge_zone({
-        description: "熊熊岩火的背后藏着一颗极品黄宝石。它虽然极其凶猛，但生命力如风中残烛，一触即灭。",
+        description: "A premium topaz gem is hidden behind the raging lava fire. Though extremely ferocious, its vitality is like a candle in the wind - extinguished with one touch.",
         enemy_count: 2, 
         enemies_list: ["地下岩火[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: false, 
         is_challenge: true,
-        name: "地宫核心 - 悬空平台", 
+        name: "Dungeon Core - Floating Platform", 
         bgm:5,
-        leave_text: "退避三舍",
+        leave_text: "Beat a strategic retreat",
         parent_location: locations["地宫深层"],
         repeatable_reward: {        },
-        unlock_text: "[纳可]一定要拿到它。诶嘿，肯定很值钱的，不知道能卖到多少钱呢……[纳娜米]明明一个红色刀币都卖不到吧！",
+        unlock_text: "[Neko] I have to get it. Hehe, it must be worth a lot - I wonder how much we could sell it for... [Nanami] You couldn't even get a single red coin for it!",
     });
     locations["地宫核心 - 光幕"] = new Challenge_zone({
-        description: "绿紫二色光幕近在眼前。直觉告诉纳可，这样的地方后面一定藏着好东西。",
+        description: "The green-purple barrier is right in front of you. Neko's instincts tell her there must be something good hidden behind it.",
         enemy_count: 2, 
         enemies_list: ["喵咕哩[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: false, 
         is_challenge: true,
-        name: "地宫核心 - 光幕", 
+        name: "Dungeon Core - Light Barrier", 
         bgm:5,
-        leave_text: "回去练练再来挑战",
+        leave_text: "Go train more and come back",
         parent_location: locations["地宫深层"],
         repeatable_reward: {locations: [{location: "光幕空间"}]},
         //unlock_text: "[纳可]一定要拿到它。诶嘿，肯定很值钱的，不知道能卖到多少钱呢……[纳娜米]明明一个红色刀币都卖不到吧！",
     });
     
     locations["光幕空间"] = new Location({ 
-        connected_locations: [{location: locations["地宫深层"], custom_text: "回到地宫的荒兽海中"}], 
-        description: "青紫光幕背后的安全区域。光幕本身有“炼化”能力，也可以用作工作台来使用。",
-        //traders: ["矿井集市"],
+        connected_locations: [{location: locations["地宫深层"], custom_text: "Return to the wild beast sea of the Dungeon"}],
+        description: "A safe area behind the blue-purple barrier. The barrier itself has a \"refining\" ability and can also be used as a workbench.",
+        //traders: ["Mine Market"],
         
         bgm: 5,
         is_unlocked: false,
         sleeping: {
-            text: "就地休整",
+            text: "Rest in place",
             xp: 4
         },
         crafting: {
-           is_unlocked: true, 
-            use_text: "使用光幕加工物品[Tier+4]", 
+           is_unlocked: true,
+            use_text: "Use the Barrier to process items [Tier+4]",
             tiers: {
                    crafting: 4,
                 forging: 4,
@@ -1884,26 +1886,26 @@ function get_location_type_penalty(type, stage, stat) {
                 alchemy: 4,
             }
             },
-        name: "光幕空间", 
+        name: "Light Barrier Space", 
     });
 
 
     locations["地宫核心 - X"] = new Challenge_zone({
-        description: "地宫的最深处。【地宫养殖者】就在这间地下35层石室的正中央。",
+        description: "The deepest part of the Dungeon. The [Dungeon Cultivator] is right in the center of this underground chamber on floor 35.",
         enemy_count: 1, 
         enemies_list: ["地宫养殖者[BOSS]"],
         enemy_group_size: [1,1],
         is_unlocked: false, 
         is_challenge: true,
-        name: "地宫核心 - X", 
+        name: "Dungeon Core - X", 
         enemy_stat_halo: 0.2,
         bgm:5,
-        leave_text: "迅速逃离",
+        leave_text: "Flee quickly",
         parent_location: locations["地宫深层"],
         repeatable_reward: {
             locations: [{location: "荒兽森林营地"}],
         },
-        unlock_text: "[纳娜米] 还有可怕强者的气息。可可，待会我们可能需要面对无法战胜的对手。在我拿出底牌之前，一定不要轻举妄动。"
+        unlock_text: "[Nanami] There's also a terrifying cultivator's aura. Koko, we may have to face an unbeatable opponent soon. Do not make any rash moves until I play my trump card."
     });
 
     locations["地宫浅层"].connected_locations.push({location: locations["地宫深层"]});
@@ -1916,29 +1918,29 @@ function get_location_type_penalty(type, stage, stat) {
     locations["地宫深层"].connected_locations.push({location: locations["地宫核心 - 悬空平台"]});
     locations["地宫深层"].connected_locations.push({location: locations["地宫核心 - 光幕"]});
     locations["地宫深层"].connected_locations.push({location: locations["光幕空间"]});
-    locations["地宫深层"].connected_locations.push({location: locations["地宫核心 - X"], custom_text: "向地宫养殖者发起挑战"});
+    locations["地宫深层"].connected_locations.push({location: locations["地宫核心 - X"], custom_text: "Challenge the Dungeon Cultivator"});
 
     
     
     locations["荒兽森林营地"] = new Location({ 
-        connected_locations: [{location: locations["地宫深层"], custom_text: "回到地宫"},{location: locations["纳可的房间"], custom_text: "快速旅行 - 第一幕"}], 
-        description: "从地宫离开之后，纳可下一个历练地点的安全区。",
-        
+        connected_locations: [{location: locations["地宫深层"], custom_text: "Return to the Dungeon"},{location: locations["纳可的房间"], custom_text: "Fast Travel - Act 1"}],
+        description: "After leaving the Dungeon, the safe zone of Neko's next training ground.",
+
         is_unlocked: false,
-        name: "荒兽森林营地", 
+        name: "Wild Beast Forest Camp",
         dialogues: ["纳布"],
-        traders: ["营地商铺"],
+        traders: ["Camp Shop"],
         bgm: 6,
         //unlock_text: "好阴森的气息。这里不像是一个强者留下的遗迹，因为强者在创造遗迹时，一般都会留下引导。"
     });//2-1安全区
     locations["地宫深层"].connected_locations.push({location: locations["荒兽森林营地"]});
-    locations["纳可的房间"].connected_locations.push({location: locations["荒兽森林营地"],custom_text:"快速旅行 - 第二幕"});
+    locations["纳可的房间"].connected_locations.push({location: locations["荒兽森林营地"],custom_text:"Fast Travel - Act 2"});
 
     locations["荒兽森林"] = new Location({ 
-        connected_locations: [{location: locations["荒兽森林营地"], custom_text: "回到营地"}], 
-        description: "荒兽森林的内部。茂密的树木挡住了大部分阳光，黑暗中潜伏着许多荒兽。",
-        
-        name: "荒兽森林", 
+        connected_locations: [{location: locations["荒兽森林营地"], custom_text: "Return to camp"}],
+        description: "The interior of the Wild Beast Forest. Dense trees block most of the sunlight, and many wild beasts lurk in the darkness.",
+
+        name: "Wild Beast Forest",
         is_unlocked: false,
         bgm: 6,
         //unlock_text: "好阴森的气息。这里不像是一个强者留下的遗迹，因为强者在创造遗迹时，一般都会留下引导。"
@@ -1947,13 +1949,13 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["荒兽森林 - 1"] = new Combat_zone({
-        description: "荒兽横行的森林区域，也有许多前来历练的大地级修者。", 
+        description: "A forest area rampant with wild beasts, and also many Earth Rank cultivators who come to train.",
         enemy_count: 20, 
         enemies_list: ["灵能菇菇","妖灵飞蛾","飞叶级魔法师","血洛箭手"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: true, 
-        name: "荒兽森林 - 1",
+        name: "Wild Beast Forest - 1",
         
         rank:101, 
         bgm:6,
@@ -1967,13 +1969,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["荒兽森林 - 2"] = new Combat_zone({
-        description: "荒兽横行的森林区域，出现了一些从宝物尽失的地宫迁徙来的荒兽。", 
+        description: "A forest area rampant with wild beasts. Some wild beasts have migrated here from the now-depleted Dungeon.",
         enemy_count: 20, 
         enemies_list: ["血洛箭手","有角一族","噬血术傀儡","司雍世界行者","密林大鸟","地龙幼崽"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "荒兽森林 - 2",
+        name: "Wild Beast Forest - 2",
         
         rank:102, 
         bgm:6,
@@ -1988,13 +1990,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["荒兽森林 - 3"] = new Combat_zone({
-        description: "荒兽横行的森林区域，出现了一些拥有强大恢复能力的荒兽。", 
+        description: "A forest area rampant with wild beasts. Some wild beasts with powerful regeneration abilities have appeared.",
         enemy_count: 20, 
         enemies_list: ["地龙幼崽","人立茸茸","草木蜘蛛","持盾荒兽","芊叶蝠","深林妖偶"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "荒兽森林 - 3",
+        name: "Wild Beast Forest - 3",
         
         rank:103, 
         bgm:6,
@@ -2006,16 +2008,16 @@ function get_location_type_penalty(type, stage, stat) {
             xp: 1600,
             locations: [{location: "荒兽森林 - 4"}],
         },
-        unlock_text: "解锁了 荒兽森林 - 3.除此之外，营地的柳树砍伐也已解锁。",
+        unlock_text: "Unlocked Wild Beast Forest - 3. Additionally, willow tree woodcutting at camp is now unlocked.",
     });
     locations["荒兽森林 - 4"] = new Combat_zone({
-        description: "荒兽横行的森林区域，出现了一些抵达大地级五阶的荒兽和人类。", 
+        description: "A forest area rampant with wild beasts. Some wild beasts and humans reaching Earth Rank Tier 5 have appeared.",
         enemy_count: 20, 
         enemies_list: ["深林妖偶","银杖茸茸","小门派执事","哥布林战士","刺猬精","毒枭蝎"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "荒兽森林 - 4",
+        name: "Wild Beast Forest - 4",
         
         rank:104, 
         bgm:6,
@@ -2029,35 +2031,35 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["荒兽森林 - X"] = new Challenge_zone({
-        description: "与百家近卫的战斗。击败他们后即可逃遁。", 
+        description: "A battle with the Baijia Elite Guards. After defeating them, you can flee.",
         enemy_count: 2, 
         enemies_list: ["百家近卫[BOSS]"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "荒兽森林 - X",
+        name: "Wild Beast Forest - X",
         bgm:6,
         parent_location: locations["荒兽森林"],
         repeatable_reward: {
             locations: [{location: "荒兽森林 - XL"},{location: "清野江畔"}],
         },
-        unlock_text: "[纳可]你说得对，但是你哥哥连大地级都没到，你是怎么修炼到大地级七阶的呀？",
+        unlock_text: "[Neko] You're right, but your brother hasn't even reached Earth Rank yet - how did you manage to cultivate all the way to Earth Rank Tier 7?",
     });
     locations["荒兽森林 - XL"] = new Challenge_zone({
-        description: "与百方的战斗。可以稍后再回来击败他！。", 
+        description: "A battle with Baifang. You can come back to defeat him later!",
         enemy_count: 1, 
         enemies_list: ["百方[荒兽森林 ver.][BOSS]"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "荒兽森林 - XL",
+        name: "Wild Beast Forest - XL",
         bgm:6,
         parent_location: locations["荒兽森林"],
         repeatable_reward: {
         },
-        unlock_text: "[百方]跑了？这下不好办了。再想下手，可没有那么好的机会了啊。",
+        unlock_text: "[Baifang] She ran? This is a problem. Getting another chance to make a move won't be so easy now.",
     });
 
     
@@ -2065,28 +2067,28 @@ function get_location_type_penalty(type, stage, stat) {
     locations["荒兽森林"].connected_locations.push({location: locations["荒兽森林 - 2"]});
     locations["荒兽森林"].connected_locations.push({location: locations["荒兽森林 - 3"]});
     locations["荒兽森林"].connected_locations.push({location: locations["荒兽森林 - 4"]});
-    locations["荒兽森林"].connected_locations.push({location: locations["荒兽森林 - X"], custom_text: "与百家近卫战斗"});
-    locations["荒兽森林"].connected_locations.push({location: locations["荒兽森林 - XL"], custom_text: "与百方战斗"});
+    locations["荒兽森林"].connected_locations.push({location: locations["荒兽森林 - X"], custom_text: "Fight the Baijia Elite Guards"});
+    locations["荒兽森林"].connected_locations.push({location: locations["荒兽森林 - XL"], custom_text: "Fight Baifang"});
 
     locations["清野江畔"] = new Location({ 
-        connected_locations: [{location: locations["荒兽森林营地"], custom_text: "走小路，回到营地"}], 
-        description: "顺着这条江往回走就可以回到家族..快点和父亲大人汇报此事！",
-        
-        traders: ["行脚商人"],
+        connected_locations: [{location: locations["荒兽森林营地"], custom_text: "Take the small path, return to camp"}],
+        description: "Following this river back leads to the family estate... hurry and report this to Father!",
+
+        traders: ["Traveling Merchant"],
         dialogues: ["清野瀑布","纳布(江畔)"],
-        name: "清野江畔", 
+        name: "Qingye Riverbank",
         is_unlocked: false,
         bgm: 7,
         //unlock_text: "好阴森的气息。这里不像是一个强者留下的遗迹，因为强者在创造遗迹时，一般都会留下引导。"
     });//2-2
     locations["清野江畔 - 1"] = new Combat_zone({
-        description: "沿着清野江，回家的路。百方仍然在此区域有所布置。", 
+        description: "Along the Qingye River, on the way home. Baifang still has forces deployed in this area.",
         enemy_count: 20, 
         enemies_list: ["小门派执事","毒枭蝎","百家近卫","怨灵船夫","旱魃龟","复苏骸骨"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: true, 
-        name: "清野江畔 - 1",
+        name: "Qingye Riverbank - 1",
         
         rank:111, 
         bgm:7,
@@ -2100,13 +2102,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["清野江畔 - 2"] = new Combat_zone({
-        description: "沿着清野江，回家的路。荒兽成群——为了避开百方，这种程度的危险区域是必要的。", 
+        description: "Along the Qingye River, on the way home. Wild beasts swarm in packs - this level of dangerous area is necessary to avoid Baifang.",
         enemy_count: 20, 
         enemies_list: ["旱魃龟","复苏骸骨","旅行魔术师","水溶茸茸","飞龙幼崽","鲜红八爪鱼"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
-        name: "清野江畔 - 2",
+        name: "Qingye Riverbank - 2",
         
         rank:112, 
         enemy_stat_halo: 0.05,
@@ -2121,13 +2123,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["清野江畔 - 3"] = new Combat_zone({
-        description: "沿着清野江，回家的路。不仅荒兽成群，还有微妙的狂暴气息的区域。", 
+        description: "Along the Qingye River, on the way home. Not only do wild beasts swarm, but there's also a subtle frenzied aura in this area.",
         enemy_count: 20, 
         enemies_list: ["水溶茸茸","飞龙幼崽","鲜红八爪鱼","商船水手","深水恐怖","清野江盗匪"],
         enemy_group_size: [1.5,2.5],
         types: [],
         is_unlocked: false, 
-        name: "清野江畔 - 3",
+        name: "Qingye Riverbank - 3",
         
         rank:113, 
         bgm:7,
@@ -2139,17 +2141,17 @@ function get_location_type_penalty(type, stage, stat) {
         repeatable_reward: {
             xp: 6400,
             locations: [{location: "清野江畔 - 4"}],
-            traders: [{traders:"行脚商人"}],
+            traders: [{traders:"Traveling Merchant"}],
         },
     });
     locations["清野江畔 - 4"] = new Combat_zone({
-        description: "沿着清野江，回家的路。荒兽实力有了巨大的跃升，但家族已经不再遥远，无需恋战。", 
+        description: "Along the Qingye River, on the way home. Wild beast strength has greatly increased, but the family estate is no longer far - no need to linger in battle.",
         enemy_count: 20, 
-        enemies_list: ["马里奥菇菇","极冰火","清野江窃贼","礁石灵","火烧云","行脚商人"],
+        enemies_list: ["马里奥菇菇","极冰火","清野江窃贼","礁石灵","火烧云","Traveling Merchant"],
         enemy_group_size: [1.5,2.5],
         types: [],
         is_unlocked: false, 
-        name: "清野江畔 - 4",
+        name: "Qingye Riverbank - 4",
         
         rank:114, 
         bgm:7,
@@ -2164,28 +2166,28 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["清野江畔 - 歧路"] = new Challenge_zone({
-        description: "偶遇七阶武士，拼尽全力无法战胜...以后不要忘了这个飞啊(x", 
+        description: "A chance encounter with a Tier 7 warrior that can't be defeated at full effort... don't forget about this encounter later (x",
         enemy_count: 1, 
         enemies_list: ["威武武士[BOSS]"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "清野江畔 - 歧路",
+        name: "Qingye Riverbank - Crossroads",
         bgm:7,
         parent_location: locations["清野江畔"],
         repeatable_reward: {
         },
     });
     locations["清野江畔 - 瀑布"] = new Challenge_zone({
-        description: "纳可小时候曾经来过的瀑布附近。其中似乎蕴含着某种领悟。", 
+        description: "Near the waterfall that Neko visited as a child. It seems to contain some kind of insight.",
         enemy_count: 1, 
         enemies_list: ["礁石灵[BOSS]"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "清野江畔 - 瀑布",
+        name: "Qingye Riverbank - Waterfall",
         bgm:7,
         parent_location: locations["清野江畔"],
         repeatable_reward: {
@@ -2193,14 +2195,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["清野江畔 - X"] = new Challenge_zone({
-        description: "父亲大人就在不远处。只要击败了这只杂役，就安全了！", 
+        description: "Father is not far away. Just defeat this errand boy and it'll be safe!",
         enemy_count: 1, 
         enemies_list: ["大门派杂役[BOSS]"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "清野江畔 - X",
+        name: "Qingye Riverbank - X",
         bgm:7,
         parent_location: locations["清野江畔"],
         repeatable_reward: {
@@ -2214,22 +2216,22 @@ function get_location_type_penalty(type, stage, stat) {
     locations["清野江畔"].connected_locations.push({location: locations["清野江畔 - 4"]});
     locations["清野江畔"].connected_locations.push({location: locations["清野江畔 - 歧路"]});
     locations["清野江畔"].connected_locations.push({location: locations["清野江畔 - 瀑布"]});
-    locations["清野江畔"].connected_locations.push({location: locations["清野江畔 - X"], custom_text: "与挡路的大门派杂役战斗"});
+    locations["清野江畔"].connected_locations.push({location: locations["清野江畔 - X"], custom_text: "Fight the blocking Great Sect errand boy"});
 
 
     
     locations["纳家秘境"] = new Location({ 
-        connected_locations: [{location: locations["清野江畔"], custom_text: "回到江畔区域历练"}], 
-        description: "纳家打造的历练秘境。包含进阶工作台，休息区，和一处储存室。",
-        
-        traders: ["物品存储箱"],
+        connected_locations: [{location: locations["清野江畔"], custom_text: "Return to the Qingye Riverbank area to train"}],
+        description: "A secret training realm built by the Na Family. Contains an advanced workbench, rest area, and a storage room.",
+
+        traders: ["Storage Chest"],
         sleeping: {
-            text: "调息，冥想[+100XP/s]",
+            text: "Meditate and restore energy [+100XP/s]",
             xp: 10
         },
         crafting: {
-           is_unlocked: true, 
-            use_text: "使用进阶工作台[Tier+6]", 
+           is_unlocked: true,
+            use_text: "Use the advanced Workbench [Tier+6]",
             tiers: {
                 crafting: 6,
                 forging: 6,
@@ -2238,18 +2240,18 @@ function get_location_type_penalty(type, stage, stat) {
                 alchemy: 6,
             }
             },
-        name: "纳家秘境", 
+        name: "Na Family Secret Realm", 
         is_unlocked: false,
         bgm: 8,
         //unlock_text: "好阴森的气息。这里不像是一个强者留下的遗迹，因为强者在创造遗迹时，一般都会留下引导。"
     });//2-3
     
     locations["纳家秘境 - 战斗区"] = new Location({ 
-        connected_locations: [{location: locations["纳家秘境"], custom_text: "回到休息区修整"}], 
-        description: "纳家打造的历练秘境。共有五层，每层都有更多更强的荒兽与魔物，同时光环效果更强。",
+        connected_locations: [{location: locations["纳家秘境"], custom_text: "Return to the rest area to recover"}],
+        description: "A secret training realm built by the Na Family. There are five floors in total, each with more and stronger wild beasts and monsters, along with more powerful halo effects.",
         
         dialogues: ["秘境心火精灵"],
-        name: "纳家秘境 - 战斗区", 
+        name: "Na Family Secret Realm - Combat Zone", 
         types: [],
         is_unlocked: true,
         bgm: 8,
@@ -2257,14 +2259,14 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["纳家秘境 - 1"] = new Combat_zone({
-        description: "纳家打造的历练秘境。这是最外围的区域。", 
+        description: "The Na Family's secret training realm. This is the outermost area.",
         enemy_count: 20, 
         enemies_list: ["极冰火","清野江窃贼","火烧云","马里奥菇菇","大门派杂役"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: true, 
         is_challenge: false,
-        name: "纳家秘境 - 1",
+        name: "Na Family Secret Realm - 1",
         enemy_stat_halo: 0.08,
         rank:121, 
         bgm:8,
@@ -2278,13 +2280,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["纳家秘境 - 2"] = new Combat_zone({
-        description: "纳家打造的历练秘境。这是较外围的区域。", 
+        description: "The Na Family's secret training realm. This is the outer area.",
         enemy_count: 20, 
-        enemies_list: ["火烧云","行脚商人","大门派杂役","高歌骸骨","燕岗高等散修"],
+        enemies_list: ["火烧云","Traveling Merchant","大门派杂役","高歌骸骨","燕岗高等散修"],
         enemy_group_size: [1.5,2.5],
         types: [],
         is_unlocked: false, 
-        name: "纳家秘境 - 2",
+        name: "Na Family Secret Realm - 2",
         enemy_stat_halo: 0.16,
         rank:122, 
         bgm:8,
@@ -2298,13 +2300,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["纳家秘境 - 3"] = new Combat_zone({
-        description: "纳家打造的历练秘境。这是介于内外之间的区域。", 
+        description: "The Na Family's secret training realm. This is the middle area between the inner and outer zones.",
         enemy_count: 20, 
         enemies_list: ["大门派杂役","高歌骸骨","燕岗高等散修","微花灵阵","灵慧石人"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "纳家秘境 - 3",
+        name: "Na Family Secret Realm - 3",
         enemy_stat_halo: 0.24,
         rank:123, 
         bgm:8,
@@ -2318,13 +2320,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["纳家秘境 - 4"] = new Combat_zone({
-        description: "纳家打造的历练秘境。这是较为靠近核心的区域。", 
+        description: "The Na Family's secret training realm. This area is closer to the core.",
         enemy_count: 20, 
         enemies_list: ["燕岗高等散修","微花灵阵","灵慧石人","纳家探宝者","秘境蝎龙"],
         enemy_group_size: [2.5,3.5],
         types: [],
         is_unlocked: false, 
-        name: "纳家秘境 - 4",
+        name: "Na Family Secret Realm - 4",
         enemy_stat_halo: 0.32,
         rank:124, 
         bgm:8,
@@ -2338,13 +2340,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["纳家秘境 - 5"] = new Combat_zone({
-        description: "纳家打造的历练秘境。这是核心区域。", 
+        description: "The Na Family's secret training realm. This is the core area.",
         enemy_count: 20, 
         enemies_list: ["微花灵阵","灵慧石人","纳家探宝者","秘境蝎龙","荒兽法兵","巨人先锋"],
         enemy_group_size: [3,3],
         types: [],
         is_unlocked: false, 
-        name: "纳家秘境 - 5",
+        name: "Na Family Secret Realm - 5",
         enemy_stat_halo: 0.40,
         rank:125, 
         bgm:8,
@@ -2360,13 +2362,13 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["纳家秘境 - ∞"] = new Combat_zone({
-        description: "纳家打造的历练秘境最核心的区域。灵阵强度可以自由调节。(楼层手册更新可能不及时,属性请以心火精灵为准)", 
+        description: "The innermost core area of the Na Family's secret training realm. Spirit array intensity can be freely adjusted. (Floor manual updates may not be timely; please refer to the Heart Fire Sprite for accurate stats)",
         enemy_count: 20, 
         enemies_list: ["微花灵阵","灵慧石人","纳家探宝者","秘境蝎龙","荒兽法兵","巨人先锋"],
         enemy_group_size: [6,6],
         types: [],
         is_unlocked: false, 
-        name: "纳家秘境 - ∞",
+        name: "Na Family Secret Realm - ∞",
         enemy_stat_halo: 0.48,
         rank:126, 
         bgm:8,
@@ -2378,14 +2380,14 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["纳家秘境 - X"] = new Challenge_zone({
-        description: "秘境最核心的精灵就在此处。击败它就可以控制整个秘境！", 
+        description: "The innermost sprite of the secret realm is here. Defeat it to take control of the entire realm!",
         enemy_count: 1, 
         enemies_list: ["秘境心火精灵[BOSS]"],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "纳家秘境 - X",
+        name: "Na Family Secret Realm - X",
         enemy_stat_halo: 0.40,
         bgm:8,
         parent_location: locations["纳家秘境 - 战斗区"],
@@ -2402,27 +2404,27 @@ function get_location_type_penalty(type, stage, stat) {
     locations["纳家秘境 - 战斗区"].connected_locations.push({location: locations["纳家秘境 - 4"]});
     locations["纳家秘境 - 战斗区"].connected_locations.push({location: locations["纳家秘境 - 5"]});
     locations["纳家秘境 - 战斗区"].connected_locations.push({location: locations["纳家秘境 - ∞"]});
-    locations["纳家秘境 - 战斗区"].connected_locations.push({location: locations["纳家秘境 - X"], custom_text:"挑战秘境的守护灵"});
+    locations["纳家秘境 - 战斗区"].connected_locations.push({location: locations["纳家秘境 - X"], custom_text:"Challenge the realm's guardian sprite"});
 
     
     
     locations["结界湖"] = new Location({ 
-        connected_locations: [{location: locations["纳家秘境"], custom_text: "回到家族秘境里"}], 
-        description: "被老祖纳鹰指引而来，封印着“灵”的结界湖。",
-        
+        connected_locations: [{location: locations["纳家秘境"], custom_text: "Return to the family's secret realm"}],
+        description: "Guided here by the ancestor Na Ying, the Barrier Lake that seals the \"Spirit\".",
+
         dialogues: ["纳鹰"],
-        name: "结界湖", 
+        name: "Barrier Lake",
         is_unlocked: false,
         bgm: 9,
     });//2-4
     locations["结界湖 - 1"] = new Combat_zone({
-        description: "秘境核心的湖泊。新生的“灵”与荒兽在此徘徊。", 
+        description: "A lake at the core of the secret realm. Newborn \"Spirits\" and wild beasts roam here.",
         enemy_count: 20, 
         enemies_list: ["微花灵阵","威武武士","七阶卫戍","秘境帕芙之灵","秘境猬精","秘境心火精灵"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "结界湖 - 1",
+        name: "Barrier Lake - 1",
         enemy_stat_halo: 0.08,
         rank:131, 
         bgm:9,
@@ -2437,13 +2439,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["结界湖 - 2"] = new Combat_zone({
-        description: "秘境核心的湖泊。新生的“灵”，人类和秘境守护者同时存在。", 
+        description: "A lake at the core of the secret realm. Newborn \"Spirits\", humans, and realm guardians all coexist here.",
         enemy_count: 20, 
         enemies_list: ["微花灵阵","秘境猬精","秘境心火精灵","纳家冰雪亲卫","有甲有角族","水晶傀儡"],
         enemy_group_size: [2.25,3.25],
         types: [],
         is_unlocked: false, 
-        name: "结界湖 - 2",
+        name: "Barrier Lake - 2",
         enemy_stat_halo: 0.08,
         rank:132, 
         bgm:9,
@@ -2457,13 +2459,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["结界湖 - 3"] = new Combat_zone({
-        description: "秘境核心的湖泊。出现了颇具危险性，不慎落入就难以摆脱的地缚“灵”。", 
+        description: "A lake at the core of the secret realm. Quite dangerous earth-binding \"Spirits\" have appeared - fall into their grasp and it's hard to escape.",
         enemy_count: 20, 
         enemies_list: ["微花灵阵","水晶傀儡","原力刀客","秘境胖胖鸟","人立金茸茸","喵咕咕哩"],
         enemy_group_size: [2.5,3.5],
         types: [],
         is_unlocked: false, 
-        name: "结界湖 - 3",
+        name: "Barrier Lake - 3",
         enemy_stat_halo: 0.08,
         rank:133, 
         bgm:9,
@@ -2477,13 +2479,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["结界湖 - 4"] = new Combat_zone({
-        description: "秘境核心的湖泊。出现了更多被“灵”占据的人类身体。", 
-        enemy_count: 20, 
+        description: "A lake at the core of the secret realm. More human bodies possessed by \"Spirits\" have appeared.",
+        enemy_count: 20,
         enemies_list: ["微花灵阵","喵咕咕哩","秘境滋生魔","蓝帽行者","流云级魔法师","威武异衣士"],
         enemy_group_size: [2.75,3.75],
         types: [],
         is_unlocked: false, 
-        name: "结界湖 - 4",
+        name: "Barrier Lake - 4",
         enemy_stat_halo: 0.08,
         rank:134, 
         bgm:9,
@@ -2497,13 +2499,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["结界湖 - 5"] = new Combat_zone({
-        description: "秘境核心的湖泊。出现了更多被“灵”占据的人类身体。", 
-        enemy_count: 20, 
+        description: "A lake at the core of the secret realm. Even more human bodies possessed by \"Spirits\" have appeared.",
+        enemy_count: 20,
         enemies_list: ["微花灵阵","喵咕咕哩","流云级魔法师","威武异衣士","雪魅蝠","大眼八爪鱼"],
         enemy_group_size: [3,3],
         types: [],
         is_unlocked: false, 
-        name: "结界湖 - 5",
+        name: "Barrier Lake - 5",
         enemy_stat_halo: 0.08,
         rank:135, 
         bgm:9,
@@ -2517,14 +2519,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["结界湖 - X"] = new Challenge_zone({
-        description: "呜呜...好强！希望你没把微花残片丢了。", 
+        description: "Wuu... so strong! Hopefully you haven't thrown away your Micro Flower Fragments.",
         enemy_count: 1, 
         enemy_groups_list : [["流云级魔法师[BOSS]","流云级魔法师[BOSS]","威武异衣士[BOSS]","威武异衣士[BOSS]","蓝帽行者[BOSS]","蓝帽行者[BOSS]","蓝帽行者[BOSS]"]],
         enemy_group_size: [7,7],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "结界湖 - X",
+        name: "Barrier Lake - X",
         enemy_stat_halo: 0.32,
         bgm:9,
         parent_location: locations["结界湖"],
@@ -2532,7 +2534,7 @@ function get_location_type_penalty(type, stage, stat) {
             activities: [{location:"结界湖", activity:"Running"}]
             //locations: [{location: "结界湖" }],
         },
-        unlock_text: "不知不觉……居然走到了核心区域。生活在这里的“灵”也是一等一的强大。",
+        unlock_text: "Without realizing it... you've walked all the way to the core area. The \"Spirits\" living here are among the strongest of their kind.",
     });
     
     //1-5 4-8 8-12 11-15 14-18.
@@ -2543,29 +2545,29 @@ function get_location_type_penalty(type, stage, stat) {
     locations["结界湖"].connected_locations.push({location: locations["结界湖 - 3"]});
     locations["结界湖"].connected_locations.push({location: locations["结界湖 - 4"]});
     locations["结界湖"].connected_locations.push({location: locations["结界湖 - 5"]});
-    locations["结界湖"].connected_locations.push({location: locations["结界湖 - X"], custom_text:"挑战结界湖最深处的“灵”"});
+    locations["结界湖"].connected_locations.push({location: locations["结界湖 - X"], custom_text:"Challenge the \"Spirit\" in the deepest part of the Barrier Lake"});
 
 
 
     locations["声律城废墟"] = new Location({ 
-        connected_locations: [{location: locations["纳家秘境"], custom_text: "赶路回到家族秘境"}], 
-        description: "被D9级飞船炸为废墟的声律领主城。在混乱中蕴藏着许多有用的财宝。",
-        
-        traders: ["废墟商人"],
+        connected_locations: [{location: locations["纳家秘境"], custom_text: "Travel back to the family's secret realm"}],
+        description: "The ruins of Shenglv City, destroyed by a D9-class spaceship. Many useful treasures are hidden in the chaos.",
+
+        traders: ["Ruins Merchant"],
         dialogues: ["纳娜米(废墟)","声律城难民"],
-        name: "声律城废墟", 
+        name: "Shenglv City Ruins",
         is_unlocked: false,
         bgm: 10,
     });//2-5
 
     locations["声律城废墟 - 1"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城。其中鱼龙混杂，适合浑水摸鱼。", 
-        enemy_count: 20, 
+        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        enemy_count: 20,
         enemies_list: ["威武异衣士","大眼八爪鱼","原力刀客","废墟猎兵","废墟菇灵"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "声律城废墟 - 1",
+        name: "Shenglv City Ruins - 1",
         rank:141, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2579,13 +2581,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城废墟 - 2"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城。其中鱼龙混杂，适合浑水摸鱼。", 
-        enemy_count: 20, 
+        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        enemy_count: 20,
         enemies_list: ["废墟猎兵","废墟菇灵","燕岗城探险者","声律城难民","声律城骸骨"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "声律城废墟 - 2",
+        name: "Shenglv City Ruins - 2",
         rank:142, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2599,13 +2601,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     }); 
     locations["声律城废墟 - 3"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城。其中鱼龙混杂，适合浑水摸鱼。", 
-        enemy_count: 20, 
+        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        enemy_count: 20,
         enemies_list: ["声律城难民","声律城骸骨","锈胎人","双棱晶体","废墟恐怖"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "声律城废墟 - 3",
+        name: "Shenglv City Ruins - 3",
         rank:143, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2619,13 +2621,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城废墟 - 4"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城。其中鱼龙混杂，适合浑水摸鱼。", 
-        enemy_count: 20, 
+        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        enemy_count: 20,
         enemies_list: ["双棱晶体","废墟恐怖","猫茸茸","兰陵城探险者","远古傀儡","血洛幽灵"],//兰陵城小队长，伏地精
         enemy_group_size: [3,3],
         types: [],
         is_unlocked: false, 
-        name: "声律城废墟 - 4",
+        name: "Shenglv City Ruins - 4",
         rank:144, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2639,13 +2641,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城废墟 - 5"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城。其中鱼龙混杂，适合浑水摸鱼。", 
-        enemy_count: 20, 
+        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        enemy_count: 20,
         enemies_list: ["远古傀儡","血洛幽灵","废墟飞鸟","兰陵城小队长","伏地精"],
         enemy_group_size: [3,3],
         types: [],
         is_unlocked: false, 
-        name: "声律城废墟 - 5",
+        name: "Shenglv City Ruins - 5",
         rank:145, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2659,21 +2661,21 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城废墟 - X"] = new Challenge_zone({
-        description: "...露头就秒？！如果可以看到这段话，相信你已经找到破解的办法了。", 
+        description: "...One-shot the moment you poke your head out?! If you can read this, I trust you've already found a way to break through.",
         enemy_count: 1, 
         enemies_list : [["废墟追光者[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "声律城废墟 - X",
+        name: "Shenglv City Ruins - X",
         bgm:10,
         parent_location: locations["声律城废墟"],
         repeatable_reward: {
             money: 1e9,
             locations: [{location: "声律城战场" }],
         },
-        unlock_text: "竟然有一只大地级巅峰的影子荒兽拦路……<br>那就用它，来检验我这段时间的进步吧。",
+        unlock_text: "There's actually a Peak Earth Rank shadow beast blocking the way...<br>Then let me use it to test how much I've improved during this time.",
     });
     locations["纳家秘境"].connected_locations.push({location: locations["声律城废墟"]});
     locations["声律城废墟"].connected_locations.push({location: locations["声律城废墟 - 1"]});
@@ -2681,13 +2683,13 @@ function get_location_type_penalty(type, stage, stat) {
     locations["声律城废墟"].connected_locations.push({location: locations["声律城废墟 - 3"]});
     locations["声律城废墟"].connected_locations.push({location: locations["声律城废墟 - 4"]});
     locations["声律城废墟"].connected_locations.push({location: locations["声律城废墟 - 5"]});
-    locations["声律城废墟"].connected_locations.push({location: locations["声律城废墟 - X"], custom_text:"挑战拦路的[追光]影子荒兽"});
+    locations["声律城废墟"].connected_locations.push({location: locations["声律城废墟 - X"], custom_text:"Challenge the [Light-Chasing] shadow beast blocking the way"});
     
     locations["声律城战场"] = new Location({ 
-        connected_locations: [{location: locations["声律城废墟"], custom_text: "返回声律城中"}], 
-        description: "声律城郊外的混战战场。无需恋战，目标是B9飞船！",
+        connected_locations: [{location: locations["声律城废墟"], custom_text: "Return to Shenglv City ruins"}],
+        description: "The chaotic battlefield on the outskirts of Shenglv City. No need to linger - the target is the B9 spaceship!",
         dialogues: ["心魔(战场)","御兰","皎月神像"],
-        name: "声律城战场", 
+        name: "Shenglv City Battlefield",
         is_unlocked: false,
         bgm: 11,
     });//2-6
@@ -2695,19 +2697,19 @@ function get_location_type_penalty(type, stage, stat) {
 
     
     locations["符文之屋"] = new Location({
-        connected_locations: [{location: locations["声律城废墟"], custom_text: "回到废墟中战斗"}],
-        description: "符文工作台套件居然还赠送箱子,床,聚能阵！真是物超所值...",
-        name: "符文之屋",
+        connected_locations: [{location: locations["声律城废墟"], custom_text: "Return to fight in the ruins"}],
+        description: "The rune workbench set even comes with a box, a bed, and an energy-gathering array! Truly great value...",
+        name: "Rune House",
         is_unlocked: false,
         bgm: 10,
-        traders: ["物品存储箱"],
+        traders: ["Storage Chest"],
         sleeping: {
-            text: "在符文之屋修炼[+1万XP/s]",
+            text: "Cultivate in the Rune House [+10,000XP/s]",
             xp: 100
         },
             crafting: {
-                is_unlocked: true, 
-                use_text: "使用符文工作台[Tier+8]", 
+                is_unlocked: true,
+                use_text: "Use the Rune Workbench [Tier+8]",
                 tiers: {
                     crafting: 8,
                     forging: 8,
@@ -2723,13 +2725,13 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["声律城战场 - 1"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城外战场，杀戮与抢夺屡见不鲜。", 
-        enemy_count: 20, 
+        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        enemy_count: 20,
         enemies_list: ["废墟飞鸟","兰陵城小队长","伏地精","废墟虫卒","战场亡魂"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "声律城战场 - 1",
+        name: "Shenglv City Battlefield - 1",
         rank:151, 
         bgm:11,
         parent_location: locations["声律城战场"],
@@ -2743,13 +2745,13 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["声律城战场 - 2"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城外战场，杀戮与抢夺屡见不鲜。", 
-        enemy_count: 20, 
+        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        enemy_count: 20,
         enemies_list: ["废墟虫卒","战场亡魂","废墟追风者","古寒铁石精","暗茸茸战士"],
         enemy_group_size: [2.25,3.25],
         types: [],
         is_unlocked: false, 
-        name: "声律城战场 - 2",
+        name: "Shenglv City Battlefield - 2",
         rank:152, 
         bgm:11,
         parent_location: locations["声律城战场"],
@@ -2763,13 +2765,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城战场 - 3"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城外战场，杀戮与抢夺屡见不鲜。", 
-        enemy_count: 20, 
+        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        enemy_count: 20,
         enemies_list: ["古寒铁石精","暗茸茸战士","魔族潜行者","魔族潜行者","圣荒城骑士","战场凶残暴徒"],
         enemy_group_size: [2.5,3.5],
         types: [],
         is_unlocked: false, 
-        name: "声律城战场 - 3",
+        name: "Shenglv City Battlefield - 3",
         rank:153, 
         bgm:11,
         parent_location: locations["声律城战场"],
@@ -2783,13 +2785,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城战场 - 4"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城外战场，杀戮与抢夺屡见不鲜。", 
-        enemy_count: 20, 
+        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        enemy_count: 20,
         enemies_list: ["圣荒城骑士","战场凶残暴徒","探险者队长","废墟荒兽","哥布林盾兵"],
         enemy_group_size: [2.75,3.75],
         types: [],
         is_unlocked: false, 
-        name: "声律城战场 - 4",
+        name: "Shenglv City Battlefield - 4",
         rank:154, 
         bgm:11,
         parent_location: locations["声律城战场"],
@@ -2803,13 +2805,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城战场 - 5"] = new Combat_zone({
-        description: "被D9飞船摧毁的声律城外战场，杀戮与抢夺屡见不鲜。", 
-        enemy_count: 20, 
+        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        enemy_count: 20,
         enemies_list: ["战场复苏骸骨","探险者队长","哥布林盾兵","鎏银幽灵","血洛老年修士"],
         enemy_group_size: [3,3],
         types: [],
         is_unlocked: false, 
-        name: "声律城战场 - 5",
+        name: "Shenglv City Battlefield - 5",
         rank:155, 
         enemy_stat_halo:0.2,
         bgm:11,
@@ -2825,21 +2827,21 @@ function get_location_type_penalty(type, stage, stat) {
 
     
     locations["声律城战场 - X"] = new Challenge_zone({
-        description: "前面就是此行的目标——[B9飞船].不过，还有个蓝色大型机器人挡路的说。", 
+        description: "Ahead is the goal of this journey - the [B9 Spaceship]. However, there's a large blue robot blocking the way.",
         enemy_count: 1, 
         enemies_list : [["初级卫兵A9[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "声律城战场 - X",
+        name: "Shenglv City Battlefield - X",
         bgm:11,
         parent_location: locations["声律城战场"],
         repeatable_reward: {
             locations: [{location: "天外飞船" }],
         },
-        spec_hint: "[纱雪][散华]领悟的核心是根据生命之比削弱攻击。想要破解，无非提高生命上限，或者造成强制伤害。",
-        unlock_text: "这个蓝色的家伙，具备的力量和速度……已经堪比当日的地宫养殖者。一定要做好充分的准备，再过去。",
+        spec_hint: "[Sayuki] The core of [Scattered Bloom]'s insight is weakening attacks based on the ratio of health. To break through, simply increase your max health, or deal forced damage.",
+        unlock_text: "That blue thing's strength and speed... is already comparable to the Dungeon Cultivator from before. I must be fully prepared before going over there.",
     });
 
     locations["声律城战场"].connected_locations.push({location: locations["声律城战场 - 1"]});
@@ -2847,12 +2849,12 @@ function get_location_type_penalty(type, stage, stat) {
     locations["声律城战场"].connected_locations.push({location: locations["声律城战场 - 3"]});
     locations["声律城战场"].connected_locations.push({location: locations["声律城战场 - 4"]});
     locations["声律城战场"].connected_locations.push({location: locations["声律城战场 - 5"]});
-    locations["声律城战场"].connected_locations.push({location: locations["声律城战场 - X"],custom_text:"挑战蓝色的庞然大物"});
+    locations["声律城战场"].connected_locations.push({location: locations["声律城战场 - X"],custom_text:"Challenge the massive blue colossus"});
     locations["天外飞船"] = new Location({ 
-        connected_locations: [{location: locations["声律城战场"], custom_text: "暂且离开这艘飞船"}], 
-        description: "声律城之行的最终目标。可能蕴含着在血洛大陆堪称罕见的宝物，却处处透露出对外来着的不友善与肃杀。",
-        name: "天外飞船", 
-        traders: ["飞船集市"],
+        connected_locations: [{location: locations["声律城战场"], custom_text: "Leave this spaceship for now"}],
+        description: "The ultimate goal of the Shenglv City journey. It may contain treasures rare even on the Blood-Luo continent, yet everywhere it radiates hostility and killing intent toward outsiders.",
+        name: "Outer-Space Spaceship",
+        traders: ["Airship Market"],
         dialogues: ["纳娜米(飞船)","核心反应堆"],
         is_unlocked: false,
         bgm: 12,
@@ -2861,13 +2863,13 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["天外飞船 - 1"] = new Combat_zone({
-        description: "B9级飞船的内部。某种压制力场让外来者感到相当不适。", 
+        description: "The interior of the B9-class spaceship. Some kind of suppression field makes outsiders feel quite uncomfortable.",
         enemy_count: 20, 
         types: [{type: "stress", stage: 1, xp_gain: 1}],
         enemies_list: ["鎏银幽灵","探险者队长","初级卫兵A9","领域之械A9","荒兽电法兵"],
         enemy_group_size: [2,2],
         is_unlocked: true, 
-        name: "天外飞船 - 1",
+        name: "Outer-Space Spaceship - 1",
         rank:161, 
         bgm:12,
         parent_location: locations["天外飞船"],
@@ -2880,13 +2882,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["天外飞船 - 2"] = new Combat_zone({
-        description: "B9级飞船的内部。出现了一些似乎同出一源的重工机械。", 
+        description: "The interior of the B9-class spaceship. Some heavy-duty machines that seem to share a common origin have appeared.",
         enemy_count: 20, 
         types: [{type: "stress", stage: 1, xp_gain: 1}],
         enemies_list: ["荒兽电法兵","黑桃重工A9","夹击之械A9","神权十字A9","梅花重工A9"],
         enemy_group_size: [2.25,3.25],
         is_unlocked: false, 
-        name: "天外飞船 - 2",
+        name: "Outer-Space Spaceship - 2",
         rank:162, 
         bgm:12,
         parent_location: locations["天外飞船"],
@@ -2899,14 +2901,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["天外飞船 - 3"] = new Combat_zone({
-        description: "B9级飞船的内部。似乎有内鬼混在里面！", 
+        description: "The interior of the B9-class spaceship. There seems to be a traitor mixed in!",
         enemy_count: 20, 
         types: [{type: "stress", stage: 1, xp_gain: 1}],
         enemies_list: ["梅花重工A9","古老符文","生命熔炉A9","血洛游侠","白银之锋A9"],
         enemy_group_size: [2.5,3.5],
         enemy_stat_halo: -0.1,
         is_unlocked: false,
-        name: "天外飞船 - 3",
+        name: "Outer-Space Spaceship - 3",
         rank:163, 
         bgm:12,
         parent_location: locations["天外飞船"],
@@ -2919,13 +2921,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["天外飞船 - 4"] = new Combat_zone({
-        description: "B9级飞船的内部。那些最大只的敌人都在-5...", 
+        description: "The interior of the B9-class spaceship. All the biggest enemies are in floor -5...",
         enemy_count: 20, 
         types: [{type: "stress", stage: 1, xp_gain: 1}],
         enemies_list: ["白银之锋A9","持盾战士A9","红桃重工B1","燕岗狂战傀儡","激光炮塔A9"],
         enemy_group_size: [2.75,3.75],
         is_unlocked: false,
-        name: "天外飞船 - 4",
+        name: "Outer-Space Spaceship - 4",
         rank:164, 
         bgm:12,
         parent_location: locations["天外飞船"],
@@ -2939,13 +2941,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["天外飞船 - 5"] = new Combat_zone({
-        description: "B9级飞船的内部。小心416 416 416的黑铁战士！", 
+        description: "The interior of the B9-class spaceship. Watch out for the 416 416 416 Black Iron Warrior!",
         enemy_count: 20, 
         types: [{type: "stress", stage: 1, xp_gain: 1}],
         enemies_list: ["方片重工A9","血洛游侠","舰船护卫A9","高级卫兵B1","黑铁战士B1"],
         enemy_group_size: [3,3],
         is_unlocked: false,
-        name: "天外飞船 - 5",
+        name: "Outer-Space Spaceship - 5",
         rank:165, 
         bgm:12,
         parent_location: locations["天外飞船"],
@@ -2959,53 +2961,53 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["天外飞船 - 右上房间"] = new Challenge_zone({
-        description: "等等，如果没有看错的话，右上角的那个家伙是……！", 
+        description: "Wait, if I'm not seeing things, that guy in the top right is...!",
         enemy_count: 1, 
         enemies_list : [["百方[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "天外飞船 - 右上房间",
+        name: "Outer-Space Spaceship - Top-Right Room",
         bgm:12,
         parent_location: locations["天外飞船"],
         repeatable_reward: {
         },
-        unlock_text: "哼，百方少爷？真是冤家路窄呢。被本小姐在这里遇到的话……是时候让你付出代价了！",
+        unlock_text: "Hmph, Young Master Baifang? What a small world. Running into you here of all places... it's time to make you pay!",
     });
     
     locations["天外飞船 - 歧路"] = new Challenge_zone({
-        description: "这里有天空级的机器人堵路！但是，后面的宝石似乎好大一只...", 
+        description: "There's a Sky Rank robot blocking the way here! But the gem behind it looks really big...",
         enemy_count: 1, 
         enemies_list : [["空间三角B1[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "天外飞船 - 歧路",
+        name: "Outer-Space Spaceship - Crossroads",
         bgm:12,
         parent_location: locations["天外飞船"],
         repeatable_reward: {
-            traders: [{traders:"飞船集市"}],
+            traders: [{traders:"Airship Market"}],
         },
-        unlock_text: "传说通过了这里，就是飞船冒险者的交换会...得想想办法，击败了那个蓝色的家伙！",
+        unlock_text: "Legend has it that beyond here is where the spaceship adventurers hold their exchange meet... I need to think of a way to defeat that blue thing!",
     });
     
     locations["天外飞船 - X"] = new Challenge_zone({
-        description: "剧情太多，先不写在这里了……说起来，内存那么贵，这个储存姬B1肯定很值钱吧。", 
+        description: "Too much story to write here right now... come to think of it, memory is so expensive, this Storage Unit B1 must be worth a lot.",
         enemy_count: 1, 
         enemies_list : [["储存姬B1[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "天外飞船 - X",
+        name: "Outer-Space Spaceship - X",
         bgm:12,
         parent_location: locations["天外飞船"],
         repeatable_reward: {
             locations: [{location: "飞船核心"}],
         },
-        unlock_text: "咕！咕咕！",
+        unlock_text: "Coo! Coo coo!",
     });
     locations["天外飞船"].connected_locations.push({location: locations["天外飞船 - 1"]});
     locations["天外飞船"].connected_locations.push({location: locations["天外飞船 - 2"]});
@@ -3018,23 +3020,23 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["飞船核心"] = new Location({ 
-        connected_locations: [{location: locations["天外飞船"], custom_text: "暂且离开核心区域"}], 
-        description: "天外飞船的核心部分。威压遍布，却蕴含着达到天空级的机遇。",
-        name: "飞船核心", 
+        connected_locations: [{location: locations["天外飞船"], custom_text: "Leave the core area for now"}],
+        description: "The core section of the outer-space spaceship. Oppressive aura fills the air, yet it contains an opportunity to reach Sky Rank.",
+        name: "Spaceship Core",
         is_unlocked: false,
         bgm: 13,
-        unlock_text: "想必我们已经进入了核心地域，之后的路，恐怕遍地都是强大的科技造物。",
+        unlock_text: "I imagine we've entered the core domain. The path ahead is probably filled with powerful technological constructs.",
     });//2-8
     locations["天外飞船"].connected_locations.push({location: locations["飞船核心"]});
 
     locations["飞船核心 - 1"] = new Combat_zone({
-        description: "B9级飞船的核心。压制力场更为强大，B1级机械随处可见", 
+        description: "The core of the B9-class spaceship. The suppression field is even more powerful; B1-class machinery is everywhere.",
         enemy_count: 20, 
         types: [{type: "stress", stage: 2, xp_gain: 2}],
         enemies_list: ["塔门战甲B1","万象天引B1","万象天引B1","镭射步兵B1","空间三角B1"],
         enemy_group_size: [2,2],
         is_unlocked: true, 
-        name: "飞船核心 - 1",
+        name: "Spaceship Core - 1",
         rank:171, 
         bgm:13,
         parent_location: locations["飞船核心"],
@@ -3047,13 +3049,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["飞船核心 - 2"] = new Combat_zone({
-        description: "B9级飞船的核心。压制力场更为强大。对抗压制力场的经验积累的越来越快了。", 
+        description: "The core of the B9-class spaceship. The suppression field is even more powerful. Experience resisting the suppression field is accumulating faster and faster.",
         enemy_count: 20, 
         types: [{type: "stress", stage: 2, xp_gain: 4}],
         enemies_list: ["镭射步兵B1","空间三角B1","异化者B1","核爆能源","剧毒恐怖B1"],
         enemy_group_size: [2.5,3.5],
         is_unlocked: false, 
-        name: "飞船核心 - 2",
+        name: "Spaceship Core - 2",
         rank:172, 
         bgm:13,
         parent_location: locations["飞船核心"],
@@ -3066,13 +3068,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["飞船核心 - 3"] = new Combat_zone({
-        description: "B9级飞船的核心。机械与荒兽共存，可以闻到进化晶体的缕缕香气。", 
+        description: "The core of the B9-class spaceship. Machinery and wild beasts coexist, and you can smell the faint fragrance of evolution crystals.",
         enemy_count: 20, 
         types: [{type: "stress", stage: 2, xp_gain: 8}],
         enemies_list: ["核爆能源","剧毒恐怖B1","黄金茸茸","银色血眼B1","游走三头蛇"],
         enemy_group_size: [3,3],
         is_unlocked: false, 
-        name: "飞船核心 - 3",
+        name: "Spaceship Core - 3",
         rank:173, 
         bgm:13,
         parent_location: locations["飞船核心"],
@@ -3085,13 +3087,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["飞船核心 - 4"] = new Combat_zone({
-        description: "B9级飞船的核心。机械与荒兽共存，一股危险的气息就在不远处。", 
+        description: "The core of the B9-class spaceship. Machinery and wild beasts coexist, and a dangerous aura is not far away.",
         enemy_count: 20, 
         types: [{type: "stress", stage: 2, xp_gain: 16}],
         enemies_list: ["银色血眼B1","游走三头蛇","质子粉碎机B1","城主府基层","深邃之暗B2"],
         enemy_group_size: [3.5,4.5],
         is_unlocked: false, 
-        name: "飞船核心 - 4",
+        name: "Spaceship Core - 4",
         rank:174, 
         bgm:13,
         parent_location: locations["飞船核心"],
@@ -3104,13 +3106,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["飞船核心 - 5"] = new Combat_zone({
-        description: "就是这里了！冲过去！无需恋战——这里全是和比B2还恐怖的B1级特化机械！", 
+        description: "This is the place! Charge forward! No need to linger - this area is full of B1-class specialized machinery even more terrifying than B2!",
         enemy_count: 10, 
         types: [{type: "stress", stage: 2, xp_gain: 32}],
         enemies_list: ["城主府基层","深邃之暗B2","鲜血之锋B1","光子石像B1","合金弹头B1"],
         enemy_group_size: [4,4],
         is_unlocked: false, 
-        name: "飞船核心 - 5",
+        name: "Spaceship Core - 5",
         rank:175, 
         bgm:13,
         parent_location: locations["飞船核心"],
@@ -3123,14 +3125,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["飞船核心 - 左上房间"] = new Challenge_zone({
-        description: "似乎看守着某种修炼法的两只机械造物。", 
+        description: "Two mechanical constructs seemingly guarding some kind of cultivation technique.",
         enemy_count: 1, 
         enemies_list : [["质子粉碎机B1[BOSS]"]],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "飞船核心 - 左上房间",
+        name: "Spaceship Core - Top-Left Room",
         bgm:13,
         parent_location: locations["飞船核心"],
         repeatable_reward: {
@@ -3138,35 +3140,35 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["飞船核心 - 下方房间"] = new Challenge_zone({
-        description: "红门内进化气息浓郁的房间.似乎有人在这里做过实验。", 
+        description: "A room behind the red door with a dense evolutionary aura. It seems someone has conducted experiments here.",
         enemy_count: 1, 
         enemies_list : [["银色血眼B1[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "飞船核心 - 下方房间",
+        name: "Spaceship Core - Lower Room",
         bgm:13,
         parent_location: locations["飞船核心"],
         repeatable_reward: {
             money:11037,
         },
-        unlock_text: "[纳娜米]可可有感觉到吗？附近的能量有一些躁动，似乎在环绕着某个中心旋转。",
+        unlock_text: "[Nanami] Do you feel it, Koko? The energy nearby is a bit restless, seeming to revolve around some center.",
     });
     locations["飞船宿舍"] = new Location({
-        connected_locations: [{location: locations["飞船核心"], custom_text: "回到飞船核心"}],
-        description: "之前没买符文工作台的有福了！天外科技，无论聚能阵法还是工作台都比符文之屋好一档。",
-        name: "飞船宿舍",
+        connected_locations: [{location: locations["飞船核心"], custom_text: "Return to the Spaceship Core"}],
+        description: "Lucky for those who didn't buy the rune workbench! Outer-space technology - both the energy-gathering arrays and workbenches are a tier better than the Rune House.",
+        name: "Spaceship Dormitory",
         is_unlocked: false,
         bgm: 13,
-        traders: ["物品存储箱"],
+        traders: ["Storage Chest"],
         sleeping: {
-            text: "使用天外聚能阵[+25万XP/s]",
+            text: "Use the outer-space energy-gathering array [+250,000XP/s]",
             xp: 500
         },
             crafting: {
-                is_unlocked: true, 
-                use_text: "使用天外工作台[Tier+10]", 
+                is_unlocked: true,
+                use_text: "Use the outer-space Workbench [Tier+10]",
                 tiers: {
                     crafting: 10,
                     forging: 10,
@@ -3178,14 +3180,14 @@ function get_location_type_penalty(type, stage, stat) {
         
     })
     locations["飞船核心 - X"] = new Challenge_zone({
-        description: "警报！警报！不明来历生命体已经抵达核心区域！启用主战中枢，执行紧急清扫程序——", 
+        description: "Alert! Alert! Unknown origin lifeforms have reached the core area! Activating primary combat hub, executing emergency sweep protocol -",
         enemy_count: 1, 
         enemies_list : [["舰船中枢B6[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "飞船核心 - X",
+        name: "Spaceship Core - X",
         bgm:13,
         parent_location: locations["飞船核心"],
         repeatable_reward: {
@@ -3204,31 +3206,31 @@ function get_location_type_penalty(type, stage, stat) {
     locations["飞船核心"].connected_locations.push({location: locations["飞船核心 - X"]});
 
     locations["赫尔沼泽入口"] = new Location({ 
-        connected_locations: [{location: locations["飞船核心"], custom_text: "返回飞船核心区域"},{location: locations["荒兽森林营地"], custom_text: "快速旅行 - 第二幕"}], 
-        description: "天外飞船引发【兽潮】后，一片兽潮蔓延区的外围。",
+        connected_locations: [{location: locations["飞船核心"], custom_text: "Return to the Spaceship Core area"},{location: locations["荒兽森林营地"], custom_text: "Fast Travel - Act 2"}],
+        description: "After the outer-space spaceship triggered the [Beast Tide], the outskirts of the beast-tide's spreading zone.",
         dialogues: ["纳布(沼泽)","结界湖转化器"],
-        name: "赫尔沼泽入口", 
+        name: "Hel Swamp Entrance",
         is_unlocked: false,
         bgm: 14,
-        unlock_text: "两年后，燕岗领，赫尔沼泽。",
+        unlock_text: "Two years later. Yangang Territory. The Hel Swamp.",
     });//3-1pre
     locations["飞船核心"].connected_locations.push({location: locations["赫尔沼泽入口"]});
 
-    locations["荒兽森林营地"].connected_locations.push({location: locations["赫尔沼泽入口"],custom_text:"快速旅行 - 第三幕"});
+    locations["荒兽森林营地"].connected_locations.push({location: locations["赫尔沼泽入口"],custom_text:"Fast Travel - Act 3"});
     locations["赫尔沼泽"] = new Location({ 
-        connected_locations: [{location: locations["赫尔沼泽入口"], custom_text: "回到沼泽中的安全区域"}], 
-        description: "天外飞船引发【兽潮】后，一片兽潮蔓延区的天空级荒兽聚集地。",
-        name: "赫尔沼泽", 
+        connected_locations: [{location: locations["赫尔沼泽入口"], custom_text: "Return to the safe zone in the swamp"}],
+        description: "After the outer-space spaceship triggered the [Beast Tide], a Sky Rank wild beast gathering ground in the beast-tide spreading zone.",
+        name: "Hel Swamp",
         is_unlocked: false,
         bgm: 14,
     });//3-1
     locations["赫尔沼泽 - 1"] = new Combat_zone({
-        description: "【兽潮】席卷的沼泽。云霄以上的兽王被扫荡完毕，但天空级初期荒兽仍然相当普遍。", 
-        enemy_count: 20, 
+        description: "The swamp swept by the [Beast Tide]. Beast kings above the Ascendant Rank have been cleared, but early Sky Rank wild beasts are still quite common.",
+        enemy_count: 20,
         enemies_list: ["无面修者","大教掌灯人","单眼蝠幼体","淳羽家族近卫","赫尔沼泽野火"],
         enemy_group_size: [2.5,3.5],
         is_unlocked: true, 
-        name: "赫尔沼泽 - 1",
+        name: "Hel Swamp - 1",
         rank:201, 
         bgm:14,
         enemy_stat_halo:0.01,
@@ -3242,12 +3244,12 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["赫尔沼泽 - 2"] = new Combat_zone({
-        description: "【兽潮】席卷的沼泽。云霄以上的兽王被扫荡完毕，但天空级初期荒兽仍然相当普遍。", 
-        enemy_count: 20, 
+        description: "The swamp swept by the [Beast Tide]. Beast kings above the Ascendant Rank have been cleared, but early Sky Rank wild beasts are still quite common.",
+        enemy_count: 20,
         enemies_list: ["地龙成长期","圣荒杀手傀儡","小门派供奉","化灵蝶","沼泽石灵"],
         enemy_group_size: [3,3],
         is_unlocked: false, 
-        name: "赫尔沼泽 - 2",
+        name: "Hel Swamp - 2",
         rank:202, 
         bgm:14,
         enemy_stat_halo:0.01,
@@ -3261,12 +3263,12 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["赫尔沼泽 - 3"] = new Combat_zone({
-        description: "【兽潮】席卷的沼泽。云霄以上的兽王被扫荡完毕，但天空级初期荒兽仍然相当普遍。", 
-        enemy_count: 20, 
+        description: "The swamp swept by the [Beast Tide]. Beast kings above the Ascendant Rank have been cleared, but early Sky Rank wild beasts are still quite common.",
+        enemy_count: 20,
         enemies_list: ["冈崎猫妖","沉陷死者","赫尔沼泽飞鼠","赫尔沼泽蝠","不瞑之目"],
         enemy_group_size: [3.5,4.5],
         is_unlocked: false, 
-        name: "赫尔沼泽 - 3",
+        name: "Hel Swamp - 3",
         rank:203, 
         bgm:14,
         enemy_stat_halo:0.01,
@@ -3280,12 +3282,12 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["赫尔沼泽 - 4"] = new Combat_zone({
-        description: "【兽潮】席卷的沼泽。云霄以上的兽王被扫荡完毕，但天空级初期荒兽仍然相当普遍。", 
-        enemy_count: 20, 
+        description: "The swamp swept by the [Beast Tide]. Beast kings above the Ascendant Rank have been cleared, but early Sky Rank wild beasts are still quite common.",
+        enemy_count: 20,
         enemies_list: ["兰陵天空骑士","大教外门弟子","燕岗精英佣兵","凌空级魔法师","飞龙成长期"],
         enemy_group_size: [4,4],
         is_unlocked: false, 
-        name: "赫尔沼泽 - 4",
+        name: "Hel Swamp - 4",
         rank:204, 
         bgm:14,
         enemy_stat_halo:0.01,
@@ -3299,20 +3301,20 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["赫尔沼泽 - X"] = new Challenge_zone({
-        description: "燕岗精英佣兵们接受了百方的委托，把纳可引到了这里。然而，危险的背后也未尝不是一场机遇。", 
+        description: "The Yangang elite mercenaries accepted Baifang's commission and lured Neko here. However, danger can sometimes be an opportunity in disguise.",
         enemy_count: 1, 
         enemies_list : [["魅影幻姬[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "赫尔沼泽 - X",
+        name: "Hel Swamp - X",
         bgm:14,
         parent_location: locations["赫尔沼泽"],
         repeatable_reward: {
             locations: [{location: "黑暗森林"}],
         },
-        unlock_text : "[燕岗精英佣兵*2]怪物……不要过来！"
+        unlock_text : "[Yangang Elite Mercenary x2] Monster... don't come any closer!"
     });
     locations["赫尔沼泽入口"].connected_locations.push({location: locations["赫尔沼泽"]});
     locations["赫尔沼泽"].connected_locations.push({location: locations["赫尔沼泽 - 1"]});
@@ -3321,25 +3323,25 @@ function get_location_type_penalty(type, stage, stat) {
     locations["赫尔沼泽"].connected_locations.push({location: locations["赫尔沼泽 - 4"]});
     locations["赫尔沼泽"].connected_locations.push({location: locations["赫尔沼泽 - X"]});
     locations["黑暗森林"] = new Location({ 
-        connected_locations: [{location: locations["赫尔沼泽"], custom_text: "回到赫尔沼泽"}], 
-        description: "黑暗的，阴云密布的森林。纳可在此迷失了方向，周围似乎没有人烟。",
-        name: "黑暗森林", 
+        connected_locations: [{location: locations["赫尔沼泽"], custom_text: "Return to the Hel Swamp"}],
+        description: "A dark, overcast forest. Neko has lost her way here, and there seems to be no sign of human life around.",
+        name: "Dark Forest",
         dialogues: ["峰"],
         is_unlocked: false,
         bgm: 15,
-        unlock_text : "一般在小说里，这种阴森的地方，总会发生不好的事情吧。呜……接下来一定要小心，慢慢找到回去的方向。"
+        unlock_text : "In novels, something bad always happens in these sinister-looking places. Wuu... I need to be very careful and slowly find my way back."
     });//3-2
 
     locations["赫尔沼泽"].connected_locations.push({location: locations["黑暗森林"]});
 
     locations["黑暗森林 - 1"] = new Combat_zone({
-        description: "黑暗的，阴云密布的森林。不过，大家的夜视技能应该早就满了？", 
+        description: "A dark, overcast forest. But everyone's Night Vision skill should be maxed out by now, right?",
         enemy_count: 20, 
         types: [{type: "dark", stage: 2, xp_gain: 1}],
         enemies_list: ["冈崎猫妖","沼泽石灵","有角族壮年","黑森镔铁战士","黑森异惑之花"],
         enemy_group_size: [2.5,3.5],
         is_unlocked: true, 
-        name: "黑暗森林 - 1",
+        name: "Dark Forest - 1",
         rank:211, 
         bgm:15,
         parent_location: locations["黑暗森林"],
@@ -3352,13 +3354,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["黑暗森林 - 2"] = new Combat_zone({
-        description: "黑暗的，阴云密布的森林。四周都是不祥的气息。", 
+        description: "A dark, overcast forest. Ominous auras surround you on all sides.",
         enemy_count: 20, 
         types: [{type: "dark", stage: 2, xp_gain: 1}],
         enemies_list: ["黑森异惑之花","黑森骸骨","司雍世界骨干","黑森僵尸茸茸","黑森猿人战士"],
         enemy_group_size: [3,3],
         is_unlocked: false, 
-        name: "黑暗森林 - 2",
+        name: "Dark Forest - 2",
         rank:212, 
         bgm:15,
         parent_location: locations["黑暗森林"],
@@ -3371,13 +3373,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["黑暗森林 - 3"] = new Combat_zone({
-        description: "黑暗的，阴云密布的森林。敌人的生命力上了一个台阶。", 
+        description: "A dark, overcast forest. Enemy vitality has risen by a level.",
         enemy_count: 20, 
         types: [{type: "dark", stage: 2, xp_gain: 1}],
         enemies_list: ["黑森猿人战士","怨灵探险者","兰陵城深骑士","黑森蝎龙","黑森猎兵"],
         enemy_group_size: [3.5,4.5],
         is_unlocked: false, 
-        name: "黑暗森林 - 3",
+        name: "Dark Forest - 3",
         rank:213, 
         bgm:15,
         parent_location: locations["黑暗森林"],
@@ -3390,13 +3392,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["黑暗森林 - 4"] = new Combat_zone({
-        description: "黑暗的，阴云密布的森林。有了峰大哥的指引，出口近在眼前。", 
+        description: "A dark, overcast forest. With Brother Feng's guidance, the exit is right around the corner.",
         enemy_count: 20, 
         types: [{type: "dark", stage: 2, xp_gain: 1}],
         enemies_list: ["黑森猎兵","石风家族队长","凶悍树妖","人立电法茸茸","嫉妒毒虫"],
         enemy_group_size: [4,4],
         is_unlocked: false, 
-        name: "黑暗森林 - 4",
+        name: "Dark Forest - 4",
         rank:214, 
         bgm:15,
         parent_location: locations["黑暗森林"],
@@ -3409,38 +3411,38 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["黑暗森林 - 歧路"] = new Challenge_zone({
-        description: "吃烤肉的青年附近有一只超大的蛮咕兽！快去救人哇！", 
+        description: "There's a huge Mangou Beast near the young man eating roasted meat! Hurry and save him!",
         enemy_count: 1, 
         enemies_list : [["蛮咕兽[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "黑暗森林 - 歧路",
+        name: "Dark Forest - Crossroads",
         bgm:15,
         parent_location: locations["黑暗森林"],
         repeatable_reward: {
             textlines: [{dialogue: "峰", lines: ["lf1"]}],
         },
-        unlock_text : "咦，前面有人？"
+        unlock_text : "Huh, there's someone up ahead?"
     });
 
     locations["黑暗森林 - X"] = new Challenge_zone({
-        description: "峰大哥的月轮感悟限时免费送！打爆这只凶兽就好了！", 
+        description: "Brother Feng's Moon Wheel Insight - limited time free giveaway! Just beat this ferocious beast!",
         enemy_count: 1, 
         enemies_list : [["天空级凶兽[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "黑暗森林 - X",
+        name: "Dark Forest - X",
         bgm:15,
         parent_location: locations["黑暗森林"],
         repeatable_reward: {
             locations: [{location: "飞云阁"}],
             money:216,
         },
-        unlock_text : "[雷冬]前面是一头变异的荒兽，恐怕达到了四阶巅峰层次。"
+        unlock_text : "[Leidong] Ahead is a mutated wild beast - it's probably reached Peak Tier 4."
     });
 
     locations["黑暗森林"].connected_locations.push({location: locations["黑暗森林 - 1"]});
@@ -3452,20 +3454,20 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["飞云阁"] = new Location({
-        connected_locations: [{location: locations["黑暗森林"], custom_text: "回到黑暗森林"}],
-        description: "商店-睡觉-箱子-合成的一站式解决方案。不愧是城里最好的客栈，感觉像家一样。",
-        name: "飞云阁",
+        connected_locations: [{location: locations["黑暗森林"], custom_text: "Return to the Dark Forest"}],
+        description: "A one-stop solution for shopping, sleeping, storage, and crafting. No wonder it's the best inn in the city - it feels like home.",
+        name: "Feiyun Pavilion",
         is_unlocked: false,
         bgm: 1,//3-3的bgm是16 这个没打错 就是家里的bgm
-        traders: ["物品存储箱","百宝楼"],
+        traders: ["Storage Chest","Treasure Pavilion"],
         dialogues: ["峰(飞云)"],
         sleeping: {
-            text: "在飞云阁休息[+36万XP/s]",
+            text: "Rest at Feiyun Pavilion [+360,000XP/s]",
             xp: 600
         },
             crafting: {
-                is_unlocked: true, 
-                use_text: "前往炼化楼合成[Tier+12]", 
+                is_unlocked: true,
+                use_text: "Go to the Refining Tower to craft [Tier+12]",
                 tiers: {
                     crafting: 12,
                     forging: 12,
@@ -3480,13 +3482,13 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["纯白冰原"] = new Location({ 
-        connected_locations: [{location: locations["飞云阁"], custom_text: "回到飞云阁"}], 
-        description: "相当寒冷的冰雪天地。温度长期停留在240K(-33°C)附近，空气中弥漫的冰元素更是能让大地级修者遭遇不测",
-        name: "纯白冰原", 
-        dialogues: ["纳娜米(冰原)","极寒相变引擎","冰霜门户"],
+        connected_locations: [{location: locations["飞云阁"], custom_text: "Return to Feiyun Pavilion"}],
+        description: "A bitterly cold world of ice and snow. The temperature stays around 240K (-33°C), and the ice element permeating the air can spell doom for Earth Rank cultivators.",
+        name: "Pure White Arctic Tundra",
+        dialogues: ["纳娜米(冰原)","极寒相变引擎","冰霜门户"], // TODO: translate new dialogue keys
         is_unlocked: false,
         bgm: 16,
-        unlock_text : "被厚厚的积雪所包裹的银白世界中，两个女孩站在一座雪山顶端，俯瞰着茫茫的白色大地。"
+        unlock_text : "In a silver-white world wrapped in thick snow, two girls stand on the peak of a snow mountain, overlooking the vast white expanse below."
     });//3-3
 
     locations["飞云阁"].connected_locations.push({location: locations["纯白冰原"]});
@@ -3494,12 +3496,12 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["纯白冰原 - 1"] = new Combat_zone({
-        description: "冰雪构成的白色天地。冰元素使得一些冰元素领悟易于施展，小心了！", 
+        description: "A white world made of ice and snow. The ice element makes certain ice-element insights easier to unleash - be careful!",
         enemy_count: 20, 
         enemies_list: ["冰原之痕","出芽茸茸战士","冰原骑士","冰原近卫"],
         enemy_group_size: [1,1],
         is_unlocked: true, 
-        name: "纯白冰原 - 1",
+        name: "Pure White Arctic Tundra - 1",
         rank:221, 
         bgm:16,
         parent_location: locations["纯白冰原"],
@@ -3512,12 +3514,12 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["纯白冰原 - 2"] = new Combat_zone({
-        description: "务必记得时刻保持自己的血线在健康范围。一旦掉出，冰封术的连击……", 
+        description: "Make sure to always keep your health in a safe range. Once it drops out of range, the Ice Seal combo...",
         enemy_count: 20, 
         enemies_list: ["天空级死士","冰原出芽茸茸","出芽红茸战士","司雍传道士"],
         enemy_group_size: [2,2],
         is_unlocked: false, 
-        name: "纯白冰原 - 2",
+        name: "Pure White Arctic Tundra - 2",
         rank:222, 
         bgm:16,
         parent_location: locations["纯白冰原"],
@@ -3530,12 +3532,12 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["纯白冰原 - 3"] = new Combat_zone({
-        description: "冰封术也是有等级之分的！可以防住上个区域的≠下个区域的也没事……", 
+        description: "Ice Seal also comes in different tiers! Being able to block the previous area's level is different from the next area's - it's fine...",
         enemy_count: 20, 
         enemies_list: ["冰原之空骸","掠冰之蝠","霜傀儡","冰原荒兽"],
         enemy_group_size: [3,3],
         is_unlocked: false, 
-        name: "纯白冰原 - 3",
+        name: "Pure White Arctic Tundra - 3",
         rank:223, 
         bgm:16,
         parent_location: locations["纯白冰原"],
@@ -3548,12 +3550,12 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["纯白冰原 - 4"] = new Combat_zone({
-        description: "按理来说这里有一只1.3亿防的散华。不过现在没有魔攻药，所以只能拿走了。", 
+        description: "There should be a Scattered Bloom with 130 million defense here. But since there's no magic-attack potion, it can only be taken away.",
         enemy_count: 20, 
         enemies_list: ["射击卫戍","冰原老人","冰原骸骨骑士","冰山石灵"],
         enemy_group_size: [4,4],
         is_unlocked: false, 
-        name: "纯白冰原 - 4",
+        name: "Pure White Arctic Tundra - 4",
         rank:224, 
         bgm:16,
         parent_location: locations["纯白冰原"],
@@ -4953,14 +4955,14 @@ function get_location_type_penalty(type, stage, stat) {
         "Running": new LocationActivity({
             activity_name: "Running",
             infinite: true,
-            starting_text: "在郊区尽情地跑步",
+            starting_text: "Run freely in the outskirts",
             skill_xp_per_tick: 1,
             is_unlocked: true,
         }),
         "Swimming": new LocationActivity({
             activity_name: "Swimming",
             infinite: true,
-            starting_text: "在河中练习游泳",
+            starting_text: "Practice swimming in the river",
             skill_xp_per_tick: 1,
             is_unlocked: true,
         }),
@@ -4970,7 +4972,7 @@ function get_location_type_penalty(type, stage, stat) {
         "Swimming": new LocationActivity({
             activity_name: "Swimming",
             infinite: true,
-            starting_text: "在清野瀑布中抗衡急流[EXPx32]",
+            starting_text: "Resist the rapids at Qingye Waterfall [EXPx32]",
             skill_xp_per_tick: 32,
             is_unlocked: true,
         }),
@@ -4981,7 +4983,7 @@ function get_location_type_penalty(type, stage, stat) {
         "miningP_Copper": new LocationActivity({
             activity_name: "mining",
             infinite: true,
-            starting_text: "挖掘部分紫铜矿石",
+            starting_text: "Mine some purple copper ore",
             skill_xp_per_tick: 1,
             is_unlocked: true,
             gained_resources: {
@@ -4995,7 +4997,7 @@ function get_location_type_penalty(type, stage, stat) {
         "miningCoal": new LocationActivity({
             activity_name: "mining",
             infinite: true,
-            starting_text: "挖掘煤矿石",
+            starting_text: "Mine coal ore",
             skill_xp_per_tick: 2,
             is_unlocked: true,
             gained_resources: {
@@ -5010,7 +5012,7 @@ function get_location_type_penalty(type, stage, stat) {
         "mining40Gem": new LocationActivity({
             activity_name: "mining",
             infinite: true,
-            starting_text: "偷偷用镐子挖出宝石",
+            starting_text: "Secretly mine out gems with a pickaxe",
             skill_xp_per_tick: 10,
             is_unlocked: true,
             exp_scaling: true,
@@ -5028,7 +5030,7 @@ function get_location_type_penalty(type, stage, stat) {
         "woodcutting100": new LocationActivity({
             activity_name: "woodcutting",
             infinite: true,
-            starting_text: "在荒兽森林中砍伐柳木",
+            starting_text: "Chop willow trees in the Wild Beast Forest",
             skill_xp_per_tick: 20,
             is_unlocked: false,
             gained_resources: {
@@ -5044,14 +5046,14 @@ function get_location_type_penalty(type, stage, stat) {
         "Running": new LocationActivity({
             activity_name: "Running",
             infinite: true,
-            starting_text: "在秘境中绕圈跑[EXPx32]",
+            starting_text: "Run laps in the secret realm [EXPx32]",
             skill_xp_per_tick: 32,
             is_unlocked: true,
         }),
         "microflower": new LocationActivity({
             activity_name: "mining",
             infinite: true,
-            starting_text: "用镐子破坏光环",
+            starting_text: "Destroy the halo with a pickaxe",
             skill_xp_per_tick: 50,
             is_unlocked: false,
             exp_scaling: true,
@@ -5070,7 +5072,7 @@ function get_location_type_penalty(type, stage, stat) {
         "fishing": new LocationActivity({
             activity_name: "fishing",
             infinite: true,
-            starting_text: "在结界湖中垂钓",
+            starting_text: "Fish in the Barrier Lake",
             skill_xp_per_tick: 1,
             is_unlocked: true,
             gained_resources: {
@@ -5083,7 +5085,7 @@ function get_location_type_penalty(type, stage, stat) {
         "Running": new LocationActivity({
             activity_name: "Running",
             infinite: true,
-            starting_text: "赶往声律城[EXPx64]",
+            starting_text: "Rush toward Shenglv City [EXPx64]",
             skill_xp_per_tick: 64,
             spec: "goto2-5",
             is_unlocked: false,
@@ -5094,7 +5096,7 @@ function get_location_type_penalty(type, stage, stat) {
         "mining50kGem": new LocationActivity({
             activity_name: "mining",
             infinite: true,
-            starting_text: "偷偷用镐子挖出更大颗的宝石",
+            starting_text: "Secretly mine out even larger gems with a pickaxe",
             skill_xp_per_tick: 100,
             is_unlocked: true,
             exp_scaling: true,
