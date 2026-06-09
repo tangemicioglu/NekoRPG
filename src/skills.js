@@ -689,16 +689,16 @@ function format_skill_rewards(milestone){
                                     }
                                 });
     
-     skills["ReflectStarVioletLight"] = new Skill({skill_id: "ReflectStarVioletLight", 
-                                    names: {0: "映星紫华",1:"映星紫华·小成",2:"映星紫华·精通",3:"映星紫华·大成",4:"映星紫华·圆满"}, 
+     skills["ReflectStarVioletLight"] = new Skill({skill_id: "ReflectStarVioletLight",
+                                    names: {0: "Starlit Purple Radiance",1:"Starlit Purple Radiance · Minor",2:"Starlit Purple Radiance · Mastered",3:"Starlit Purple Radiance · Major",4:"Starlit Purple Radiance · Perfect"},
                                     parent_skill: "Stance mastery",
-                                    description: "【映星花】秘法的第二层大境界。可以大幅增强原始秘法的经验获取。", 
+                                    description: "The second great realm of the [Starlit Blossom] secret art. Greatly enhances EXP gain from the original secret art.",
                                     max_level_coefficient: 1.25,
                                     base_xp_cost: 5000e16,
                                     max_level: 4,
                                     xp_scaling:20,
                                     get_effect_description: ()=> {
-                                        return `增加基础经验获取量,额外增加【映星花】经验获取量`;
+                                        return `Increases base EXP gain, and additionally increases [Starlit Blossom] EXP gain`;
                                     },
                                     category: "Stance",
                                     rewards: {
@@ -1585,8 +1585,8 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
 
     
     skills["AquaElement"] = new Skill({skill_id: "AquaElement",
-    description: "感应水元素，加快对领域的感悟！(领域三重巅峰[lv.39]前有效)",
-    names: {0: "水元素亲和",10:"水元素精通"},
+    description: "Sense water elements, accelerate domain comprehension! (Effective before Domain Triple Peak [lv.39])",
+    names: {0: "Water Element Affinity",10:"Water Element Mastery"},
     max_level: 18,
     xp_scaling: 1.6,
     category: "Activity",
@@ -1598,15 +1598,15 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
     },
     get_effect_description: ()=> {
       let value = skills["AquaElement"].get_coefficient("multiplicative");
-      return `将领域感悟速度乘以 ${format_number(value)} [Lv.39后将^0.25]`;
+      return `Multiplies domain comprehension speed by ${format_number(value)} [after Lv.39, exponent becomes ^0.25]`;
     },
     
     });
 
 
     skills["GrassCutting"] = new Skill({skill_id: "GrassCutting",
-    description: "更好地收割绝音蕨！",
-    names: {0: "收割",10:"收割·精通",20:"收割·大师"},
+    description: "Harvest Silenceferns more effectively!",
+    names: {0: "Harvest",10:"Harvest · Expert",20:"Harvest · Master"},
     max_level: 20,
     xp_scaling: 1.6,
     category: "Activity",
@@ -1617,8 +1617,8 @@ Multiplies AP with daggers by ${Math.round((skills["Daggers"].get_coefficient("m
       }
     },
     get_effect_description: ()=> {
-      let value = skills["GrassCutting"].current_level + ((character.equipment.sickle?.name == "死神之镰")?4:0);
-      return `收割半径 ${format_number(15+1.5*value)}px ,生成速度 ${format_number(0.5+0.1*value)}/s,<br>容量上限 ${format_number(Math.floor((value + 1) ** 1.5 * 10))},【噬芒兰】概率 :${format_number(value ** 0.7 / 20)}% <br>${(character.equipment.sickle?.name == "死神之镰")?"<span style='violet'><b>[死神之镰已激活 / 有效等级+4]</b></span>":""}`;
+      let value = skills["GrassCutting"].current_level + ((character.equipment.sickle?.id == "死神之镰")?4:0);
+      return `Harvest radius ${format_number(15+1.5*value)}px, spawn rate ${format_number(0.5+0.1*value)}/s,<br>capacity limit ${format_number(Math.floor((value + 1) ** 1.5 * 10))}, [Light-Devouring Orchid] chance: ${format_number(value ** 0.7 / 20)}%<br>${(character.equipment.sickle?.id == "死神之镰")?"<span style='violet'><b>[Death's Scythe Activated / Effective Level +4]</b></span>":""}`;
     },
     
     });
