@@ -2813,9 +2813,9 @@ function update_displayed_effects() {
     if(effect_count > 0) {
         active_effects_tooltip.innerHTML = '';
         effect_divs = {};
-        Object.values(active_effects).forEach(effect => {
-            effect_divs[effect.name] = create_effect_tooltip(effect.name, effect.duration);
-            active_effects_tooltip.appendChild(effect_divs[effect.name]);
+        Object.entries(active_effects).forEach(([key, effect]) => {
+            effect_divs[key] = create_effect_tooltip(key, effect.duration);
+            active_effects_tooltip.appendChild(effect_divs[key]);
         });
     } else {
         active_effects_tooltip.innerHTML = 'No effects';
