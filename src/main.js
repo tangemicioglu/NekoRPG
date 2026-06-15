@@ -4505,7 +4505,7 @@ let fish_v = 0,fish_x = 100;
 let rod_v = 0,rod_x = 100;
 let bar_health = 25;
 let rod_length = 40;
-let fishs = {1:{name:"湖鲤鱼",str:40},2:{name:"青花鱼",str:100},3:{name:"冰柱鱼",str:180}}
+let fishs = {1:{id:"湖鲤鱼",name:"Lake Carp",str:40},2:{id:"青花鱼",name:"Blue Flower Fish",str:100},3:{id:"冰柱鱼",name:"Ice Pillar Fish",str:180}}
 function update_displayed_fish()
 {
     fish_progress_bar.style.height = bar_health.toFixed(0) + "%";
@@ -4573,7 +4573,7 @@ function start_fishing_minigame()
             action_div.style.display = "inherit";
             fish_div.style.display = "none";
             add_xp_to_skill({skill: skills["Fishing"], xp_to_add: cur_fish.str / 20});
-            add_to_character_inventory([{item: item_templates[cur_fish.name], count: 1}]);
+            add_to_character_inventory([{item: item_templates[cur_fish.id], count: 1}]);
             clearInterval(fishId);
         }
         if (bar_health <= 0) {
@@ -4602,7 +4602,7 @@ let fish_vy = 0,fish_xy = 100;
 let rod_vy = 0,rod_xy = 100;
 let center_x,center_y,offset_x,offset_y;
 let rod_diff = 0.750;//操控力度
-let fishs_changed = {1:{name:"冰柱鱼",str:80},2:{name:"血莲鱼",str:120},3:{name:"冰柱鱼王",str:160}}
+let fishs_changed = {1:{id:"冰柱鱼",name:"Ice Pillar Fish",str:80},2:{id:"血莲鱼",name:"Blood Lotus Fish",str:120},3:{id:"冰柱鱼王",name:"Icicle Fish King",str:160}}
 //bar_health rod_length保留
 function update_displayed_fish_changed()
 {
@@ -4705,15 +4705,15 @@ function start_fishing_minigame_changed()
 
         update_displayed_fish_changed();
         if (bar_health >= 100) {
-            log_message(cur_fish.name + " 上钩了！","enemy_defeated");
+            log_message(cur_fish.name + " is hooked!","enemy_defeated");
             action_div.style.display = "inherit";
             fish_changed_div.style.display = "none";
             add_xp_to_skill({skill: skills["Fishing"], xp_to_add: cur_fish.str / 5});//四倍经验
-            add_to_character_inventory([{item: item_templates[cur_fish.name], count: 1}]);
+            add_to_character_inventory([{item: item_templates[cur_fish.id], count: 1}]);
             clearInterval(fishId);
         }
         if (bar_health <= 0) {
-            log_message(cur_fish.name + " 逃跑了！","enemy_enhanced");
+            log_message(cur_fish.name + " got away!","enemy_enhanced");
             action_div.style.display = "inherit";
             fish_changed_div.style.display = "none";
             clearInterval(fishId);

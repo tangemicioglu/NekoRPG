@@ -2551,23 +2551,23 @@ function get_location_type_penalty(type, stage, stat) {
 
     locations["声律城废墟"] = new Location({ 
         connected_locations: [{location: locations["纳家秘境"], custom_text: "Travel back to the family's secret realm"}],
-        description: "The ruins of Shenglv City, destroyed by a D9-class spaceship. Many useful treasures are hidden in the chaos.",
+        description: "The ruins of Shenglu City, destroyed by a D9-class spaceship. Many useful treasures are hidden in the chaos.",
 
         traders: ["Ruins Merchant"],
         dialogues: ["纳娜米(废墟)","声律城难民"],
-        name: "Shenglv City Ruins",
+        name: "Shenglu City Ruins",
         is_unlocked: false,
         bgm: 10,
     });//2-5
 
     locations["声律城废墟 - 1"] = new Combat_zone({
-        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        description: "Shenglu City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
         enemy_count: 20,
         enemies_list: ["威武异衣士","大眼八爪鱼","原力刀客","废墟猎兵","废墟菇灵"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Ruins - 1",
+        name: "Shenglu City Ruins - 1",
         rank:141, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2581,13 +2581,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城废墟 - 2"] = new Combat_zone({
-        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        description: "Shenglu City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
         enemy_count: 20,
         enemies_list: ["废墟猎兵","废墟菇灵","燕岗城探险者","声律城难民","声律城骸骨"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Ruins - 2",
+        name: "Shenglu City Ruins - 2",
         rank:142, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2601,13 +2601,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     }); 
     locations["声律城废墟 - 3"] = new Combat_zone({
-        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        description: "Shenglu City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
         enemy_count: 20,
         enemies_list: ["声律城难民","声律城骸骨","锈胎人","双棱晶体","废墟恐怖"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Ruins - 3",
+        name: "Shenglu City Ruins - 3",
         rank:143, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2621,13 +2621,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城废墟 - 4"] = new Combat_zone({
-        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        description: "Shenglu City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
         enemy_count: 20,
         enemies_list: ["双棱晶体","废墟恐怖","猫茸茸","兰陵城探险者","远古傀儡","血洛幽灵"],//兰陵城小队长，伏地精
         enemy_group_size: [3,3],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Ruins - 4",
+        name: "Shenglu City Ruins - 4",
         rank:144, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2641,13 +2641,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城废墟 - 5"] = new Combat_zone({
-        description: "Shenglv City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
+        description: "Shenglu City destroyed by the D9 spaceship. A chaotic mix of all sorts, perfect for fishing in troubled waters.",
         enemy_count: 20,
         enemies_list: ["远古傀儡","血洛幽灵","废墟飞鸟","兰陵城小队长","伏地精"],
         enemy_group_size: [3,3],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Ruins - 5",
+        name: "Shenglu City Ruins - 5",
         rank:145, 
         bgm:10,
         parent_location: locations["声律城废墟"],
@@ -2668,7 +2668,7 @@ function get_location_type_penalty(type, stage, stat) {
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "Shenglv City Ruins - X",
+        name: "Shenglu City Ruins - X",
         bgm:10,
         parent_location: locations["声律城废墟"],
         repeatable_reward: {
@@ -2686,10 +2686,10 @@ function get_location_type_penalty(type, stage, stat) {
     locations["声律城废墟"].connected_locations.push({location: locations["声律城废墟 - X"], custom_text:"Challenge the [Light-Chasing] shadow beast blocking the way"});
     
     locations["声律城战场"] = new Location({ 
-        connected_locations: [{location: locations["声律城废墟"], custom_text: "Return to Shenglv City ruins"}],
-        description: "The chaotic battlefield on the outskirts of Shenglv City. No need to linger - the target is the B9 spaceship!",
+        connected_locations: [{location: locations["声律城废墟"], custom_text: "Return to Shenglu City ruins"}],
+        description: "The chaotic battlefield on the outskirts of Shenglu City. No need to linger - the target is the B9 spaceship!",
         dialogues: ["心魔(战场)","御兰","皎月神像"],
-        name: "Shenglv City Battlefield",
+        name: "Shenglu City Battlefield",
         is_unlocked: false,
         bgm: 11,
     });//2-6
@@ -2725,13 +2725,13 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["声律城战场 - 1"] = new Combat_zone({
-        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        description: "The battlefield outside Shenglu City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
         enemy_count: 20,
         enemies_list: ["废墟飞鸟","兰陵城小队长","伏地精","废墟虫卒","战场亡魂"],
         enemy_group_size: [2,2],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Battlefield - 1",
+        name: "Shenglu City Battlefield - 1",
         rank:151, 
         bgm:11,
         parent_location: locations["声律城战场"],
@@ -2745,13 +2745,13 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["声律城战场 - 2"] = new Combat_zone({
-        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        description: "The battlefield outside Shenglu City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
         enemy_count: 20,
         enemies_list: ["废墟虫卒","战场亡魂","废墟追风者","古寒铁石精","暗茸茸战士"],
         enemy_group_size: [2.25,3.25],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Battlefield - 2",
+        name: "Shenglu City Battlefield - 2",
         rank:152, 
         bgm:11,
         parent_location: locations["声律城战场"],
@@ -2765,13 +2765,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城战场 - 3"] = new Combat_zone({
-        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        description: "The battlefield outside Shenglu City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
         enemy_count: 20,
         enemies_list: ["古寒铁石精","暗茸茸战士","魔族潜行者","魔族潜行者","圣荒城骑士","战场凶残暴徒"],
         enemy_group_size: [2.5,3.5],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Battlefield - 3",
+        name: "Shenglu City Battlefield - 3",
         rank:153, 
         bgm:11,
         parent_location: locations["声律城战场"],
@@ -2785,13 +2785,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城战场 - 4"] = new Combat_zone({
-        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        description: "The battlefield outside Shenglu City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
         enemy_count: 20,
         enemies_list: ["圣荒城骑士","战场凶残暴徒","探险者队长","废墟荒兽","哥布林盾兵"],
         enemy_group_size: [2.75,3.75],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Battlefield - 4",
+        name: "Shenglu City Battlefield - 4",
         rank:154, 
         bgm:11,
         parent_location: locations["声律城战场"],
@@ -2805,13 +2805,13 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["声律城战场 - 5"] = new Combat_zone({
-        description: "The battlefield outside Shenglv City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
+        description: "The battlefield outside Shenglu City, destroyed by the D9 spaceship. Killing and looting are commonplace here.",
         enemy_count: 20,
         enemies_list: ["战场复苏骸骨","探险者队长","哥布林盾兵","鎏银幽灵","血洛老年修士"],
         enemy_group_size: [3,3],
         types: [],
         is_unlocked: false, 
-        name: "Shenglv City Battlefield - 5",
+        name: "Shenglu City Battlefield - 5",
         rank:155, 
         enemy_stat_halo:0.2,
         bgm:11,
@@ -2834,7 +2834,7 @@ function get_location_type_penalty(type, stage, stat) {
         types: [],
         is_unlocked: false, 
         is_challenge: true,
-        name: "Shenglv City Battlefield - X",
+        name: "Shenglu City Battlefield - X",
         bgm:11,
         parent_location: locations["声律城战场"],
         repeatable_reward: {
@@ -2852,7 +2852,7 @@ function get_location_type_penalty(type, stage, stat) {
     locations["声律城战场"].connected_locations.push({location: locations["声律城战场 - X"],custom_text:"Challenge the massive blue colossus"});
     locations["天外飞船"] = new Location({ 
         connected_locations: [{location: locations["声律城战场"], custom_text: "Leave this spaceship for now"}],
-        description: "The ultimate goal of the Shenglv City journey. It may contain treasures rare even on the Blood-Luo continent, yet everywhere it radiates hostility and killing intent toward outsiders.",
+        description: "The ultimate goal of the Shenglu City journey. It may contain treasures rare even on the Blood-Luo continent, yet everywhere it radiates hostility and killing intent toward outsiders.",
         name: "Outer-Space Spaceship",
         traders: ["Airship Market"],
         dialogues: ["纳娜米(飞船)","核心反应堆"],
@@ -5085,7 +5085,7 @@ function get_location_type_penalty(type, stage, stat) {
         "Running": new LocationActivity({
             activity_name: "Running",
             infinite: true,
-            starting_text: "Rush toward Shenglv City [EXPx64]",
+            starting_text: "Rush toward Shenglu City [EXPx64]",
             skill_xp_per_tick: 64,
             spec: "goto2-5",
             is_unlocked: false,

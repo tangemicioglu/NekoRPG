@@ -3364,7 +3364,7 @@ class Enemy {
         ],
     });
     enemy_templates["声律城骸骨"] = new Enemy({
-        name: "Shenglv City Skeleton",
+        name: "Shenglu City Skeleton",
         description: "Its bones have been tempered to the [Blue Jade] tier. You could pick them up and use them directly as entwining crystals!",
         xp_value: 121393, 
         rank: 2504,
@@ -3384,7 +3384,7 @@ class Enemy {
         ],
     });
     enemy_templates["声律城难民"] = new Enemy({
-        name: "Shenglv City Refugee",
+        name: "Shenglu City Refugee",
         description: "Has a decent set of mechanics, but has been starving for days and its HP is nearly depleted. The Otherworld Gate can't do much in this state.",
         xp_value: 121393, 
         rank: 2505,
