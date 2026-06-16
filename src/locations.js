@@ -368,7 +368,7 @@ class Combat_zone {
                 log_message("[Feng] We finally made it. Worth every step I spent tailing her.","enemy_enhanced");
                 log_message("[Feng] Well then, I suppose it's time for me to take my leave...","enemy_enhanced");
             }
-            if(character.equipment.props?.name == "光环法杖"){
+            if(character.equipment.props?.id == "光环法杖"){
                 if(enemy.rank >= 4000){
                     log_message("[一段光环法杖遇到云霄级敌人增幅不动的剧情]","enemy_enhanced");
                 }

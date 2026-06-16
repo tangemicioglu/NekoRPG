@@ -1142,7 +1142,7 @@ function textline_special(t_key){
         }
         else if(t_key == "byzx"){
 
-            if(character.equipment.special?.name == "冰原之心")
+            if(character.equipment.special?.id == "冰原之心")
             {
                 character.equipment.special = null;
                 add_to_character_inventory([{item: item_templates["冰原之心·材"], count: 1}]);
@@ -4841,7 +4841,7 @@ function start_grass_minigame(){
     grass_spawn_cooldown = 1.00;
     grass_cur_cooldown = 0.00;
     const GrassId = setInterval(() => {
-        inf_combat.GR.eff_lvl = skills["GrassCutting"].current_level + ((character.equipment.sickle?.name == "死神之镰")?4:0);
+        inf_combat.GR.eff_lvl = skills["GrassCutting"].current_level + ((character.equipment.sickle?.id == "死神之镰")?4:0);
         inf_combat.GR.radius = inf_combat.GR.eff_lvl * 1.5 + 15;
         grass_spawn_cooldown = 10.0 / (5 + inf_combat.GR.eff_lvl);
         inf_combat.GR.grass_cap = Math.floor((inf_combat.GR.eff_lvl + 1) ** 1.5 * 10);
@@ -5160,8 +5160,8 @@ function update_displayed_engine(){
     engine_result_name.innerText = (inf_combat.FE.SF.num * 999.999 - inf_combat.FE.SF.ice < 0)?"万载冰髓锭":"冰原超流体";
     engine_result_fruit_status.innerText = (inf_combat.FE.fruit == -1)?"未放入":`觉醒${(inf_combat.FE.fruit / 1e4).toFixed(4)}%`
     engine_result_temp.innerText = (inf_combat.FE.outer_temp.toFixed(0)) + 'K / '+ ((inf_combat.FE.outer_temp/240)**2*12).toFixed(2) + 'MPa';
-    engine_env1.style.display = (character.equipment.realm?.name == "焰海霜天[领域二重]" || character.equipment.realm?.name == "焰海霜天[领域三重]")?"inline-block":"none";
-    engine_env2.style.display = (character.equipment.realm?.name == "焰海霜天[领域二重]" || character.equipment.realm?.name == "焰海霜天[领域三重]")?"inline-block":"none";
+    engine_env1.style.display = (character.equipment.realm?.id == "焰海霜天[领域二重]" || character.equipment.realm?.id == "焰海霜天[领域三重]")?"inline-block":"none";
+    engine_env2.style.display = (character.equipment.realm?.id == "焰海霜天[领域二重]" || character.equipment.realm?.id == "焰海霜天[领域三重]")?"inline-block":"none";
 
 
     piston_div.style.left = Math.round(120 * (1+Math.cos(3.1415927*(1+inf_combat.FE.piston))) + 64) + 'px';
@@ -5409,7 +5409,7 @@ function engine_e(e_temp){
     if(e_temp != -1) inf_combat.FE.outer_temp = e_temp;
     else{
         
-            if(character.equipment.special?.name == "飞船之心")
+            if(character.equipment.special?.id == "飞船之心")
             {
                 character.equipment.special = null;
                 add_to_character_inventory([{item: item_templates["飞船之心·材"], count: 1}]);
@@ -5783,7 +5783,7 @@ function gem_consume(){
 function coin_consume(){
     inf_combat.MP = inf_combat.MP || 0;
     Object.keys(character.inventory).forEach(key =>{
-        if(character.inventory[key].item.name == "紫色刀币" || character.inventory[key].item.name?.includes("宇宙币"))
+        if(character.inventory[key].item.id == "紫色刀币" || character.inventory[key].item.id?.includes("宇宙币"))
         {
             inf_combat.MP += character.inventory[key].count * character.inventory[key].item.value / 1e12;
             remove_from_character_inventory([{ 
