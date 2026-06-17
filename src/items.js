@@ -4756,7 +4756,7 @@ item_templates["Twist liek a snek"] = new Book({
     });
     item_templates["峰"] = new Material({
         id: "峰",
-        name: "Peak",
+        name: "Feng",
         description: "<span class='realm_cloudy'>Ascendant Rank: Peak</span><br><b><span style='color:#00fa9a'>Hundred-Line Style</span> <span style='color:#edec9f'>Golden Void Law</span><br><span style='color:lime'>4.489Qi</span> <span style='color:red'>167.24Q</span> <span style='color:blue'>86.49Q</span></b> <br><br>Priceless... but only if you survive to claim it.",
         value: 1.21e24,
         material_type: "metal",
