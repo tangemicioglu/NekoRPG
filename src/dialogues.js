@@ -1681,39 +1681,39 @@ class Textline {
     dialogues["冰霜门户"] = new Dialogue({
         name: "Frost Gate",
         textlines: {
-            "bs1": new Textline({ 
+            "bs1": new Textline({
                 is_unlocked:false,
-                name: "咦，这是什么。(触摸)",
-                text: "纳可的手触碰上了这冰雪门户。<br>霎时间，刺骨的寒冷触感，<br>从手掌传来，让少女不禁打了个哆嗦。<br>在纳可的眼前，出现了一条长长的甬道，<br>一直通向前方。<br>甬道两侧都是高耸透明的冰壁。",
+                name: "Hm, what's this? (Touch)",
+                text: "Nako's hand touches the frost gate.<br>In an instant, a bone-chilling cold sensation<br>travels up from her palm, making the girl shiver.<br>Before Nako's eyes, a long corridor appears,<br>stretching deep ahead.<br>Both sides of the corridor are towering, transparent walls of ice.",
 
                 unlocks: {
                     textlines: [{dialogue: "冰霜门户", lines: ["bs2"]}],
                 },
                 locks_lines: ["bs1"],
             }),
-            "bs2": new Textline({ 
+            "bs2": new Textline({
                 is_unlocked:false,
-                name: "(继续向前)",
-                text: "她本能地迈步向甬道的尽头走去，<br>很快看到了一扇冰门，<br>这扇冰门看上去朴实无华，散发着淡蓝色的光芒。<br>冰寒的力量犹如实质，弥漫在空气中，<br>逐渐汇聚成一种陌生而又熟悉的景象，<br>那是——水蓝色的庞大六芒星阵！",
+                name: "(Continue forward)",
+                text: "She instinctively steps toward the end of the corridor<br>and soon sees an ice door,<br>plain in appearance but radiating a faint blue glow.<br>The icy power feels almost tangible, filling the air,<br>gradually coalescing into a form both foreign and familiar —<br>a vast aqua-blue hexagram!",
 
                 unlocks: {
                     textlines: [{dialogue: "冰霜门户", lines: ["bs3"]}],
                 },
                 locks_lines: ["bs2"],
             }),
-            "bs3": new Textline({ 
+            "bs3": new Textline({
                 is_unlocked:false,
-                name: "领域……冰元素的领域！",
-                text: "纳可不受控制地抬起手，火焰的能量席卷，<br>在她的身周蔓延，<br>转瞬与硕大的冰蓝六芒星碰撞！<br>剧烈的爆炸声响彻四周，<br>整个甬道都剧烈地晃动起来。<br>冲击波席卷四周，<br>冰墙出现一道道裂痕，旋即迅速愈合。<br>那水蓝色的六芒星，同样出现一道道缺口，<br>炽热的火焰能量，便趁虚而入，<br>融合进了六芒星的缝隙当中，最终消失不见。",
+                name: "A domain... an ice-element domain!",
+                text: "Nako's hand rises on its own, flame energy surging<br>and spreading around her body,<br>clashing in an instant with the massive ice-blue hexagram!<br>A violent explosion reverberates through the air<br>as the entire corridor shakes wildly.<br>Shockwaves sweep outward —<br>cracks form across the ice walls, only to seal themselves shut.<br>The aqua-blue hexagram splinters apart all the same,<br>and the scorching flame energy seizes the opening,<br>flowing into the cracks of the hexagram until it vanishes entirely.",
 
                 unlocks: {
                     textlines: [{dialogue: "冰霜门户", lines: ["bs4"]}],
                 },
                 locks_lines: ["bs3"],
             }),
-            "bs4": new Textline({ 
+            "bs4": new Textline({
                 is_unlocked:false,
-                name: "水，滋润万物……火，照耀一切……",
+                name: "Water, nourishing all things... Fire, illuminating everything...",
                 text: "",
 
                 unlocks: {
@@ -1722,20 +1722,20 @@ class Textline {
                 },
                 locks_lines: ["bs4"],
             }),
-            "bs5": new Textline({ 
+            "bs5": new Textline({
                 is_unlocked:false,
-                name: "……",
-                text: "[纳娜米]可可，你快醒醒啊……<br>别吓姐姐。<br>纳可睁开迷离的双眼，<br>身边姐姐焦急的声音传来。<br>[纳娜米]可可！<br>你刚才突然晕倒了，我还以为你……<br>你还记得发生了什么？",
+                name: "...",
+                text: "[Nanami] Keke, wake up...<br>Don't scare your sister.<br>Nako opens her hazy eyes,<br>her sister's anxious voice reaching her from nearby.<br>[Nanami] Keke!<br>You suddenly fainted just now — I thought you...<br>Do you remember what happened?",
 
                 unlocks: {
                     textlines: [{dialogue: "冰霜门户", lines: ["bs6"]}],
                 },
                 locks_lines: ["bs5"],
             }),
-            "bs6": new Textline({ 
+            "bs6": new Textline({
                 is_unlocked:false,
-                name: "(构造微型法阵)你怎么知道我的领域突破了？",
-                text: "[纳娜米]诶诶？什么时候……<br>原来如此，刚才的冰霜门户吗。<br>不愧是你可可，总能给姐姐带来惊吓。<br>说起来，刚刚在里面还发现了这个……<br><br>获取了 [万载冰髓锭] !",
+                name: "(Forming a miniature spell array) How did you know my domain had a breakthrough?",
+                text: "[Nanami] Hm? When did...<br>I see — the Frost Gate just now.<br>That's so you, Keke — always giving your sister a fright.<br>Speaking of which, I found this inside just a moment ago...<br><br>Obtained [Eternal Ice Marrow Ingot]!",
 
                 unlocks: {
                     items: [{item_name: "万载冰髓锭"}],

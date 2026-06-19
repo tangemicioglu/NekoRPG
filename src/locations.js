@@ -3590,38 +3590,38 @@ function get_location_type_penalty(type, stage, stat) {
         unlock_text : "System: Touch the Frost Gate — you may discover something unexpected.",
     });
     locations["纯白冰原 - X"] = new Challenge_zone({
-        description: "前面有一座两侧覆盖着冰雪的石制大门。越过这只怨气魔物才能触碰到它。", 
-        enemy_count: 1, 
+        description: "A stone gate ahead, its sides blanketed in ice and snow. Defeat the wrathful creatures blocking the way to pass through.",
+        enemy_count: 1,
         enemy_groups_list : [["敌意女巫[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]"]],
         enemy_group_size: [7,7],
         types: [],
         enemy_stat_halo:0.24,
-        is_unlocked: false, 
+        is_unlocked: false,
         is_challenge: true,
-        name: "纯白冰原 - X",
+        name: "Pure White Arctic Tundra - X",
         bgm:16,
         parent_location: locations["纯白冰原"],
         repeatable_reward: {
             locations: [{location: "极寒冰宫"}],
         },
-        unlock_text : "[猎兵]没什么好说的，真要道歉，那就留在这里吧！杀！",
+        unlock_text : "[Hunter] Nothing to say — if you really want to apologize, then stay here forever! Kill!",
     });
     locations["纯白冰原 - XS"] = new Challenge_zone({
-        description: "前面有一座两侧覆盖着冰雪的石制大门。越过这只怨气魔物才能触碰到它。", 
-        enemy_count: 1, 
+        description: "A stone gate ahead, its sides blanketed in ice and snow. Defeat the wrathful creatures blocking the way to pass through.",
+        enemy_count: 1,
         enemy_groups_list : [["敌意女巫[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]","敌意猎兵[BOSS]"]],
         enemy_group_size: [7,7],
         types: [],
         enemy_stat_halo:0.24,
-        is_unlocked: false, 
+        is_unlocked: false,
         is_challenge: true,
-        name: "纯白冰原 - XS",
+        name: "Pure White Arctic Tundra - XS",
         bgm:16,
         parent_location: locations["纯白冰原"],
         repeatable_reward: {
             locations: [{location: "极寒冰宫"}],
         },
-        unlock_text : "[猎兵]没什么好说的，真要道歉，那就留在这里吧！杀！",
+        unlock_text : "[Hunter] Nothing to say — if you really want to apologize, then stay here forever! Kill!",
     });
 
     locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - 1"]});
@@ -3632,27 +3632,27 @@ function get_location_type_penalty(type, stage, stat) {
     locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - X"], custom_text: "Challenge Ice Palace Guardian [old]"});
     locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - XS"], custom_text: "Challenge Ice Palace Guardian"});
     
-    locations["极寒冰城"] = new Location({ 
-        connected_locations: [{location: locations["极寒冰宫"], custom_text: "前往【极寒冰宫】"}], 
-        description: "非常抱歉，这里的名字最后一个字已经改掉了的说……为了防止有猫掉进虚空，做了这个地点！",
-        name: "极寒冰城", 
+    locations["极寒冰城"] = new Location({
+        connected_locations: [{location: locations["极寒冰宫"], custom_text: "Go to [Extreme Cold Ice Palace]"}],
+        description: "So sorry — the last character of this location's name was changed... This location was added to prevent cats from falling into the void!",
+        name: "Extreme Cold Ice City",
         is_unlocked: true,
         bgm: 17,
     });//3-4(D)
     
-    locations["极寒冰宫"] = new Location({ 
-        connected_locations: [{location: locations["纯白冰原"], custom_text: "回到纯白冰原"}], 
-        description: "坐落于纯白冰原的中心地带，完全由冰块组成的城市。女巫似乎希望留下纳可和纳娜米，却没有意识到攻守已悄然逆转。",
-        name: "极寒冰宫", 
+    locations["极寒冰宫"] = new Location({
+        connected_locations: [{location: locations["纯白冰原"], custom_text: "Return to Pure White Arctic Tundra"}],
+        description: "Located at the heart of the Pure White Arctic Tundra, a city built entirely of ice. The witch hoped to keep Nako and Nanami here, not realizing the tables had quietly turned.",
+        name: "Extreme Cold Ice Palace",
         traders: ["冰宫商人"],
         dialogues: ["溪月"],
         is_unlocked: false,
         bgm: 17,
-        unlock_text : "[女巫]外来的小东西，本以为你们会知难而退，想不到竟然闯入这冰城里来。",
+        unlock_text : "[Witch] Little outsiders — I expected you to give up and leave, but you actually broke into this ice city.",
     });//3-4
     locations["纯白冰原"].connected_locations.push({location: locations["极寒冰宫"]});
     locations["极寒冰宫 - 1"] = new Combat_zone({
-        description: "充斥着敌意的冰块城市，女巫指引着狂暴的荒兽", 
+        description: "A city of ice filled with hostility — witches directing raging beasts.",
         enemy_count: 20, 
         enemies_list: ["探险者的怨恨","出芽橙茸战士","敌意猎兵","大眼霜冻鱼","敌意女巫"],
         enemy_group_size: [3,3],
@@ -3670,7 +3670,7 @@ function get_location_type_penalty(type, stage, stat) {
             locations: [{location: "极寒冰宫 - 2"}],
         },
     });locations["极寒冰宫 - 2"] = new Combat_zone({
-        description: "充斥着敌意的冰块城市，更多的女巫对荒兽不断释放着光环", 
+        description: "A city of ice filled with hostility — more witches constantly releasing auras over the beasts.",
         enemy_count: 20, 
         enemies_list: ["敌意女巫","出芽黄茸战士","绝对低温能源","敌意骑士","出芽绿茸战士"],
         enemy_group_size: [3,3],
@@ -3688,7 +3688,7 @@ function get_location_type_penalty(type, stage, stat) {
             locations: [{location: "极寒冰宫 - 3"}],
         },
     });locations["极寒冰宫 - 3"] = new Combat_zone({
-        description: "充斥着敌意的冰块城市，女巫离开了……毕竟它们也无法掌控冰血除草者的力量。", 
+        description: "A city of ice filled with hostility — the witches have left... even they couldn't control the Ice-Blood Weeders' power.",
         enemy_count: 20, 
         enemies_list: ["冰血除草者","夹击卫戍","敌意傀儡","雪茸茸战士","大教内门弟子","敌意美杜莎"],
         enemy_group_size: [3,3],
@@ -3705,7 +3705,7 @@ function get_location_type_penalty(type, stage, stat) {
             locations: [{location: "极寒冰宫 - 4"}],
         },
     });locations["极寒冰宫 - 4"] = new Combat_zone({
-        description: "充斥着敌意的冰块城市，这里是一片较核心的区域……奇怪的粉发少女似乎在附近！要不要跟上呢？", 
+        description: "A city of ice filled with hostility — a more central zone... a strange pink-haired girl seems to be nearby! Should you follow her?",
         enemy_count: 20, 
         enemies_list: ["冰兽龙龙","敌意巫师","出芽青茸战士","自爆步兵","敌意老人"],
         enemy_group_size: [3,3],
@@ -3723,48 +3723,48 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["极寒冰宫 - X"] = new Challenge_zone({
-        description: "在光环的庇护之下，我等将誓死冲锋！谔谔啊啊啊啊啊啊！", 
-        enemy_count: 1, 
+        description: "Under the protection of the aura, we shall charge to the death! Graaaaaaaaah!",
+        enemy_count: 1,
         enemies_list : [["敌意老人[BOSS]"]],
         enemy_group_size: [4,4],
         types: [],
-        is_unlocked: false, 
+        is_unlocked: false,
         is_challenge: true,
         enemy_stat_halo:0.50,
-        name: "极寒冰宫 - X",
+        name: "Extreme Cold Ice Palace - X",
         bgm:17,
         parent_location: locations["极寒冰宫"],
         repeatable_reward: {
             textlines: [{dialogue: "溪月", lines: ["xy1"]}],
         },
-        unlock_text : "[敌意老人]狂妄自大的外来者，杀我族人，罪该当诛！"
+        unlock_text : "[Hostile Elder] Arrogant outsiders — slaying my kin is a sin punishable by death!"
     });
     locations["极寒冰宫"].connected_locations.push({location: locations["极寒冰宫 - 1"]});
     locations["极寒冰宫"].connected_locations.push({location: locations["极寒冰宫 - 2"]});
     locations["极寒冰宫"].connected_locations.push({location: locations["极寒冰宫 - 3"]});
     locations["极寒冰宫"].connected_locations.push({location: locations["极寒冰宫 - 4"]});
     locations["极寒冰宫"].connected_locations.push({location: locations["极寒冰宫 - X"]});
-    locations["时封水牢"] = new Location({ 
-        connected_locations: [{location: locations["极寒冰宫"], custom_text: "回到极寒冰宫"}], 
-        description: "充盈着水元素的奇怪领域。被奇怪的粉色头发女孩子打晕之后就进来了！",
-        name: "时封水牢", 
+    locations["时封水牢"] = new Location({
+        connected_locations: [{location: locations["极寒冰宫"], custom_text: "Return to Extreme Cold Ice Palace"}],
+        description: "A strange realm brimming with water elements. You ended up here after being knocked out by a strange pink-haired girl!",
+        name: "Time-Sealed Water Prison",
         dialogues: ["竺虎","莫尔"],
         is_unlocked: false,
         bgm: 18,
-        unlock_text : "[老人]你们……完了……主人会……替我们……报仇……",
+        unlock_text : "[Elder] You... are... finished... our master... will... avenge us...",
     });//3-5
     
     locations["极寒冰宫"].connected_locations.push({location: locations["时封水牢"]});
 
     locations["时封水牢 - I"] = new Challenge_zone({
-        description: "这一区的小boss着实很多。将会从I~IV区分！", 
-        enemy_count: 1, 
+        description: "There are quite a few mini-bosses in this area — split into zones I through IV!",
+        enemy_count: 1,
         enemies_list : [["竺虎[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
-        is_unlocked: false, 
+        is_unlocked: false,
         is_challenge: true,
-        name: "时封水牢 - I",
+        name: "Time-Sealed Water Prison - I",
         bgm:18,
         parent_location: locations["时封水牢"],
         repeatable_reward: {
@@ -3772,14 +3772,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["时封水牢 - II"] = new Challenge_zone({
-        description: "莫尔的脾气很好，人也很好……不会有杀害按钮了啦。", 
-        enemy_count: 1, 
+        description: "Mor has a very good temper, and is a good person too... there won't be a kill button.",
+        enemy_count: 1,
         enemies_list : [["莫尔[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
-        is_unlocked: false, 
+        is_unlocked: false,
         is_challenge: true,
-        name: "时封水牢 - II",
+        name: "Time-Sealed Water Prison - II",
         bgm:18,
         parent_location: locations["时封水牢"],
         repeatable_reward: {
@@ -3789,12 +3789,12 @@ function get_location_type_penalty(type, stage, stat) {
 
     
     locations["时封水牢 - 1"] = new Combat_zone({
-        description: "囚禁着大量天空级强者的水牢。也孕育着许多用于积攒经验的【灵】。", 
-        enemy_count: 20, 
+        description: "A water prison holding many Sky Rank powerhouses — and home to many [Spirits] useful for accumulating experience.",
+        enemy_count: 20,
         enemies_list: ["大门派先锋","水牢雪怪","水牢花妖","成熟期蛟龙","出芽蓝茸战士"],
         enemy_group_size: [4,4],
-        is_unlocked: false, 
-        name: "时封水牢 - 1",
+        is_unlocked: false,
+        name: "Time-Sealed Water Prison - 1",
         rank:241, 
         bgm:18,
         parent_location: locations["时封水牢"],
@@ -3807,12 +3807,12 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["时封水牢 - 2"] = new Combat_zone({
-        description: "囚禁着大量天空级强者的水牢。也孕育着许多用于积攒经验的【灵】。", 
-        enemy_count: 20, 
+        description: "A water prison holding many Sky Rank powerhouses — and home to many [Spirits] useful for accumulating experience.",
+        enemy_count: 20,
         enemies_list: ["出芽蓝茸战士","燕岗迷途强者","水牢嗜血哥布林","识灵水藻","徘徊的紫乌"],
         enemy_group_size: [4,4],
-        is_unlocked: false, 
-        name: "时封水牢 - 2",
+        is_unlocked: false,
+        name: "Time-Sealed Water Prison - 2",
         rank:242, 
         bgm:18,
         parent_location: locations["时封水牢"],
@@ -3825,12 +3825,12 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["时封水牢 - 3"] = new Combat_zone({
-        description: "囚禁着大量天空级强者的水牢。也孕育着许多用于积攒经验的【灵】。", 
-        enemy_count: 20, 
+        description: "A water prison holding many Sky Rank powerhouses — and home to many [Spirits] useful for accumulating experience.",
+        enemy_count: 20,
         enemies_list: ["徘徊的紫乌","夜巡傀儡","水猫茸茸","徘徊的骸骨","水牢骨角茸茸"],
         enemy_group_size: [4,4],
-        is_unlocked: false, 
-        name: "时封水牢 - 3",
+        is_unlocked: false,
+        name: "Time-Sealed Water Prison - 3",
         enemy_stat_halo: 0.06,
         rank:243, 
         bgm:18,
@@ -3851,20 +3851,20 @@ function get_location_type_penalty(type, stage, stat) {
     locations["时封水牢"].connected_locations.push({location: locations["时封水牢 - 3"]});
 
     
-    locations["水牢洞府"] = new Location({
-        connected_locations: [{location: locations["时封水牢"], custom_text: "回到水牢中战斗"}],
-        description: "强榜强者在听闻纳可姐妹的战绩后，“主动”腾出的一间洞府。",
-        name: "水牢洞府",
+    locations[“水牢洞府”] = new Location({
+        connected_locations: [{location: locations[“时封水牢”], custom_text: “Return to the Water Prison to fight”}],
+        description: “A cave dwelling \”voluntarily\” vacated by a Power Rankings expert after hearing of the Nako sisters' combat record.”,
+        name: “Water Prison Cave Dwelling”,
         is_unlocked: false,
         bgm: 18,
-        traders: ["物品存储箱"],
+        traders: [“物品存储箱”],
         sleeping: {
-            text: "在水牢洞府修炼[+0.36亿XP/s]",
+            text: “Cultivate in the Water Prison Cave Dwelling [+0.36M XP/s]”,
             xp: 6000
         },
             crafting: {
-                is_unlocked: true, 
-                use_text: "使用熔炼阵法[Tier+14]", 
+                is_unlocked: true,
+                use_text: “Use Smelting Formation [Tier+14]”,
                 tiers: {
                     crafting: 14,
                     forging: 14,
@@ -3880,10 +3880,10 @@ function get_location_type_penalty(type, stage, stat) {
 
     
     
-    locations["水牢深处"] = new Location({ 
-        connected_locations: [{location: locations["时封水牢"], custom_text: "回到时封水牢"}], 
-        description: "充盈着水元素的奇怪领域。从此出发去挑战强榜强者！",
-        name: "水牢深处", 
+    locations["水牢深处"] = new Location({
+        connected_locations: [{location: locations["时封水牢"], custom_text: "Return to Time-Sealed Water Prison"}],
+        description: "A realm brimming with water elements. Set out from here to challenge Power Rankings experts!",
+        name: "Water Prison Depths",
         dialogues: ["秋兴","蓝柒"],
         is_unlocked: false,
         bgm: 18,
@@ -3891,7 +3891,7 @@ function get_location_type_penalty(type, stage, stat) {
     locations["时封水牢"].connected_locations.push({location: locations["水牢深处"]});
 
     locations["时封水牢 - 4"] = new Combat_zone({
-        description: "囚禁着大量天空级强者的水牢。从此出发可以前往强榜强者的住处。", 
+        description: "A water prison holding many Sky Rank powerhouses. Set out from here to reach the residences of Power Rankings experts.",
         enemy_count: 20, 
         enemies_list: ["水牢石灵","仙旅城强战士","城主府骨干","火箭卫戍","小门派长老"],
         enemy_group_size: [4,4],
@@ -3909,7 +3909,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["时封水牢 - 5"] = new Combat_zone({
-        description: "囚禁着大量天空级强者的水牢。从此出发可以前往强榜强者的住处。", 
+        description: "A water prison holding many Sky Rank powerhouses. Set out from here to reach the residences of Power Rankings experts.",
         enemy_count: 20, 
         enemies_list: ["小门派长老","水牢幽暗人形","出芽紫茸战士","星月幻术师","绿皮怪物"],
         enemy_group_size: [4,4],
@@ -3929,7 +3929,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["时封水牢 - 6"] = new Combat_zone({
-        description: "囚禁着大量天空级强者的水牢。距离出水的岸边已经越来越近了。", 
+        description: "A water prison holding many Sky Rank powerhouses. The shore where the water ends is drawing ever closer.",
         enemy_count: 20, 
         enemies_list: ["星月幻术师","魔化枭蝎","古龙幼崽","血杀殿余孽","城主府骨干"],
         enemy_group_size: [4,4],
@@ -3949,7 +3949,7 @@ function get_location_type_penalty(type, stage, stat) {
     });
     
     locations["时封水牢 - III"] = new Challenge_zone({
-        description: "击败她以解锁时封水牢 - 5！", 
+        description: "Defeat her to unlock Time-Sealed Water Prison - 5!",
         enemy_count: 1, 
         enemies_list : [["秋兴[BOSS]"]],
         enemy_group_size: [1,1],
@@ -3965,7 +3965,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["时封水牢 - IV"] = new Challenge_zone({
-        description: "击败她以……拿到三颗传奇红宝石？", 
+        description: "Defeat her to... get three legendary rubies?",
         enemy_count: 1, 
         enemies_list : [["蓝柒[放水 ver.][BOSS]"]],
         enemy_group_size: [1,1],
@@ -3980,7 +3980,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["时封水牢 - X"] = new Challenge_zone({
-        description: "击败她以离开水牢！", 
+        description: "Defeat her to escape the Water Prison!",
         enemy_count: 1, 
         enemies_list : [["蓝柒[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4005,22 +4005,22 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     
-    locations["水牢走廊"] = new Location({ 
-        connected_locations: [{location: locations["时封水牢"], custom_text: "回到时封水牢"}], 
-        description: "已经离开了时封水牢的范围……等会！那个粉色头发的女孩子！",
-        name: "水牢走廊", 
+    locations["水牢走廊"] = new Location({
+        connected_locations: [{location: locations["时封水牢"], custom_text: "Return to Time-Sealed Water Prison"}],
+        description: "You've left the bounds of the Time-Sealed Water Prison... Wait! That pink-haired girl!",
+        name: "Water Prison Corridor",
         dialogues: ["溪月 II"],
         is_unlocked: false,
         bgm: 19,
     });//3-5III
     locations["水牢深处"].connected_locations.push({location: locations["水牢走廊"]});  
 
-    locations["传承幻境"] = new Location({ 
-        connected_locations: [{location: locations["时封水牢"], custom_text: "回到时封水牢"}], 
-        description: "散发着五彩光华的空间，周围有许多实力相近(?)的荒兽。苏醒了，猎杀时刻！",
+    locations["传承幻境"] = new Location({
+        connected_locations: [{location: locations["时封水牢"], custom_text: "Return to Time-Sealed Water Prison"}],
+        description: "A space radiating five-colored radiance, surrounded by many wild beasts of similar strength(?). Awakened — time to hunt!",
         dialogues: ["传承水晶"],
         traders: ["窥秘商人"],
-        name: "传承幻境", 
+        name: "Heritage Illusory Realm",
         is_unlocked: false,
         bgm: 19,
     });//3-6
@@ -4028,7 +4028,7 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["传承幻境 - 1"] = new Combat_zone({
-        description: "散发着五彩光华的空间。无论左阿到底想要什么，至少这里真的有很多突破机缘。", 
+        description: "A space radiating five-colored radiance. Whatever Zuo'a ultimately wants, at least there are genuinely many breakthrough opportunities here.",
         enemy_count: 20, 
         enemies_list: ["奇异菇菇","幻境掌灯人","蓝皮怪物","幻境通识者","幻境翠绿行者"],
         enemy_group_size: [2.5,3.5],
@@ -4046,7 +4046,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["传承幻境 - 2"] = new Combat_zone({
-        description: "散发着五彩光华的空间。无论左阿到底想要什么，至少这里真的有很多突破机缘。", 
+        description: "A space radiating five-colored radiance. Whatever Zuo'a ultimately wants, at least there are genuinely many breakthrough opportunities here.",
         enemy_count: 20, 
         enemies_list: ["幻境翠绿行者","幻境飞蛾","风尘的窃贼","深邃级魔法师","荒野守尸人"],
         enemy_group_size: [3,3],
@@ -4064,7 +4064,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["传承幻境 - 3"] = new Combat_zone({
-        description: "散发着五彩光华的空间。无论左阿到底想要什么，至少这里真的有很多突破机缘。", 
+        description: "A space radiating five-colored radiance. Whatever Zuo'a ultimately wants, at least there are genuinely many breakthrough opportunities here.",
         enemy_count: 20, 
         enemies_list: ["火烈茸茸","幻境火蝶","出芽粉茸战士","凶恶的金乌","幻境血魔"],
         enemy_group_size: [3.5,4.5],
@@ -4083,7 +4083,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["传承幻境 - 4"] = new Combat_zone({
-        description: "散发着五彩光华的空间。无论左阿到底想要什么，至少这里真的有很多突破机缘。", 
+        description: "A space radiating five-colored radiance. Whatever Zuo'a ultimately wants, at least there are genuinely many breakthrough opportunities here.",
         enemy_count: 20, 
         enemies_list: ["幻境血魔","窥秘商人","燕岗领独行侠","幻境石灵","磐石蜘蛛"],
         enemy_group_size: [4,4],
@@ -4107,7 +4107,7 @@ function get_location_type_penalty(type, stage, stat) {
     locations["传承幻境"].connected_locations.push({location: locations["传承幻境 - 4"]});    
 
     locations["传承幻境 - 水晶空间"] = new Challenge_zone({
-        description: "击败成精的怪物手册来获取五色水晶——当然还有映星紫华。", 
+        description: "Defeat the sentient Monster Manual to obtain Five-Colored Crystals — and of course, Stargazing Purple Jade.",
         enemy_count: 1, 
         enemies_list : [["怪物手册[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4125,7 +4125,7 @@ function get_location_type_penalty(type, stage, stat) {
     
     
     locations["传承幻境 - ?"] = new Challenge_zone({
-        description: "测试一下伤害是否正常！(才不是因为纱雪的存档还在3-5没办法测，才放这个地图在这里的。)", 
+        description: "Test to see if damage is working correctly! (It's totally not because Shaxue's save file is still at 3-5 and I can't test there. That's definitely not why this map is here.)",
         enemy_count: 1, 
         enemies_list : [["心魔木偶[SP]"]],
         enemy_group_size: [1,1],
@@ -4140,7 +4140,7 @@ function get_location_type_penalty(type, stage, stat) {
     });
     locations["传承幻境"].connected_locations.push({location: locations["传承幻境 - ?"]});   
     locations["传承幻境 - X"] = new Challenge_zone({
-        description: "如果打不过的话，回去吃两本牵制书！说不定还有其他的邪道呢？", 
+        description: "If you can't beat it, go consume two Restraint Books! Maybe there are other tricks up your sleeve?",
         enemy_count: 1, 
         enemies_list : [["心魔[BOSS]"]],
         enemy_group_size: [4,4],
@@ -4157,10 +4157,10 @@ function get_location_type_penalty(type, stage, stat) {
     locations["传承幻境"].connected_locations.push({location: locations["传承幻境 - X"]});   
 
 
-    locations["幻境核心·地宫"] = new Location({ 
-        connected_locations: [{location: locations["传承幻境"], custom_text: "回到传承幻境"}], 
-        description: "幻境之行，应该就到此为止……等等，骗人的吧，这，这里是——地宫？有姐姐的声音！",
-        name: "幻境核心·地宫", 
+    locations["幻境核心·地宫"] = new Location({
+        connected_locations: [{location: locations["传承幻境"], custom_text: "Return to Heritage Illusory Realm"}],
+        description: "The illusory journey should end here... Wait, you've got to be kidding — this place is an underground palace? There's the sound of my sister's voice!",
+        name: "Illusory Realm Core · Underground Palace",
         dialogues: ["纳娜米?"],
         is_unlocked: false,
         bgm: 20,
@@ -4168,7 +4168,7 @@ function get_location_type_penalty(type, stage, stat) {
     locations["传承幻境"].connected_locations.push({location: locations["幻境核心·地宫"]});   
 
     locations["幻境核心 - 1"] = new Combat_zone({
-        description: "隐约听到姐姐的声音？！姐姐不会——就在那里——", 
+        description: "Can faintly hear my sister's voice?! My sister can't be — right there —",
         enemy_count: 30, 
         enemies_list: ["心魔","燕岗辉煌佣兵","地宫虫将","地宫不眠者","地下焚天火","燕岗城卫队长"],
         enemy_group_size: [4,4],
@@ -4186,7 +4186,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["幻境核心 - I"] = new Challenge_zone({
-        description: "大胆茸茸！我一眼就看出你不是姐姐！姐姐虽然会灵体，但哪有你这么强哇。", 
+        description: "Insolent Ronglong! I could tell at a glance you're not my sister! My sister can use spirit forms, but she's nowhere near as strong as you.",
         enemy_count: 1, 
         enemies_list : [["喵咕啦[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4205,10 +4205,10 @@ function get_location_type_penalty(type, stage, stat) {
 
 
 
-    locations["幻境核心·结界湖"] = new Location({ 
-        connected_locations: [{location: locations["幻境核心·地宫"], custom_text: "回到一重幻境"}], 
-        description: "所以这一次是——家族秘境，结界湖吗，不知道这里有没有冰柱鱼。这里也算是……对我影响很深的地方呢。",
-        name: "幻境核心·结界湖", 
+    locations["幻境核心·结界湖"] = new Location({
+        connected_locations: [{location: locations["幻境核心·地宫"], custom_text: "Return to the First Illusory Layer"}],
+        description: "So this time it's — the family's secret realm, Barrier Lake? Wonder if there are any Icestalagmite Fish here. This place is also... somewhere that has had a deep influence on me.",
+        name: "Illusory Realm Core · Barrier Lake",
         dialogues: ["纳鹰?"],
         is_unlocked: false,
         bgm: 20,
@@ -4217,7 +4217,7 @@ function get_location_type_penalty(type, stage, stat) {
     locations["幻境核心·地宫"].connected_locations.push({location: locations["幻境核心·结界湖"]});  
 
     locations["幻境核心 - 2"] = new Combat_zone({
-        description: "就是在这里，纳鹰前辈传授了我很多修炼心得，令我一步步成长到现在。", 
+        description: "It was here that Senior Naying imparted many cultivation insights to me, guiding me step by step to grow into who I am now.",
         enemy_count: 30, 
         enemies_list: ["心魔","残雪灵阵","秘境荧光帕芙","秘境闪耀精灵","喵咕啦","晓雪魅蝠","威武星骑士"],
         enemy_group_size: [4,4],
@@ -4239,10 +4239,10 @@ function get_location_type_penalty(type, stage, stat) {
 
 
 
-    locations["幻境核心·战场"] = new Location({ 
-        connected_locations: [{location: locations["幻境核心·结界湖"], custom_text: "回到二重幻境"}], 
-        description: "幻境，已经被打破了两重。那一场生灵涂炭的劫难……身临其境，不自觉就会变得暴戾起来。",
-        name: "幻境核心·战场", 
+    locations["幻境核心·战场"] = new Location({
+        connected_locations: [{location: locations["幻境核心·结界湖"], custom_text: "Return to the Second Illusory Layer"}],
+        description: "Two illusory layers have now been shattered. That catastrophe that devastated all life... being immersed in it, you can't help but feel rage welling up.",
+        name: "Illusory Realm Core · Battlefield",
         dialogues: ["烈日神像"],
         is_unlocked: false,
         bgm: 20,
@@ -4251,7 +4251,7 @@ function get_location_type_penalty(type, stage, stat) {
     locations["幻境核心·结界湖"].connected_locations.push({location: locations["幻境核心·战场"]});  
 
     locations["幻境核心 - 3"] = new Combat_zone({
-        description: "要坚信，这一切的劫难……都是假象……假象！", 
+        description: "You must believe — all these disasters are... illusions... illusions!",
         enemy_count: 30, 
         enemies_list: ["心魔","威武星骑士","兰陵城头目","圣荒城头目","战场不朽骸骨","血腥追风者"],
         enemy_group_size: [4,4],
@@ -4270,7 +4270,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["幻境核心 - II"] = new Challenge_zone({
-        description: "说起来，彭罗斯三角什么的在攻防中会有怎样的妙用呢？感觉是一个不错的巧思主题。", 
+        description: "Come to think of it, what clever use would a Penrose triangle have in offense and defense? Feels like a nice theme for creative tactics.",
         enemy_count: 1, 
         enemies_list : [["不可能三角B9[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4287,10 +4287,10 @@ function get_location_type_penalty(type, stage, stat) {
     locations["幻境核心·战场"].connected_locations.push({location: locations["幻境核心 - 3"]});  
     locations["幻境核心·战场"].connected_locations.push({location: locations["幻境核心 - II"]});  
 
-    locations["幻境核心·飞船"] = new Location({ 
-        connected_locations: [{location: locations["幻境核心·战场"], custom_text: "回到三重幻境"}], 
-        description: "那么，第四重幻境……天外来客的飞船核心？说起来，附近的区域，似乎有一种莫名的怨念在聚集。",
-        name: "幻境核心·飞船", 
+    locations["幻境核心·飞船"] = new Location({
+        connected_locations: [{location: locations["幻境核心·战场"], custom_text: "Return to the Third Illusory Layer"}],
+        description: "So, the fourth illusory layer... the core of the alien visitors' spacecraft? Come to think of it, the surrounding area seems to have a strange, inexplicable resentment gathering.",
+        name: "Illusory Realm Core · Spacecraft",
         dialogues: ["末世天骄","十连扭蛋机"],
         is_unlocked: false,
         bgm: 20,
@@ -4300,7 +4300,7 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["幻境核心 - 4"] = new Combat_zone({
-        description: "这种怨念……这是之前三重幻境，都没有感应到过的。这一次，又是什么呢？", 
+        description: "This resentment... is something I never sensed in the previous three illusory layers. What could it be this time?",
         enemy_count: 30, 
         enemies_list: ["心魔","黄桃重工B9","不可能三角B9","极寒之锋B9","金色血眼B9","恐怖机人B9"],
         enemy_group_size: [4,4],
@@ -4318,14 +4318,14 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["幻境核心 - 歧路"] = new Challenge_zone({
-        description: "看来讲话是讲不通了！Plan B~物·理·超·度！", 
-        enemy_count: 1, 
+        description: "Looks like talking it out won't work! Plan B — physical transcendence!",
+        enemy_count: 1,
         enemies_list : [["末世天骄[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
-        is_unlocked: false, 
+        is_unlocked: false,
         is_challenge: true,
-        name: "幻境核心 - 歧路",
+        name: "Illusory Realm Core - Crossroads",
         bgm:20,
         parent_location: locations["幻境核心·飞船"],
         repeatable_reward: {
@@ -4333,7 +4333,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["幻境核心 - III"] = new Challenge_zone({
-        description: "真的非常狠！蛮咕兽，狠咕兽，特咕兽——征集下一个名字！暴咕兽怎么样？", 
+        description: "Truly ferocious! Brute-ling, Savage-ling, Special-ling — taking suggestions for the next name! How about Berserk-ling?",
         enemy_count: 1, 
         enemies_list : [["狠咕兽[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4352,10 +4352,10 @@ function get_location_type_penalty(type, stage, stat) {
     locations["幻境核心·飞船"].connected_locations.push({location: locations["幻境核心 - 歧路"]});  
 
 
-    locations["幻境核心·森林"] = new Location({ 
-        connected_locations: [{location: locations["幻境核心·飞船"], custom_text: "回到四重幻境"}], 
-        description: "好浓的雾气……不过辨认眼前的事物还是没问题的。这是，遇到峰大哥的那片森林吧。",
-        name: "幻境核心·森林", 
+    locations["幻境核心·森林"] = new Location({
+        connected_locations: [{location: locations["幻境核心·飞船"], custom_text: "Return to the Fourth Illusory Layer"}],
+        description: "Such thick fog... but I can still make out things in front of me. This is the forest where I met Big Brother Feng.",
+        name: "Illusory Realm Core · Forest",
         dialogues: ["心魔之主","草场"],
         is_unlocked: false,
         bgm: 20,
@@ -4366,7 +4366,7 @@ function get_location_type_penalty(type, stage, stat) {
 
 
     locations["幻境核心 - 5"] = new Combat_zone({
-        description: "说起来，如果不是百家联合许多势力设计，我也就不会遇到峰大哥，就不会有后来的这些事情。", 
+        description: "Come to think of it, if not for the Hundred Clans Alliance and many factions scheming together, I never would have met Big Brother Feng, and none of what followed would have happened.",
         enemy_count: 30, 
         enemies_list: ["心魔","冈崎喵妖","血洛大陆骨干","扭曲毒虫","狠咕兽","超量凶悍树妖"],
         enemy_group_size: [4,4],
@@ -4384,7 +4384,7 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["幻境核心 - IV"] = new Challenge_zone({
-        description: "这家伙的信心取决于被牵制毒害的有多深！说到底不就差了两倍吗……魔不行别怪到牵制头上哇。", 
+        description: "This guy's confidence depends on how badly the Restraint debuff has sapped him! At the end of the day it's just a 2x difference... if your demon form isn't cutting it, don't blame the Restraint.",
         enemy_count: 1, 
         enemies_list : [["心魔之主[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4402,20 +4402,20 @@ function get_location_type_penalty(type, stage, stat) {
     locations["幻境核心·森林"].connected_locations.push({location: locations["幻境核心 - IV"]});  
 
 
-    locations["幻境核心·现世"] = new Location({ 
-        connected_locations: [{location: locations["幻境核心·森林"], custom_text: "回到五重幻境"}], 
-        description: "挣脱开心魔的侵袭后，彩色光芒浮现。五层幻境全部破碎，此地即是幻境的真正核心。另外，左阿忙着抹除印记，这里的阵法可以偷用一下！",
-        dialogues: ["溪月(核心)"],
-        name: "幻境核心·现世", 
-        
-        traders: ["物品存储箱"],
+    locations[“幻境核心·现世”] = new Location({
+        connected_locations: [{location: locations[“幻境核心·森林”], custom_text: “Return to the Fifth Illusory Layer”}],
+        description: “After breaking free from the heart demons' assault, colorful light blooms. All five illusory layers are shattered — this is the true core of the Illusory Realm. Also, Zuo'a is busy erasing seal marks, so the formation arrays here can be borrowed!”,
+        dialogues: [“溪月(核心)”],
+        name: “Illusory Realm Core · Present World”,
+
+        traders: [“物品存储箱”],
         sleeping: {
-            text: "“借用”幻境阵法修炼[+25亿XP/s]",
+            text: “\”Borrow\” the Illusory Realm Formation to Cultivate [+2.5B XP/s]”,
             xp: 50000
         },
             crafting: {
-                is_unlocked: true, 
-                use_text: "“借用”熔炼阵法[Tier+16]", 
+                is_unlocked: true,
+                use_text: “\”Borrow\” the Smelting Formation [Tier+16]”,
                 tiers: {
                     crafting: 16,
                     forging: 16,
@@ -4431,7 +4431,7 @@ function get_location_type_penalty(type, stage, stat) {
     locations["幻境核心·森林"].connected_locations.push({location: locations["幻境核心·现世"]});  
     
     locations["幻境核心 - 6"] = new Combat_zone({
-        description: "请登上最后的决战之地，击败左阿！[将会在V2.69被添加]", 
+        description: "Head to the final battle site and defeat Zuo'a! [To be added in V2.69]",
         enemy_count: 30, 
         enemies_list: ["暗杀飞蛾","巨人强豪","古龙小兽","血洛流浪剑客","大门派精英"],
         enemy_group_size: [4,4],
@@ -4453,19 +4453,19 @@ function get_location_type_penalty(type, stage, stat) {
 
 
 
-    locations["幻境核心·决战"] = new Location({ 
+    locations["幻境核心·决战"] = new Location({
         connected_locations: [],//没有退路可言！
-        description: "这里就是第三幕的终极尽头！对了，你回不去了。复活也是就地复活哦。",
-        name: "幻境核心·决战", 
+        description: "This is the ultimate end of Act 3! By the way, you can't go back. Even resurrection happens right here.",
+        name: "Illusory Realm Core · Final Battle",
         dialogues: ["左阿(决战)","决战木牌"],
         is_unlocked: false,
         bgm: 20,
     });//3-7(最终)
-    locations["幻境核心·现世"].connected_locations.push({location: locations["幻境核心·决战"],custom_text:"进入决战[⚠️胜利前无法返回]"});  
+    locations["幻境核心·现世"].connected_locations.push({location: locations["幻境核心·决战"],custom_text:"Enter the Final Battle [⚠️ No return until victory]"});  
 
 
     locations["幻境核心 - B1"] = new Challenge_zone({
-        description: "心之灵·禁锢 自选敌人区域！", 
+        description: "Soul Spirit·Confinement — choose your enemies!",
         enemy_count: 1, 
         enemies_list : [["心之灵·禁锢[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4479,7 +4479,7 @@ function get_location_type_penalty(type, stage, stat) {
         repeatable_reward: {},
     });
     locations["幻境核心 - B2"] = new Challenge_zone({
-        description: "心之灵·滋生 自选敌人区域！", 
+        description: "Soul Spirit·Proliferation — choose your enemies!",
         enemy_count: 1, 
         enemies_list : [["心之灵·滋生[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4493,7 +4493,7 @@ function get_location_type_penalty(type, stage, stat) {
         repeatable_reward: {},
     });
     locations["幻境核心 - B3"] = new Challenge_zone({
-        description: "心之灵·暴走 自选敌人区域！", 
+        description: "Soul Spirit·Berserk — choose your enemies!",
         enemy_count: 1, 
         enemies_list : [["心之灵·暴走[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4507,7 +4507,7 @@ function get_location_type_penalty(type, stage, stat) {
         repeatable_reward: {},
     });
     locations["幻境核心 - X"] = new Challenge_zone({
-        description: "左阿的最终战斗！", 
+        description: "Zuo'a's final battle!",
         enemy_count: 1, 
         enemies_list : [["左阿(垂死)[BOSS]"]],
         enemy_stat_halo: 0.1,
@@ -4523,34 +4523,34 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     
-    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心 - B1"],custom_text:"挑战心之灵·禁锢"});
-    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心 - B2"],custom_text:"挑战心之灵·滋生"});
-    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心 - B3"],custom_text:"挑战心之灵·暴走"});
-    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心 - X"],custom_text:"挑战左阿！！！"});
+    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心 - B1"],custom_text:"Challenge Soul Spirit·Confinement"});
+    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心 - B2"],custom_text:"Challenge Soul Spirit·Proliferation"});
+    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心 - B3"],custom_text:"Challenge Soul Spirit·Berserk"});
+    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心 - X"],custom_text:"Challenge Zuo'a!!!"});
 
     
 
-    locations["幻境核心·出口"] = new Location({ 
-        connected_locations: [{location: locations["幻境核心·现世"], custom_text: "回到六重幻境"}], 
-        description: "左阿的战斗……结束了！",
-        name: "幻境核心·出口", 
+    locations["幻境核心·出口"] = new Location({
+        connected_locations: [{location: locations["幻境核心·现世"], custom_text: "Return to the Sixth Illusory Layer"}],
+        description: "Zuo'a's battle... is over!",
+        name: "Illusory Realm Core · Exit",
         dialogues: ["冰溪月"],//出口剧情！
         is_unlocked: false,
         bgm: 20,
     });//3-7(5区)
     locations["幻境核心·现世"].connected_locations.push({location: locations["幻境核心·出口"]});
-    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心·出口"],custom_text:"离开决战之地"});
+    locations["幻境核心·决战"].connected_locations.push({location: locations["幻境核心·出口"],custom_text:"Leave the Battle Site"});
 
-    locations["纳家宝库"] = new Location({ 
-        connected_locations: [{location: locations["幻境核心·出口"], custom_text: "回到幻境核心"},{location: locations["赫尔沼泽入口"], custom_text: "快速旅行 - 第三幕"}], 
-        description: "终于回到家族了！是时候夺走这家主大位……[V2.70前版本终点]",
-        name: "纳家宝库", 
+    locations["纳家宝库"] = new Location({
+        connected_locations: [{location: locations["幻境核心·出口"], custom_text: "Return to Illusory Realm Core"},{location: locations["赫尔沼泽入口"], custom_text: "Fast Travel - Act 3"}],
+        description: "Finally back to the family! Time to seize the clan head seat... [Pre-V2.70 endpoint]",
+        name: "Na Family Treasury",
         dialogues: ["纳布(宝库)"],//老登剧情！
         is_unlocked: false,
         bgm: 21,
     });//4-1(初始区)
     locations["纳家宝库 - X"] = new Challenge_zone({
-        description: "老爹突破了。想要拿走奇宝可没有原作那么简单了！", 
+        description: "Dad made a breakthrough. Taking the treasures won't be as easy as it was in the original story!",
         enemy_count: 1, 
         enemies_list : [["纳布[BOSS]"]],
         enemy_group_size: [1,1],
@@ -4566,11 +4566,11 @@ function get_location_type_penalty(type, stage, stat) {
     });
     locations["幻境核心·出口"].connected_locations.push({location: locations["纳家宝库"]});
     locations["纳家宝库"].connected_locations.push({location: locations["纳家宝库 - X"]});
-    locations["赫尔沼泽入口"].connected_locations.push({location: locations["纳家宝库"],custom_text:"快速旅行 - 第四幕"});
-    locations["狩猎大赛·城门战"] = new Location({ 
-        connected_locations: [{location: locations["纳家宝库"], custom_text: "回到纳家宝库"}], 
-        description: "激动人心的燕岗领狩猎大赛。这里是第一阶段！[V2.74前版本终点]",
-        name: "狩猎大赛·城门战", 
+    locations["赫尔沼泽入口"].connected_locations.push({location: locations["纳家宝库"],custom_text:"Fast Travel - Act 4"});
+    locations["狩猎大赛·城门战"] = new Location({
+        connected_locations: [{location: locations["纳家宝库"], custom_text: "Return to Na Family Treasury"}],
+        description: "The thrilling Yangang Hunting Competition. This is Phase 1! [Pre-V2.74 endpoint]",
+        name: "Hunting Competition · City Gate Battle",
         dialogues: [],
         is_unlocked: false,
         bgm: 21,
