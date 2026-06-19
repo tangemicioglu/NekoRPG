@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 import { enemy_templates, Enemy } from "./enemies.js";
 import { dialogues as dialoguesList} from "./dialogues.js";
@@ -3851,20 +3851,20 @@ function get_location_type_penalty(type, stage, stat) {
     locations["时封水牢"].connected_locations.push({location: locations["时封水牢 - 3"]});
 
     
-    locations[“水牢洞府”] = new Location({
-        connected_locations: [{location: locations[“时封水牢”], custom_text: “Return to the Water Prison to fight”}],
-        description: “A cave dwelling \”voluntarily\” vacated by a Power Rankings expert after hearing of the Nako sisters' combat record.”,
-        name: “Water Prison Cave Dwelling”,
+    locations["水牢洞府"] = new Location({
+        connected_locations: [{location: locations["时封水牢"], custom_text: "Return to the Water Prison to fight"}],
+        description: "A cave dwelling \"voluntarily\" vacated by a Power Rankings expert after hearing of the Nako sisters' combat record.",
+        name: "Water Prison Cave Dwelling",
         is_unlocked: false,
         bgm: 18,
-        traders: [“物品存储箱”],
+        traders: ["物品存储箱"],
         sleeping: {
-            text: “Cultivate in the Water Prison Cave Dwelling [+0.36M XP/s]”,
+            text: "Cultivate in the Water Prison Cave Dwelling [+0.36M XP/s]",
             xp: 6000
         },
             crafting: {
                 is_unlocked: true,
-                use_text: “Use Smelting Formation [Tier+14]”,
+                use_text: "Use Smelting Formation [Tier+14]",
                 tiers: {
                     crafting: 14,
                     forging: 14,
@@ -4402,20 +4402,20 @@ function get_location_type_penalty(type, stage, stat) {
     locations["幻境核心·森林"].connected_locations.push({location: locations["幻境核心 - IV"]});  
 
 
-    locations[“幻境核心·现世”] = new Location({
-        connected_locations: [{location: locations[“幻境核心·森林”], custom_text: “Return to the Fifth Illusory Layer”}],
-        description: “After breaking free from the heart demons' assault, colorful light blooms. All five illusory layers are shattered — this is the true core of the Illusory Realm. Also, Zuo'a is busy erasing seal marks, so the formation arrays here can be borrowed!”,
-        dialogues: [“溪月(核心)”],
-        name: “Illusory Realm Core · Present World”,
+    locations["幻境核心·现世"] = new Location({
+        connected_locations: [{location: locations["幻境核心·森林"], custom_text: "Return to the Fifth Illusory Layer"}],
+        description: "After breaking free from the heart demons' assault, colorful light blooms. All five illusory layers are shattered — this is the true core of the Illusory Realm. Also, Zuo'a is busy erasing seal marks, so the formation arrays here can be borrowed!",
+        dialogues: ["溪月(核心)"],
+        name: "Illusory Realm Core · Present World",
 
-        traders: [“物品存储箱”],
+        traders: ["物品存储箱"],
         sleeping: {
-            text: “\”Borrow\” the Illusory Realm Formation to Cultivate [+2.5B XP/s]”,
+            text: "\"Borrow\" the Illusory Realm Formation to Cultivate [+2.5B XP/s]",
             xp: 50000
         },
             crafting: {
                 is_unlocked: true,
-                use_text: “\”Borrow\” the Smelting Formation [Tier+16]”,
+                use_text: "\"Borrow\" the Smelting Formation [Tier+16]",
                 tiers: {
                     crafting: 16,
                     forging: 16,
