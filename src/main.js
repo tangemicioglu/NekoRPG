@@ -5346,7 +5346,7 @@ const engine_env2 = document.getElementById("engine_env2");
 
 
 function update_displayed_engine(){
-    engine_result_name.innerText = (inf_combat.FE.SF.num * 999.999 - inf_combat.FE.SF.ice < 0)?"万载冰髓锭":"冰原超流体";
+    engine_result_name.innerText = (inf_combat.FE.SF.num * 999.999 - inf_combat.FE.SF.ice < 0)?"Eternal Ice Marrow Ingot":"Arctic Superfluid";
     engine_result_fruit_status.innerText = (inf_combat.FE.fruit == -1)?"Not Inserted":`Awakened ${(inf_combat.FE.fruit / 1e4).toFixed(4)}%`
     engine_result_temp.innerText = (inf_combat.FE.outer_temp.toFixed(0)) + 'K / '+ ((inf_combat.FE.outer_temp/240)**2*12).toFixed(2) + 'MPa';
     engine_env1.style.display = (character.equipment.realm?.id == "焰海霜天[领域二重]" || character.equipment.realm?.id == "焰海霜天[领域三重]")?"inline-block":"none";

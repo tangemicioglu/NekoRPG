@@ -1605,7 +1605,7 @@ function update_displayed_normal_location(location) {
     
     if(inf_combat.S3?.live){
         document.getElementById("S3_current_div").display = 'inherit';
-        document.getElementById("S3_current_div").innerHTML = "<img src='image/item/violet_ingot.png'><b><span style='color:plum'>灵魂之力 : " + inf_combat.S3.sp + "</span><br>剩余敌人: </b>";
+        document.getElementById("S3_current_div").innerHTML = "<img src='image/item/violet_ingot.png'><b><span style='color:plum'>Soul Power: " + inf_combat.S3.sp + "</span><br>Remaining enemies: </b>";
         document.getElementById("S3_current_div").innerHTML += `<img src='image/boss/B3706.png'><b><span style='color:lightblue'> x${inf_combat.S3.b1} </span></b><img src='image/boss/B3707.png'><b><span style='color:yellow'> x${inf_combat.S3.b2} </span></b><img src='image/boss/B3708.png'><b><span style='color:orange'> x${inf_combat.S3.b3} </span></b>`;
     }
     else document.getElementById("S3_current_div").innerHTML = '';
@@ -3865,7 +3865,7 @@ function add_bestiary_tooltip(enemy_name){
 
     
     const tooltip_value = document.createElement("div"); //base enemy stats
-    tooltip_value.innerHTML = "<br>预期收益: " + format_money(perdicted_value);
+    tooltip_value.innerHTML = "<br>Expected income: " + format_money(perdicted_value);
     
     bestiary_tooltip.appendChild(tooltip_desc);
     bestiary_tooltip.appendChild(stat_realm);
@@ -3937,6 +3937,13 @@ function resolve_enemy_template_key(enemy_name) {
     return Object.keys(enemy_templates).find(k => enemy_templates[k] === template);
 }
 
+function resolve_location_key(level_name) {
+    if(locations[level_name]) return level_name;
+    const loc = Object.values(locations).find(l => l.name === level_name);
+    if(!loc) return level_name;
+    return Object.keys(locations).find(k => locations[k] === loc);
+}
+
 function add_bestiary_zones(enemy_name)
 {
     const key = resolve_enemy_template_key(enemy_name);
@@ -4006,7 +4013,9 @@ function create_new_levelary_entry(level_name) {
 
 
 function add_levelary_tooltip(level_name) {
-    const level = locations[level_name];
+    const loc_key = resolve_location_key(level_name);
+    const level = locations[loc_key];
+    if(!level) return;
     const levelary_tooltip = document.createElement("div");
     levelary_tooltip.classList.add("bestiary_entry_tooltip");
     const tooltip_xp = document.createElement("div"); //base xp enemy gives
@@ -4066,7 +4075,7 @@ function add_levelary_tooltip(level_name) {
 
 
     const value_loots = document.createElement("div");
-    value_loots.innerHTML += `<br>预期收益/敌人：` + format_money(predict_value);
+    value_loots.innerHTML += `<br>Expected income/enemy: ` + format_money(predict_value);
 
     for(let j=0;j<level.enemies_list.length;j++)
     {
@@ -4089,11 +4098,14 @@ function add_levelary_tooltip(level_name) {
     levelary_tooltip.appendChild(tooltip_enemies);
     levelary_tooltip.appendChild(tooltip_loots);
     levelary_tooltip.appendChild(value_loots);
-    levelary_entry_divs[level_name].appendChild(levelary_tooltip);
+    const entry_div = levelary_entry_divs[level_name] ?? levelary_entry_divs[loc_key];
+    if(entry_div) entry_div.appendChild(levelary_tooltip);
 }
 
 function clear_levelary_tooltip(level_name) {
-    levelary_entry_divs[level_name].querySelectorAll('.bestiary_entry_tooltip').forEach(el => el.remove());
+    const loc_key = resolve_location_key(level_name);
+    const entry_div = levelary_entry_divs[level_name] ?? levelary_entry_divs[loc_key];
+    if(entry_div) entry_div.querySelectorAll('.bestiary_entry_tooltip').forEach(el => el.remove());
 }
 
 
