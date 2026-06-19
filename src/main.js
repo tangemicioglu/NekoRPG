@@ -1052,17 +1052,17 @@ function textline_special(t_key){
             let C_HP = character.stats.full.max_health;
             let C_realm = character.xp.current_level;
             if(C_realm >= 32){
-                displayed_text += `这个神像仅能给 ${character.name} 这样的强者清空效果...`;
-                displayed_text += `基于 ${format_number(C_HP)} 的生命力，<br>赐福一次的耗费为 ${format_money(Math.round(C_HP ** 1.4))}<br>`;
+                displayed_text += `This idol can only clear status effects for a powerhouse like ${character.name}...`;
+                displayed_text += `Based on ${format_number(C_HP)} max HP,<br>one blessing costs ${format_money(Math.round(C_HP ** 1.4))}<br>`;
             }
             else{
-                displayed_text += `基于 ${format_number(C_HP)} 的生命力，<br>赐福一次的耗费为 ${format_money(Math.round(C_HP ** 1.4))}<br>`;
+                displayed_text += `Based on ${format_number(C_HP)} max HP,<br>one blessing costs ${format_money(Math.round(C_HP ** 1.4))}<br>`;
                 let C_time = current_game_time.hour + current_game_time.minute / 60;
                 C_time = Math.floor(C_time / 22.5)
-                let MM1 = ["0-23点","23-45点","45-67点","67-90点","90-113点","113-135点","135-157点","157-180点"];
-                let MM2 = ["生命上限 x 1.8","生命恢复 1.5%","攻击伤害 x 1.2","攻击速度 x 1.15","牵制 [80% 效力]","魔攻 [20% 占比]","回风 [80% 倍率]","坚固 [8% 吸收线]"];
-                displayed_text += `<br>目前的时段为 ${MM1[C_time]}，<br>赐福内容为 ${MM2[C_time]}.(1800s)`
-                displayed_text += `<br>⚠️接受烈阳祝福会清空原有状态效果⚠️`;
+                let MM1 = ["0-23","23-45","45-67","67-90","90-113","113-135","135-157","157-180"];
+                let MM2 = ["Max HP x 1.8","HP Regen 1.5%","Attack Damage x 1.2","Attack Speed x 1.15","Restraint [80% Efficacy]","Magic Attack [20% Ratio]","Windback [80% Multiplier]","Fortify [8% Absorb Threshold]"];
+                displayed_text += `<br>Current time period: ${MM1[C_time]},<br>Blessing effect: ${MM2[C_time]} (1800s)`
+                displayed_text += `<br>⚠️Accepting the Blazing Sun Blessing will clear all existing status effects⚠️`;
                 /*
                 
 <br>·乾:血量*1.8,兑:回血+1.5%,离:攻击*1.2,震:攻速*1.15.
@@ -1112,20 +1112,20 @@ function textline_special(t_key){
                 let C_money = Math.round(character.stats.full.max_health ** 1.4);
                 if(character.money < C_money)
                 {
-                    displayed_text += `叮~余额不足！<br> ${format_money(character.money)} / ${format_money(C_money)}`;
+                    displayed_text += `Ding~ Insufficient funds!<br> ${format_money(character.money)} / ${format_money(C_money)}`;
                 }
                 else
                 {
-                    displayed_text += `钱包: ${format_money(character.money)} ->`;
+                    displayed_text += `Wallet: ${format_money(character.money)} ->`;
                     character.money -= C_money;
                     displayed_text += `${format_money(character.money)}.<br>`;
                     update_displayed_money();
-                    displayed_text += `原有的状态效果全部被烈日净化了！`;
-                    
+                    displayed_text += `All existing status effects have been purified by the Blazing Sun!`;
+
                     Object.keys(active_effects).forEach(key => {
                         delete active_effects[key];
                     });
-                    if(C_realm >= 32) displayed_text += `这个神像仅能给 ${character.name} 这样的强者清空效果...`;
+                    if(C_realm >= 32) displayed_text += `This idol can only clear status effects for a powerhouse like ${character.name}...`;
                     else{
                         let MM3 = ["乾","兑","离","震","巽","坎","艮","坤"];
                         let C_time = current_game_time.hour + current_game_time.minute / 60;
@@ -1150,20 +1150,20 @@ function textline_special(t_key){
             start_grass_minigame();
         }
         else if(t_key == "realm-II"){
-            displayed_text += '在看到这冰蓝色六芒星阵时，我印证了很多东西……<br>';
-            displayed_text += '曾经领悟的水元素秘法，<br>';
-            displayed_text += '与火元素领域，彻底融合在了一起。<br>';
-            displayed_text += '竟然……会有这么神异的现象产生。<br>';
-            displayed_text += '互斥的两种元素，本该是极难相容。<br>';
-            displayed_text += '可一旦达到完美的临界点，<br>';
-            displayed_text += '便能迈入【冰火两重天】的玄妙之境，<br>';
-            displayed_text += '迸发出不可思议的力量！<br>';
+            displayed_text += 'Upon seeing this ice-blue hexagram formation, so many things fell into place…<br>';
+            displayed_text += 'The water-element secret arts I once comprehended,<br>';
+            displayed_text += 'have fully merged with the fire-element domain.<br>';
+            displayed_text += 'Who would have thought… such a wondrous phenomenon could emerge.<br>';
+            displayed_text += 'Two mutually opposing elements that should be nearly impossible to reconcile.<br>';
+            displayed_text += 'Yet once the perfect threshold is reached,<br>';
+            displayed_text += 'one can step into the profound realm of [Icefire Duality],<br>';
+            displayed_text += 'and unleash unimaginable power!<br>';
             if(skills["Neko_Realm"].current_level <= 29){
-                    displayed_text += `，【火灵幻海】获取了51.2垓经验！<br>`;
+                    displayed_text += `, [Fire Spirit Phantom Sea] gained 51.2 × 10²⁰ XP!<br>`;
             }
             else{
-                    displayed_text += `【焰海霜天】获取了51.2垓经验...?<br>`;
-                    displayed_text += `怎么领悟又已经突破了哇！也太能刷了叭！！<br>`;
+                    displayed_text += `[Blazing Frost Sky] gained 51.2 × 10²⁰ XP…?<br>`;
+                    displayed_text += `How did the realm break through again?! You're grinding way too fast!!<br>`;
             }
             add_xp_to_skill({skill: skills["Neko_Realm"], xp_to_add: 51.2e20,should_info:true,use_bonus:false,add_to_parent:false},);
         }
@@ -1190,10 +1190,10 @@ function textline_special(t_key){
                 update_displayed_equipment(); 
                 character.stats.add_all_equipment_bonus();
                 update_displayed_stats();
-                displayed_text += `你的【冰原之心】已经被转化为【冰原之心·材】，<br>可以继续升级为【幻境之心】。`;
-                log_message("获取了 冰原之心·材","combat_loot");
+                displayed_text += `Your [Arctic Heart] has been transformed into [Arctic Heart (Material)],<br>and can be further upgraded to [Illusory Heart].`;
+                log_message("Obtained Arctic Heart (Material)","combat_loot");
             }
-            else displayed_text += `请将【冰原之心】佩戴后再次尝试！`;
+            else displayed_text += `Please equip the [Arctic Heart] and try again!`;
         }
         else if(t_key == "3-1-nanami"){
             if(character.equipment.special?.name == "Nanami (Spaceship)") displayed_text += `(pat) Koko, Sky Rank usually means you won't get fevers anymore.<br>Hasn't she always been dragged by your side, refusing to let go?<br>`;
@@ -1309,23 +1309,23 @@ function textline_special(t_key){
         }
         else if(t_key == "realm-III"){
             if(skills["Neko_Realm"].current_level <= 34){
-                    displayed_text += `【焰海霜天[领域二重]】获取了1.68秭经验！<br>`;
+                    displayed_text += `[Blazing Frost Sky (Domain II)] gained 1.68 × 10²⁴ XP!<br>`;
             }
             else{
-                    displayed_text += `【焰海霜天[领域三重]】获取了1.68秭经验！<br>`;
-                    displayed_text += `这次……能提前突破一点也不意外（笑！<br>`;
+                    displayed_text += `[Blazing Frost Sky (Domain III)] gained 1.68 × 10²⁴ XP!<br>`;
+                    displayed_text += `Breaking through early this time… honestly not surprising (lol)!<br>`;
             }
             add_xp_to_skill({skill: skills["Neko_Realm"], xp_to_add: 1.68e24,should_info:true,use_bonus:false,add_to_parent:false},);
             add_xp_to_skill({skill: skills["AquaElement"], xp_to_add: 3997e4,should_info:true,use_bonus:false,add_to_parent:false},);
         }
         else if(t_key == "realm-IV"){
             if(skills["Neko_Realm"].current_level <= 39){
-                    displayed_text += `【焰海霜天[领域三重]】获取了64秭经验！<br>（到现在，<br>在直面领域级强者，<br>感受其来自领域的威压之后，<br>本就临近突破的四重领域，<br>终于迈出了最后一步。）`;
-                    
+                    displayed_text += `[Blazing Frost Sky (Domain III)] gained 64 × 10²⁴ XP!<br>(Up until now,<br>having faced a Domain-rank powerhouse head-on<br>and felt the overwhelming pressure of their domain,<br>the fourth-layer domain that was already on the verge of breakthrough<br>finally took its last step forward.)`;
+
             }
             else{
-                    displayed_text += `【出云落月[领域四重]】获取了64秭经验！<br>`;
-                    displayed_text += `抱歉纱雪高考去了……别说突破了都有人48级了！喵啊啊啊！<br>`;
+                    displayed_text += `[Rising Cloud Falling Moon (Domain IV)] gained 64 × 10²⁴ XP!<br>`;
+                    displayed_text += `Sorry, Sayuki went to take the gaokao… Someone's already at level 48 and we haven't even broken through?! Meow nooo!!<br>`;
             }
             add_xp_to_skill({skill: skills["Neko_Realm"], xp_to_add: 64e24,should_info:true,use_bonus:false,add_to_parent:false},);
         }else if(t_key == "S3-start"){
@@ -1349,12 +1349,12 @@ function textline_special(t_key){
             current_game_time.go_up(32400);
         }
         else if(t_key == "heartdemon-lord"){
-            displayed_text += `[心魔之主]哼，自爆！<br>恐怕云霄级强者来了，<br>都扛不住16兆伤害吧！<br>`;
+            displayed_text += `[Heart Demon Lord] Hmph, self-destruct!<br>Even a Cloudy Sky-rank powerhouse<br>couldn't withstand 16 trillion damage!<br>`;
             let qz_perc = global_flags["qz_percent"];
-            displayed_text += `……哈？压制${100 - qz_perc}%,牵制${qz_perc}%?<br>`;
-            if(qz_perc < 30) displayed_text += `哈哈哈——恐惧牵制又如何？<br>你不会的技能，我又从何模仿起呢？<br>强行抹杀！汇集心魔的一切力量，<br>誓要令你……彻底沉眠！`;
-            else if(qz_perc < 70) displayed_text += `你还偷看燕岗领五大禁书之一的牵制书！<br>自己从来没用过，也不想用……<br>只是为了坑我吗！<br>……强行抹杀……汇集力量……<br>令你，彻底沉眠！`;
-            else displayed_text += `牵制书不愧是燕岗领五大禁书之一……<br>该死，我的力量已经十不存一。<br>你到底从哪里搞到的这个？<br>外面那帮黄不拉几的商人，<br>还是某个封闭许久的老坟？<br><br>唏，可以和解吗？`
+            displayed_text += `…Huh? Suppress ${100 - qz_perc}%, Restraint ${qz_perc}%?<br>`;
+            if(qz_perc < 30) displayed_text += `Hahaha — so what if you fear Restraint?<br>A skill you don't even know — how could I possibly imitate it?<br>Forced erasure! Gathering all the power of the Heart Demon,<br>I swear to make you… fall into eternal slumber!`;
+            else if(qz_perc < 70) displayed_text += `You even snuck a look at the Restraint Tome, one of the Five Forbidden Books of Yangang Territory!<br>You've never used it yourself, never even wanted to…<br>Just to set me up?!<br>…Forced erasure… gathering power…<br>I will make you… fall into eternal slumber!`;
+            else displayed_text += `The Restraint Tome truly deserves its place among Yangang Territory's Five Forbidden Books…<br>Damn, less than a tenth of my power remains.<br>Where in the world did you get this?<br>Those shady merchants outside,<br>or some long-sealed ancient tomb?<br><br>Heh… any chance we could just call it even?`
         }
         else if(t_key == "save"){
                 var a = window.document.createElement('a');
@@ -1368,39 +1368,39 @@ function textline_special(t_key){
         }
         else if(t_key.includes("P3")){
             if(t_key == "P3-1"){
-                displayed_text += global_flags['lq_status']==1?"原本的强榜第二，也不是蓝柒，而是<span style='color:aqua'>冰蓝</span>。<br>不过，她倒在了黎明前的黑暗中……":`喏，我旁边这位也不是蓝柒，而是<span style='color:aqua'>冰蓝</span><br><br>[冰蓝]……嗯嗯……`;
+                displayed_text += global_flags['lq_status']==1?"The original #2 on the power ranking wasn't actually Lan Qi — it was <span style='color:aqua'>Bing Lan</span>.<br>But she fell in the darkness before dawn…":`Look, the one beside me isn't Lan Qi either — she's <span style='color:aqua'>Bing Lan</span><br><br>[Bing Lan] …Mm-hm…`;
             }if(t_key == "P3-2"){
-                displayed_text += global_flags['qx_status']==1?"例如秋兴就是一例……<br>不过倒也不用担心冰家追下追杀令。<br>作为死士，在危机四伏的水牢中遇难，<br>也在所难免。":`<br>[秋兴]哎啊啊，小姐。<br>这种说法有点太残忍了吧？<br>家主大人待我等不薄，<br>我等也不过是奉命行事。`;
+                displayed_text += global_flags['qx_status']==1?"Qiu Xing is one such example…<br>Though there's no need to worry about the Bing Clan issuing a kill order.<br>As a death warrior, dying in the treacherous Water Prison<br>was an occupational hazard.":`<br>[Qiu Xing] Ehh, my lady.<br>That's a bit too cruel of a way to put it.<br>The master has treated us well,<br>we were simply following orders.`;
             }if(t_key == "P3-3"){
-                displayed_text += global_flags['lq_status']==1?"[纳可]那，之所以排出强榜是为了……<br><br>[冰溪月]哎呀呀，这你得去问冰蓝了……<br>最新一代的强榜还是她一手操办的呢。":`[纳可]那，蓝柒……冰蓝小姐，<br>之所以排出强榜是为了？<br><br>[冰蓝]……左阿是一个戒心很重的人。<br>我将实力控制在天空级六阶，<br>长此以往，他必然会有疑心。<br>【强榜】是一种掩饰，<br>这让左阿误以为我是那种享受者，<br>压制他人，高高在上的家伙。<br><br>[莫尔]是的，而且在那老贼的眼中，<br>这样一个榜单，反而看似对他的杀戮规则有益。<br>呵，他也以为自己能轻松掌控全局。`;
+                displayed_text += global_flags['lq_status']==1?"[Nako] Then, the reason the power ranking was drawn up…<br><br>[Bing Xiyue] Oh my, you'd have to ask Bing Lan about that…<br>The latest power ranking was her brainchild after all.":`[Nako] Then, Lan Qi… Miss Bing Lan,<br>why exactly was the power ranking drawn up?<br><br>[Bing Lan] …Zuoa is a very suspicious person.<br>I've been keeping my strength at Sky-Rank Stage 6 —<br>if this went on, he would eventually grow suspicious.<br>The [Power Ranking] is a form of cover,<br>making Zuoa think I'm the type who enjoys<br>suppressing others and looking down from above.<br><br>[Mor] Yes, and in that old scoundrel's eyes,<br>such a ranking seemed beneficial to his rules of slaughter.<br>Heh, he thought he could easily control the whole situation.`;
             }
             if(t_key == "P3-4"){
                 let kr = (global_flags['qx_status']==1?1:0) + (global_flags['lq_status']==1?1:0);
                 if(kr == 0){
-                    displayed_text += "[冰蓝]两位，大恩不言谢。<br>自此之后，凡我族血脉所及之处，<br>便敬二位为坐上宾，<br>即便献上性命，也定护你们周全。<br><br>[冰溪月]哦哦，气场很足的嘛。<br>话说小蓝你今天，<br>一次性说了这么多话？有点难得呀。<br>是时候了，回家了哦。<br>纳可小姐……谢谢你。<br>拿着这个，后会有期啦。<br><br>冰溪月玉手一挥，<br>一枚镌刻着<span style='color:aqua'>冰</span>字的玉简落入纳可手中。"
+                    displayed_text += "[Bing Lan] You two, a great debt cannot be repaid in words.<br>From this day forward, wherever our clan's bloodline reaches,<br>you shall be honored as the highest guests,<br>and even at the cost of our lives, we will ensure your safety.<br><br>[Bing Xiyue] Ohh, quite the presence!<br>Say, Xiao Lan, you've said so much<br>all in one go today? That's rare.<br>Time to go home.<br>Miss Nako… thank you.<br>Take this — till we meet again.<br><br>With a wave of Bing Xiyue's jade hand,<br>a jade slip engraved with the character <span style='color:aqua'>Bing (Ice)</span> fell into Nako's hands."
                     add_to_character_inventory([{ "item": getItem(item_templates["冰家玉简"]), "count": 1}]);
                     //获取冰家玉简(价值1000u)
                 }
                 if(kr == 1){
-                    displayed_text += "[冰溪月]两位，虽说有些许摩擦，<br>但冤家宜解不宜结，<br>毕竟小姐也是唯一成功破局之人。<br>纳可小姐……谢谢你。<br>拿着这个，后会有期啦。<br><br>冰溪月玉手一挥，<br>一叠369枚<span class='coin coin_moneyQa' >宇宙币</span>落入纳可手中。"
+                    displayed_text += "[Bing Xiyue] You two, despite the friction between us,<br>it's better to resolve a grudge than to nurture one —<br>after all, you were the only one who succeeded in breaking through.<br>Miss Nako… thank you.<br>Take this — till we meet again.<br><br>With a wave of Bing Xiyue's jade hand,<br>a stack of 369 <span class='coin coin_moneyQa'>Cosmic Coins</span> fell into Nako's hands."
                     character.money += 369e15;
                     //获取888u
                 }
                 if(kr == 2){
-                    displayed_text += "[冰溪月]两位……<br>虽然破局之人是你们，<br>但你们的杀念属实太重。<br>在被你杀掉之前，<br>我还是先溜为妙。<br><br>冰溪月玉手一捏，<br>一枚镌刻着<span style='color:aqua'>冰</span>字的玉简被捏碎，<br>她的身影也消散在空气中。"
+                    displayed_text += "[Bing Xiyue] You two…<br>while it's true you're the ones who broke through,<br>your killing intent is far too strong.<br>Before you get a chance to kill me,<br>I'd better slip away first.<br><br>Bing Xiyue's jade hand clenched,<br>crushing a jade slip engraved with the character <span style='color:aqua'>Bing (Ice)</span>,<br>and her figure dissolved into thin air."
                     //杀了俩还想要东西？
                 }
             }
 
-        }//Past-3 第三幕boss战后多种判定
+        }//Past-3: post-act-3 boss fight multi-branch resolution
         else if(t_key == "age-check"){
             let age=Math.round(current_game_time.year - 1374 + (current_game_time.era-31698)*10081);
             // 1374年 15岁 进入时封水牢(RPG标准世界线)
-            displayed_text += `${age}年了呐！！<br>`
-            if(age<10) displayed_text += `家族里的人都说你们很快就会回来。<br>看来我也是瞎操心一趟。`;
-            else if(age<100) displayed_text += `虽然那个历练地点是峰大哥建议的……<br>但以后还是不要离开那么久，好吗？<br>`;
-            else if(age<1000) displayed_text += `得亏你们还记得回来……<br>再不回来的话，<br>家族都不知道谁继承了。`
-            else displayed_text += `满燕岗城都在传，<br>曾经惊才绝艳的纳可姐妹，<br>双双陨落在了那座出不去的冰宫！<br>再晚回来几年，你们估计连纳家都看不到了。`
+            displayed_text += `It's been ${age} years!!<br>`
+            if(age<10) displayed_text += `Everyone in the family said you'd be back soon.<br>Looks like I worried for nothing.`;
+            else if(age<100) displayed_text += `Even though it was Brother Feng who suggested that training spot…<br>please don't be away for so long next time, alright?<br>`;
+            else if(age<1000) displayed_text += `It's a good thing you remembered to come back…<br>If you'd stayed away any longer,<br>nobody in the family would have known who to pass things down to.`
+            else displayed_text += `All of Yangang City had been saying<br>that the once-brilliant Nako sisters<br>had both perished in that inescapable Ice Palace!<br>A few more years and you'd probably have come back to find no Nako Clan at all.`
         }
         return displayed_text;
 }
@@ -4456,10 +4456,14 @@ function load(save_data) {
     
     update_displayed_effects();
     if(save_data["enemy_killcount"]) {
-        
+        const killcount_migrations = {
+            "Shenglv City Skeleton": "Shenglu City Skeleton",
+            "Shenglv City Refugee": "Shenglu City Refugee",
+        };
         add_bestiary_lines(11);
-        Object.keys(save_data["enemy_killcount"]).forEach(enemy_name => {
-            enemy_killcount[enemy_name] = save_data["enemy_killcount"][enemy_name];
+        Object.keys(save_data["enemy_killcount"]).forEach(raw_name => {
+            const enemy_name = killcount_migrations[raw_name] || raw_name;
+            enemy_killcount[enemy_name] = save_data["enemy_killcount"][raw_name];
             create_new_bestiary_entry(enemy_name);
             add_bestiary_zones(enemy_name);
 
@@ -5218,7 +5222,7 @@ function engine(item_id,count){
     if(count==-2){
         count = inf_combat.FE.IM.num - 1;
         inf_combat.FE.IM.num = 1;
-        log_message("提取了 多孔冰晶 * " + count,"combat_loot");
+        log_message("Extracted Porous Ice Crystal x " + count,"combat_loot");
         add_to_character_inventory([{ "item": getItem(item_templates["多孔冰晶"] ), "count": count}]);
         return;
     }
@@ -5343,14 +5347,14 @@ const engine_env2 = document.getElementById("engine_env2");
 
 function update_displayed_engine(){
     engine_result_name.innerText = (inf_combat.FE.SF.num * 999.999 - inf_combat.FE.SF.ice < 0)?"万载冰髓锭":"冰原超流体";
-    engine_result_fruit_status.innerText = (inf_combat.FE.fruit == -1)?"未放入":`觉醒${(inf_combat.FE.fruit / 1e4).toFixed(4)}%`
+    engine_result_fruit_status.innerText = (inf_combat.FE.fruit == -1)?"Not Inserted":`Awakened ${(inf_combat.FE.fruit / 1e4).toFixed(4)}%`
     engine_result_temp.innerText = (inf_combat.FE.outer_temp.toFixed(0)) + 'K / '+ ((inf_combat.FE.outer_temp/240)**2*12).toFixed(2) + 'MPa';
     engine_env1.style.display = (character.equipment.realm?.id == "焰海霜天[领域二重]" || character.equipment.realm?.id == "焰海霜天[领域三重]")?"inline-block":"none";
     engine_env2.style.display = (character.equipment.realm?.id == "焰海霜天[领域二重]" || character.equipment.realm?.id == "焰海霜天[领域三重]")?"inline-block":"none";
 
 
     piston_div.style.left = Math.round(120 * (1+Math.cos(3.1415927*(1+inf_combat.FE.piston))) + 64) + 'px';
-    let modemap = {0:"摸鱼ing",1:"压缩内部气体",2:"内部气体自由膨胀",3:"向内部充入气体",4:"释放内部气体"};
+    let modemap = {0:"Idling",1:"Compressing Gas",2:"Gas Free Expansion",3:"Inflating Gas",4:"Releasing Gas"};
     piston_mode.innerText = modemap[inf_combat.FE.piston_mode];
     piston_temp.innerText = inf_combat.FE.IA.temp.toFixed(2);
     let pres = inf_combat.FE.IA.pressure;
@@ -5399,11 +5403,11 @@ function update_displayed_engine(){
     container_element_speed.innerText = ice_speed.toFixed(2);
     let ice_time = (inf_combat.FE.SF.num * 1000 - inf_combat.FE.SF.ice) / ice_speed;
     ice_time = Math.max(ice_time,0);
-    if(ice_time <= 60) container_element_time.innerText = ice_time.toFixed(1) + '秒';
-    else if(ice_time <= 3600) container_element_time.innerText = (ice_time/60).toFixed(1) + '分钟';
-    else if(ice_time <= 86400) container_element_time.innerText = (ice_time/3600).toFixed(2) + '小时';
-    else if(ice_time <= 31557020) container_element_time.innerText = (ice_time/86400).toFixed(2) + '天';
-    else container_element_time.innerText = (ice_time/31557020).toFixed(2) + '年';
+    if(ice_time <= 60) container_element_time.innerText = ice_time.toFixed(1) + ' sec';
+    else if(ice_time <= 3600) container_element_time.innerText = (ice_time/60).toFixed(1) + ' min';
+    else if(ice_time <= 86400) container_element_time.innerText = (ice_time/3600).toFixed(2) + ' hr';
+    else if(ice_time <= 31557020) container_element_time.innerText = (ice_time/86400).toFixed(2) + ' days';
+    else container_element_time.innerText = (ice_time/31557020).toFixed(2) + ' yrs';
 }
 
 function start_engine_minigame()
@@ -5561,7 +5565,7 @@ function engine_r(item_id,count){
     else if(count > inf_combat.FE.SF.num - 1) return;
     inf_combat.FE.SF.ice *= (inf_combat.FE.SF.num - count) / inf_combat.FE.SF.num;
     inf_combat.FE.SF.num -= count;
-    log_message(`提取了 ${r_id} x ${count} !`,"combat_loot");
+    log_message(`Extracted ${r_id} x ${count}!`,"combat_loot");
 
     add_to_character_inventory([{ "item": getItem(item_templates[r_id]), "count": count}]);
     update_displayed_character_inventory();
@@ -5576,14 +5580,14 @@ function engine_f(oper){
                 item_count: 1,
             }]);
             inf_combat.FE.fruit = 0;
-            log_message(`玄冰果实 已开始吸取冰元素 !`,"enemy_defeated");
+            log_message(`Mystic Ice Fruit has started absorbing Ice Element!`,"enemy_defeated");
         }
         //拿走玄冰果实
     }
     if(oper==2 && inf_combat.FE.fruit != -1){
         //根据是否抵达1e6判定取出什么
         let q_id = inf_combat.FE.fruit > 999900 ? "玄冰果实·觉醒" : "玄冰果实" ;
-        log_message(`提取了 ${q_id} !`,"combat_loot");
+        log_message(`Extracted ${q_id}!`,"combat_loot");
 
         add_to_character_inventory([{ "item": getItem(item_templates[q_id]), "count": 1}]);
         update_displayed_character_inventory();
@@ -5601,10 +5605,10 @@ function engine_e(e_temp){
                 update_displayed_equipment(); 
                 character.stats.add_all_equipment_bonus();
                 update_displayed_stats();
-                log_message("你的【飞船之心】已经被转化为【飞船之心·材】，","combat_loot");
-                log_message("可以继续升级为【冰原之心】。","combat_loot");
+                log_message("Your [Starship Heart] has been converted to [Starship Heart · Material],","combat_loot");
+                log_message("and can continue to be upgraded to [Arctic Heart].","combat_loot");
             }
-            else log_message("请将【飞船之心】佩戴后再次尝试！`","combat_looot");
+            else log_message("Please equip [Starship Heart] and try again!","combat_looot");
             //借用代码……
     }
 }

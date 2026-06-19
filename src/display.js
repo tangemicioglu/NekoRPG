@@ -3682,7 +3682,8 @@ function create_new_bestiary_entry(enemy_name) {
 
 function add_bestiary_tooltip(enemy_name){
 
-    const enemy = enemy_templates[enemy_name];
+    const enemy = enemy_templates[enemy_name] || Object.values(enemy_templates).find(t => t.name === enemy_name);
+    if(!enemy) return;
     const bestiary_tooltip = document.createElement("div");
     const tooltip_xp = document.createElement("div"); //base xp enemy gives
     tooltip_xp.innerHTML = enemy.description;
@@ -3889,7 +3890,7 @@ function add_bestiary_lines(zone)
     //zone 11-> 1-1，rank作为1200处理
     //sorts bestiary_list div by enemy rank
     bestiary_entry_divs[zone] = document.createElement("div");
-    let ZoneNameMap = {11:"Nayaka Training Ground",12:"Yangang City",13:"Yangang Outskirts",14:"Underground Palace",15:"Underground Palace Core",21:"Wild Beast Forest",22:"Qingye Riverside",23:"Na Family Secret Realm",24:"Barrier Lake",25:"Shenlv City Ruins",26:"Shenlv City Battlefield",27:"Sky Vessel",28:"Ship Core",31:"Hel Swamp",32:"Dark Forest",33:"Pure White Ice Plains",34:"Extreme Cold Ice Palace",35:"Time-Locked Water Prison",36:"Inheritance Realm",37:"Illusion Realm Core",41:"City Gate Battle",42:"[WIP] Battle",43:"[WIP] Battle",44:"Quqiu Valley",45:"Blood Peak",46:"Ruined Domain",47:"Ruined Crumbling Cliffs",48:"Clan Annihilation Battle [WIP]",51:"Withered Leaf Corridor",52:"Ashen Nightmare [WIP]",53:"Ashen Nightmare Courtyard",54:"Pearl Sea",55:"Wind and Thunder Convention",56:"Wanderers Alliance Trial Battle",61:"Deep Forest [WIP]",62:"Blood Demon Sea",63:"Blazing Gaze [WIP]",64:"Burial Ground [WIP]",65:"Echoing Sound Sacred Tree",66:"Tower of Echoing Sound",67:"Sound Realm",68:"Sacred City [WIP]"}
+    let ZoneNameMap = {11:"Nayaka Training Ground",12:"Yangang City",13:"Yangang Outskirts",14:"Underground Palace",15:"Underground Palace Core",21:"Wild Beast Forest",22:"Qingye Riverside",23:"Na Family Secret Realm",24:"Barrier Lake",25:"Shenglu City Ruins",26:"Shenglu City Battlefield",27:"Sky Vessel",28:"Ship Core",31:"Hel Swamp",32:"Dark Forest",33:"Pure White Ice Plains",34:"Extreme Cold Ice Palace",35:"Time-Locked Water Prison",36:"Inheritance Realm",37:"Illusion Realm Core",41:"City Gate Battle",42:"[WIP] Battle",43:"[WIP] Battle",44:"Quqiu Valley",45:"Blood Peak",46:"Ruined Domain",47:"Ruined Crumbling Cliffs",48:"Clan Annihilation Battle [WIP]",51:"Withered Leaf Corridor",52:"Ashen Nightmare [WIP]",53:"Ashen Nightmare Courtyard",54:"Pearl Sea",55:"Wind and Thunder Convention",56:"Wanderers Alliance Trial Battle",61:"Deep Forest [WIP]",62:"Blood Demon Sea",63:"Blazing Gaze [WIP]",64:"Burial Ground [WIP]",65:"Echoing Sound Sacred Tree",66:"Tower of Echoing Sound",67:"Sound Realm",68:"Sacred City [WIP]"}
     const name_div = document.createElement("div");
     name_div.innerHTML = `<b>【${ZoneNameMap[zone]}】</b>`;
     name_div.classList.add("bestiary_entry_name");
@@ -3929,27 +3930,35 @@ function clear_bestiary() {
     });
 }
 
+function resolve_enemy_template_key(enemy_name) {
+    if(enemy_templates[enemy_name]) return enemy_name;
+    const template = Object.values(enemy_templates).find(t => t.name === enemy_name);
+    if(!template) return enemy_name;
+    return Object.keys(enemy_templates).find(k => enemy_templates[k] === template);
+}
+
 function add_bestiary_zones(enemy_name)
 {
-    if(enemy_name == "纳家待从") add_bestiary_lines(12);
-    if(enemy_name == "腐蚀质石精") add_bestiary_lines(13);
-    if(enemy_name == "夜行幽灵") add_bestiary_lines(14);
-    if(enemy_name == "行走树妖") add_bestiary_lines(15);
-    if(enemy_name == "妖灵飞蛾") add_bestiary_lines(21);
-    if(enemy_name == "百家近卫") add_bestiary_lines(22);
-    if(enemy_name == "大门派杂役") add_bestiary_lines(23);
-    if(enemy_name == "威武武士") add_bestiary_lines(24);
-    if(enemy_name == "废墟猎兵") add_bestiary_lines(25);
-    if(enemy_name == "废墟虫卒") add_bestiary_lines(26);
-    if(enemy_name == "荒兽电法兵") add_bestiary_lines(27);
-    if(enemy_name == "塔门战甲B1") add_bestiary_lines(28);
-    if(enemy_name == "无面修者") add_bestiary_lines(31);
-    if(enemy_name == "有角族壮年") add_bestiary_lines(32);
-    if(enemy_name == "冰原之痕") add_bestiary_lines(33);
-    if(enemy_name == "探险者的怨恨") add_bestiary_lines(34);
-    if(enemy_name == "大门派先锋") add_bestiary_lines(35);
-    if(enemy_name == "奇异菇菇") add_bestiary_lines(36);
-    if(enemy_name == "心魔") add_bestiary_lines(37);
+    const key = resolve_enemy_template_key(enemy_name);
+    if(key == "纳家待从") add_bestiary_lines(12);
+    if(key == "腐蚀质石精") add_bestiary_lines(13);
+    if(key == "夜行幽灵") add_bestiary_lines(14);
+    if(key == "行走树妖") add_bestiary_lines(15);
+    if(key == "妖灵飞蛾") add_bestiary_lines(21);
+    if(key == "百家近卫") add_bestiary_lines(22);
+    if(key == "大门派杂役") add_bestiary_lines(23);
+    if(key == "威武武士") add_bestiary_lines(24);
+    if(key == "废墟猎兵") add_bestiary_lines(25);
+    if(key == "废墟虫卒") add_bestiary_lines(26);
+    if(key == "荒兽电法兵") add_bestiary_lines(27);
+    if(key == "塔门战甲B1") add_bestiary_lines(28);
+    if(key == "无面修者") add_bestiary_lines(31);
+    if(key == "有角族壮年") add_bestiary_lines(32);
+    if(key == "冰原之痕") add_bestiary_lines(33);
+    if(key == "探险者的怨恨") add_bestiary_lines(34);
+    if(key == "大门派先锋") add_bestiary_lines(35);
+    if(key == "奇异菇菇") add_bestiary_lines(36);
+    if(key == "心魔") add_bestiary_lines(37);
 }
 
 function reload_bestiary(){
