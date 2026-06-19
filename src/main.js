@@ -57,12 +57,21 @@ import { end_activity_animation,
          update_other_save_load_button,
          format_number,add_bestiary_zones,
          unlock_moonwheel,
+         add_bestiary_tooltip,
+         clear_bestiary_tooltip,
+         add_levelary_tooltip,
+         clear_levelary_tooltip,
         } from "./display.js";
 import { compare_game_version, get_hit_chance } from "./misc.js";
 import { stances } from "./combat_stances.js";
 import { get_recipe_xp_value, recipes } from "./crafting_recipes.js";
 import { game_version, get_game_version } from "./game_version.js";
 import { ActiveEffect, effect_templates } from "./active_effects.js";
+
+window.add_bestiary_tooltip = add_bestiary_tooltip;
+window.clear_bestiary_tooltip = clear_bestiary_tooltip;
+window.add_levelary_tooltip = add_levelary_tooltip;
+window.clear_levelary_tooltip = clear_levelary_tooltip;
 
 const save_key = "save data";
 const dev_save_key = "dev save data";
@@ -120,6 +129,7 @@ const global_flags = {
     is_crafting_unlocked: false,
     is_deep_forest_beaten: false,
     is_realm_enabled: false,
+    is_family_enabled: false,
     is_evolve_studied:false,
     is_moonwheel_unlocked: false,
     qx_status: 0,
@@ -134,12 +144,13 @@ const flag_unlock_texts = {
     is_realm_enabled: "The path of evolution through [Tiny Flame] has been opened!",
     is_evolve_studied: "You have mastered the method to condense [Basic Evolution Crystal]!",
     is_moonwheel_unlocked: "You have mastered the crafting method for [Silver Frost Moonwheel]!",
+    is_family_enabled: "【Family System】activated! (bottom-right third tab)",
 }
 
 // special stats
 
 //infinity combat
-let inf_combat = {"A6":{cur:6,cap:8},"A7":{cur:0}, "VP":{num:0}, "RM":0,"MP":0,"B3":0,"ST":0};
+let inf_combat = {"A6":{cur:6,cap:8},"A7":{cur:0}, "VP":{num:0}, "RM":0,"MP":0,"B3":0,"ST":0,"S3":{live:false,sp:0,b1:8,b2:8,b3:0}};
 //A6:秘境
 //A7:赶往声律城
 //VP:心境一重价值点
@@ -148,6 +159,7 @@ let inf_combat = {"A6":{cur:6,cap:8},"A7":{cur:0}, "VP":{num:0}, "RM":0,"MP":0,"
 //B3:辐射扩散程度(赫尔沼泽)
 //B6:拯救商人数
 //ST:SaveTime(上次保存时间)
+//S3:第三幕最终战，live表示开战与否，sp灵魂之力,b1b2b3是怪物数。
 
 
 //in seconds
@@ -289,6 +301,8 @@ const options = {
     remember_message_log_filters: false,
     remember_sorting_options: false,
     combat_disable_autoswitch: true,
+    option_combat_filter: false,
+    option_format_change: false,
 };
 
 let message_log_filters = {
@@ -387,6 +401,32 @@ function option_remember_filters(option) {
     }
 }
 
+function option_combat_filter(option) {
+    const checkbox = document.getElementById("options_combat_filter");
+
+    if(checkbox.checked || option) {
+        options.option_combat_filter = true;
+    } else {
+        options.option_combat_filter = false;
+    }
+
+    if(option) {
+        checkbox.checked = option;
+    }
+}
+function option_format_change(option) {
+    const checkbox = document.getElementById("options_format_change");
+
+    if(checkbox.checked || option) {
+        options.option_format_change = true;
+    } else {
+        options.option_format_change = false;
+    }
+
+    if(option) {
+        checkbox.checked = option;
+    }
+}
 function option_combat_autoswitch(option) {
     const checkbox = document.getElementById("options_dont_autoswitch_to_combat");
 
@@ -423,6 +463,7 @@ const musicList = {
   18: 'bgms/18.mp3',
   19: 'bgms/19.mp3',
   20: 'bgms/20.mp3',
+  21: 'bgms/21.mp3',
 };
 
 let hasPlayed = false;  // 确保只触发一次
@@ -1149,7 +1190,7 @@ function textline_special(t_key){
                 update_displayed_equipment(); 
                 character.stats.add_all_equipment_bonus();
                 update_displayed_stats();
-                displayed_text += `你的【冰原之心】已经被转化为【冰原之心·材】，<br>可以继续升级为【幻境之心】。[WIP:将在V2.68加入]`;
+                displayed_text += `你的【冰原之心】已经被转化为【冰原之心·材】，<br>可以继续升级为【幻境之心】。`;
                 log_message("获取了 冰原之心·材","combat_loot");
             }
             else displayed_text += `请将【冰原之心】佩戴后再次尝试！`;
@@ -1277,6 +1318,20 @@ function textline_special(t_key){
             add_xp_to_skill({skill: skills["Neko_Realm"], xp_to_add: 1.68e24,should_info:true,use_bonus:false,add_to_parent:false},);
             add_xp_to_skill({skill: skills["AquaElement"], xp_to_add: 3997e4,should_info:true,use_bonus:false,add_to_parent:false},);
         }
+        else if(t_key == "realm-IV"){
+            if(skills["Neko_Realm"].current_level <= 39){
+                    displayed_text += `【焰海霜天[领域三重]】获取了64秭经验！<br>（到现在，<br>在直面领域级强者，<br>感受其来自领域的威压之后，<br>本就临近突破的四重领域，<br>终于迈出了最后一步。）`;
+                    
+            }
+            else{
+                    displayed_text += `【出云落月[领域四重]】获取了64秭经验！<br>`;
+                    displayed_text += `抱歉纱雪高考去了……别说突破了都有人48级了！喵啊啊啊！<br>`;
+            }
+            add_xp_to_skill({skill: skills["Neko_Realm"], xp_to_add: 64e24,should_info:true,use_bonus:false,add_to_parent:false},);
+        }else if(t_key == "S3-start"){
+            inf_combat.S3 = {live:true,sp:0,b1:8,b2:8,b3:0};
+
+        }
         else if(t_key == "qx-kill"){
             character.money += 923124981247561;
             global_flags['qx_status'] = 1;
@@ -1300,6 +1355,52 @@ function textline_special(t_key){
             if(qz_perc < 30) displayed_text += `哈哈哈——恐惧牵制又如何？<br>你不会的技能，我又从何模仿起呢？<br>强行抹杀！汇集心魔的一切力量，<br>誓要令你……彻底沉眠！`;
             else if(qz_perc < 70) displayed_text += `你还偷看燕岗领五大禁书之一的牵制书！<br>自己从来没用过，也不想用……<br>只是为了坑我吗！<br>……强行抹杀……汇集力量……<br>令你，彻底沉眠！`;
             else displayed_text += `牵制书不愧是燕岗领五大禁书之一……<br>该死，我的力量已经十不存一。<br>你到底从哪里搞到的这个？<br>外面那帮黄不拉几的商人，<br>还是某个封闭许久的老坟？<br><br>唏，可以和解吗？`
+        }
+        else if(t_key == "save"){
+                var a = window.document.createElement('a');
+                a.href = window.URL.createObjectURL(new Blob([save_to_file()], {type: 'text/plain'}));
+                a.download = `Autosave_corrupt_prevention`;
+
+                document.body.appendChild(a);
+                a.click();
+
+                document.body.removeChild(a);
+        }
+        else if(t_key.includes("P3")){
+            if(t_key == "P3-1"){
+                displayed_text += global_flags['lq_status']==1?"原本的强榜第二，也不是蓝柒，而是<span style='color:aqua'>冰蓝</span>。<br>不过，她倒在了黎明前的黑暗中……":`喏，我旁边这位也不是蓝柒，而是<span style='color:aqua'>冰蓝</span><br><br>[冰蓝]……嗯嗯……`;
+            }if(t_key == "P3-2"){
+                displayed_text += global_flags['qx_status']==1?"例如秋兴就是一例……<br>不过倒也不用担心冰家追下追杀令。<br>作为死士，在危机四伏的水牢中遇难，<br>也在所难免。":`<br>[秋兴]哎啊啊，小姐。<br>这种说法有点太残忍了吧？<br>家主大人待我等不薄，<br>我等也不过是奉命行事。`;
+            }if(t_key == "P3-3"){
+                displayed_text += global_flags['lq_status']==1?"[纳可]那，之所以排出强榜是为了……<br><br>[冰溪月]哎呀呀，这你得去问冰蓝了……<br>最新一代的强榜还是她一手操办的呢。":`[纳可]那，蓝柒……冰蓝小姐，<br>之所以排出强榜是为了？<br><br>[冰蓝]……左阿是一个戒心很重的人。<br>我将实力控制在天空级六阶，<br>长此以往，他必然会有疑心。<br>【强榜】是一种掩饰，<br>这让左阿误以为我是那种享受者，<br>压制他人，高高在上的家伙。<br><br>[莫尔]是的，而且在那老贼的眼中，<br>这样一个榜单，反而看似对他的杀戮规则有益。<br>呵，他也以为自己能轻松掌控全局。`;
+            }
+            if(t_key == "P3-4"){
+                let kr = (global_flags['qx_status']==1?1:0) + (global_flags['lq_status']==1?1:0);
+                if(kr == 0){
+                    displayed_text += "[冰蓝]两位，大恩不言谢。<br>自此之后，凡我族血脉所及之处，<br>便敬二位为坐上宾，<br>即便献上性命，也定护你们周全。<br><br>[冰溪月]哦哦，气场很足的嘛。<br>话说小蓝你今天，<br>一次性说了这么多话？有点难得呀。<br>是时候了，回家了哦。<br>纳可小姐……谢谢你。<br>拿着这个，后会有期啦。<br><br>冰溪月玉手一挥，<br>一枚镌刻着<span style='color:aqua'>冰</span>字的玉简落入纳可手中。"
+                    add_to_character_inventory([{ "item": getItem(item_templates["冰家玉简"]), "count": 1}]);
+                    //获取冰家玉简(价值1000u)
+                }
+                if(kr == 1){
+                    displayed_text += "[冰溪月]两位，虽说有些许摩擦，<br>但冤家宜解不宜结，<br>毕竟小姐也是唯一成功破局之人。<br>纳可小姐……谢谢你。<br>拿着这个，后会有期啦。<br><br>冰溪月玉手一挥，<br>一叠369枚<span class='coin coin_moneyQa' >宇宙币</span>落入纳可手中。"
+                    character.money += 369e15;
+                    //获取888u
+                }
+                if(kr == 2){
+                    displayed_text += "[冰溪月]两位……<br>虽然破局之人是你们，<br>但你们的杀念属实太重。<br>在被你杀掉之前，<br>我还是先溜为妙。<br><br>冰溪月玉手一捏，<br>一枚镌刻着<span style='color:aqua'>冰</span>字的玉简被捏碎，<br>她的身影也消散在空气中。"
+                    //杀了俩还想要东西？
+                }
+            }
+
+        }//Past-3 第三幕boss战后多种判定
+        else if(t_key == "age-check"){
+            let age=Math.round(current_game_time.year - 1374 + (current_game_time.era-31698)*10081);
+            // 1374年 15岁 进入时封水牢(RPG标准世界线)
+            displayed_text += `${age}年了呐！！<br>`
+            if(age<10) displayed_text += `家族里的人都说你们很快就会回来。<br>看来我也是瞎操心一趟。`;
+            else if(age<100) displayed_text += `虽然那个历练地点是峰大哥建议的……<br>但以后还是不要离开那么久，好吗？<br>`;
+            else if(age<1000) displayed_text += `得亏你们还记得回来……<br>再不回来的话，<br>家族都不知道谁继承了。`
+            else displayed_text += `满燕岗城都在传，<br>曾经惊才绝艳的纳可姐妹，<br>双双陨落在了那座出不去的冰宫！<br>再晚回来几年，你们估计连纳家都看不到了。`
         }
         return displayed_text;
 }
@@ -1548,9 +1649,11 @@ function reset_combat_loops() {
  * @param {*} enemy_id 
  * @param {*} cooldown 
  */
+
+let cd_needed = [0,0,0,0,0,0,0,0];
+let cur_cd = [0,0,0,0,0,0,0,0];
 function do_enemy_attack_loop(enemy_id, count, E_round = 1,isnew = false) {//E_round:回合数
     count = count || 0;
-    update_enemy_attack_bar(enemy_id, count);
     if(!current_enemies?.[enemy_id] || !Array.isArray(current_enemies[enemy_id].spec)) {
         clearTimeout(enemy_attack_loops[enemy_id]);
         return;
@@ -1570,10 +1673,11 @@ function do_enemy_attack_loop(enemy_id, count, E_round = 1,isnew = false) {//E_r
     if(current_enemies[enemy_id].spec.includes(51)) Spec_S += "[Suppress: Total]";
     if(current_enemies[enemy_id].spec.includes(52)) Spec_S += "[Pseudo-Suppress]";
     if(current_enemies[enemy_id].spec.includes(54)) Spec_S += "[Life Limit]";
-    
+    if(current_enemies[enemy_id].spec.includes(55)) Spec_S += "[Greed+]";
+
     if(isnew) {
-        enemy_timer_variance_accumulator[enemy_id] = 0;
-        enemy_timer_adjustment[enemy_id] = 0;
+        cd_needed[enemy_id] = 1000 / current_enemies[enemy_id].stats.attack_speed;
+        cur_cd[enemy_id] = 0;
         if(current_enemies[enemy_id].spec.includes(2)) do_enemy_combat_action(enemy_id,"[Swift]"+Spec_S);//迅捷(开局攻击)
         if(current_enemies != null) if(current_enemies[enemy_id].spec.includes(4))
         {
@@ -1623,6 +1727,7 @@ function do_enemy_attack_loop(enemy_id, count, E_round = 1,isnew = false) {//E_r
         }//冻伤
     }
 
+    let frametime = 25;
     clearTimeout(enemy_attack_loops[enemy_id]);
     enemy_attack_loops[enemy_id] = setTimeout(() => {
         if(current_enemies != null)
@@ -1631,23 +1736,11 @@ function do_enemy_attack_loop(enemy_id, count, E_round = 1,isnew = false) {//E_r
                 clearTimeout(enemy_attack_loops[enemy_id]);
                 return;
             }
-            if(!Array.isArray(enemy_timers[enemy_id])) {
-                enemy_timers[enemy_id] = [Date.now(), Date.now()];
-            }
-            if(typeof enemy_timer_variance_accumulator[enemy_id] !== "number") {
-                enemy_timer_variance_accumulator[enemy_id] = 0;
-            }
-            if(typeof enemy_timer_adjustment[enemy_id] !== "number") {
-                enemy_timer_adjustment[enemy_id] = 0;
-            }
-            enemy_timers[enemy_id][0] = Date.now(); 
-            enemy_timer_variance_accumulator[enemy_id] += ((enemy_timers[enemy_id][0] - enemy_timers[enemy_id][1]) - enemy_attack_cooldowns[enemy_id]*1000/(40*tickrate));
-
-            enemy_timers[enemy_id][1] = Date.now();
-            update_enemy_attack_bar(enemy_id, count);
-            count++;
+            cur_cd[enemy_id] += frametime;
+            update_enemy_attack_bar(enemy_id, cur_cd[enemy_id] / cd_needed[enemy_id]);
             let atk_sign = 0;
-            if(count >= 40) {
+            if(cur_cd[enemy_id] >= cd_needed[enemy_id]) {
+                cur_cd[enemy_id] -= cd_needed[enemy_id];
                 count = 0;
                 if(current_enemies[enemy_id].spec.includes(10))
                 {
@@ -1736,22 +1829,9 @@ function do_enemy_attack_loop(enemy_id, count, E_round = 1,isnew = false) {//E_r
             }
             do_enemy_attack_loop(enemy_id, count,E_round + atk_sign,false);
 
-            if(enemy_timer_variance_accumulator[enemy_id] <= 5/tickrate && enemy_timer_variance_accumulator[enemy_id] >= -5/tickrate) {
-                enemy_timer_adjustment[enemy_id] = time_variance_accumulator;
-            }
-            else {
-                if(enemy_timer_variance_accumulator[enemy_id] > 5/tickrate) {
-                    enemy_timer_adjustment[enemy_id] = 5/tickrate;
-                }
-                else {
-                    if(enemy_timer_variance_accumulator[enemy_id] < -5/tickrate) {
-                        enemy_timer_adjustment[enemy_id] = -5/tickrate;
-                    }
-                }
-            } //limits the maximum correction to +/- 5ms, just to be safe
         }
         else clearTimeout(enemy_attack_loops[enemy_id]);
-    }, enemy_attack_cooldowns[enemy_id]*1000/(40*tickrate) - enemy_timer_adjustment[enemy_id]);
+    }, frametime);
 }
 
 function clear_enemy_attack_loop(enemy_id) {
@@ -1807,14 +1887,16 @@ function set_character_attack_loop({base_cooldown}) {
  * @param {String} attack_power 
  * @param {String} attack_type 
  */
+let chara_cd = 0;
 function do_character_attack_loop({base_cooldown, actual_cooldown, attack_power, targets}) {
     let count = 0;
     clear_character_attack_loop();
+    let frametime = 20;
     character_attack_loop = setInterval(() => {
-        update_character_attack_bar(count);
-        count++;
-        if(count >= 40) {
-            count = 0;
+        update_character_attack_bar(chara_cd/(actual_cooldown * 1000));
+        chara_cd += frametime;
+        if(chara_cd >= actual_cooldown * 1000) {
+            chara_cd -= actual_cooldown * 1000;
             let leveled = false;
 
             for(let i = 0; i < targets.length; i++) {
@@ -1853,7 +1935,7 @@ function do_character_attack_loop({base_cooldown, actual_cooldown, attack_power,
                 set_new_combat();
             }
         }
-    }, actual_cooldown*1000/(40*tickrate));
+    }, frametime);
 }
 
 function clear_character_attack_loop() {
@@ -1885,6 +1967,12 @@ function faint(c_log)
     end_activity_animation(); //clears the "animation"
     current_activity = null;
      update_displayed_health();
+    if(inf_combat.S3?.live){
+        if(current_location.parent_location != undefined) change_location(current_location.parent_location.name);
+        log_message("The shadow of Soul Spirit flickers. Can't fall now!","combat_loot")
+        return;
+    }//BOSS战正在进行
+    
     if(options.auto_return_to_bed && last_location_with_bed) {
         change_location(last_location_with_bed);
         start_sleeping();
@@ -1957,6 +2045,10 @@ function do_enemy_combat_action(enemy_id,spec_hint,E_atk_mul = 1,E_dmg_mul = 1) 
         inf_combat.VP = inf_combat.VP || {num:0};
         spec_mul *= (1 - 0.01*(inf_combat.VP.num/attacker.spec_value[39]));
         spec_mul = Math.max(spec_mul,0);
+    }
+    if(attacker.spec.includes(55)){//贪婪·改
+        spec_mul *= (1 - 0.01*(character.money/attacker.spec_value[55]));
+        spec_mul = Math.max(spec_mul,0.2);
     }
 
     if(attacker.spec.includes(7)) spec_mul *= 1.5;//撕裂
@@ -2052,7 +2144,7 @@ function do_enemy_combat_action(enemy_id,spec_hint,E_atk_mul = 1,E_dmg_mul = 1) 
 
 
     if((hit_chance < Math.random()) && (spec_mul * E_atk_mul_f) < 25) { //EVADED ATTACK
-        log_message(character.name + " evaded an attack", "enemy_missed");
+        if(!options.option_combat_filter) log_message(character.name + " evaded an attack", "enemy_missed");
         return; //damage fully evaded, nothing more can happen
     }
     //目前25倍以上攻击是必中状态。
@@ -2094,11 +2186,11 @@ function do_enemy_combat_action(enemy_id,spec_hint,E_atk_mul = 1,E_dmg_mul = 1) 
     if(attacker.spec.includes(27)) sdef_mul *= character.stats.full.attack_power / character.stats.full.defense * 0.1 + 1;//柔骨
     
     if(attacker.spec.includes(34)){
-        if(attacker.defense < character.stats.full.defense){
+        if(attacker.stats.defense < character.stats.full.defense){
             spec_hint += "[Dominate Weak·Immune]";
         }
         else{
-            sdef_mul *= (2- attacker.defense/character.stats.full.defense);
+            sdef_mul *= (2- attacker.stats.defense/character.stats.full.defense);
             sdef_mul = sdef_mul || 0;
             spec_hint += "[Dominate Weak]";
         }
@@ -2109,9 +2201,9 @@ function do_enemy_combat_action(enemy_id,spec_hint,E_atk_mul = 1,E_dmg_mul = 1) 
 
     if(critted)
     {
-        log_message(character.name + " took " + format_number(damage_taken) + " damage [CRIT]" + spec_hint, "hero_attacked_critically");
+        if((!options.option_combat_filter) || damage_taken != 0) log_message(character.name + " took " + format_number(damage_taken) + " damage [CRIT]" + spec_hint, "hero_attacked_critically");
     } else {
-        log_message(character.name + " took " + format_number(damage_taken) + " damage" + spec_hint, "hero_attacked");
+        if((!options.option_combat_filter) || damage_taken != 0) log_message(character.name + " took " + format_number(damage_taken) + " damage" + spec_hint, "hero_attacked");
     }
 
 
@@ -2216,9 +2308,43 @@ function update_neko_realm()
     else if(S_level >= 40 && inf_combat.RM < 5)
     {
         add_to_character_inventory([{item: getItem({...item_templates["出云落月[领域四重]"], quality: 240}), count: 1}]);
-        log_message(`领域四重剧情[WIP]！`, "location_unlocked");
+        log_message(`领悟了第四重领域【出云落月】！请检查装备栏查看详情！`, "location_unlocked");
         inf_combat.RM = 5;
     }
+}
+function get_spirit_buff(S3_sp){
+    
+    locations["幻境核心 - B1"].is_unlocked = (inf_combat.S3.b1 != 0);
+    locations["幻境核心 - B2"].is_unlocked = (inf_combat.S3.b2 != 0);
+    locations["幻境核心 - B3"].is_unlocked = (inf_combat.S3.b3 != 0);
+    //判定自选关解锁
+    if(S3_sp == 5){
+        log_message(`${character.name}'s Max HP increased by 20%!`,"enemy_enhanced");
+        active_effects["灵魂之力 I"] = new ActiveEffect({...effect_templates["灵魂之力 I"], duration: 99999999});
+    }
+    if(S3_sp == 10){
+        log_message(`${character.name}'s Max HP increased by 20%!`,"enemy_enhanced");
+        active_effects["灵魂之力 II"] = new ActiveEffect({...effect_templates["灵魂之力 II"], duration: 99999999});
+    }
+    if(S3_sp == 15){
+        log_message(`${character.name}'s ATK/DEF/AGI increased by 100,000,000!`,"enemy_enhanced");
+        active_effects["灵魂之力 III"] = new ActiveEffect({...effect_templates["灵魂之力 III"], duration: 99999999});
+    }
+    if(S3_sp == 20){
+        log_message(`${character.name}'s ATK/DEF/AGI increased by 100,000,000!`,"enemy_enhanced");
+        active_effects["灵魂之力 IV"] = new ActiveEffect({...effect_templates["灵魂之力 IV"], duration: 99999999});
+    }
+    if(S3_sp >= 25){
+        locations["幻境核心 - X"].is_unlocked = true;
+        log_message(`[Zuo'a] seal complete — all attributes reduced by 10081x!`,"enemy_enhanced");
+        log_message(`${character.name} channeled all soul power into the illusion realm! ATK/DEF/AGI increased by 500,000,000!`,"enemy_enhanced");
+        active_effects["灵魂之力 V"] = new ActiveEffect({...effect_templates["灵魂之力 V"], duration: 99999999});
+    }
+    
+                        character.stats.add_active_effect_bonus();
+                        update_character_stats();
+                        update_displayed_effect_durations();
+                        update_displayed_effects();
 }
 
 function do_character_combat_action({target, attack_power}, target_num,c_atk_mul,c_hint) {
@@ -2356,11 +2482,13 @@ function do_character_combat_action({target, attack_power}, target_num,c_atk_mul
         }
         let b_health = target.stats.health;
         target.stats.health -= damage_dealt;
+        let filter = false;
+        if(options.option_combat_filter && ((damage_dealt == 0) || (target.stats.health <= 0))) filter = true;
         if(critted) {
-            log_message(target.name + " took " + format_number(damage_dealt) + " damage [CRIT]" + Spec_E, "enemy_attacked_critically");
+            if(!filter) log_message(target.name + " took " + format_number(damage_dealt) + " damage [CRIT]" + Spec_E, "enemy_attacked_critically");
         }
         else {
-            log_message(target.name + " took " + format_number(damage_dealt) + " damage" + Spec_E, "enemy_attacked");
+            if(!filter) log_message(target.name + " took " + format_number(damage_dealt) + " damage" + Spec_E, "enemy_attacked");
         }
         
         const effect = document.getElementById(`E${target_num}_effect`);
@@ -2393,6 +2521,31 @@ function do_character_combat_action({target, attack_power}, target_num,c_atk_mul
 
             log_message(target.name + " defeated, gained " + format_number(xp_display) + " XP" + tooltip_ex, 
             "enemy_defeated");
+            //亡语判定区
+            if(target.spec.includes(56))
+            {
+                log_message(`${character.name} gained a 60s [Slowed] effect!`,"enemy_enhanced");
+                active_effects["迟缓"] = new ActiveEffect({...effect_templates["迟缓"], duration:60});
+                inf_combat.S3.b1 -= 1;
+            }//禁锢
+            if(target.spec.includes(57))
+            {
+                log_message(`3 [Soul Spirit·Berserk] have entered the field!`,"enemy_enhanced");
+                inf_combat.S3.b2 -= 1;
+                inf_combat.S3.b3 += 3;
+            }//滋生
+            if(target.spec.includes(58))
+            {
+                log_message(`[Soul Spirit·Berserk]'s ATK/HP increased by 5%!`,"enemy_enhanced");
+                //计算公式:((8-inf_combat.S3.b2)*3-inf_combat.S3.b3)*0.05)
+                inf_combat.S3.b3 -= 1;
+            }//暴走
+            if(target.spec.includes(59))
+            {
+                log_message(`Gained 1 [Soul Power] point!`,"enemy_enhanced");
+                inf_combat.S3.sp += 1;
+                get_spirit_buff(inf_combat.S3.sp);
+            }//心之力
             if(target.rank >= 3100 && target.rank <= 3200){
                 inf_combat.B3 = inf_combat.B3 || 0;
                 log_message(`Swamp radiation spread: ${format_number(inf_combat.B3)} % -> ${format_number(inf_combat.B3 + 0.004)} % `,"enemy_defeated");
@@ -2467,6 +2620,23 @@ function do_character_combat_action({target, attack_power}, target_num,c_atk_mul
                     //2年
                 }
             }
+            if(target.name == "左阿(垂死)[BOSS]"){
+                locations["幻境核心 - B1"].is_unlocked = false;
+                locations["幻境核心 - B2"].is_unlocked = false;
+                locations["幻境核心 - B3"].is_unlocked = false;
+                inf_combat.S3.live = false;
+                locations["幻境核心·决战"].is_unlocked = false;
+                locations["幻境核心·出口"].is_unlocked = true;
+                change_location("幻境核心·出口");
+                
+                log_message(`击败左阿！自动切换地图【幻境核心·出口】！`,"enemy_enhanced");
+                log_message(`【幻境核心·决战】已封锁且无法进入！`,"enemy_enhanced");
+                log_message(`所有状态效果已清除！`,"enemy_enhanced");
+                Object.keys(active_effects).forEach(key => {
+                    delete active_effects[key];
+                });
+
+            }
             kill_enemy(target);
         }
 
@@ -2499,7 +2669,7 @@ function do_character_combat_action({target, attack_power}, target_num,c_atk_mul
             log_message(character.name + " missed, and took " + format_number(damage_taken) + " damage [Repel]", "hero_missed");
             if(fainted) faint(" was defeated by repel damage")
         }
-        else log_message(character.name + " missed", "hero_missed");
+        else if(!options.option_combat_filter) log_message(character.name + " missed", "hero_missed");
     }
     if(target.spec.includes(35)){
         let {damage_taken, fainted} = character.take_damage([],{damage_value: Math.max(target.spec_value[35]-character.stats.full.agility,0)},0);
@@ -2739,6 +2909,12 @@ function get_location_rewards(location) {
     let should_return = false;
         if(location.is_challenge) {
             location.is_finished = true;
+            if(location.name.includes("幻境核心 - B")){
+                location.is_finished = false;
+                should_return = true;
+                //特判：幻境核心自选打怪虽然是挑战区域但是不会清空
+                //挑战区域仅仅为了避开楼层手册
+            }
         }
     update_displayed_combat_location(location,true);
     if(location.repeatable_reward.money && typeof location.repeatable_reward.money === "number") {
@@ -3650,12 +3826,20 @@ function load(save_data) {
     option_combat_autoswitch(options.disable_combat_autoswitch);
 
     options.remember_message_log_filters = save_data.options?.remember_message_log_filters;
+    
     if(save_data.message_filters) {
         Object.keys(message_log_filters).forEach(filter => {
             message_log_filters[filter] = save_data.message_filters[filter] ?? true;
         })
     }
     option_remember_filters(options.remember_message_log_filters);
+
+    options.option_combat_filter = save_data.options?.option_combat_filter;
+    option_combat_filter(options.option_combat_filter);
+
+    options.option_format_change = save_data.options?.option_format_change;
+    option_format_change(options.option_format_change);
+
 
     //this can be removed at some point
     const is_from_before_eco_rework = compare_game_version("v0.3.5", save_data["game version"]) == 1;
@@ -4867,6 +5051,7 @@ function start_grass_minigame(){
 function leave_grass()
 {
     grass_able = false;
+    
 }
 window.leave_grass = leave_grass;
 //割草小游戏
@@ -5885,6 +6070,8 @@ window.updateRecipeTooltip = update_recipe_tooltip;
 window.option_uniform_textsize = option_uniform_textsize;
 window.option_bed_return = option_bed_return;
 window.option_combat_autoswitch = option_combat_autoswitch;
+window.option_combat_filter = option_combat_filter;
+window.option_format_change = option_format_change;
 window.option_remember_filters = option_remember_filters;
 
 window.getDate = get_date;

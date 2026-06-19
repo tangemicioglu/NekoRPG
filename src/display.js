@@ -200,6 +200,14 @@ function format_number(some_number)
     if(some_number <= 1e-8) return '0';
     let len=Math.floor(Math.log10(some_number)) + 1;//位数！
     if(some_number<1e-4) f_result += '0';
+    if(options.option_format_change && some_number > 1e6){
+        len--;//exp
+        some_number *= 0.1 ** len;
+        f_result += some_number.toFixed(2);
+        f_result += 'e';
+        f_result += Math.round(len);
+        return f_result;
+    }
     else if(len<=4||len==6)
     {
         f_result += String(some_number).substring(0,6);
@@ -1594,6 +1602,13 @@ function update_displayed_normal_location(location) {
 
     location_name_span.innerText = current_location.name;
     document.getElementById("location_description_div").innerText = current_location.getDescription();
+    
+    if(inf_combat.S3?.live){
+        document.getElementById("S3_current_div").display = 'inherit';
+        document.getElementById("S3_current_div").innerHTML = "<img src='image/item/violet_ingot.png'><b><span style='color:plum'>灵魂之力 : " + inf_combat.S3.sp + "</span><br>剩余敌人: </b>";
+        document.getElementById("S3_current_div").innerHTML += `<img src='image/boss/B3706.png'><b><span style='color:lightblue'> x${inf_combat.S3.b1} </span></b><img src='image/boss/B3707.png'><b><span style='color:yellow'> x${inf_combat.S3.b2} </span></b><img src='image/boss/B3708.png'><b><span style='color:orange'> x${inf_combat.S3.b3} </span></b>`;
+    }
+    else document.getElementById("S3_current_div").innerHTML = '';
 }
 
 /**
@@ -1810,7 +1825,7 @@ function create_location_choices({location, category, add_icons = true, is_comba
         }
 
         const last_bed = resolve_location_ref(last_location_with_bed);
-        if(last_bed && !location.sleeping && (!location.connected_locations || location?.connected_locations?.filter(loc => {
+        if((!inf_combat.S3?.live) && last_bed && !location.sleeping && (!location.connected_locations || location?.connected_locations?.filter(loc => {
             return loc.location?.id === last_bed.id || loc.location?.name === last_bed.name;
         }).length == 0)) {
 
@@ -1911,6 +1926,7 @@ function update_displayed_combat_location(location,disable_switch = false) {
     
     document.getElementById("location_description_div").innerText = current_location.getDescription();
     create_location_types_display(current_location);
+    document.getElementById("S3_current_div").display = 'none';
 }
 
 function create_location_types_display(current_location){
@@ -2693,7 +2709,7 @@ function update_displayed_stats() { //updates displayed stats
 
     Object.keys(stats_divs).forEach(function(key){
         if(key === "crit_rate" || key === "crit_multiplier") {
-            stats_divs[key].innerHTML = `${(character.stats.full[key]*100).toFixed(1)}%`;
+            stats_divs[key].innerHTML = `${format_numberL(character.stats.full[key])}`;
             update_stat_description(key);
         } 
         else if(key === "attack_speed") {
@@ -2709,7 +2725,7 @@ function update_displayed_stats() { //updates displayed stats
                 stats_divs[key].innerHTML = ``;
             }
             else{
-                stats_divs[key].innerHTML = `${(character.stats.full[key]*100).toFixed(1)}%`;
+                stats_divs[key].innerHTML = `${format_numberL(character.stats.full[key])}`;
                 update_stat_description(key);
             }
         }
@@ -2718,7 +2734,7 @@ function update_displayed_stats() { //updates displayed stats
                 stats_divs[key].innerHTML = ``;
             }
             else{
-                stats_divs[key].innerHTML = `${(character.stats.full[key]*100).toFixed(1)}%`;
+                stats_divs[key].innerHTML = `${format_numberL(character.stats.full[key])}`;
                 update_stat_description(key);
             }
         }
@@ -2864,6 +2880,12 @@ function format_money(num) {
     let value=``;
     const sign = num >= 0 ? '' : '-';
     num = Math.abs(num);
+    if(num<100){
+        if((num - Math.floor(num))>0.01)
+        {
+            return  `<span class="coin coin_copper">${num.toFixed(2)}C</span> `
+        }
+    }
 
     if(num > 0) {
         let cC=Math.floor(num%1000);
@@ -3609,6 +3631,11 @@ let spec_stat = [[0, 'Magic Attack', '#bbb0ff','This enemy seems to have mastere
 [52, "Pseudo-Suppress", "#47e6a4", "A combined suppress/restrain technique.<br>Enemy damage per round * <span style='color:#87CEFA'>(enemy atk+def / player atk+def)^(1-0.01*Suppress mastery) * (enemy def / player def)^(0.01*Suppress mastery)</span>."], // TODO: verify name for 压制·伪
 [53, "Synchronize: Demon", "#FF6A00","A mysterious and threatening insight that can share attributes.<br>The enemy grows stronger as the player does, adding <span style='color:#87CEFA'>200%</span> of the player's attack."],
 [54, "Life Limit", "#ffacc5","Limiting the opponent's ability can be a trick or a burden.<br>Enemy damage per round * (enemy HP / player HP)."],
+[55, "Greed+", "#bfc630",function(enemy){return `This enemy seems very sensitive to money.<br>For every ${format_money(enemy.spec_value[55])} the player has, this enemy's damage decreases by <span style='color:#87CEFA'>1%</span> (max <span style='color:#87CEFA'>80%</span>).`}],
+[56, "Shackle", "#808080","On enemy death, the player gains a <span style='color:#87CEFA'>-20% Attack Speed</span> status effect for <span style='color:#87CEFA'>30s</span>."],
+[57, "Proliferate", "#ff20c0","On enemy death, 3 [Soul Spirit·Berserk] spawn on the field."],
+[58, "Berserk", "#fffc62","On enemy death, [Soul Spirit·Berserk] base ATK/HP increases by 5% (stacks)."],
+[59, "Soul Spirit", "#b0f6ff","On enemy death, gain 1 [Soul Power] point."],
 ];
 //超过25倍倍率的攻击暂时视为必中！
 function format_percent(perc){
@@ -3640,6 +3667,22 @@ function create_new_bestiary_entry(enemy_name) {
     kill_counter.classList.add("bestiary_entry_kill_count");
     
 
+
+    bestiary_entry_divs[enemy_name].appendChild(name_div);
+    bestiary_entry_divs[enemy_name].appendChild(kill_counter);
+
+    bestiary_entry_divs[enemy_name].setAttribute("data-bestiary", -1*enemy.rank);
+    bestiary_entry_divs[enemy_name].classList.add("bestiary_entry_div");
+    bestiary_list.appendChild(bestiary_entry_divs[enemy_name]);
+
+    //sorts bestiary_list div by enemy rank
+    [...bestiary_list.children].sort((a,b)=>parseInt(a.getAttribute("data-bestiary")) - parseInt(b.getAttribute("data-bestiary")))
+                                .forEach(node=>bestiary_list.appendChild(node));
+}
+
+function add_bestiary_tooltip(enemy_name){
+
+    const enemy = enemy_templates[enemy_name];
     const bestiary_tooltip = document.createElement("div");
     const tooltip_xp = document.createElement("div"); //base xp enemy gives
     tooltip_xp.innerHTML = enemy.description;
@@ -3790,7 +3833,7 @@ function create_new_bestiary_entry(enemy_name) {
 
         tooltip_drops.appendChild(loot_line);
     }
-
+    let perdicted_value = 0;
     for(let i = 0; i < enemy.loot_list.length; i++) {
         const loot_line = document.createElement("div");
         const loot_name = document.createElement("div");
@@ -3814,9 +3857,14 @@ function create_new_bestiary_entry(enemy_name) {
         loot_line.append(loot_name, loot_chance);
 
         tooltip_drops.appendChild(loot_line);
+        perdicted_value += enemy.loot_list[i].chance * enemy.get_droprate_modifier() * item_templates[enemy.loot_list[i].item_name].value;
     }
 
     bestiary_tooltip.classList.add("bestiary_entry_tooltip");
+
+    
+    const tooltip_value = document.createElement("div"); //base enemy stats
+    tooltip_value.innerHTML = "<br>预期收益: " + format_money(perdicted_value);
     
     bestiary_tooltip.appendChild(tooltip_desc);
     bestiary_tooltip.appendChild(stat_realm);
@@ -3824,18 +3872,14 @@ function create_new_bestiary_entry(enemy_name) {
     bestiary_tooltip.appendChild(tooltip_tags);
     bestiary_tooltip.appendChild(tooltip_stats);
     bestiary_tooltip.appendChild(tooltip_drops);
+    bestiary_tooltip.appendChild(tooltip_value);
 
-    bestiary_entry_divs[enemy_name].appendChild(name_div);
-    bestiary_entry_divs[enemy_name].appendChild(kill_counter);
+
     bestiary_entry_divs[enemy_name].appendChild(bestiary_tooltip);
+}
 
-    bestiary_entry_divs[enemy_name].setAttribute("data-bestiary", -1*enemy.rank);
-    bestiary_entry_divs[enemy_name].classList.add("bestiary_entry_div");
-    bestiary_list.appendChild(bestiary_entry_divs[enemy_name]);
-
-    //sorts bestiary_list div by enemy rank
-    [...bestiary_list.children].sort((a,b)=>parseInt(a.getAttribute("data-bestiary")) - parseInt(b.getAttribute("data-bestiary")))
-                                .forEach(node=>bestiary_list.appendChild(node));
+function clear_bestiary_tooltip(enemy_name){
+    bestiary_entry_divs[enemy_name].querySelectorAll('.bestiary_entry_tooltip').forEach(el => el.remove());
 }
 
 
@@ -3939,6 +3983,21 @@ function create_new_levelary_entry(level_name) {
     if(level.rank==0) return;
     
 
+    levelary_entry_divs[level_name].appendChild(name_div);
+    levelary_entry_divs[level_name].appendChild(kill_counter);
+
+    levelary_entry_divs[level_name].setAttribute("data-levelary", -1*level.rank);
+    levelary_entry_divs[level_name].classList.add("bestiary_entry_div");
+    levelary_list.appendChild(levelary_entry_divs[level_name]);
+
+    // sorts levelary_list div by enemy rank
+    [...levelary_list.children].sort((a,b)=>parseInt(a.getAttribute("data-levelary")) - parseInt(b.getAttribute("data-levelary")))
+                                .forEach(node=>levelary_list.appendChild(node));
+}
+
+
+function add_levelary_tooltip(level_name) {
+    const level = locations[level_name];
     const levelary_tooltip = document.createElement("div");
     levelary_tooltip.classList.add("bestiary_entry_tooltip");
     const tooltip_xp = document.createElement("div"); //base xp enemy gives
@@ -3981,6 +4040,7 @@ function create_new_levelary_entry(level_name) {
      tooltip_loots.innerHTML += `<br>Loot here (avg):<br>`;
     let lootlist = {0:0};
     let I_list = [];
+    let predict_value = 0;
      for(let j=0;j<level.enemies_list.length;j++)
     {
         let C_enemy = enemy_templates[level.enemies_list[j]];
@@ -3990,9 +4050,14 @@ function create_new_levelary_entry(level_name) {
             let I_name = C_enemy.loot_list[k].item_name;
             if(I_list[I_name] == undefined) I_list[I_name] = C_enemy.loot_list[k].chance;
             else I_list[I_name] += C_enemy.loot_list[k].chance;
+            predict_value += C_enemy.loot_list[k].chance * item_templates[C_enemy.loot_list[k].item_name].value;
         }
         //tooltip_enemies.innerHTML += `<img src=${enemy_templates[level.enemies_list[j]].image}>`;
     }
+
+
+    const value_loots = document.createElement("div");
+    value_loots.innerHTML += `<br>预期收益/敌人：` + format_money(predict_value);
 
     for(let j=0;j<level.enemies_list.length;j++)
     {
@@ -4014,24 +4079,15 @@ function create_new_levelary_entry(level_name) {
     levelary_tooltip.appendChild(tooltip_tags);
     levelary_tooltip.appendChild(tooltip_enemies);
     levelary_tooltip.appendChild(tooltip_loots);
-
-    levelary_entry_divs[level_name].appendChild(name_div);
-    levelary_entry_divs[level_name].appendChild(kill_counter);
+    levelary_tooltip.appendChild(value_loots);
     levelary_entry_divs[level_name].appendChild(levelary_tooltip);
+}
 
-    levelary_entry_divs[level_name].setAttribute("data-levelary", -1*level.rank);
-    levelary_entry_divs[level_name].classList.add("bestiary_entry_div");
-    levelary_list.appendChild(levelary_entry_divs[level_name]);
-
-    // sorts levelary_list div by enemy rank
-    [...levelary_list.children].sort((a,b)=>parseInt(a.getAttribute("data-levelary")) - parseInt(b.getAttribute("data-levelary")))
-                                .forEach(node=>levelary_list.appendChild(node));
+function clear_levelary_tooltip(level_name) {
+    levelary_entry_divs[level_name].querySelectorAll('.bestiary_entry_tooltip').forEach(el => el.remove());
 }
 
 
-function update_levelary_entry(level_name) {
-    levelary_entry_divs[level_name].children[1].innerHTML = enemy_killcount[enemy_name];
-}
 
 function clear_levelary() {
     Object.keys(levelary_entry_divs).forEach((level) => {
@@ -4048,11 +4104,11 @@ function clear_skill_list(){
 }
 
 function update_enemy_attack_bar(enemy_id, num) {
-    enemies_div.children[enemy_id].querySelector(".enemy_attack_bar").style.width = `${Math.min(num*2.6,100)}%`;
+    enemies_div.children[enemy_id].querySelector(".enemy_attack_bar").style.width = `${Math.min(num*100,100)}%`;
 }
 
 function update_character_attack_bar(num) {
-    character_attack_bar.style.width = `${Math.min(num*2.6,100)}%`;
+    character_attack_bar.style.width = `${Math.min(num*100,100)}%`;
 }
 
 function update_backup_load_button(date_string){
@@ -4193,4 +4249,8 @@ export {
     reload_bestiary,
     add_bestiary_zones,
     unlock_moonwheel,
+    add_bestiary_tooltip,
+    clear_bestiary_tooltip,
+    add_levelary_tooltip,
+    clear_levelary_tooltip,
 }

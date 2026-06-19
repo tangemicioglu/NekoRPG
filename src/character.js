@@ -231,9 +231,9 @@ character.add_xp = function ({xp_to_add, use_bonus = true},ignore_cap) {
                 character.xp_bonuses.multiplier.levels.all_skill = (character.xp_bonuses.multiplier.levels.all_skill || 1) * total_skill_xp_multiplier;
 
                 //显示-提高属性
-                gains += `Attack increased by ${this_realm[2] * 2}<br>`;
-                gains += `Defense, Agility increased by ${this_realm[2]}<br>`;
-                gains += `Max HP increased by ${this_realm[3]}<br>`;
+                gains += `Attack increased by ${format_number(this_realm[2] * 2)}<br>`;
+                gains += `Defense, Agility increased by ${format_number(this_realm[2])}<br>`;
+                gains += `Max HP increased by ${format_number(this_realm[3])}<br>`;
                 if(realm_spd_gain != 0) gains += `Minor stage breakthrough, Attack Speed additionally increased by ${realm_spd_gain}<br>`;
                 if(this_realm[0]==9)
                 {

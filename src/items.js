@@ -2560,6 +2560,17 @@ item_templates["Twist liek a snek"] = new Book({
         }
     });
 
+    item_templates["伊芙"] = new Props({
+        name: "伊芙",
+        id: "伊芙",
+        description: "你猜为什么纳家没有云霄级，却可以在燕岗城经商？这面自适应盾牌连云霄级一阶的攻击都能进行层层削弱！", 
+        value: 1888e15,
+        stats: {
+            defense: {
+                flat: 30e8,
+            }
+        }
+    });
 
 })();
 
@@ -4032,7 +4043,7 @@ item_templates["Twist liek a snek"] = new Book({
         base_defense: 0.768e8,
         component_tier: 16,
         stats: {
-            defense: {
+            agility: {
                 flat: 0.288e8,
             },},});
     item_templates["铁制头盔"] = new ArmorComponent({
@@ -4848,6 +4859,12 @@ item_templates["Twist liek a snek"] = new Book({
         value: 672e12,
         material_type: "metal",
         image: "image/item/violet_ingot.png",
+    });
+    item_templates["冰家玉简"] = new OtherItem({
+        name: "冰家玉简", 
+        description: "凭它可以招揽冰蓝(出狱后突破至天空级巅峰)和秋兴(出狱后突破至天空级八阶)加入重组纳家！<br>别跟我说这东西上面该写个冰字。<br>否则我就狡辩血洛大陆通用语是象形文字！",
+        value: 1000e15,
+        image: "image/item/ice_jade.png",
     });
 })();
 

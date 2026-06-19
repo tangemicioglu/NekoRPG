@@ -380,6 +380,38 @@ effect_templates["烈日祝福·坤"] = new ActiveEffect({
     //Fortify (no side effects / 8%)
 });
 
+
+effect_templates["迟缓"] = new ActiveEffect({
+    name: "Slowed",
+    effects: {stats: {attack_speed: {multiplier: 0.8}}}
+});
+effect_templates["灵魂之力 I"] = new ActiveEffect({
+    name: "Soul Power I",
+    effects: {stats: {max_health: {multiplier: 1.2}}}
+});
+effect_templates["灵魂之力 II"] = new ActiveEffect({
+    name: "Soul Power II",
+    effects: {stats: {max_health: {multiplier: 1.2}}}
+});
+effect_templates["灵魂之力 III"] = new ActiveEffect({
+    name: "Soul Power III",
+    effects: {stats: {
+            attack_power:{flat:1e8},
+            defense:{flat:1e8},
+            agility:{flat:1e8},}}});
+effect_templates["灵魂之力 IV"] = new ActiveEffect({
+    name: "Soul Power IV",
+    effects: {stats: {
+            attack_power:{flat:1e8},
+            defense:{flat:1e8},
+            agility:{flat:1e8},}}});
+effect_templates["灵魂之力 V"] = new ActiveEffect({
+    name: "Soul Power V",
+    effects: {stats: {
+            attack_power:{flat:5e8},
+            defense:{flat:5e8},
+            agility:{flat:5e8},}}});
+
 /*  let MM1 = ["New Moon","Crescent Moon","First Quarter","Waxing Gibbous","Full Moon","Waning Gibbous","Last Quarter","Waning Crescent"];
                 let MM2 = ["HP Regen +1%","Crit Rate x1.5","Crit Damage x1.6","Normal Attack Multiplier x1.4","Attack x1.1","Defense x1.2","Agility x1.2","Speed x1.1"];*/
 
