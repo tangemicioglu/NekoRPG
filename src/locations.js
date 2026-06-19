@@ -3574,20 +3574,20 @@ function get_location_type_penalty(type, stage, stat) {
         },
     });
     locations["纯白冰原 - 冰霜门户"] = new Challenge_zone({
-        description: "前面有一座两侧覆盖着冰雪的石制大门。越过这只怨气魔物才能触碰到它。", 
-        enemy_count: 1, 
+        description: "A stone gate ahead, its sides blanketed in ice and snow. Defeat the wrathful creature blocking the way to touch it.",
+        enemy_count: 1,
         enemies_list : [["探险者的怨恨[BOSS]"]],
         enemy_group_size: [1,1],
         types: [],
-        is_unlocked: false, 
+        is_unlocked: false,
         is_challenge: true,
-        name: "纯白冰原 - 冰霜门户",
+        name: "Pure White Arctic Tundra - Frost Gate",
         bgm:16,
         parent_location: locations["纯白冰原"],
         repeatable_reward: {
             textlines: [{dialogue: "冰霜门户", lines: ["bs1"]}],
         },
-        unlock_text : "系统提示：触碰冰霜门户，或许会有意外收获。",
+        unlock_text : "System: Touch the Frost Gate — you may discover something unexpected.",
     });
     locations["纯白冰原 - X"] = new Challenge_zone({
         description: "前面有一座两侧覆盖着冰雪的石制大门。越过这只怨气魔物才能触碰到它。", 
@@ -3629,8 +3629,8 @@ function get_location_type_penalty(type, stage, stat) {
     locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - 3"]});
     locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - 4"]});
     locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - 冰霜门户"]});
-    locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - X"], custom_text: "前往挑战冰宫守卫[旧]"});
-    locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - XS"], custom_text: "前往挑战冰宫守卫"});
+    locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - X"], custom_text: "Challenge Ice Palace Guardian [old]"});
+    locations["纯白冰原"].connected_locations.push({location: locations["纯白冰原 - XS"], custom_text: "Challenge Ice Palace Guardian"});
     
     locations["极寒冰城"] = new Location({ 
         connected_locations: [{location: locations["极寒冰宫"], custom_text: "前往【极寒冰宫】"}], 

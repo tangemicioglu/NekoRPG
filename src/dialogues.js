@@ -1679,7 +1679,7 @@ class Textline {
     });
 
     dialogues["冰霜门户"] = new Dialogue({
-        name: "冰霜门户",
+        name: "Frost Gate",
         textlines: {
             "bs1": new Textline({ 
                 is_unlocked:false,
