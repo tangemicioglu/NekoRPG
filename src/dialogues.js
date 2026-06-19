@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 const dialogues = {};
 
@@ -1746,64 +1746,64 @@ class Textline {
     });
 
 
-    dialogues[“溪月”] = new Dialogue({
-        name: “Xiyue”,
-        starting_text: “Speak with the mysterious girl who appeared out of nowhere”,
+    dialogues["溪月"] = new Dialogue({
+        name: "Xiyue",
+        starting_text: "Speak with the mysterious girl who appeared out of nowhere",
         textlines: {
-            “xy1”: new Textline({
+            "xy1": new Textline({
                 is_unlocked: false,
-                name: “Something's strange, sis.”,
-                text: “[Nako] In the earlier battles, after those guys died,<br>their 'clanmates' weren't scared at all —<br>they actually charged at us even more frantically.<br>That's just not how normal people behave...<br>If I had to compare, they're more like<br>those emotionless [Tech Constructs] we've encountered before.<br><br>[Nanami] What? That can't be right...<br>You mean to say<br>these guys aren't actually human?<br>[Nako] What kind of real humans would charge at us<br>in tens of thousands like this?”,
+                name: "Something's strange, sis.",
+                text: "[Nako] In the earlier battles, after those guys died,<br>their 'clanmates' weren't scared at all —<br>they actually charged at us even more frantically.<br>That's just not how normal people behave...<br>If I had to compare, they're more like<br>those emotionless [Tech Constructs] we've encountered before.<br><br>[Nanami] What? That can't be right...<br>You mean to say<br>these guys aren't actually human?<br>[Nako] What kind of real humans would charge at us<br>in tens of thousands like this?",
                 unlocks: {
-                    textlines: [{dialogue: “溪月”, lines: [“xy2”]}],
+                    textlines: [{dialogue: "溪月", lines: ["xy2"]}],
                 },
-                locks_lines: [“xy1”],
+                locks_lines: ["xy1"],
             }),
-            “xy2”: new Textline({
+            "xy2": new Textline({
                 is_unlocked: false,
-                name: “......”,
-                text: “[???] Congratulations, congratulations! Outsiders,<br>you've cracked the secret of this place!<br>As your reward, I'll send you somewhere fun —<br>the [Water Prison].<br>[Nanami] You're... the girl we saw before!<br>So it was you deliberately leading us here.<br>[Nako] (Eyes lighting up) This sounds like a pretty incredible place!”,
+                name: "......",
+                text: "[???] Congratulations, congratulations! Outsiders,<br>you've cracked the secret of this place!<br>As your reward, I'll send you somewhere fun —<br>the [Water Prison].<br>[Nanami] You're... the girl we saw before!<br>So it was you deliberately leading us here.<br>[Nako] (Eyes lighting up) This sounds like a pretty incredible place!",
                 unlocks: {
-                    textlines: [{dialogue: “溪月”, lines: [“xy3”]}],
-                    locations: [“时封水牢”],
+                    textlines: [{dialogue: "溪月", lines: ["xy3"]}],
+                    locations: ["时封水牢"],
                 },
-                locks_lines: [“xy2”],
+                locks_lines: ["xy2"],
             }),
-            “xy3”: new Textline({
+            "xy3": new Textline({
                 is_unlocked: false,
-                name: “Sis, sis, wake up......”,
-                text: “[Nanami] Ugh, Keko...?!<br>Thank goodness you're still here...<br>[Nako] I'm fine... that girl didn't kill us —<br>she just dumped us here...<br>[Xiyue] Welcome, you two cute little ladies.<br>Hehe, I'm still here. Rather than [that girl],<br>you'd do better to call me [Xiyue].”,
+                name: "Sis, sis, wake up......",
+                text: "[Nanami] Ugh, Keko...?!<br>Thank goodness you're still here...<br>[Nako] I'm fine... that girl didn't kill us —<br>she just dumped us here...<br>[Xiyue] Welcome, you two cute little ladies.<br>Hehe, I'm still here. Rather than [that girl],<br>you'd do better to call me [Xiyue].",
                 unlocks: {
-                    textlines: [{dialogue: “溪月”, lines: [“xy4”]}],
+                    textlines: [{dialogue: "溪月", lines: ["xy4"]}],
                 },
-                locks_lines: [“xy3”],
+                locks_lines: ["xy3"],
             }),
-            “xy4”: new Textline({
+            "xy4": new Textline({
                 is_unlocked: false,
-                name: “Were you the one leading us here? Why would you do that?”,
-                text: “[Xiyue] All of this is my master's arrangement.<br>Though I never expected<br>the outsiders this time to be quite so adorable, hehe.<br>Ladies, within this Water Prison<br>there are hundreds of Sky Rank powerhouses imprisoned,<br>ranging from Sky Rank Tier 1-2 up to Tier 5-6.<br>The way out is simple —<br>kill every powerhouse in this Water Prison!<br>The exit will open to the last victor standing.”,
+                name: "Were you the one leading us here? Why would you do that?",
+                text: "[Xiyue] All of this is my master's arrangement.<br>Though I never expected<br>the outsiders this time to be quite so adorable, hehe.<br>Ladies, within this Water Prison<br>there are hundreds of Sky Rank powerhouses imprisoned,<br>ranging from Sky Rank Tier 1-2 up to Tier 5-6.<br>The way out is simple —<br>kill every powerhouse in this Water Prison!<br>The exit will open to the last victor standing.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月”, lines: [“xy5”]}],
+                    textlines: [{dialogue: "溪月", lines: ["xy5"]}],
                 },
-                locks_lines: [“xy4”],
+                locks_lines: ["xy4"],
             }),
-            “xy5”: new Textline({
+            "xy5": new Textline({
                 is_unlocked: false,
-                name: “(Stunned)”,
-                text: “[Nako] Only a few hundred?<br>You need 1,120 trillion EXP to break through to Sky Rank Tier 6!<br>That's nowhere near enough!<br><br>[Xiyue] Hehe, there's also a barrier my master set up here.<br>Nurtured by the abundant water elements,<br>this place generates water [Spirits] up to Sky Rank Tier 7.<br>In short,<br>combat experience is more than covered!<br>You can come and go as you please,<br>but Sky Rank Tier 7 enemies aren't available just anywhere!<br>Well, my job here is done.<br>Good luck, and goodbye~”,
+                name: "(Stunned)",
+                text: "[Nako] Only a few hundred?<br>You need 1,120 trillion EXP to break through to Sky Rank Tier 6!<br>That's nowhere near enough!<br><br>[Xiyue] Hehe, there's also a barrier my master set up here.<br>Nurtured by the abundant water elements,<br>this place generates water [Spirits] up to Sky Rank Tier 7.<br>In short,<br>combat experience is more than covered!<br>You can come and go as you please,<br>but Sky Rank Tier 7 enemies aren't available just anywhere!<br>Well, my job here is done.<br>Good luck, and goodbye~",
                 unlocks: {
-                    textlines: [{dialogue: “溪月”, lines: [“xy6”]}],
+                    textlines: [{dialogue: "溪月", lines: ["xy6"]}],
                 },
-                locks_lines: [“xy5”],
+                locks_lines: ["xy5"],
             }),
-            “xy6”: new Textline({
+            "xy6": new Textline({
                 is_unlocked: false,
-                name: “Hey, wait!”,
-                text: “[Nanami] Looks like she's really gone.<br>[Nako] What do we do now, sis...<br>There isn't a single [Spirit] here.<br>[Nanami] Not necessarily.<br>Maybe we can take the initiative and seek out<br>the powerhouses in the Water Prison<br>and try talking to them.<br>[Nako] What, go find them?<br>[Nanami] They might also be troubled by the [Spirit] attacks.<br>Going to help deal with the [Spirits] seems like a win-win.”,
+                name: "Hey, wait!",
+                text: "[Nanami] Looks like she's really gone.<br>[Nako] What do we do now, sis...<br>There isn't a single [Spirit] here.<br>[Nanami] Not necessarily.<br>Maybe we can take the initiative and seek out<br>the powerhouses in the Water Prison<br>and try talking to them.<br>[Nako] What, go find them?<br>[Nanami] They might also be troubled by the [Spirit] attacks.<br>Going to help deal with the [Spirits] seems like a win-win.",
                 unlocks: {
-                    textlines: [{dialogue: “竺虎”, lines: [“zh1”]}],
+                    textlines: [{dialogue: "竺虎", lines: ["zh1"]}],
                 },
-                locks_lines: [“xy6”],
+                locks_lines: ["xy6"],
             }),
         }
     });
@@ -2049,92 +2049,92 @@ class Textline {
     });
 
 
-    dialogues[“蓝柒”] = new Dialogue({
-        name: “Lanzhi”,
+    dialogues["蓝柒"] = new Dialogue({
+        name: "Lanzhi",
         textlines: {
-            “lq1”: new Textline({
+            "lq1": new Textline({
                 is_unlocked: false,
-                name: “(The aura of a powerhouse... so she's really come?)”,
-                text: “[Lanzhi]......<br><br>[Nanami] You've been watching, haven't you —<br>our battle with Qiuxing.<br>Otherwise you wouldn't have ranked Keko's strength<br>at third on the Strength Ranking —<br>or rather, many of the battles in the Water Prison,<br>you've been watching from the shadows?<br><br>[Lanzhi]......”,
+                name: "(The aura of a powerhouse... so she's really come?)",
+                text: "[Lanzhi]......<br><br>[Nanami] You've been watching, haven't you —<br>our battle with Qiuxing.<br>Otherwise you wouldn't have ranked Keko's strength<br>at third on the Strength Ranking —<br>or rather, many of the battles in the Water Prison,<br>you've been watching from the shadows?<br><br>[Lanzhi]......",
                 unlocks: {
-                    textlines: [{dialogue: “蓝柒”, lines: [“lq2”]}],
+                    textlines: [{dialogue: "蓝柒", lines: ["lq2"]}],
                 },
-                locks_lines: [“lq1”],
-            }),”lq2”: new Textline({
+                locks_lines: ["lq1"],
+            }),"lq2": new Textline({
                 is_unlocked: false,
-                name: “Sis, hold on a moment...”,
-                text: “[Nanami] Keko, interrupting your big sis at a time like this is annoying...<br><br>[Lanzhi]......<br>Stop growing any stronger.<br>Something terrible will happen.”,
+                name: "Sis, hold on a moment...",
+                text: "[Nanami] Keko, interrupting your big sis at a time like this is annoying...<br><br>[Lanzhi]......<br>Stop growing any stronger.<br>Something terrible will happen.",
                 unlocks: {
-                    textlines: [{dialogue: “蓝柒”, lines: [“lq3”]}],
+                    textlines: [{dialogue: "蓝柒", lines: ["lq3"]}],
                 },
-                locks_lines: [“lq2”],
-            }),”lq3”: new Textline({
+                locks_lines: ["lq2"],
+            }),"lq3": new Textline({
                 is_unlocked: false,
-                name: “What do you mean...?”,
-                text: “[Lanzhi] There are special reasons.<br>In any case — stop here. This is a warning——“,
+                name: "What do you mean...?",
+                text: "[Lanzhi] There are special reasons.<br>In any case — stop here. This is a warning——",
                 unlocks: {
-                    locations: [“时封水牢 - IV”],
+                    locations: ["时封水牢 - IV"],
                 },
-                locks_lines: [“lq3”],
-            }),”lq4”: new Textline({
+                locks_lines: ["lq3"],
+            }),"lq4": new Textline({
                 is_unlocked: false,
-                name: “......”,
-                text: “[Lanzhi] That's enough — this is my final warning.<br>The way out of this prison isn't what you think it is.<br>Goodbye.<br><br>[Nanami] She's just going to leave like that?<br>This is... not what we expected.”,
+                name: "......",
+                text: "[Lanzhi] That's enough — this is my final warning.<br>The way out of this prison isn't what you think it is.<br>Goodbye.<br><br>[Nanami] She's just going to leave like that?<br>This is... not what we expected.",
                 unlocks: {
-                    textlines: [{dialogue: “蓝柒”, lines: [“lq5”]}],
+                    textlines: [{dialogue: "蓝柒", lines: ["lq5"]}],
                 },
-                locks_lines: [“lq4”],
-            }),”lq5”: new Textline({
+                locks_lines: ["lq4"],
+            }),"lq5": new Textline({
                 is_unlocked: false,
-                name: “Can't figure her out — and Qiuxing earlier didn't seem the warning type either.”,
-                text: “[Nako] That girl — is she really Lanzhi?<br>Her strength is definitely extraordinary, but she doesn't match the stories.<br>Even... I felt no hostility from her whatsoever.<br><br>[Nanami] More and more questions.<br>Does she mean there's a different way to escape this Water Prison?<br>[Nako] Let's head back, sis.<br>We'll think things over later.”,
+                name: "Can't figure her out — and Qiuxing earlier didn't seem the warning type either.",
+                text: "[Nako] That girl — is she really Lanzhi?<br>Her strength is definitely extraordinary, but she doesn't match the stories.<br>Even... I felt no hostility from her whatsoever.<br><br>[Nanami] More and more questions.<br>Does she mean there's a different way to escape this Water Prison?<br>[Nako] Let's head back, sis.<br>We'll think things over later.",
                 unlocks: {
-                    items: [{item_name: “传说红宝石”}],
+                    items: [{item_name: "传说红宝石"}],
                 },
-                locks_lines: [“lq5”],
-            }),”lq6”: new Textline({
+                locks_lines: ["lq5"],
+            }),"lq6": new Textline({
                 is_unlocked: false,
-                name: “......”,
-                text: “[Lanzhi] You are strong...<br>but to break free...<br>still not enough......”,
+                name: "......",
+                text: "[Lanzhi] You are strong...<br>but to break free...<br>still not enough......",
                 unlocks: {
-                    textlines: [{dialogue: “蓝柒”, lines: [“lq7”]}],
+                    textlines: [{dialogue: "蓝柒", lines: ["lq7"]}],
                 },
-                locks_lines: [“lq6”],
-            }),”lq7”: new Textline({
+                locks_lines: ["lq6"],
+            }),"lq7": new Textline({
                 is_unlocked: false,
-                name: “May I ask you something?”,
-                text: “[Nanami] When you saw us approach —<br>why did you react so... out of composure?<br><br>[Lanzhi] I'd rather not answer that...<br>Maybe... you'll understand soon enough.<br>But I can no longer help you.<br>”,
+                name: "May I ask you something?",
+                text: "[Nanami] When you saw us approach —<br>why did you react so... out of composure?<br><br>[Lanzhi] I'd rather not answer that...<br>Maybe... you'll understand soon enough.<br>But I can no longer help you.<br>",
                 unlocks: {
-                    locations: [“水牢走廊”],
-                    textlines: [{dialogue: “蓝柒”, lines: [“lq8-1”]},{dialogue: “蓝柒”, lines: [“lq8-2”]},{dialogue: “蓝柒”, lines: [“lq8-3”]}],
+                    locations: ["水牢走廊"],
+                    textlines: [{dialogue: "蓝柒", lines: ["lq8-1"]},{dialogue: "蓝柒", lines: ["lq8-2"]},{dialogue: "蓝柒", lines: ["lq8-3"]}],
                 },
-                locks_lines: [“lq7”],
+                locks_lines: ["lq7"],
             }),
-            “lq8-1”: new Textline({
+            "lq8-1": new Textline({
                 is_unlocked: false,
-                name: “<span style='color:red'><b>Kill</b></span>”,
-                text: “[Lanzhi] If... this is the Water Prison in your hearts...<br><br>(Sound of a moon blade slicing)<br><br>[Nako] Someone important... a reliable senior...<br>when did I become like this?<br>[Nanami] ...Keko, don't kill me, I'm scared...<br><br><br>Obtained <span class='coin coin_moneyQa'>5U</span> <span class='coin coin_moneyT'>810B</span> <span class='coin coin_moneyB'>358D</span> <span class='coin coin_moneyM'>643Z</span> <span class='coin coin_moneyK'>364X</span> <span class='coin coin_copper'>656C</span>!<br><span style='color:aqua'>Na Clan</span> approval of Nako decreased significantly!”,
+                name: "<span style='color:red'><b>Kill</b></span>",
+                text: "[Lanzhi] If... this is the Water Prison in your hearts...<br><br>(Sound of a moon blade slicing)<br><br>[Nako] Someone important... a reliable senior...<br>when did I become like this?<br>[Nanami] ...Keko, don't kill me, I'm scared...<br><br><br>Obtained <span class='coin coin_moneyQa'>5U</span> <span class='coin coin_moneyT'>810B</span> <span class='coin coin_moneyB'>358D</span> <span class='coin coin_moneyM'>643Z</span> <span class='coin coin_moneyK'>364X</span> <span class='coin coin_copper'>656C</span>!<br><span style='color:aqua'>Na Clan</span> approval of Nako decreased significantly!",
                 unlocks: {
-                    spec:”lq-kill”,
+                    spec:"lq-kill",
                 },
-                locks_lines: [“lq8-1”,”lq8-2”,”lq8-3”],
+                locks_lines: ["lq8-1","lq8-2","lq8-3"],
             }),
-            “lq8-2”: new Textline({
+            "lq8-2": new Textline({
                 is_unlocked: false,
-                name: “<span style='color:red'><b>Violate</b></span>”,
-                text: “Lanzhi had long been a figure shrouded in mystery in Nako's mind.<br>Taking this chance, she decided to bring Lanzhi back to the cave dwelling<br>for a thorough 'interrogation' to get to the bottom of things.<br>[Nako] Underground Palace Berserk Potion~ Ruins Berserk Potion~<br>Don't even think about recovering strength to resist me~<br>[Lanzhi] You're strong... but... still not enough...<br>[Nako] That's enough, is Domain Tier 4 really necessary?<br>(Nako takes out a bucket of otherworld elixir and drains it!)<br><br>Under multipliers that kept rising each round,<br>Lanzhi ultimately couldn't withstand Nako's 'assault.'<br><br>Lanzhi developed special feelings for Nako!”,
+                name: "<span style='color:red'><b>Violate</b></span>",
+                text: "Lanzhi had long been a figure shrouded in mystery in Nako's mind.<br>Taking this chance, she decided to bring Lanzhi back to the cave dwelling<br>for a thorough 'interrogation' to get to the bottom of things.<br>[Nako] Underground Palace Berserk Potion~ Ruins Berserk Potion~<br>Don't even think about recovering strength to resist me~<br>[Lanzhi] You're strong... but... still not enough...<br>[Nako] That's enough, is Domain Tier 4 really necessary?<br>(Nako takes out a bucket of otherworld elixir and drains it!)<br><br>Under multipliers that kept rising each round,<br>Lanzhi ultimately couldn't withstand Nako's 'assault.'<br><br>Lanzhi developed special feelings for Nako!",
                 unlocks: {
-                    spec:”lq-sox”,
+                    spec:"lq-sox",
                 },
-                locks_lines: [“lq8-1”,”lq8-2”,”lq8-3”],
+                locks_lines: ["lq8-1","lq8-2","lq8-3"],
             }),
-            “lq8-3”: new Textline({
+            "lq8-3": new Textline({
                 is_unlocked: false,
-                name: “<b>Leave</b>”,
-                text: “If you want to move forward, then go —<br>may the great immortal spirits bless you.”,
+                name: "<b>Leave</b>",
+                text: "If you want to move forward, then go —<br>may the great immortal spirits bless you.",
                 unlocks: {
                 },
-                locks_lines: [“lq8-1”,”lq8-2”,”lq8-3”],
+                locks_lines: ["lq8-1","lq8-2","lq8-3"],
             }),
         }
     });
@@ -2543,235 +2543,235 @@ class Textline {
     });
 
 
-    dialogues[“溪月(核心)”] = new Dialogue({
-        name: “Xiyue (Core)”,
-        starting_text: “Talk with the pink-haired girl [Xiyue]”,
+    dialogues["溪月(核心)"] = new Dialogue({
+        name: "Xiyue (Core)",
+        starting_text: "Talk with the pink-haired girl [Xiyue]",
         textlines: {
-            “hx11_1”: new Textline({
+            "hx11_1": new Textline({
                 is_unlocked: true,
-                name: “(Open eyes)”,
-                text: “[Xiyue] Welcome to the deepest layer of the Illusory Realm Core —<br>Illusory Realm Core · Present World.<br>Don't look around — you won't find me.<br>I'm deep within your mindspace, communicating through thought alone.”,
+                name: "(Open eyes)",
+                text: "[Xiyue] Welcome to the deepest layer of the Illusory Realm Core —<br>Illusory Realm Core · Present World.<br>Don't look around — you won't find me.<br>I'm deep within your mindspace, communicating through thought alone.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx12”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx12"]}],
                 },
-                locks_lines: [“hx11_1”],
+                locks_lines: ["hx11_1"],
             }),
-            “hx12”: new Textline({
+            "hx12": new Textline({
                 is_unlocked: false,
-                name: “Miss Xiyue, why are you here?”,
-                text: “[Nako] Also — what's going on with this Illusory Realm,<br>and Senior Zuo'a, he——<br><br>[Xiyue] Don't call that guy 'Senior' in here, ugh.<br>Right now he's busy trying to erase the soul marks on you —<br>too preoccupied to notice, which gave me a chance to slip in.”,
+                name: "Miss Xiyue, why are you here?",
+                text: "[Nako] Also — what's going on with this Illusory Realm,<br>and Senior Zuo'a, he——<br><br>[Xiyue] Don't call that guy 'Senior' in here, ugh.<br>Right now he's busy trying to erase the soul marks on you —<br>too preoccupied to notice, which gave me a chance to slip in.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx13”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx13"]}],
                 },
-                locks_lines: [“hx12”],
+                locks_lines: ["hx12"],
             }),
-            “hx13”: new Textline({
+            "hx13": new Textline({
                 is_unlocked: false,
-                name: “Huh?”,
-                text: “[Xiyue] I'll keep it short —<br>not that it matters; thought-transmission is fast.<br>This won't take much of your time.<br>First — do you remember the 'Strength Ranking' from the Water Prison?<br>Yes, I mean the spot that's been sitting empty at number one.”,
+                name: "Huh?",
+                text: "[Xiyue] I'll keep it short —<br>not that it matters; thought-transmission is fast.<br>This won't take much of your time.<br>First — do you remember the 'Strength Ranking' from the Water Prison?<br>Yes, I mean the spot that's been sitting empty at number one.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx14”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx14"]}],
                 },
-                locks_lines: [“hx13”],
+                locks_lines: ["hx13"],
             }),
-            “hx14”: new Textline({
+            "hx14": new Textline({
                 is_unlocked: false,
-                name: “Why bring that up out of nowhere.”,
-                text: “[Nako] Intel says that for hundreds of years,<br>the number one spot has been left empty by Lanzhi.<br><br>[Xiyue] Heh heh... of course it's empty,<br>because number one already left the Water Prison<br>and went over to the master of this barrier.<br>'Went over' is a stretch — it was more like going undercover beside Zuo'a,<br>who happened to find some use in them<br>and so accepted them in —<br>and along the way, gathered a great deal of intelligence.”,
+                name: "Why bring that up out of nowhere.",
+                text: "[Nako] Intel says that for hundreds of years,<br>the number one spot has been left empty by Lanzhi.<br><br>[Xiyue] Heh heh... of course it's empty,<br>because number one already left the Water Prison<br>and went over to the master of this barrier.<br>'Went over' is a stretch — it was more like going undercover beside Zuo'a,<br>who happened to find some use in them<br>and so accepted them in —<br>and along the way, gathered a great deal of intelligence.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx15”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx15"]}],
                 },
-                locks_lines: [“hx14”],
+                locks_lines: ["hx14"],
             }),
-            “hx15”: new Textline({
+            "hx15": new Textline({
                 is_unlocked: false,
-                name: “The former number one on the Strength Ranking... that's you?!”,
-                text: “[Xiyue] Clever, clever! As expected,<br>talking to a smart kid is such a pleasure.<br>Little Blue is just as smart as you,<br>but unfortunately she doesn't like talking.<br>Back in the Water Prison, she... ah, I'm getting sidetracked.”,
+                name: "The former number one on the Strength Ranking... that's you?!",
+                text: "[Xiyue] Clever, clever! As expected,<br>talking to a smart kid is such a pleasure.<br>Little Blue is just as smart as you,<br>but unfortunately she doesn't like talking.<br>Back in the Water Prison, she... ah, I'm getting sidetracked.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx16”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx16"]}],
                 },
-                locks_lines: [“hx15”],
+                locks_lines: ["hx15"],
             }),
-            “hx16”: new Textline({
+            "hx16": new Textline({
                 is_unlocked: false,
-                name: “You mean [Lanzhi].”,
-                text: “[Nako] ...When I was leaving the Water Prison,<br>she said some things that were only half-clear to me.<br><br>[Xiyue] Ah, I can probably guess what she said.<br>The reason she wasn't more direct<br>wasn't that she didn't want to — she couldn't.<br>The entire Water Prison is under [Zuo'a]'s surveillance.<br>When conveying any message, one wrong move,<br>one hint of suspicion from him, and it could mean death!”,
+                name: "You mean [Lanzhi].",
+                text: "[Nako] ...When I was leaving the Water Prison,<br>she said some things that were only half-clear to me.<br><br>[Xiyue] Ah, I can probably guess what she said.<br>The reason she wasn't more direct<br>wasn't that she didn't want to — she couldn't.<br>The entire Water Prison is under [Zuo'a]'s surveillance.<br>When conveying any message, one wrong move,<br>one hint of suspicion from him, and it could mean death!",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx17”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx17"]}],
                 },
-                locks_lines: [“hx16”],
+                locks_lines: ["hx16"],
             }),
-            “hx17”: new Textline({
+            "hx17": new Textline({
                 is_unlocked: false,
-                name: “Just what kind of person is Zuo'a?”,
-                text: “[Xiyue] He is a <span class='realm_realm'>Domain-level</span> powerhouse —<br>and a complete and utter... madman.<br><br>[Nako] Then, those precious inheritances...<br>don't tell me——<br><br>[Xiyue] All an illusion. On the surface he seems to be selecting talented cultivators to receive an inheritance,<br>but in reality, he just wants to use them to rebuild his body —<br>to forge a 'vessel' that can contain his soul!<br>As far as I know, every powerhouse who leaves the Water Prison,<br>no matter the method,<br>has ended up without exception<br>as part of that vessel.”,
+                name: "Just what kind of person is Zuo'a?",
+                text: "[Xiyue] He is a <span class='realm_realm'>Domain-level</span> powerhouse —<br>and a complete and utter... madman.<br><br>[Nako] Then, those precious inheritances...<br>don't tell me——<br><br>[Xiyue] All an illusion. On the surface he seems to be selecting talented cultivators to receive an inheritance,<br>but in reality, he just wants to use them to rebuild his body —<br>to forge a 'vessel' that can contain his soul!<br>As far as I know, every powerhouse who leaves the Water Prison,<br>no matter the method,<br>has ended up without exception<br>as part of that vessel.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx18”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx18"]}],
                 },
-                locks_lines: [“hx17”],
+                locks_lines: ["hx17"],
             }),
-            “hx18”: new Textline({
+            "hx18": new Textline({
                 is_unlocked: false,
-                name: “What——!”,
-                text: “[Xiyue] The minimum standard to become a vessel is...<br>a living person with high-tier Sky Rank strength.<br>If you have Domain Tier 3,<br>you've undoubtedly met that threshold as well.<br>The exit of the Water Prison, once you meet the standard,<br>will summon the powerhouses to walk out —<br>and they naturally, inevitably become part of the vessel.”,
+                name: "What——!",
+                text: "[Xiyue] The minimum standard to become a vessel is...<br>a living person with high-tier Sky Rank strength.<br>If you have Domain Tier 3,<br>you've undoubtedly met that threshold as well.<br>The exit of the Water Prison, once you meet the standard,<br>will summon the powerhouses to walk out —<br>and they naturally, inevitably become part of the vessel.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx19”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx19"]}],
                 },
-                locks_lines: [“hx18”],
+                locks_lines: ["hx18"],
             }),
-            “hx19”: new Textline({
+            "hx19": new Textline({
                 is_unlocked: false,
-                name: “Then what's this about killing all the other powerhouses?”,
-                text: “[Xiyue] That was just a front...<br>Life-and-death battles are always the catalyst that forges powerhouses.<br>Historically, no one has ever killed every powerhouse in the Water Prison.<br>Because... outsiders who stumble into this secret realm<br>keep flowing in almost endlessly.<br>The only fates for these powerhouses are to be killed by others,<br>to die of old age, or to become part of the vessel.”,
+                name: "Then what's this about killing all the other powerhouses?",
+                text: "[Xiyue] That was just a front...<br>Life-and-death battles are always the catalyst that forges powerhouses.<br>Historically, no one has ever killed every powerhouse in the Water Prison.<br>Because... outsiders who stumble into this secret realm<br>keep flowing in almost endlessly.<br>The only fates for these powerhouses are to be killed by others,<br>to die of old age, or to become part of the vessel.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx20”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx20"]}],
                 },
-                locks_lines: [“hx19”],
+                locks_lines: ["hx19"],
             }),
-            “hx20”: new Textline({
+            "hx20": new Textline({
                 is_unlocked: false,
-                name: “'Life-and-death battles are always the catalyst that forges powerhouses'”,
-                text: “[Nako] 'A single powerhouse born from ten thousand weaklings<br>is worth more to the group than all ten thousand weaklings combined'<br>...Fine, I get it.<br>When does your HP bar appear?<br>(Red and blue light flickers in her eyes)<br><br>[Xiyue] Heh heh...<br>The way this girl reacts —<br>she's clearly met too many lunatics.<br>Unfortunately Shaxue didn't give me any stat boosts,<br>so all I can give you is the intelligence I have!”,
+                name: "'Life-and-death battles are always the catalyst that forges powerhouses'",
+                text: "[Nako] 'A single powerhouse born from ten thousand weaklings<br>is worth more to the group than all ten thousand weaklings combined'<br>...Fine, I get it.<br>When does your HP bar appear?<br>(Red and blue light flickers in her eyes)<br><br>[Xiyue] Heh heh...<br>The way this girl reacts —<br>she's clearly met too many lunatics.<br>Unfortunately Shaxue didn't give me any stat boosts,<br>so all I can give you is the intelligence I have!",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx21”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx21"]}],
                 },
-                locks_lines: [“hx20”],
+                locks_lines: ["hx20"],
             }),
-            “hx21”: new Textline({
+            "hx21": new Textline({
                 is_unlocked: false,
-                name: “(Receive intel pt1)”,
-                text: “Zuo'a — an utterly insignificant nobody.<br>Among the overflowing talent of the Huntian Gate,<br>he went unnoticed with his mediocre aptitude,<br>pushed aside by fellow disciples, subjected to endless cold looks.<br>In this world full of competition and killing,<br>the weak could only ever live at the very bottom.<br>He pushed himself desperately, but his cultivation talent was simply too poor to change anything.<br>Then one day, he encountered a fellow disciple with true genius.<br>The two hit it off wonderfully, and in a moment of good spirits, drank a few too many cups.<br>From that drunken night — one of them never woke up again.”,
+                name: "(Receive intel pt1)",
+                text: "Zuo'a — an utterly insignificant nobody.<br>Among the overflowing talent of the Huntian Gate,<br>he went unnoticed with his mediocre aptitude,<br>pushed aside by fellow disciples, subjected to endless cold looks.<br>In this world full of competition and killing,<br>the weak could only ever live at the very bottom.<br>He pushed himself desperately, but his cultivation talent was simply too poor to change anything.<br>Then one day, he encountered a fellow disciple with true genius.<br>The two hit it off wonderfully, and in a moment of good spirits, drank a few too many cups.<br>From that drunken night — one of them never woke up again.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx22”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx22"]}],
                 },
                 locks_lines: ["hx21"],
             }), 
-            “hx22”: new Textline({
+            "hx22": new Textline({
                 is_unlocked: false,
-                name: “(Receive intel pt2)”,
-                text: “In everyone's eyes, he had abandoned his ambitions,<br>spending his days socializing and drinking.<br>Over time, he managed to befriend a few people of standing.<br>At last, he could hold his head up in front of his fellow disciples —<br>but what no one could have imagined<br>was that this was merely the first step of his grand plan.<br>On that day, the sect's upper echelon<br>found his martial brother's corpse in the Beast Forest.<br>Beside the body were several Sky Rank beasts.<br>He had clearly just survived a fierce battle,<br>covered in blood, his face smeared with mud and ash.”,
+                name: "(Receive intel pt2)",
+                text: "In everyone's eyes, he had abandoned his ambitions,<br>spending his days socializing and drinking.<br>Over time, he managed to befriend a few people of standing.<br>At last, he could hold his head up in front of his fellow disciples —<br>but what no one could have imagined<br>was that this was merely the first step of his grand plan.<br>On that day, the sect's upper echelon<br>found his martial brother's corpse in the Beast Forest.<br>Beside the body were several Sky Rank beasts.<br>He had clearly just survived a fierce battle,<br>covered in blood, his face smeared with mud and ash.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx23”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx23"]}],
                 },
-                locks_lines: [“hx22”],
+                locks_lines: ["hx22"],
             }),
-            “hx23”: new Textline({
+            "hx23": new Textline({
                 is_unlocked: false,
-                name: “(Receive intel pt3)”,
-                text: “After that, Zuo'a became despondent,<br>as if his martial brother's death had hit him hard.<br>He stopped drinking and socializing, instead spending every day immersed in the cultivation chamber.<br>His cultivation began to climb steadily from that point on.<br>Everyone assumed the shock had suddenly awakened him,<br>and they all began to see him in a different light.<br>The Gate Master was especially thrilled,<br>and immediately appointed him Deputy Master on the spot —<br>the future successor of the Huntian Gate!<br><br>[Xiyue] Mm. That's how it went.<br>This should have been an inspirational story...<br>But, little girl — have you spotted the inconsistency?”,
+                name: "(Receive intel pt3)",
+                text: "After that, Zuo'a became despondent,<br>as if his martial brother's death had hit him hard.<br>He stopped drinking and socializing, instead spending every day immersed in the cultivation chamber.<br>His cultivation began to climb steadily from that point on.<br>Everyone assumed the shock had suddenly awakened him,<br>and they all began to see him in a different light.<br>The Gate Master was especially thrilled,<br>and immediately appointed him Deputy Master on the spot —<br>the future successor of the Huntian Gate!<br><br>[Xiyue] Mm. That's how it went.<br>This should have been an inspirational story...<br>But, little girl — have you spotted the inconsistency?",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx24”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx24"]}],
                 },
-                locks_lines: [“hx23”],
+                locks_lines: ["hx23"],
             }),
-            “hx24”: new Textline({
+            "hx24": new Textline({
                 is_unlocked: false,
-                name: “The circumstances of that martial brother's death are suspicious——“,
-                text: “[Xiyue] Correct! Later,<br>the Huntian Gate's master also noticed something was wrong<br>and ordered a thorough investigation——<br>”,
+                name: "The circumstances of that martial brother's death are suspicious——",
+                text: "[Xiyue] Correct! Later,<br>the Huntian Gate's master also noticed something was wrong<br>and ordered a thorough investigation——<br>",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx25”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx25"]}],
                 },
-                locks_lines: [“hx24”],
+                locks_lines: ["hx24"],
             }),
-            “hx25”: new Textline({
+            "hx25": new Textline({
                 is_unlocked: false,
-                name: “(Receive intel pt4)”,
-                text: “After Zuo'a rose to a position of power,<br>his nature became more brazen and unrestrained.<br>Because his virtue didn't match his position, those who resented him grew in number.<br>You can't wrap a fire in paper——<br>the matter of the fallen martial brother was brought up again,<br>and many disciples confronted Zuo'a,<br>analyzing the many suspicious details of the affair.<br>The Gate Master was a Domain-level powerhouse —<br>illusions that ordinary people couldn't see through<br>were completely transparent to his eyes,<br>and before long, clues kept being gathered.”,
+                name: "(Receive intel pt4)",
+                text: "After Zuo'a rose to a position of power,<br>his nature became more brazen and unrestrained.<br>Because his virtue didn't match his position, those who resented him grew in number.<br>You can't wrap a fire in paper——<br>the matter of the fallen martial brother was brought up again,<br>and many disciples confronted Zuo'a,<br>analyzing the many suspicious details of the affair.<br>The Gate Master was a Domain-level powerhouse —<br>illusions that ordinary people couldn't see through<br>were completely transparent to his eyes,<br>and before long, clues kept being gathered.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx26”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx26"]}],
                 },
-                locks_lines: [“hx25”],
+                locks_lines: ["hx25"],
             }),
-            “hx26”: new Textline({
+            "hx26": new Textline({
                 is_unlocked: false,
-                name: “(Receive intel pt5)”,
-                text: “When the truth came to light and everyone awakened to the reality —<br>that the martial brother truly had been killed by Zuo'a,<br>and that his Innate Primordial Spirit Body had been seized and taken over by Zuo'a —<br>it was already too late. Everyone discovered in horror<br>that Zuo'a had been exploiting his position as Deputy Master<br>to train for years within the sect's supreme treasure —<br>the [Hall of Time].<br>His true cultivation had long since surpassed his surface level by an unknown margin!<br>When the false mask was torn away,<br>in merely a hundred-some years,<br>he had already cultivated to Yunxiao Tier 9!”,
+                name: "(Receive intel pt5)",
+                text: "When the truth came to light and everyone awakened to the reality —<br>that the martial brother truly had been killed by Zuo'a,<br>and that his Innate Primordial Spirit Body had been seized and taken over by Zuo'a —<br>it was already too late. Everyone discovered in horror<br>that Zuo'a had been exploiting his position as Deputy Master<br>to train for years within the sect's supreme treasure —<br>the [Hall of Time].<br>His true cultivation had long since surpassed his surface level by an unknown margin!<br>When the false mask was torn away,<br>in merely a hundred-some years,<br>he had already cultivated to Yunxiao Tier 9!",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx27”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx27"]}],
                 },
-                locks_lines: [“hx26”],
+                locks_lines: ["hx26"],
             }),
-            “hx27”: new Textline({
+            "hx27": new Textline({
                 is_unlocked: false,
-                name: “(Receive intel pt6)”,
-                text: “Zuo'a swept a cold gaze across the crowd,<br>and with his ruthless and brutal nature, he struck first.<br>The Gate Master moved to stop him, only to discover that the Zuo'a before him was merely a phantom.<br>His true body, under the guise of Deputy Master,<br>had already moved unobstructed from one sect hall to another,<br>unleashing a one-sided slaughter.<br>He was Yunxiao Tier 9, and had seized the Innate Primordial Spirit Body —<br>the Earth-rank and Sky-rank disciples,<br>even the Yunxiao-rank sect elders, were utterly powerless against him!”,
+                name: "(Receive intel pt6)",
+                text: "Zuo'a swept a cold gaze across the crowd,<br>and with his ruthless and brutal nature, he struck first.<br>The Gate Master moved to stop him, only to discover that the Zuo'a before him was merely a phantom.<br>His true body, under the guise of Deputy Master,<br>had already moved unobstructed from one sect hall to another,<br>unleashing a one-sided slaughter.<br>He was Yunxiao Tier 9, and had seized the Innate Primordial Spirit Body —<br>the Earth-rank and Sky-rank disciples,<br>even the Yunxiao-rank sect elders, were utterly powerless against him!",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx28”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx28"]}],
                 },
-                locks_lines: [“hx27”],
+                locks_lines: ["hx27"],
             }),
-            “hx28”: new Textline({
+            "hx28": new Textline({
                 is_unlocked: false,
-                name: “(Receive intel pt7)”,
-                text: “Of the entire Huntian Gate, only the Gate Master remained to face him.<br>And that Gate Master, without a moment's hesitation,<br>laid down his own life to fight Zuo'a to the death.<br>Even so, the losses to the Huntian Gate were catastrophic.<br>This scene, witnessed by several other factions,<br>caused massive upheaval.<br>The Gate Master fell. Zuo'a's body was destroyed,<br>but he made a breakthrough at the last moment, and his soul escaped.<br>The sect's supreme treasure, the [Hall of Time], was taken by him as well.<br>Soon after, the Huntian Gate was carved up by many forces. The once-invincible, greatest power...”,
+                name: "(Receive intel pt7)",
+                text: "Of the entire Huntian Gate, only the Gate Master remained to face him.<br>And that Gate Master, without a moment's hesitation,<br>laid down his own life to fight Zuo'a to the death.<br>Even so, the losses to the Huntian Gate were catastrophic.<br>This scene, witnessed by several other factions,<br>caused massive upheaval.<br>The Gate Master fell. Zuo'a's body was destroyed,<br>but he made a breakthrough at the last moment, and his soul escaped.<br>The sect's supreme treasure, the [Hall of Time], was taken by him as well.<br>Soon after, the Huntian Gate was carved up by many forces. The once-invincible, greatest power...",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx29”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx29"]}],
                 },
-                locks_lines: [“hx28”],
+                locks_lines: ["hx28"],
             }),
-            “hx29”: new Textline({
+            "hx29": new Textline({
                 is_unlocked: false,
-                name: “Faded from the annals of Yangang Hunting Ground's history.”,
-                text: “[Xiyue] The rest of that story, you already know.<br>No need to repeat it.<br>That's how it was.<br>The Gate Master's family had originally been a distinguished house in the Yangang Hunting Ground.<br>After that earth-shaking war,<br>the Huntian Gate vanished, the family's strength was devastated, and they fell from grace.<br>That Gate Master was a man worthy of respect —<br>he single-handedly spared the entire sect from being wiped out to the last person.<br>And, he was also —<br>my ancestor. Mine and Lanzhi's.”,
+                name: "Faded from the annals of Yangang Hunting Ground's history.",
+                text: "[Xiyue] The rest of that story, you already know.<br>No need to repeat it.<br>That's how it was.<br>The Gate Master's family had originally been a distinguished house in the Yangang Hunting Ground.<br>After that earth-shaking war,<br>the Huntian Gate vanished, the family's strength was devastated, and they fell from grace.<br>That Gate Master was a man worthy of respect —<br>he single-handedly spared the entire sect from being wiped out to the last person.<br>And, he was also —<br>my ancestor. Mine and Lanzhi's.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx30”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx30"]}],
                 },
-                locks_lines: [“hx29”],
+                locks_lines: ["hx29"],
             }),
-            “hx30”: new Textline({
+            "hx30": new Textline({
                 is_unlocked: false,
-                name: “It must be such a painful thing to carry.”,
-                text: “[Nako] Hearing someone speak so lightly of something so heavy.<br><br>[Xiyue] Ah, it's alright.<br>I'm actually very happy right now — because I can see hope —<br>hope that we can rewrite this fate.<br>Our family has endured in silence for generations,<br>a full ten eras have passed,<br>during which we gathered intelligence without pause,<br>tracking down Zuo'a's whereabouts<br>and everything he has done over these years.”,
+                name: "It must be such a painful thing to carry.",
+                text: "[Nako] Hearing someone speak so lightly of something so heavy.<br><br>[Xiyue] Ah, it's alright.<br>I'm actually very happy right now — because I can see hope —<br>hope that we can rewrite this fate.<br>Our family has endured in silence for generations,<br>a full ten eras have passed,<br>during which we gathered intelligence without pause,<br>tracking down Zuo'a's whereabouts<br>and everything he has done over these years.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx31”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx31"]}],
                 },
-                locks_lines: [“hx30”],
+                locks_lines: ["hx30"],
             }),
-            “hx31”: new Textline({
+            "hx31": new Textline({
                 is_unlocked: false,
-                name: “...”,
-                text: “[Xiyue] And so, under those conditions,<br>Lanzhi and I<br>quietly disguised ourselves as ordinary adventurers,<br>crept into position at Zuo'a's side, and...<br>waited for the right moment to strike!<br>What Lanzhi was doing in the Water Prison<br>wasn't protecting her own status —<br>she was protecting the powerhouses inside the Water Prison,<br>preventing them from growing stronger<br>and reaching the standard to become a 'vessel.'<br><br>[Nako] Phew... what a winding tale...<br>You've been waiting, haven't you?”,
+                name: "...",
+                text: "[Xiyue] And so, under those conditions,<br>Lanzhi and I<br>quietly disguised ourselves as ordinary adventurers,<br>crept into position at Zuo'a's side, and...<br>waited for the right moment to strike!<br>What Lanzhi was doing in the Water Prison<br>wasn't protecting her own status —<br>she was protecting the powerhouses inside the Water Prison,<br>preventing them from growing stronger<br>and reaching the standard to become a 'vessel.'<br><br>[Nako] Phew... what a winding tale...<br>You've been waiting, haven't you?",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx32”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx32"]}],
                 },
-                locks_lines: [“hx31”],
+                locks_lines: ["hx31"],
             }),
-            “hx32”: new Textline({
+            "hx32": new Textline({
                 is_unlocked: false,
-                name: “Waiting for a power that could reverse the tides of fate to appear?”,
-                text: “[Xiyue] That's right. I know our plan is dangerous —<br>you could even say we have no guarantees.<br>Because Zuo'a right now<br>is on the verge of recovering to his former state.<br>This is the only chance to kill him,<br>so we have no choice but to go all in.<br>Even if it costs us our lives, we've accepted that.<br>Lanzhi and I — our family has waited ten eras.<br>We don't want to keep waiting any longer.”,
+                name: "Waiting for a power that could reverse the tides of fate to appear?",
+                text: "[Xiyue] That's right. I know our plan is dangerous —<br>you could even say we have no guarantees.<br>Because Zuo'a right now<br>is on the verge of recovering to his former state.<br>This is the only chance to kill him,<br>so we have no choice but to go all in.<br>Even if it costs us our lives, we've accepted that.<br>Lanzhi and I — our family has waited ten eras.<br>We don't want to keep waiting any longer.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx33”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx33"]}],
                 },
-                locks_lines: [“hx32”],
+                locks_lines: ["hx32"],
             }),
-            “hx33”: new Textline({
+            "hx33": new Textline({
                 is_unlocked: false,
-                name: “I believe you.”,
-                text: “[Nako] So Zuo'a has been hoarding all those treasures...<br>that explains it.<br>Wait — by that logic, isn't sis in danger?!<br><br>[Xiyue] Mm mm, don't worry.<br>Your sis is in a chest, right!<br>As long as we destroy this place before Zuo'a goes rummaging through it<br>and drags her out,<br>she'll be fine.<br>I'll do everything I can to protect your sis and get her out safe and sound.”,
+                name: "I believe you.",
+                text: "[Nako] So Zuo'a has been hoarding all those treasures...<br>that explains it.<br>Wait — by that logic, isn't sis in danger?!<br><br>[Xiyue] Mm mm, don't worry.<br>Your sis is in a chest, right!<br>As long as we destroy this place before Zuo'a goes rummaging through it<br>and drags her out,<br>she'll be fine.<br>I'll do everything I can to protect your sis and get her out safe and sound.",
                 unlocks: {
-                    textlines: [{dialogue: “溪月(核心)”, lines: [“hx34”]}],
+                    textlines: [{dialogue: "溪月(核心)", lines: ["hx34"]}],
                 },
-                locks_lines: [“hx33”],
+                locks_lines: ["hx33"],
             }),
-            “hx34”: new Textline({
+            "hx34": new Textline({
                 is_unlocked: false,
-                name: “I'll give it everything I've got too!”,
-                text: “[Nako] Then, Miss Xiyue — it's a pleasure to work with you.<br><br>[Xiyue] ...Thank you. I'm counting on you...<br><br>”,
+                name: "I'll give it everything I've got too!",
+                text: "[Nako] Then, Miss Xiyue — it's a pleasure to work with you.<br><br>[Xiyue] ...Thank you. I'm counting on you...<br><br>",
                 unlocks: {
-                    locations:[“幻境核心 - 6”],
+                    locations:["幻境核心 - 6"],
                 },
-                locks_lines: [“hx34”],
+                locks_lines: ["hx34"],
             }),
-            “hx35”: new Textline({
+            "hx35": new Textline({
                 is_unlocked: false,
-                name: “Now — open the way to the final battlefield!”,
-                text: “[Xiyue] Mm... ready!<br><br>”,
+                name: "Now — open the way to the final battlefield!",
+                text: "[Xiyue] Mm... ready!<br><br>",
                 unlocks: {
-                    locations:[“幻境核心·决战”],
+                    locations:["幻境核心·决战"],
                     spec:'save',
                 },
-                locks_lines: [“hx35”],
+                locks_lines: ["hx35"],
             }),
         }
     })
@@ -2790,83 +2790,83 @@ class Textline {
             }),
         }
     });
-    dialogues[“左阿(决战)”] = new Dialogue({
-        name: “Zuo'a (Final Battle)”,
-        starting_text: “Speak with 'Senior' Zuo'a”,
+    dialogues["左阿(决战)"] = new Dialogue({
+        name: "Zuo'a (Final Battle)",
+        starting_text: "Speak with 'Senior' Zuo'a",
         textlines: {
-            “za1”: new Textline({
+            "za1": new Textline({
                 is_unlocked: true,
-                name: “So I've finally arrived — the source of power sustaining this entire Illusory Realm...”,
-                text: “[Zuo'a] Congratulations, little girl.<br>You've made it here alive —<br>which means you qualify to receive my, [Zuo'a]'s, inheritance.<br>Only——“,
+                name: "So I've finally arrived — the source of power sustaining this entire Illusory Realm...",
+                text: "[Zuo'a] Congratulations, little girl.<br>You've made it here alive —<br>which means you qualify to receive my, [Zuo'a]'s, inheritance.<br>Only——",
                 unlocks: {
-                    textlines: [{dialogue: “左阿(决战)”, lines: [“za2”]}],
+                    textlines: [{dialogue: "左阿(决战)", lines: ["za2"]}],
                 },
-                locks_lines: [“za1”],
+                locks_lines: ["za1"],
             }),
-            “za2”: new Textline({
+            "za2": new Textline({
                 is_unlocked: false,
-                name: “No need to reveal the punchline — I already know.”,
-                text: “[Nako] You've told so many lies.<br>I'm truly disappointed in you, Senior Zuo'a.<br><br>[Zuo'a] Ahahahaha, good, interesting, very interesting.<br>It seems things have taken, just the tiniest bit,<br>an unexpected turn.”,
+                name: "No need to reveal the punchline — I already know.",
+                text: "[Nako] You've told so many lies.<br>I'm truly disappointed in you, Senior Zuo'a.<br><br>[Zuo'a] Ahahahaha, good, interesting, very interesting.<br>It seems things have taken, just the tiniest bit,<br>an unexpected turn.",
                 unlocks: {
-                    textlines: [{dialogue: “左阿(决战)”, lines: [“za3”]}],
+                    textlines: [{dialogue: "左阿(决战)", lines: ["za3"]}],
                 },
-                locks_lines: [“za2”],
+                locks_lines: ["za2"],
             }),
-            “za3”: new Textline({
+            "za3": new Textline({
                 is_unlocked: false,
-                name: “Your time has passed, Senior.”,
-                text: “[Nako] There's no need to cause any more trouble here.<br><br>[Zuo'a] Save the speech. My hundred-thousand-year plan<br>is now just one step from completion —<br>do you really think I'd abandon it for one little girl?<br>You know how much I despise that undying Gate Master.<br>If not for him,<br>would a man of my caliber have been forced to languish in this barrier for a hundred thousand years?”,
+                name: "Your time has passed, Senior.",
+                text: "[Nako] There's no need to cause any more trouble here.<br><br>[Zuo'a] Save the speech. My hundred-thousand-year plan<br>is now just one step from completion —<br>do you really think I'd abandon it for one little girl?<br>You know how much I despise that undying Gate Master.<br>If not for him,<br>would a man of my caliber have been forced to languish in this barrier for a hundred thousand years?",
                 unlocks: {
-                    textlines: [{dialogue: “左阿(决战)”, lines: [“za4”]}],
+                    textlines: [{dialogue: "左阿(决战)", lines: ["za4"]}],
                 },
-                locks_lines: [“za3”],
+                locks_lines: ["za3"],
             }),
-            “za4”: new Textline({
+            "za4": new Textline({
                 is_unlocked: false,
-                name: “After everything you've done — have you still not realized how utterly mediocre you are?”,
-                text: “[Nako] You've been wrong from the very first step.<br>In a hundred thousand years, a total of over 230,000 adventurers<br>have stumbled in here.<br>The 200,000 of them who hadn't reached Sky Rank<br>became nourishment for the barrier the instant they stepped in.<br>You didn't even consider looting their packs——<br>what if someone was carrying a treasure like the B6 Laser Gun?<br>You're just going to pass that up?”,
+                name: "After everything you've done — have you still not realized how utterly mediocre you are?",
+                text: "[Nako] You've been wrong from the very first step.<br>In a hundred thousand years, a total of over 230,000 adventurers<br>have stumbled in here.<br>The 200,000 of them who hadn't reached Sky Rank<br>became nourishment for the barrier the instant they stepped in.<br>You didn't even consider looting their packs——<br>what if someone was carrying a treasure like the B6 Laser Gun?<br>You're just going to pass that up?",
                 unlocks: {
-                    textlines: [{dialogue: “左阿(决战)”, lines: [“za5”]}],
+                    textlines: [{dialogue: "左阿(决战)", lines: ["za5"]}],
                 },
-                locks_lines: [“za4”],
+                locks_lines: ["za4"],
             }),
-            “za5”: new Textline({
+            "za5": new Textline({
                 is_unlocked: false,
-                name: “Thirty thousand Sky Rank cultivators, under the Water Prison's accelerated time,”,
-                text: “[Nako] survived five hundred thousand years of endless slaughter,<br>with only a few hundred left alive today.<br>Considering a Sky Rank cultivator's lifespan is only ten thousand years...<br>the fact that hundreds are still alive today<br>means the vast majority died of natural causes!<br>The atmosphere in the Water Prison should be one of mutual suspicion and backstabbing —<br>not the orderly society it's become!”,
+                name: "Thirty thousand Sky Rank cultivators, under the Water Prison's accelerated time,",
+                text: "[Nako] survived five hundred thousand years of endless slaughter,<br>with only a few hundred left alive today.<br>Considering a Sky Rank cultivator's lifespan is only ten thousand years...<br>the fact that hundreds are still alive today<br>means the vast majority died of natural causes!<br>The atmosphere in the Water Prison should be one of mutual suspicion and backstabbing —<br>not the orderly society it's become!",
                 unlocks: {
-                    textlines: [{dialogue: “左阿(决战)”, lines: [“za6”]}],
+                    textlines: [{dialogue: "左阿(决战)", lines: ["za6"]}],
                 },
-                locks_lines: [“za5”],
+                locks_lines: ["za5"],
             }),
-            “za6”: new Textline({
+            "za6": new Textline({
                 is_unlocked: false,
-                name: “Furthermore, twenty-five Yunxiao-rank powerhouses,”,
-                text: “[Nako] because they had already met the threshold to become vessels,<br>were killed by you without a second thought...<br>And that's your excuse for leaving your soul sitting idle all this time?<br><br>[Zuo'a] Little girl,<br>I'm not sure where you found the nerve<br>to start lecturing me on my poor Water Prison management.<br>But your cultivation, to me, is still far too green.”,
+                name: "Furthermore, twenty-five Yunxiao-rank powerhouses,",
+                text: "[Nako] because they had already met the threshold to become vessels,<br>were killed by you without a second thought...<br>And that's your excuse for leaving your soul sitting idle all this time?<br><br>[Zuo'a] Little girl,<br>I'm not sure where you found the nerve<br>to start lecturing me on my poor Water Prison management.<br>But your cultivation, to me, is still far too green.",
                 unlocks: {
-                    textlines: [{dialogue: “左阿(决战)”, lines: [“za7”]}],
+                    textlines: [{dialogue: "左阿(决战)", lines: ["za7"]}],
                 },
-                locks_lines: [“za6”],
+                locks_lines: ["za6"],
             }),
-            “za7”: new Textline({
+            "za7": new Textline({
                 is_unlocked: false,
-                name: “[Zuo'a] Are you joking?”,
-                text: “[Nako] Time's up.<br>Time to evolve — Domain power.”,
+                name: "[Zuo'a] Are you joking?",
+                text: "[Nako] Time's up.<br>Time to evolve — Domain power.",
                 unlocks: {
-                    textlines: [{dialogue: “左阿(决战)”, lines: [“za8”]}],
-                    spec:”realm-IV”,
+                    textlines: [{dialogue: "左阿(决战)", lines: ["za8"]}],
+                    spec:"realm-IV",
                 },
-                locks_lines: [“za7”],
+                locks_lines: ["za7"],
             }),
-            “za8”: new Textline({
+            "za8": new Textline({
                 is_unlocked: false,
-                name: “(Warning ⚠️: Fast Return will be disabled after triggering this scene)”,
-                text: “[Zuo'a] Is that all you've got?<br>[Nako] We're nowhere near finished.<br><br>[Act 3 Boss Battle has begun!]”,
+                name: "(Warning ⚠️: Fast Return will be disabled after triggering this scene)",
+                text: "[Zuo'a] Is that all you've got?<br>[Nako] We're nowhere near finished.<br><br>[Act 3 Boss Battle has begun!]",
                 unlocks: {
-                    textlines: [{dialogue: “决战木牌”, lines: [“S31”]},{dialogue: “决战木牌”, lines: [“S32”]},{dialogue: “决战木牌”, lines: [“S33”]}],
-                    spec:”S3-start”,
+                    textlines: [{dialogue: "决战木牌", lines: ["S31"]},{dialogue: "决战木牌", lines: ["S32"]},{dialogue: "决战木牌", lines: ["S33"]}],
+                    spec:"S3-start",
                 },
-                locks_lines: [“za8”],
+                locks_lines: ["za8"],
             }),
         }
     });
