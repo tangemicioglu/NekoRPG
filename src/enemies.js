@@ -6529,8 +6529,8 @@ class Enemy {
         ],
     });
     enemy_templates["幻境火蝶"] = new Enemy({
-        name: “Illusory Fire Butterfly”,
-        description: “You've already saved the princess! Wrong crossover. The princess doesn't have red wings…”,
+        name: "Illusory Fire Butterfly",
+        description: "You've already saved the princess! Wrong crossover. The princess doesn't have red wings…",
         xp_value: 1134903170, 
         rank: 3610,
         image: "image/enemy/E3610.png",
