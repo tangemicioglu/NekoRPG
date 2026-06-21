@@ -5254,7 +5254,7 @@ function get_location_type_penalty(type, stage, stat) {
         "miningIce": new LocationActivity({
             activity_name: "mining",
             infinite: true,
-            starting_text: "挖开冰块，拯救被困住的商人",
+            starting_text: "Break open ice blocks and rescue the trapped merchant",
             skill_xp_per_tick: 200,
             is_unlocked: true,
             gained_resources: {
@@ -5271,7 +5271,7 @@ function get_location_type_penalty(type, stage, stat) {
         "AquaElement": new LocationActivity({
             activity_name: "AquaElement",
             infinite: true,
-            starting_text: "感应时封水牢中充盈的水元素",
+            starting_text: "Sense the water elements filling the Time-Sealed Water Prison",
             skill_xp_per_tick: 1,
             is_unlocked: true,
         }),
